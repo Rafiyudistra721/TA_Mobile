@@ -1,0 +1,29 @@
+{
+  "project_info": {
+    "project_number": "25552811791",
+    "project_id": "ta-mobile-perpustakaan-digital",
+    "storage_bucket": "ta-mobile-perpustakaan-digital.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:25552811791:android:0628278d177c9750fc307a",
+        "android_client_info": {
+          "package_name": "com.example.ta_mobile"
+        }
+      },
+      "oauth_client": [],
+      "api_key": [
+        {
+          "current_key": "AIzaSyAjwcwklbdHw0C_zpGq0qBlm6aj-4eN0JE"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": []
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
