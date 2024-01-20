@@ -50,6 +50,7 @@ class DefaultFirebaseOptions {
     projectId: 'ta-mobile-perpustakaan-digital',
     authDomain: 'ta-mobile-perpustakaan-digital.firebaseapp.com',
     storageBucket: 'ta-mobile-perpustakaan-digital.appspot.com',
+    measurementId: 'G-SQP1CGC6WK',
   );
 
   static const FirebaseOptions android = FirebaseOptions(
@@ -66,6 +67,8 @@ class DefaultFirebaseOptions {
     messagingSenderId: '25552811791',
     projectId: 'ta-mobile-perpustakaan-digital',
     storageBucket: 'ta-mobile-perpustakaan-digital.appspot.com',
+    androidClientId: '25552811791-1j46i3aagebsrmra8ka7ju1pgjb4ti6h.apps.googleusercontent.com',
+    iosClientId: '25552811791-hugqupsodn1d5lcdfsakut7dp6h8klth.apps.googleusercontent.com',
     iosBundleId: 'com.example.taMobile',
   );
 
@@ -75,6 +78,8 @@ class DefaultFirebaseOptions {
     messagingSenderId: '25552811791',
     projectId: 'ta-mobile-perpustakaan-digital',
     storageBucket: 'ta-mobile-perpustakaan-digital.appspot.com',
+    androidClientId: '25552811791-1j46i3aagebsrmra8ka7ju1pgjb4ti6h.apps.googleusercontent.com',
+    iosClientId: '25552811791-60gkj2ubsfm0j5a4872h7ai4c9m4je9q.apps.googleusercontent.com',
     iosBundleId: 'com.example.taMobile.RunnerTests',
   );
 }

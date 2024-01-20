@@ -13,6 +13,7 @@ dependencies:
   cloud_firestore: 4.13.6
   firebase_storage: 11.5.6
   nb_utils: 6.1.0
+  google_sign_in: 6.2.1
   flutter: 
     sdk: flutter
 
@@ -22,5 +23,10 @@ dev_dependencies:
     sdk: flutter
 
 flutter: 
+  assets: 
+    - assets/bgLR.png
+    - assets/bgLR.jpg
+    - assets/icons/logo_login.png
+    - assets/icons/google.png
   uses-material-design: true
 

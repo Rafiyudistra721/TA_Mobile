@@ -12,7 +12,20 @@
           "package_name": "com.example.ta_mobile"
         }
       },
-      "oauth_client": [],
+      "oauth_client": [
+        {
+          "client_id": "25552811791-1j46i3aagebsrmra8ka7ju1pgjb4ti6h.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "com.example.ta_mobile",
+            "certificate_hash": "64ffc3df3a72df18c31596d831779108746b1701"
+          }
+        },
+        {
+          "client_id": "25552811791-m2lcklo2donp1c102q8jahc8p1lu54mo.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
       "api_key": [
         {
           "current_key": "AIzaSyAjwcwklbdHw0C_zpGq0qBlm6aj-4eN0JE"
@@ -20,7 +33,19 @@
       ],
       "services": {
         "appinvite_service": {
-          "other_platform_oauth_client": []
+          "other_platform_oauth_client": [
+            {
+              "client_id": "25552811791-m2lcklo2donp1c102q8jahc8p1lu54mo.apps.googleusercontent.com",
+              "client_type": 3
+            },
+            {
+              "client_id": "25552811791-60gkj2ubsfm0j5a4872h7ai4c9m4je9q.apps.googleusercontent.com",
+              "client_type": 2,
+              "ios_info": {
+                "bundle_id": "com.example.taMobile.RunnerTests"
+              }
+            }
+          ]
         }
       }
     }
