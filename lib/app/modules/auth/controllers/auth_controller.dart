@@ -1,4 +1,4 @@
-// ignore_for_file: prefer_interpolation_to_compose_strings, avoid_print
+// ignore_for_file: prefer_interpolation_to_compose_strings, avoid_print, prefer_final_fields
 
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
@@ -17,12 +17,14 @@ class AuthController extends GetxController {
   TextEditingController passC2 = TextEditingController();
   TextEditingController adressC = TextEditingController();
 
-  final GoogleSignIn _googleSignIn = GoogleSignIn();
+  GoogleSignIn _googleSignIn = GoogleSignIn(
+    clientId: '25552811791-m2lcklo2donp1c102q8jahc8p1lu54mo.apps.googleusercontent.com',
+  );
 
   //fungsi login dengan google
   Future<void> signInWithGoogle() async {
     try {
-      final GoogleSignInAccount? googleUser = await _googleSignIn.signIn();
+      final GoogleSignInAccount? googleUser = await _googleSignIn.signInSilently(reAuthenticate: true);
       if (googleUser != null) {
         final GoogleSignInAuthentication googleAuth =
             await googleUser.authentication;
@@ -59,13 +61,25 @@ class AuthController extends GetxController {
           .set(userModel.toJson);
 
       currUser.value = userModel;
-
-      Get.offAndToNamed(Routes.HOME);
+      
+      switch (userModel.level) {
+        case "Admin":
+        Get.offAndToNamed(Routes.DASHBOARD);
+        break;
+        case "Petugas":
+        Get.offAndToNamed(Routes.DASHBOARD);
+        break;
+        case "Peminjam":
+        Get.offAndToNamed(Routes.HOME);
+        break;
+      }
     } catch (e) {
       print('Error saving Google user to Firestore: $e');
       rethrow;
     }
   }
+
+
 
   RxBool isPassHidden = true.obs;
 
@@ -99,7 +113,17 @@ class AuthController extends GetxController {
       final myUser = await auth.signInWithEmailAndPassword(
           email: emailC.text, password: passC.text);
       if (myUser.user!.emailVerified) {
+        switch (user.level) {
+        case "Admin":
+        Get.offAndToNamed(Routes.DASHBOARD);
+        break;
+        case "Petugas":
+        Get.offAndToNamed(Routes.DASHBOARD);
+        break;
+        case "Peminjam":
         Get.offAndToNamed(Routes.HOME);
+        break;
+      }
       } else {
         Get.defaultDialog(
           title: 'Verifikasi',

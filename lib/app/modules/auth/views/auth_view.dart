@@ -13,6 +13,7 @@ class AuthView extends GetView<AuthController> {
   AuthView({Key? key}) : super(key: key);
   @override
   Widget build(BuildContext context) {
+    double textFieldWidth = MediaQuery.of(context).size.width - 114;
     return Scaffold(
         backgroundColor: Colors.white,
         body: Stack(
@@ -77,7 +78,7 @@ class AuthView extends GetView<AuthController> {
                                             10.width,
                                             SizedBox(
                                               height: 60,
-                                              width: 230,
+                                              width: textFieldWidth,
                                               child: AppTextField(
                                                 textFieldType:
                                                     TextFieldType.NAME,
@@ -96,7 +97,7 @@ class AuthView extends GetView<AuthController> {
                                                     border: UnderlineInputBorder(
                                                         borderSide: BorderSide(
                                                             color:
-                                                                colorPrimary)),
+                                                                grey)),
                                                     focusedBorder: OutlineInputBorder(
                                                         borderSide: BorderSide(
                                                             color:
@@ -104,7 +105,11 @@ class AuthView extends GetView<AuthController> {
                                                     enabledBorder: OutlineInputBorder(
                                                         borderSide: BorderSide(
                                                             color:
-                                                                colorPrimary))),
+                                                                colorPrimary)),
+                                                    errorBorder: OutlineInputBorder(
+                                                        borderSide: BorderSide(
+                                                            color:
+                                                                redColor))),
                                                 validator: (value) {
                                                   if (value!.isEmpty) {
                                                     return 'Username wajib diisi';
@@ -130,7 +135,7 @@ class AuthView extends GetView<AuthController> {
                                           10.width,
                                           SizedBox(
                                             height: 60,
-                                            width: 230,
+                                            width: textFieldWidth,
                                             child: AppTextField(
                                               textFieldType:
                                                   TextFieldType.EMAIL,
@@ -148,7 +153,7 @@ class AuthView extends GetView<AuthController> {
                                                       color: colorPrimary),
                                                   border: UnderlineInputBorder(
                                                       borderSide: BorderSide(
-                                                          color: colorPrimary)),
+                                                          color: grey)),
                                                   focusedBorder:
                                                       OutlineInputBorder(
                                                           borderSide: BorderSide(
@@ -158,7 +163,12 @@ class AuthView extends GetView<AuthController> {
                                                       OutlineInputBorder(
                                                           borderSide: BorderSide(
                                                               color:
-                                                                  colorPrimary))),
+                                                                  colorPrimary)),
+                                                  errorBorder:
+                                                      OutlineInputBorder(
+                                                          borderSide: BorderSide(
+                                                              color:
+                                                                  redColor))),
                                               validator: (value) {
                                                 if (value!.isEmpty) {
                                                   return 'Email wajib diisi';
@@ -184,7 +194,7 @@ class AuthView extends GetView<AuthController> {
                                           10.width,
                                           SizedBox(
                                             height: 60,
-                                            width: 230,
+                                            width: textFieldWidth,
                                             child: AppTextField(
                                               textFieldType:
                                                   TextFieldType.PASSWORD,
@@ -218,7 +228,7 @@ class AuthView extends GetView<AuthController> {
                                                       const UnderlineInputBorder(
                                                           borderSide: BorderSide(
                                                               color:
-                                                                  colorPrimary)),
+                                                                  grey)),
                                                   focusedBorder:
                                                       const OutlineInputBorder(
                                                           borderSide: BorderSide(
@@ -228,7 +238,12 @@ class AuthView extends GetView<AuthController> {
                                                       const OutlineInputBorder(
                                                           borderSide: BorderSide(
                                                               color:
-                                                                  colorPrimary))),
+                                                                  colorPrimary)),
+                                                  errorBorder:
+                                                        const OutlineInputBorder(
+                                                            borderSide: BorderSide(
+                                                                color:
+                                                                    redColor))),
                                               validator: (value) {
                                                 if (value!.isEmpty) {
                                                   return 'Harap isi password Anda';
@@ -252,10 +267,10 @@ class AuthView extends GetView<AuthController> {
                                               Icons.lock_outline,
                                               color: colorPrimary,
                                             ),
-                                            10.height,
+                                            10.width,
                                             SizedBox(
                                               height: 60,
-                                              width: 230,
+                                              width: textFieldWidth,
                                               child: AppTextField(
                                                 textFieldType:
                                                     TextFieldType.PASSWORD,
@@ -290,7 +305,7 @@ class AuthView extends GetView<AuthController> {
                                                     border: const UnderlineInputBorder(
                                                         borderSide: BorderSide(
                                                             color:
-                                                                colorPrimary)),
+                                                                grey)),
                                                     focusedBorder:
                                                         const OutlineInputBorder(
                                                             borderSide: BorderSide(
@@ -300,7 +315,12 @@ class AuthView extends GetView<AuthController> {
                                                         const OutlineInputBorder(
                                                             borderSide: BorderSide(
                                                                 color:
-                                                                    colorPrimary))),
+                                                                    colorPrimary)),
+                                                    errorBorder:
+                                                        const OutlineInputBorder(
+                                                            borderSide: BorderSide(
+                                                                color:
+                                                                    redColor))),
                                                 validator: (value) {
                                                   if (value!.isEmpty) {
                                                     return 'Harap isi password Anda';
@@ -331,7 +351,7 @@ class AuthView extends GetView<AuthController> {
                                             10.width,
                                             SizedBox(
                                               height: 60,
-                                              width: 230,
+                                              width: textFieldWidth,
                                               child: AppTextField(
                                                 textFieldType:
                                                     TextFieldType.MULTILINE,
@@ -350,7 +370,7 @@ class AuthView extends GetView<AuthController> {
                                                     border: UnderlineInputBorder(
                                                         borderSide: BorderSide(
                                                             color:
-                                                                colorPrimary)),
+                                                                grey)),
                                                     focusedBorder: OutlineInputBorder(
                                                         borderSide: BorderSide(
                                                             color:
@@ -358,7 +378,11 @@ class AuthView extends GetView<AuthController> {
                                                     enabledBorder: OutlineInputBorder(
                                                         borderSide: BorderSide(
                                                             color:
-                                                                colorPrimary))),
+                                                                colorPrimary)),
+                                                    errorBorder: OutlineInputBorder(
+                                                        borderSide: BorderSide(
+                                                            color:
+                                                                redColor))),
                                                 validator: (value) {
                                                   if (value!.isEmpty) {
                                                     return 'Alamat wajib diisi';
@@ -370,6 +394,8 @@ class AuthView extends GetView<AuthController> {
                                           ],
                                         ),
                                       ),
+                                    if (controller.isRegis)
+                                    20.height,
                                   ],
                                 )),
                           ),
@@ -490,32 +516,31 @@ class AuthView extends GetView<AuthController> {
                           ),
                         ),
                       ),
-                      if (controller.isRegis)
-                        Padding(
-                          padding: const EdgeInsets.only(
-                              top: 25, left: 20, right: 20),
-                          child: ElevatedButton.icon(
-                              onPressed: () async {
-                                await controller.signInWithGoogle();
-                              },
-                              style: ElevatedButton.styleFrom(
-                                elevation: 8,
-                                shadowColor: Colors.grey,
-                                backgroundColor: Colors.white,
-                                minimumSize: const Size(double.infinity, 45),
+                      Padding(
+                        padding:
+                            const EdgeInsets.only(top: 10, left: 20, right: 20),
+                        child: ElevatedButton.icon(
+                            onPressed: () async {
+                              await controller.signInWithGoogle();
+                            },
+                            style: ElevatedButton.styleFrom(
+                              elevation: 8,
+                              shadowColor: Colors.grey,
+                              backgroundColor: Colors.white,
+                              minimumSize: const Size(double.infinity, 45),
+                            ),
+                            icon: Image.asset(
+                              'assets/icons/google.png',
+                              width: 20,
+                            ),
+                            label: const Text(
+                              'Sign in With Google',
+                              style: TextStyle(
+                                color: colorPrimary,
+                                fontSize: 15,
                               ),
-                              icon: Image.asset(
-                                'assets/icons/google.png',
-                                width: 20,
-                              ),
-                              label: const Text(
-                                'Sign in With Google',
-                                style: TextStyle(
-                                  color: colorPrimary,
-                                  fontSize: 15,
-                                ),
-                              )),
-                        )
+                            )),
+                      )
                     ],
                   )),
             )
