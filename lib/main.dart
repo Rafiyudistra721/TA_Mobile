@@ -28,10 +28,15 @@ class MyApp extends StatelessWidget {
       builder: (context, snapshot) {
         if (snapshot.connectionState == ConnectionState.active) {
           print(snapshot.data);
+          String initialRoute = snapshot.data != null
+              ? authC.user.level == "Admin" || authC.user.level == "Petugas"
+                  ? Routes.DASHBOARD
+                  : Routes.HOME
+              : Routes.AUTH;
             return GetMaterialApp(
               debugShowCheckedModeBanner: false,
               title: "Application",
-              initialRoute: snapshot.data != null ? Routes.HOME : Routes.AUTH,
+              initialRoute: initialRoute,
               getPages: AppPages.routes,
             );
           }

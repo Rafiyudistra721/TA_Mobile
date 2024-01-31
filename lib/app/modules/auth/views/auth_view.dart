@@ -31,11 +31,11 @@ class AuthView extends GetView<AuthController> {
                     crossAxisAlignment: CrossAxisAlignment.start,
                     children: [
                       Padding(
-                        padding: const EdgeInsets.only(top: 50.0),
+                        padding: const EdgeInsets.only(top: 10.0),
                         child: Center(
                           child: Image.asset(
                             'assets/icons/logo_login.png',
-                            width: 250,
+                            width: 350,
                           ),
                         ),
                       ),

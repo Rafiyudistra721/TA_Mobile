@@ -9,18 +9,18 @@ class UserModel {
   String? id;
   String? username;
   String? email;
-  String? image;
-  String? adress;
-  DateTime? createdAt;
+  String? fotoProfil;
+  String? alamat;
+  DateTime? dibuatTanggal;
   String? level;
 
   UserModel(
       {this.id,
       this.username,
       this.email,
-      this.image,
-      this.adress,
-      this.createdAt,
+      this.fotoProfil,
+      this.alamat,
+      this.dibuatTanggal,
       this.level});
 
   UserModel fromJson(DocumentSnapshot doc) {
@@ -29,9 +29,9 @@ class UserModel {
         id: doc.id,
         username: json?['username'],
         email: json?['email'],
-        image: json?['image'] ?? "",
-        adress: json?['address'],
-        createdAt: (json?['createdAt'] as Timestamp?)?.toDate(),
+        fotoProfil: json?['fotoProfil'] ?? "",
+        alamat: json?['alamat'],
+        dibuatTanggal: (json?['dibuatTanggal'] as Timestamp?)?.toDate(),
         level: json?['level']);
   }
 
@@ -39,9 +39,9 @@ class UserModel {
         'id': id,
         'username': username,
         'email': email,
-        'image': image,
-        'address': adress,
-        'createdAt': createdAt,
+        'fotoProfil': fotoProfil,
+        'alamat': alamat,
+        'dibuatTanggal': dibuatTanggal,
         'level': level
       };
 
@@ -54,7 +54,7 @@ class UserModel {
   Future<UserModel> save({File? file}) async {
     id == null ? id = await db.add(toJson) : await db.edit(toJson);
     if (file != null && id != null) {
-      image = await db.upload(id: id!, file: file);
+      fotoProfil = await db.upload(id: id!, file: file);
       db.edit(toJson);
     }
     return this;
