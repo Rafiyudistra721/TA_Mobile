@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 
 import 'package:get/get.dart';
 import 'package:nb_utils/nb_utils.dart';
+import 'package:ta_mobile/app/routes/app_pages.dart';
 import 'package:ta_mobile/app/utils/colors.dart';
 
 import 'package:ta_mobile/app/modules/auth/controllers/auth_controller.dart';
@@ -23,7 +24,7 @@ class AuthView extends GetView<AuthController> {
               size: 20,
             ),
             onPressed: () {
-              return Get.back();
+              Get.to(Routes.INTRO);
             },
           )),
       body: Container(

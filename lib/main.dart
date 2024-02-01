@@ -32,7 +32,15 @@ class MyApp extends StatelessWidget {
               ? authC.user.level == "Admin" || authC.user.level == "Petugas"
                   ? Routes.DASHBOARD
                   : Routes.HOME
-              : Routes.AUTH;
+              : Routes.INTRO;
+
+              Future.delayed(Duration(seconds: 2), () {
+              
+            Get.offNamed(
+              Routes.AUTH,
+            );
+          });
+
             return GetMaterialApp(
               debugShowCheckedModeBanner: false,
               title: "Application",
