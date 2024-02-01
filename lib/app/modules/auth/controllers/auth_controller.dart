@@ -17,52 +17,59 @@ class AuthController extends GetxController {
   TextEditingController passC2 = TextEditingController();
   TextEditingController adressC = TextEditingController();
 
-  GoogleSignIn _googleSignIn = GoogleSignIn(
-    clientId: '25552811791-m2lcklo2donp1c102q8jahc8p1lu54mo.apps.googleusercontent.com',
-  );
+
 
   //fungsi login dengan google
   Future<void> signInWithGoogle() async {
     try {
-      final GoogleSignInAccount? googleUser = await _googleSignIn.signInSilently(reAuthenticate: true);
-      if (googleUser != null) {
-        final GoogleSignInAuthentication googleAuth =
-            await googleUser.authentication;
+      final GoogleSignInAccount? googleUser = await GoogleSignIn().signInSilently(reAuthenticate: true);
+      if (googleUser == null) {
+        final  GoogleSignInAccount? googleUser = await GoogleSignIn().signIn();
+        if (googleUser == null) {
+          throw Exception('Tidak dapat mengambil data pengguna dari Google.');
+        }
+      }
+
+        final GoogleSignInAuthentication googleAuth = await googleUser!.authentication;
         final AuthCredential credential = GoogleAuthProvider.credential(
           accessToken: googleAuth.accessToken,
           idToken: googleAuth.idToken,
         );
-        final UserCredential userCredential =
-            await FirebaseAuth.instance.signInWithCredential(credential);
+
+        final UserCredential userCredential = await FirebaseAuth.instance.signInWithCredential(credential);
         final User? user = userCredential.user;
 
-        await saveGoogleUserToFirestore(user!);
-      }
+        if (user == null) {
+          throw Exception('Tidak dapat mengambil data pengguna dari Firebase.');
+        }
+
+        await saveGoogleUserToFirestore(user);
     } catch (e) {
       print(e);
+      rethrow;
     }
   }
+  
   //Menyimpan data user dari google ke firestore
-  Future<void> saveGoogleUserToFirestore(User user) async {
+  Future<void> saveGoogleUserToFirestore(User users) async {
     try {
       UserModel userModel = UserModel(
-        id: user.uid,
-        username: user.displayName ?? '',
-        email: user.email!,
-        adress: '',
-        image: user.photoURL ?? '',
+        id: users.uid,
+        username: users.displayName ?? '',
+        email: users.email!,
+        alamat: '',
+        fotoProfil: users.photoURL ?? '',
         level: 'Peminjam',
-        createdAt: DateTime.now(),
+        dibuatTanggal: DateTime.now(),
       );
 
       await firebaseFirestore
           .collection(usersCollection)
-          .doc(user.uid)
+          .doc(users.uid)
           .set(userModel.toJson);
 
-      currUser.value = userModel;
       
-      switch (userModel.level) {
+      switch (user.level) {
         case "Admin":
         Get.offAndToNamed(Routes.DASHBOARD);
         break;
@@ -87,15 +94,13 @@ class AuthController extends GetxController {
     isPassHidden.value = !isPassHidden.value;
   }
 
-  var role = "user";
-
   var currUser = UserModel().obs;
   UserModel get user => currUser.value;
   set user(UserModel value) => currUser.value = value;
 
   final _isRegis = false.obs;
   bool get isRegis => _isRegis.value;
-  set isRegis(val) => _isRegis.value = val;
+  set isRegis(bool val) => _isRegis.value = val;
 
   final _isSaving = false.obs;
   bool get isSaving => _isSaving.value;
@@ -164,10 +169,10 @@ class AuthController extends GetxController {
       UserModel user = UserModel(
         username: nameC.text,
         email: emailC.text,
-        adress: adressC.text,
-        image: '',
+        alamat: adressC.text,
+        fotoProfil: '',
         level: 'Peminjam',
-        createdAt: DateTime.now(),
+        dibuatTanggal: DateTime.now(),
       );
       UserCredential myUser = await auth.createUserWithEmailAndPassword(
         email: emailC.text,
@@ -292,12 +297,12 @@ class AuthController extends GetxController {
   }
 
   @override
-  void onClose() {
-    emailC.clear();
-    passC.clear();
-    passC2.clear();
-    nameC.clear();
-    adressC.clear();
+  void onClose() { 
+    emailC.dispose();
+    passC.dispose();
+    passC2.dispose();
+    nameC.dispose();
+    adressC.dispose();
     super.onClose();
   }
 }

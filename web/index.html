@@ -33,13 +33,36 @@
   <title>ta_mobile</title>
   <link rel="manifest" href="manifest.json">
 
+  <!-- Add Firebase scripts here -->
+  <script src="https://www.gstatic.com/firebasejs/9.6.7/firebase-app.js"></script>
+  <script src="https://www.gstatic.com/firebasejs/9.6.7/firebase-auth.js"></script>
+  <script src="https://www.gstatic.com/firebasejs/9.6.7/firebase-firestore.js"></script>
+  <script src="https://apis.google.com/js/platform.js" async defer></script>
+
   <script>
     // The value below is injected by flutter build, do not touch.
     const serviceWorkerVersion = null;
   </script>
   <!-- This script adds the flutter initialization JS code -->
   <script src="flutter.js" defer></script>
+  <!-- <script>
+    function onSignIn(googleUser) {
+      // Send the ID token to your server.
+      var id_token = googleUser.getAuthResponse().id_token;
+      // ...
+    }
+  
+    function onLoad() {
+      gapi.load('auth2', function() {
+        gapi.auth2.init({
+          client_id: '25552811791-m2lcklo2donp1c102q8jahc8p1lu54mo.apps.googleusercontent.com',
+          cookiepolicy: 'single_host_origin',
+        });
+      });
+    }
+  </script> -->
 </head>
+<!-- <body onload="onLoad()"> -->
 <body>
   <script>
     window.addEventListener('load', function(ev) {

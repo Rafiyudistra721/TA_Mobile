@@ -9,5 +9,7 @@ FirebaseStorage firebaseStorage = FirebaseStorage.instance;
 
 FirebaseAuth firebaseAuth = FirebaseAuth.instance;
 
-const usersCollection = "coll_users";
-const bukuCollection = "coll_buku";
+const usersCollection = "Collection_Users";
+const bukuCollection = "Collection_Buku";
+const kategoriCollection = "Collection_Kategori";
+const bookmarkCollection = "Collection_Bookmark";
