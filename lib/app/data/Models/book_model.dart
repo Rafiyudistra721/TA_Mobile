@@ -37,7 +37,7 @@ class BukuModel {
       penerbit: json['Penerbit'] as String?,
       tahunTerbit: json['Tahun Terbit'] as int?,
       sinopsis: json['Sinopsis'] as String?,
-      kategoriId: json["Kategori"] as String?,
+      kategoriId: json["KategoriId"] as String?,
     );
   }
 
@@ -49,7 +49,7 @@ class BukuModel {
         "Penerbit": penerbit,
         "Tahun Terbit": tahunTerbit,
         "Sinopsis": sinopsis,
-        "Kategori": kategoriId
+        "KategoriId": kategoriId
       };
 
   Database db = Database(
