@@ -34,7 +34,7 @@ class MyApp extends StatelessWidget {
                   : Routes.HOME
               : Routes.INTRO;
 
-              Future.delayed(Duration(seconds: 2), () {
+              Future.delayed(const Duration(seconds: 4), () {
               
             Get.offNamed(
               Routes.AUTH,
