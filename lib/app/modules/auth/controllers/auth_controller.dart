@@ -298,11 +298,11 @@ class AuthController extends GetxController {
 
   @override
   void onClose() { 
-    emailC.dispose();
-    passC.dispose();
-    passC2.dispose();
-    nameC.dispose();
-    adressC.dispose();
+    emailC.clear();
+    passC.clear();
+    passC2.clear();
+    nameC.clear();
+    adressC.clear();
     super.onClose();
   }
 }

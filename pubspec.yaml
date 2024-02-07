@@ -15,6 +15,7 @@ dependencies:
   nb_utils: 6.1.0
   google_sign_in: 6.2.1
   carousel_slider: 4.2.1
+  google_fonts: 6.1.0
   flutter: 
     sdk: flutter
 
@@ -25,9 +26,10 @@ dev_dependencies:
 
 flutter: 
   assets: 
-    - assets/bgLR.png
-    - assets/bgLR.jpg
     - assets/icons/logo_login.png
     - assets/icons/google.png
+    - assets/stocks/1.png
+    - assets/stocks/2.png
+    - assets/stocks/3.png
   uses-material-design: true
 

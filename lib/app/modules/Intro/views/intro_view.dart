@@ -4,6 +4,8 @@ import 'package:ta_mobile/app/modules/Intro/controllers/intro_controller.dart';
 
 
 class SplashScreen extends GetView<IntroController> {
+  const SplashScreen({super.key});
+
   
 
   @override

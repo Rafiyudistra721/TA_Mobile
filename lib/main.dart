@@ -5,6 +5,7 @@ import 'package:firebase_core/firebase_core.dart';
 import 'package:flutter/material.dart';
 
 import 'package:get/get.dart';
+import 'package:ta_mobile/app/data/Models/theme_model.dart';
 import 'package:ta_mobile/app/modules/auth/controllers/auth_controller.dart';
 import 'package:ta_mobile/firebase_options.dart';
 
@@ -24,32 +25,30 @@ class MyApp extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return StreamBuilder<User?>(
-      stream: authC.streamAuthStatus, 
+      stream: authC.streamAuthStatus,
       builder: (context, snapshot) {
         if (snapshot.connectionState == ConnectionState.active) {
           print(snapshot.data);
-          String initialRoute = snapshot.data != null
-              ? authC.user.level == "Admin" || authC.user.level == "Petugas"
-                  ? Routes.DASHBOARD
-                  : Routes.HOME
-              : Routes.INTRO;
-
-              Future.delayed(const Duration(seconds: 4), () {
-              
-            Get.offNamed(
-              Routes.AUTH,
-            );
+          String initialRoute = Routes.INTRO;
+          Future.delayed(const Duration(seconds: 2), () {
+            Get.offNamed(snapshot.data != null
+                ? authC.user.level == "Admin" || authC.user.level == "Petugas"
+                    ? Routes.DASHBOARD
+                    : Routes.HOME
+                : Routes.AUTH);
           });
 
-            return GetMaterialApp(
-              debugShowCheckedModeBanner: false,
-              title: "Application",
-              initialRoute: initialRoute,
-              getPages: AppPages.routes,
-            );
-          }
-          return const CircularProgressIndicator();
-        },
-      );
-    }
+          return GetMaterialApp(
+            debugShowCheckedModeBanner: false,
+            theme: ThemeModel.lightTheme,
+            darkTheme: ThemeModel.darkTheme,
+            title: "Application",
+            initialRoute: initialRoute,
+            getPages: AppPages.routes,
+          );
+        }
+        return const CircularProgressIndicator();
+      },
+    );
+  }
 }
