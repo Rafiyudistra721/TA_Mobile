@@ -1,12 +1,45 @@
+// ignore_for_file: unnecessary_overrides, avoid_print
+
 import 'package:get/get.dart';
+import 'package:ta_mobile/app/data/Models/buku_model.dart';
+import 'package:ta_mobile/app/data/Models/kategori_model.dart';
 
 class HomeController extends GetxController {
-  //TODO: Implement HomeController
+  var categories = <KategoriModel>[].obs;
+  var selectedCategory = ''.obs;
+  var allBooks = <BukuModel>[].obs;
 
-  final count = 0.obs;
+  void fetchCategories() async {
+    try {
+      final kategoriModel = KategoriModel();
+      kategoriModel.streamList().listen((categoriesList) {
+        categories.assignAll(categoriesList);
+      });
+    } catch (e) {
+      print('Error fetching categories:  $e');
+    }
+  }
+
+  void fetchBooks() {
+    try {
+      final bukuModel = BukuModel();
+      bukuModel.streamList().listen((books) {
+        allBooks.assignAll(books);
+      });
+    } catch (e) {
+      print('Error fetching books: $e');
+    }
+  }
+
+  void changeCategory({required String temp}) {
+    selectedCategory.value = temp;
+  }
+
   @override
   void onInit() {
     super.onInit();
+    fetchCategories();
+    fetchBooks();
   }
 
   @override
@@ -19,5 +52,4 @@ class HomeController extends GetxController {
     super.onClose();
   }
 
-  void increment() => count.value++;
 }

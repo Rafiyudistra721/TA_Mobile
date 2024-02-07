@@ -1,6 +1,7 @@
+// ignore_for_file: non_constant_identifier_names
+
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:nb_utils/nb_utils.dart';
-import 'package:ta_mobile/app/data/Models/koleksi_model.dart';
 import 'package:ta_mobile/app/data/database.dart';
 import 'package:ta_mobile/app/integrations/firestore.dart';
 

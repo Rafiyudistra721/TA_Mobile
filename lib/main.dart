@@ -3,6 +3,7 @@ import 'package:firebase_core/firebase_core.dart';
 import 'package:flutter/material.dart';
 
 import 'package:get/get.dart';
+import 'package:ta_mobile/app/data/Models/theme_model.dart';
 import 'package:ta_mobile/app/modules/auth/controllers/auth_controller.dart';
 import 'package:ta_mobile/firebase_options.dart';
 
@@ -61,6 +62,8 @@ class MyApp extends StatelessWidget {
 
           return GetMaterialApp(
             debugShowCheckedModeBanner: false,
+            theme: ThemeModel.lightTheme,
+            darkTheme: ThemeModel.darkTheme,
             title: "Application",
             initialRoute: initialRoute,
             getPages: AppPages.routes,
