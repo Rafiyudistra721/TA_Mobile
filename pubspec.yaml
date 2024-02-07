@@ -29,5 +29,6 @@ flutter:
     - assets/bgLR.jpg
     - assets/icons/logo_login.png
     - assets/icons/google.png
+    - assets/icons/buku1.png
   uses-material-design: true
 

@@ -24,14 +24,20 @@ class LandingPage extends StatelessWidget {
       appBar: AppBar(
         title: Text('Landing Page'),
       ),
-      body: Center(
+      body: Container(
+	    color: Colors.red.shade200,
         child: Column(
-          mainAxisAlignment: MainAxisAlignment.center,
           children: [
-            Image.asset(
-              'assets/icons/buku1.png', // Path to your image asset
-              width: 200, // Adjust the width as needed
-              height: 200, // Adjust the height as needed
+               Container(
+                color: Colors.red.shade200,
+                child: Padding(
+                  padding: const EdgeInsets.only(bottom: 20, left: 20),
+            child: 
+              Image.asset(
+              'assets/icons/buku1.png', 
+              width: 200, 
+              height: 200, 
+            ),)
             ),
             SizedBox(height: 20),
             ElevatedButton(
@@ -39,7 +45,7 @@ class LandingPage extends StatelessWidget {
                 Get.to(LandingPage2());
               },
               child: Text('Go to Next Page'),
-            ),
+            )
           ],
         ),
       ),

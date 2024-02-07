@@ -1,5 +1,3 @@
-// ignore_for_file: avoid_print
-
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:firebase_core/firebase_core.dart';
 import 'package:flutter/material.dart';
@@ -24,32 +22,52 @@ class MyApp extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return StreamBuilder<User?>(
-      stream: authC.streamAuthStatus, 
+      stream: authC.streamAuthStatus,
       builder: (context, snapshot) {
         if (snapshot.connectionState == ConnectionState.active) {
           print(snapshot.data);
-          String initialRoute = snapshot.data != null
-              ? authC.user.level == "Admin" || authC.user.level == "Petugas"
-                  ? Routes.DASHBOARD
-                  : Routes.HOME
-              : Routes.INTRO;
+          String initialRoute;
+          if (snapshot.data != null) {
+            // If user is logged in, decide initial route based on user level
+            initialRoute = authC.user.level == "Admin" ||
+                    authC.user.level == "Petugas"
+                ? Routes.DASHBOARD
+                : Routes.HOME;
+          } else {
+            // If user is not logged in, show intro first
+            initialRoute = Routes.INTRO;
+          }
 
-              Future.delayed(Duration(seconds: 2), () {
-              
+          // Delay for 2 seconds before navigating to landing page 1
+          Future.delayed(Duration(seconds: 2), () {
+            Get.offNamed(
+              Routes.LANDING_PAGE,
+            );
+          });
+
+          // Delay for additional 2 seconds before navigating to landing page 2
+          Future.delayed(Duration(seconds: 4), () {
+            Get.offNamed(
+              Routes.LANDING_PAGE2,
+            );
+          });
+
+          // Delay for additional 2 seconds before navigating to AUTH page
+          Future.delayed(Duration(seconds: 6), () {
             Get.offNamed(
               Routes.AUTH,
             );
           });
 
-            return GetMaterialApp(
-              debugShowCheckedModeBanner: false,
-              title: "Application",
-              initialRoute: initialRoute,
-              getPages: AppPages.routes,
-            );
-          }
-          return const CircularProgressIndicator();
-        },
-      );
-    }
+          return GetMaterialApp(
+            debugShowCheckedModeBanner: false,
+            title: "Application",
+            initialRoute: initialRoute,
+            getPages: AppPages.routes,
+          );
+        }
+        return const CircularProgressIndicator();
+      },
+    );
+  }
 }
