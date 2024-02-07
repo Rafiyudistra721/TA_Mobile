@@ -9,6 +9,9 @@ abstract class Routes {
   static const AUTH = _Paths.AUTH;
   static const DASHBOARD = _Paths.DASHBOARD;
   static const INTRO = _Paths.INTRO;
+  static const LANDING_PAGE = _Paths.LANDING_PAGE;
+  static const LANDING_PAGE2 = _Paths.LANDING_PAGE2;
+  static const ETALASE = _Paths.ETALASE;
 }
 
 abstract class _Paths {
@@ -17,4 +20,7 @@ abstract class _Paths {
   static const AUTH = '/auth';
   static const DASHBOARD = '/dashboard';
   static const INTRO = '/intro';
+  static const LANDING_PAGE = '/landing-page';
+  static const LANDING_PAGE2 = '/landing-page2';
+  static const ETALASE = '/etalase';
 }
