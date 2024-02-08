@@ -28,7 +28,7 @@ flutter:
   assets: 
     - assets/icons/logo_login.png
     - assets/icons/google.png
-    - assets/icons/buku1.png
+    - assets/icons/logo_landing.png
     - assets/stocks/1.png
     - assets/stocks/2.png
     - assets/stocks/3.png

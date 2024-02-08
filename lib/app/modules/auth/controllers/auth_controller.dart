@@ -235,7 +235,7 @@ class AuthController extends GetxController {
       textConfirm: 'Iya',
       textCancel: 'Tidak',
       buttonColor: colorPrimary,
-      confirmTextColor: Colors.white,
+      confirmTextColor: Colors.black,
       cancelTextColor: colorPrimary,
       titleStyle: const TextStyle(color: colorPrimary),
       middleTextStyle: const TextStyle(color: colorPrimary),

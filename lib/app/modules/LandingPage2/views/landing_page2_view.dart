@@ -1,39 +1,42 @@
 import 'package:flutter/material.dart';
 
 import 'package:get/get.dart';
-import 'package:ta_mobile/app/modules/dashboard/views/dashboard_view.dart';
+import 'package:nb_utils/nb_utils.dart';
+import 'package:ta_mobile/app/routes/app_pages.dart';
+import 'package:ta_mobile/app/utils/colors.dart';
 
 import '../controllers/landing_page2_controller.dart';
 
-import 'package:flutter/material.dart';
-import 'package:get/get.dart';
 
-class LandingPage2 extends StatelessWidget {
+class LandingPage2 extends GetView<LandingPage2Controller> {
+  const LandingPage2({super.key});
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
+      backgroundColor: colorPrimary,
       appBar: AppBar(
-        title: Text('Landing Page'),
+        title: const Text('Landing Page'),
       ),
       body: Center(
         child: Column(
           mainAxisAlignment: MainAxisAlignment.center,
           children: [
             Image.asset(
-              'assets/images/landing_image.png', // Path to your image asset
+              'assets/icons/logo_landing.png', // Path to your image asset
               width: 200, // Adjust the width as needed
               height: 200, // Adjust the height as needed
             ),
-            SizedBox(height: 20),
+            20.height,
             ElevatedButton(
               onPressed: () {
-                Get.to(DashboardView());
+                Get.toNamed(Routes.AUTH);
               },
               style: ElevatedButton.styleFrom(
-                primary: Colors.blue, // Change button color to blue
+                backgroundColor: Colors.blue, // Change button color to blue
               ),
-              child: Text(
-                'Next',
+              child: const Text(
+                'Register',
                 style: TextStyle(color: Colors.black), // Text color white
               ),
             ),

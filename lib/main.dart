@@ -27,44 +27,20 @@ class MyApp extends StatelessWidget {
       builder: (context, snapshot) {
         if (snapshot.connectionState == ConnectionState.active) {
           print(snapshot.data);
-          String initialRoute;
-          if (snapshot.data != null) {
-            // If user is logged in, decide initial route based on user level
-            initialRoute = authC.user.level == "Admin" ||
-                    authC.user.level == "Petugas"
-                ? Routes.DASHBOARD
-                : Routes.HOME;
-          } else {
-            // If user is not logged in, show intro first
-            initialRoute = Routes.INTRO;
-          }
-
-          // Delay for 2 seconds before navigating to landing page 1
-          Future.delayed(Duration(seconds: 2), () {
-            Get.offNamed(
-              Routes.LANDING_PAGE,
-            );
-          });
-
-          // Delay for additional 2 seconds before navigating to landing page 2
-          Future.delayed(Duration(seconds: 4), () {
-            Get.offNamed(
-              Routes.LANDING_PAGE2,
-            );
-          });
-
-          // Delay for additional 2 seconds before navigating to AUTH page
-          Future.delayed(Duration(seconds: 6), () {
-            Get.offNamed(
-              Routes.AUTH,
-            );
+          String initialRoute = Routes.INTRO;
+          Future.delayed(const Duration(seconds: 2), () {
+            Get.offNamed(snapshot.data != null
+                ? authC.user.level == "Admin" || authC.user.level == "Petugas"
+                    ? Routes.DASHBOARD
+                    : Routes.HOME
+                : Routes.LANDING_PAGE);
           });
 
           return GetMaterialApp(
             debugShowCheckedModeBanner: false,
             theme: ThemeModel.lightTheme,
             darkTheme: ThemeModel.darkTheme,
-            title: "Application",
+            title: "SmartLib",
             initialRoute: initialRoute,
             getPages: AppPages.routes,
           );

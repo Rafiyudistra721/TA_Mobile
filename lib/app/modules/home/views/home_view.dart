@@ -31,8 +31,7 @@ class HomeView extends GetView<HomeController> {
                 ),
                 child: IconButton(
                   onPressed: () {
-                    //! perlu diubah
-                    Navigator.of(context).pushNamed('CartScreen');
+                    authC.logout();
                   },
                   icon: const Icon(
                     Icons.shopping_cart,
