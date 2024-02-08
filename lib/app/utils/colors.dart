@@ -1,5 +1,10 @@
 import 'package:flutter/material.dart';
 import 'package:nb_utils/nb_utils.dart';
+import 'package:get/get.dart';
+import 'package:ta_mobile/app/routes/app_pages.dart';
+import 'package:ta_mobile/app/modules/auth/controllers/auth_controller.dart';
+
+import '../modules/home/controllers/home_controller.dart';
 
 const colorPrimary = blueColor;
 const colorSecondary = greenColor;
@@ -20,52 +25,92 @@ var myDrawer = Drawer(
   elevation: 0,
   child: Column(
     children: [
-      DrawerHeader(
-        child: Icon(
-          Icons.favorite,
-          size: 64,
-        ),
-      ),
-      Padding(
-        padding: tilePadding,
-        child: ListTile(
-          leading: Icon(Icons.home),
-          title: Text(
-            'D A S H B O A R D',
-            style: drawerTextColor,
+        DrawerHeader(
+                child: Icon(
+                  Icons.favorite,
+                  size: 64,
+                ),
+              ),
+              Padding(
+                padding: tilePadding,
+                child: GestureDetector(
+                  onTap: () {
+                    // Add your onTap functionality for Settings navigation here
+                    Get.toNamed(Routes.MANAGE_BUKU);
+                  },
+                  child: ListTile(
+                    leading: Icon(Icons.settings),
+                    title: Text(
+                      'MANAGE BUKU',
+                      style: drawerTextColor,
+                    ),
+                  ),
+                ),
+              ),
+              Padding(
+                padding: tilePadding,
+                child: GestureDetector(
+                  onTap: () {
+                    // Add your onTap functionality for About navigation here
+                    Get.toNamed(Routes.MANAGE_KATEGORI);
+                  },
+                  child: ListTile(
+                    leading: Icon(Icons.info),
+                    title: Text(
+                      'MANAGE KATEGORI',
+                      style: drawerTextColor,
+                    ),
+                  ),
+                ),
+              ),
+              Padding(
+                padding: tilePadding,
+                child: GestureDetector(
+                  onTap: () {
+                    // Add your onTap functionality for Logout navigation here
+                    Get.toNamed(Routes.MANAGE_PEMINJAMAN);
+                  },
+                  child: ListTile(
+                    leading: Icon(Icons.logout),
+                    title: Text(
+                      'MANAGE PEMINJAMAN',
+                      style: drawerTextColor,
+                    ),
+                  ),
+                ),
+              ),
+              Padding(
+                padding: tilePadding,
+                child: GestureDetector(
+                  onTap: () {
+                    // Add your onTap functionality for Logout navigation here
+                    Get.toNamed(Routes.MANAGE_ULASAN);
+                  },
+                  child: ListTile(
+                    leading: Icon(Icons.logout),
+                    title: Text(
+                      'MANAGE ULASAN',
+                      style: drawerTextColor,
+                    ),
+                  ),
+                ),
+              ),
+              Padding(
+                padding: tilePadding,
+                child: GestureDetector(
+                  onTap: () {
+                    // Add your onTap functionality for Logout navigation here
+                    Get.toNamed(Routes.MANAGE_USER);
+                  },
+                  child: ListTile(
+                    leading: Icon(Icons.logout),
+                    title: Text(
+                      'MANAGE USER',
+                      style: drawerTextColor,
+                    ),
+                  ),
+                ),
+              ),
+            ],
           ),
-        ),
-      ),
-      Padding(
-        padding: tilePadding,
-        child: ListTile(
-          leading: Icon(Icons.settings),
-          title: Text(
-            'S E T T I N G S',
-            style: drawerTextColor,
-          ),
-        ),
-      ),
-      Padding(
-        padding: tilePadding,
-        child: ListTile(
-          leading: Icon(Icons.info),
-          title: Text(
-            'A B O U T',
-            style: drawerTextColor,
-          ),
-        ),
-      ),
-      Padding(
-        padding: tilePadding,
-        child: ListTile(
-          leading: Icon(Icons.logout),
-          title: Text(
-            'L O G O U T',
-            style: drawerTextColor,
-          ),
-        ),
-      ),
-    ],
-  ),
-);
+        );
