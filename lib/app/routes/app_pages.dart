@@ -37,7 +37,7 @@ class AppPages {
     ),
     GetPage(
       name: _Paths.DASHBOARD,
-      page: () => const DashboardView(),
+      page: () =>  const DesktopScaffold(),
       binding: DashboardBinding(),
     ),
     GetPage(
