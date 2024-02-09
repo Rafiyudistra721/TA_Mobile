@@ -18,7 +18,6 @@ class DashboardView extends GetView<DashboardController> {
     if (isDesktop(context)) {
       return Scaffold(
         backgroundColor: defaultBackgroundColor,
-        appBar: myAppBar,
         body: Padding(
           padding: const EdgeInsets.all(8.0),
           child: Row(
@@ -99,7 +98,6 @@ class DashboardView extends GetView<DashboardController> {
     } else {
       return Scaffold(
         backgroundColor: defaultBackgroundColor,
-        appBar: myAppBar,
         drawer: myDrawer,
         body: Padding(
           padding: const EdgeInsets.all(8.0),

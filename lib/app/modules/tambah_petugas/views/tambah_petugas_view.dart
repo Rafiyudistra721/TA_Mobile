@@ -5,10 +5,10 @@ import 'package:ta_mobile/app/utils/colors.dart';
 import 'package:ta_mobile/app/utils/my_Box.dart';
 import 'package:ta_mobile/app/utils/my_tile.dart';
 
-import '../controllers/manage_kategori_controller.dart';
+import '../controllers/tambah_petugas_controller.dart';
 
-class ManageKategoriView extends GetView<ManageKategoriController> {
-  const ManageKategoriView({Key? key}) : super(key: key);
+class TambahPetugasView extends GetView<TambahPetugasController> {
+  const TambahPetugasView({Key? key}) : super(key: key);
   @override
   Widget build(BuildContext context) {
     return Scaffold(

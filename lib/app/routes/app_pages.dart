@@ -24,6 +24,8 @@ import '../modules/dashboard/bindings/dashboard_binding.dart';
 import '../modules/dashboard/views/dashboard_view.dart';
 import '../modules/home/bindings/home_binding.dart';
 import '../modules/home/views/home_view.dart';
+import '../modules/tambah_petugas/bindings/tambah_petugas_binding.dart';
+import '../modules/tambah_petugas/views/tambah_petugas_view.dart';
 
 // ignore_for_file: constant_identifier_names
 
@@ -47,7 +49,7 @@ class AppPages {
     ),
     GetPage(
       name: _Paths.DASHBOARD,
-      page: () => const DashboardView(),
+      page: () => DashboardView(),
       binding: DashboardBinding(),
     ),
     GetPage(
@@ -94,6 +96,11 @@ class AppPages {
       name: _Paths.MANAGE_PEMINJAMAN,
       page: () => const ManagePeminjamanView(),
       binding: ManagePeminjamanBinding(),
+    ),
+    GetPage(
+      name: _Paths.TAMBAH_PETUGAS,
+      page: () => const TambahPetugasView(),
+      binding: TambahPetugasBinding(),
     ),
   ];
 }

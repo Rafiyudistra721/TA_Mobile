@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:google_fonts/google_fonts.dart';
 import 'package:nb_utils/nb_utils.dart';
 import 'package:get/get.dart';
 import 'package:ta_mobile/app/routes/app_pages.dart';
@@ -6,111 +7,174 @@ import 'package:ta_mobile/app/modules/auth/controllers/auth_controller.dart';
 
 import '../modules/home/controllers/home_controller.dart';
 
+
 const colorPrimary = Color(0xffC1DBFE);
 const colorSecondary = greenColor;
 const colorThird = Color(0xffD2E5F9);
 var defaultBackgroundColor = Colors.grey[300];
 var appBarColor = Colors.grey[900];
-var myAppBar = AppBar(
-  backgroundColor: appBarColor,
-  title: Text(' '),
-  centerTitle: false,
-);
 var drawerTextColor = TextStyle(
   color: Colors.grey[600],
 );
 var tilePadding = const EdgeInsets.only(left: 8.0, right: 8, top: 8);
+final AuthController authController = Get.put(AuthController());
 var myDrawer = Drawer(
   backgroundColor: Colors.grey[300],
   elevation: 0,
   child: Column(
     children: [
-        DrawerHeader(
-                child: Icon(
-                  Icons.favorite,
-                  size: 64,
-                ),
-              ),
-              Padding(
-                padding: tilePadding,
-                child: GestureDetector(
-                  onTap: () {
-                    // Add your onTap functionality for Settings navigation here
-                    Get.toNamed(Routes.MANAGE_BUKU);
-                  },
-                  child: ListTile(
-                    leading: Icon(Icons.settings),
-                    title: Text(
-                      'MANAGE BUKU',
-                      style: drawerTextColor,
-                    ),
-                  ),
-                ),
-              ),
-              Padding(
-                padding: tilePadding,
-                child: GestureDetector(
-                  onTap: () {
-                    // Add your onTap functionality for About navigation here
-                    Get.toNamed(Routes.MANAGE_KATEGORI);
-                  },
-                  child: ListTile(
-                    leading: Icon(Icons.info),
-                    title: Text(
-                      'MANAGE KATEGORI',
-                      style: drawerTextColor,
-                    ),
-                  ),
-                ),
-              ),
-              Padding(
-                padding: tilePadding,
-                child: GestureDetector(
-                  onTap: () {
-                    // Add your onTap functionality for Logout navigation here
-                    Get.toNamed(Routes.MANAGE_PEMINJAMAN);
-                  },
-                  child: ListTile(
-                    leading: Icon(Icons.logout),
-                    title: Text(
-                      'MANAGE PEMINJAMAN',
-                      style: drawerTextColor,
-                    ),
-                  ),
-                ),
-              ),
-              Padding(
-                padding: tilePadding,
-                child: GestureDetector(
-                  onTap: () {
-                    // Add your onTap functionality for Logout navigation here
-                    Get.toNamed(Routes.MANAGE_ULASAN);
-                  },
-                  child: ListTile(
-                    leading: Icon(Icons.logout),
-                    title: Text(
-                      'MANAGE ULASAN',
-                      style: drawerTextColor,
-                    ),
-                  ),
-                ),
-              ),
-              Padding(
-                padding: tilePadding,
-                child: GestureDetector(
-                  onTap: () {
-                    // Add your onTap functionality for Logout navigation here
-                    Get.toNamed(Routes.MANAGE_USER);
-                  },
-                  child: ListTile(
-                    leading: Icon(Icons.logout),
-                    title: Text(
-                      'MANAGE USER',
-                      style: drawerTextColor,
-                    ),
-                  ),
-                ),
-              ),
-            ],
+      DrawerHeader(
+          child: Column(
+        children: [
+          Image.asset('assets/icons/logo_login.png',
+          height: 70,
+          width: 300,
+          fit: BoxFit.cover,
           ),
-        );
+          Text(
+            "Halo... ${authController.user.username} 👋",
+            style: GoogleFonts.ubuntu(
+              color: Colors.grey[700],
+              fontSize: 25
+            ),
+          ),
+          Text(
+            authController.user.level!,
+            style: GoogleFonts.ubuntu(
+              color: Colors.grey[600],
+              fontSize: 15
+            ),
+          )
+        ],
+      )),
+      Padding(
+        padding: tilePadding,
+        child: GestureDetector(
+          onTap: () {
+            // Add your onTap functionality for Settings navigation here
+            Get.offNamed(Routes.DASHBOARD);
+          },
+          child: ListTile(
+            leading: const Icon(Icons.dashboard_rounded),
+            title: Text(
+              'DASHBOARD',
+              style: drawerTextColor,
+            ),
+          ),
+        ),
+      ),
+      Padding(
+        padding: tilePadding,
+        child: GestureDetector(
+          onTap: () {
+            // Add your onTap functionality for Settings navigation here
+            Get.offNamed(Routes.MANAGE_BUKU);
+          },
+          child: ListTile(
+            leading: const Icon(Icons.book_rounded),
+            title: Text(
+              'MANAGE BUKU',
+              style: drawerTextColor,
+            ),
+          ),
+        ),
+      ),
+      Padding(
+        padding: tilePadding,
+        child: GestureDetector(
+          onTap: () {
+            // Add your onTap functionality for About navigation here
+            Get.offNamed(Routes.MANAGE_KATEGORI);
+          },
+          child: ListTile(
+            leading: const Icon(Icons.info),
+            title: Text(
+              'MANAGE KATEGORI',
+              style: drawerTextColor,
+            ),
+          ),
+        ),
+      ),
+      Padding(
+        padding: tilePadding,
+        child: GestureDetector(
+          onTap: () {
+            // Add your onTap functionality for Logout navigation here
+            Get.offNamed(Routes.MANAGE_PEMINJAMAN);
+          },
+          child: ListTile(
+            leading: const Icon(Icons.view_timeline),
+            title: Text(
+              'MANAGE PEMINJAMAN',
+              style: drawerTextColor,
+            ),
+          ),
+        ),
+      ),
+      Padding(
+        padding: tilePadding,
+        child: GestureDetector(
+          onTap: () {
+            // Add your onTap functionality for Logout navigation here
+            Get.offNamed(Routes.MANAGE_ULASAN);
+          },
+          child: ListTile(
+            leading: const Icon(Icons.textsms_rounded),
+            title: Text(
+              'MANAGE ULASAN',
+              style: drawerTextColor,
+            ),
+          ),
+        ),
+      ),
+      Padding(
+        padding: tilePadding,
+        child: GestureDetector(
+          onTap: () {
+            // Add your onTap functionality for Logout navigation here
+            Get.offNamed(Routes.MANAGE_USER);
+          },
+          child: ListTile(
+            leading: const Icon(Icons.supervised_user_circle_rounded),
+            title: Text(
+              'MANAGE USER',
+              style: drawerTextColor,
+            ),
+          ),
+        ),
+      ),
+      Padding(
+        padding: tilePadding,
+        child: GestureDetector(
+          onTap: () {
+            // Add your onTap functionality for Logout navigation here
+            Get.offNamed(Routes.TAMBAH_PETUGAS);
+          },
+          child: ListTile(
+            leading: const Icon(Icons.person_add_alt_rounded),
+            title: Text(
+              'TAMBAH PETUGAS',
+              style: drawerTextColor,
+            ),
+          ),
+        ),
+      ),
+      Padding(
+        padding: tilePadding,
+        child: GestureDetector(
+          onTap: () {
+            // Add your onTap functionality for Logout navigation here
+            authController.logout();
+          },
+          child: ListTile(
+            leading: const Icon(Icons.logout_rounded),
+            title: Text(
+              'LOG-OUT',
+              style: drawerTextColor,
+            ),
+          ),
+        ),
+      ),
+    ],
+  ),
+);

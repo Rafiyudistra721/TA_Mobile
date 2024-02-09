@@ -196,7 +196,7 @@ class AuthController extends GetxController {
                 emailC.clear();
                 adressC.clear();
                 passC2.clear();
-                Get.back();
+                Get.toNamed(Routes.AUTH);
                 isRegis = false;
               },
               buttonColor: colorPrimary,
@@ -230,7 +230,7 @@ class AuthController extends GetxController {
         isSaving = false;
         emailC.clear();
         passC.clear();
-        Get.offAndToNamed(Routes.AUTH);
+        Get.offAndToNamed(Routes.LANDING_PAGE);
       },
       textConfirm: 'Iya',
       textCancel: 'Tidak',
