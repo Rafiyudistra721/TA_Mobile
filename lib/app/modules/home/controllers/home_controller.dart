@@ -8,6 +8,7 @@ class HomeController extends GetxController {
   var categories = <KategoriModel>[].obs;
   var selectedCategory = ''.obs;
   var allBooks = <BukuModel>[].obs;
+  final darkModeValue = Get.isDarkMode.obs;
 
   void fetchCategories() async {
     try {

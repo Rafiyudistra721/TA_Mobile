@@ -11,6 +11,13 @@ import '../controllers/home_controller.dart';
 class HomeView extends GetView<HomeController> {
   final authC = Get.put(AuthController());
   HomeView({Key? key}) : super(key: key);
+
+  void toggleTheme() {
+    controller.darkModeValue.value = !controller.darkModeValue.value;
+    Get.changeThemeMode(
+        controller.darkModeValue.value ? ThemeMode.dark : ThemeMode.light);
+  }
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -21,53 +28,51 @@ class HomeView extends GetView<HomeController> {
             padding: const EdgeInsets.all(12.0),
             child: SizedBox(
               width: 33,
-              child: Container(
-                alignment: Alignment.center,
-                decoration: BoxDecoration(
-                  color: (Get.isDarkMode)
-                      ? Colors.grey.shade600
-                      : Colors.grey.shade200,
-                  borderRadius: BorderRadius.circular(100),
-                ),
-                child: IconButton(
-                  onPressed: () {
-                    authC.logout();
-                  },
-                  icon: const Icon(
-                    Icons.shopping_cart,
-                    size: 18,
-                  ),
-                ),
-              ),
+              child: Obx(() => Container(
+                    alignment: Alignment.center,
+                    decoration: BoxDecoration(
+                      color: (controller.darkModeValue.value)
+                          ? Colors.grey.shade600
+                          : Colors.grey.shade200,
+                      borderRadius: BorderRadius.circular(100),
+                    ),
+                    child: IconButton(
+                      onPressed: () {
+                        authC.logout();
+                      },
+                      icon: const Icon(
+                        Icons.shopping_cart,
+                        size: 18,
+                      ),
+                    ),
+                  )),
             ),
           ),
           Padding(
             padding: const EdgeInsets.all(12.0),
             child: SizedBox(
               width: 33,
-              child: Container(
-                alignment: Alignment.center,
-                decoration: BoxDecoration(
-                  color: (Get.isDarkMode)
-                      ? Colors.grey.shade600
-                      : Colors.grey.shade200,
-                  borderRadius: BorderRadius.circular(100),
-                ),
-                child: IconButton(
-                  onPressed: () {
-                    (Get.isDarkMode)
-                        ? Get.changeThemeMode(ThemeMode.light)
-                        : Get.changeThemeMode(ThemeMode.dark);
-                  },
-                  icon: Icon(
-                    (Get.isDarkMode
-                        ? Icons.wb_sunny_rounded
-                        : Icons.nightlight_round),
-                    size: 18,
-                    color: Colors.grey,
-                  ),
-                ),
-              ),
+              child: Obx(() => Container(
+                    alignment: Alignment.center,
+                    decoration: BoxDecoration(
+                      color: (controller.darkModeValue.value)
+                          ? Colors.grey.shade600
+                          : Colors.grey.shade200,
+                      borderRadius: BorderRadius.circular(100),
+                    ),
+                    child: IconButton(
+                      onPressed: () {
+                        toggleTheme();
+                      },
+                      icon: Icon(
+                        (controller.darkModeValue.value)
+                            ? Icons.wb_sunny_rounded
+                            : Icons.nightlight_round,
+                        size: 18,
+                        color: Colors.grey,
+                      ),
+                    ),
+                  )),
             ),
           ),
           8.width,
@@ -75,16 +80,16 @@ class HomeView extends GetView<HomeController> {
         centerTitle: false,
         title: Row(
           children: [
-            Text(
-              'SmartLib',
-              style: GoogleFonts.lobster(
-                color: (Get.isDarkMode)
-                    ? Colors.red.shade200
-                    : Colors.red.shade800,
-                fontWeight: FontWeight.w700,
-                fontSize: 30,
-              ),
-            ),
+            Obx(() => Text(
+                  'SmartLib',
+                  style: GoogleFonts.lobster(
+                    color: (controller.darkModeValue.value)
+                        ? Colors.red.shade200
+                        : Colors.red.shade800,
+                    fontWeight: FontWeight.w700,
+                    fontSize: 30,
+                  ),
+                )),
           ],
         ),
       ),
@@ -133,7 +138,7 @@ class HomeView extends GetView<HomeController> {
                           decoration: BoxDecoration(
                             boxShadow: [
                               BoxShadow(
-                                color: (Get.isDarkMode)
+                                color: (controller.darkModeValue.value)
                                     ? Colors.grey.shade900
                                     : Colors.grey.shade900,
                                 blurRadius: 14,
@@ -234,7 +239,7 @@ class HomeView extends GetView<HomeController> {
                                       child: Text(
                                         'The Safest way to deliver Books.',
                                         style: TextStyle(
-                                          fontSize: 17,
+                                          fontSize: 15,
                                           wordSpacing: 2.5,
                                           height: 1.4,
                                           letterSpacing: -0.7,
@@ -389,22 +394,51 @@ class HomeView extends GetView<HomeController> {
                             child: ListView.builder(
                               scrollDirection: Axis.horizontal,
                               itemCount: controller.categories.length,
-                              itemBuilder: (BuildContext context, int index) {
-                                final category = controller.categories[index];
-                                final isActive =
-                                    controller.selectedCategory.value ==
-                                        category.namaKategori;
+                              itemBuilder: (context, index) {
+                                var category = controller.categories[index];
+                                var isActive =
+                                    category.id! == controller.selectedCategory.value;
+                                var isActiveValue = isActive.obs;
                                 return Hero(
-                                  tag: 'category_${category.namaKategori}',
-                                  child: CategoryButton(
-                                    categoryName: category.namaKategori!,
-                                    isActive: isActive,
-                                    onPressed: () {
-                                      controller.changeCategory(
-                                          temp: category.id!);
-                                    },
-                                  ),
-                                );
+                                    tag: 'category_${category.id}',
+                                    child: Padding(
+                                      padding: const EdgeInsets.symmetric(
+                                          vertical: 8.0, horizontal: 5.0),
+                                      child: ElevatedButton(
+                                        onPressed: () async {
+                                          controller.changeCategory(
+                                              temp: category.id!);
+                                          print(controller.selectedCategory.value);
+                                          print("------------------------------");
+                                          print(category.id);
+                                          print("--------------------------");
+                                          print(isActiveValue.value);
+                                          // print(controller.darkModeValue.value);
+                                        },
+                                        style: ElevatedButton.styleFrom(
+                                          elevation: isActiveValue.value ? 6 : 0,
+                                          backgroundColor:
+                                            isActiveValue.value
+                                                ? Colors.red
+                                                : controller.darkModeValue.value
+                                                    ? Colors.grey.shade700
+                                                    : Colors.green,
+                                        ),
+                                        child: Padding(
+                                          padding: const EdgeInsets.all(8.0),
+                                          child: Text(
+                                            category.namaKategori!,
+                                            style: TextStyle(
+                                              color: isActiveValue.value
+                                                  ? Colors.white
+                                                  : controller.darkModeValue.value
+                                                      ? Colors.white
+                                                      : Colors.grey.shade800,
+                                            ),
+                                          ),
+                                        ),
+                                      ),
+                                    ));
                               },
                             ),
                           );
@@ -421,16 +455,16 @@ class HomeView extends GetView<HomeController> {
                         padding: const EdgeInsets.only(left: 35.0, right: 30),
                         child: Row(
                           children: [
-                            Text(
-                              'Lagi Populer',
-                              style: TextStyle(
-                                fontSize: 19,
-                                fontWeight: FontWeight.w800,
-                                color: (Get.isDarkMode)
-                                    ? Colors.white
-                                    : Colors.grey.shade900,
-                              ),
-                            ),
+                            Obx(() => Text(
+                                  'Lagi Populer',
+                                  style: TextStyle(
+                                    fontSize: 19,
+                                    fontWeight: FontWeight.w800,
+                                    color: (controller.darkModeValue.value)
+                                        ? Colors.white
+                                        : Colors.grey.shade900,
+                                  ),
+                                )),
                             const Spacer(),
                             GestureDetector(
                               onTap: () {
@@ -538,52 +572,54 @@ class HomeView extends GetView<HomeController> {
   }
 }
 
-class CategoryButton extends StatelessWidget {
-  final String categoryName;
-  final bool isActive;
-  final VoidCallback onPressed;
+// class CategoryButton extends GetView<HomeController> {
+//   final String categoryName;
+//   final RxBool isActivated;
+//   final VoidCallback onPressed;
 
-  const CategoryButton({
-    Key? key,
-    required this.categoryName,
-    required this.isActive,
-    required this.onPressed,
-  }) : super(key: key);
+//   CategoryButton({
+//     Key? key,
+//     required this.categoryName,
+//     required this.isActivated,
+//     required this.onPressed,
+//   }) : super(key: key);
 
-  @override
-  Widget build(BuildContext context) {
-    return Padding(
-      padding: const EdgeInsets.only(
-        left: 10,
-        top: 10,
-        bottom: 10,
-      ),
-      child: ElevatedButton(
-        onPressed: onPressed,
-        style: ButtonStyle(
-          elevation: MaterialStateProperty.all(isActive ? 6 : 0),
-          backgroundColor: MaterialStateProperty.all(
-            isActive
-                ? Colors.red
-                : (Get.isDarkMode
-                    ? Colors.grey.shade700
-                    : Colors.grey.shade200),
-          ),
-        ),
-        child: Padding(
-          padding: const EdgeInsets.all(1.0),
-          child: Text(
-            categoryName,
-            style: TextStyle(
-              fontWeight: FontWeight.bold,
-              fontSize: 14,
-              color: isActive
-                  ? Colors.white
-                  : (Get.isDarkMode ? Colors.white : Colors.grey.shade800),
-            ),
-          ),
-        ),
-      ),
-    );
-  }
-}
+//   @override
+//   Widget build(BuildContext context) {
+//     return Padding(
+//       padding: const EdgeInsets.only(
+//         left: 10,
+//         top: 10,
+//         bottom: 10,
+//       ),
+//       child: Obx(() => ElevatedButton(
+//             onPressed: onPressed,
+//             style: ButtonStyle(
+//               elevation: MaterialStateProperty.all(isActivated.value ? 6 : 0),
+//               backgroundColor: MaterialStateProperty.all(
+//                 isActivated.value
+//                     ? Colors.red
+//                     : (controller.darkModeValue.value)
+//                         ? Colors.grey.shade700
+//                         : Colors.grey.shade200,
+//               ),
+//             ),
+//             child: Padding(
+//               padding: const EdgeInsets.all(1.0),
+//               child: Text(
+//                 categoryName,
+//                 style: TextStyle(
+//                   fontWeight: FontWeight.bold,
+//                   fontSize: 14,
+//                   color: isActivated.value
+//                       ? Colors.white
+//                       : (controller.darkModeValue.value)
+//                           ? Colors.white
+//                           : Colors.grey.shade800,
+//                 ),
+//               ),
+//             ),
+//           )),
+//     );
+//   }
+// }
