@@ -31,25 +31,25 @@ class BukuModel {
     var json = doc.data() as Map<String, dynamic>?;
     return BukuModel(
       id: doc.id,
-      judul: json!['Judul'] as String?,
-      penulis: json['Penulis'] as String?,
-      coverBuku: json['CoverBuku'] as String?,
-      penerbit: json['Penerbit'] as String?,
-      tahunTerbit: json['Tahun Terbit'] as int?,
-      sinopsis: json['Sinopsis'] as String?,
-      kategoriId: json["Kategori"] as String?,
+      judul: json!['judul'] as String?,
+      penulis: json['penulis'] as String?,
+      coverBuku: json['coverBuku'] as String?,
+      penerbit: json['penerbit'] as String?,
+      tahunTerbit: json['tahunTerbit'] as int?,
+      sinopsis: json['sinopsis'] as String?,
+      kategoriId: json["kategoriId"] as String?,
     );
   }
 
   Map<String, dynamic> get toJson => {
         'id': id,
-        'Judul': judul,
-        "Penulis": penulis,
-        "CoverBuku": coverBuku,
-        "Penerbit": penerbit,
-        "Tahun Terbit": tahunTerbit,
-        "Sinopsis": sinopsis,
-        "Kategori": kategoriId
+        'judul': judul,
+        "penulis": penulis,
+        "coverBuku": coverBuku,
+        "penerbit": penerbit,
+        "tahunTerbit": tahunTerbit,
+        "sinopsis": sinopsis,
+        "kategoriId": kategoriId
       };
 
   Database db = Database(

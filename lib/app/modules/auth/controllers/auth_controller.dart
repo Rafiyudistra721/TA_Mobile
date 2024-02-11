@@ -196,7 +196,7 @@ class AuthController extends GetxController {
                 emailC.clear();
                 adressC.clear();
                 passC2.clear();
-                Get.back();
+                Get.toNamed(Routes.AUTH);
                 isRegis = false;
               },
               buttonColor: colorPrimary,
@@ -230,12 +230,12 @@ class AuthController extends GetxController {
         isSaving = false;
         emailC.clear();
         passC.clear();
-        Get.offAndToNamed(Routes.AUTH);
+        Get.offAndToNamed(Routes.LANDING_PAGE);
       },
       textConfirm: 'Iya',
       textCancel: 'Tidak',
       buttonColor: colorPrimary,
-      confirmTextColor: Colors.white,
+      confirmTextColor: Colors.black,
       cancelTextColor: colorPrimary,
       titleStyle: const TextStyle(color: colorPrimary),
       middleTextStyle: const TextStyle(color: colorPrimary),
@@ -298,11 +298,11 @@ class AuthController extends GetxController {
 
   @override
   void onClose() { 
-    emailC.dispose();
-    passC.dispose();
-    passC2.dispose();
-    nameC.dispose();
-    adressC.dispose();
+    emailC.clear();
+    passC.clear();
+    passC2.clear();
+    nameC.clear();
+    adressC.clear();
     super.onClose();
   }
 }

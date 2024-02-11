@@ -1,3 +1,5 @@
+// ignore_for_file: non_constant_identifier_names
+
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:nb_utils/nb_utils.dart';
 import 'package:ta_mobile/app/integrations/firestore.dart';
@@ -18,14 +20,14 @@ class KategoriModel {
     var json = doc.data() as Map<String, dynamic>?;
     return KategoriModel(
       id: doc.id,
-      namaKategori: json!['Nama'] as String?,
+      namaKategori: json!['namaKategori'] as String?,
       
     );
   }
 
   Map<String, dynamic> get toJson => {
         'id': id,
-        'nama': namaKategori,
+        'namaKategori': namaKategori,
         
       };
 

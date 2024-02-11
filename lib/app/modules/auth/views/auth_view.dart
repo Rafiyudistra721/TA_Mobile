@@ -1,550 +1,530 @@
-// ignore_for_file: must_be_immutable
-
 import 'package:flutter/material.dart';
 
 import 'package:get/get.dart';
 import 'package:nb_utils/nb_utils.dart';
+import 'package:ta_mobile/app/routes/app_pages.dart';
 import 'package:ta_mobile/app/utils/colors.dart';
 
-import '../controllers/auth_controller.dart';
+import 'package:ta_mobile/app/modules/auth/controllers/auth_controller.dart';
 
 class AuthView extends GetView<AuthController> {
-  GlobalKey<FormState> formKey = GlobalKey();
+  final GlobalKey<FormState> formKey = GlobalKey();
   AuthView({Key? key}) : super(key: key);
+
   @override
   Widget build(BuildContext context) {
-    double textFieldWidth = MediaQuery.of(context).size.width - 114;
     return Scaffold(
-        backgroundColor: Colors.white,
-        body: Stack(
-          alignment: Alignment.center,
-          children: [
-            Container(
-              decoration: const BoxDecoration(
-                image: DecorationImage(
-                    image: AssetImage('assets/bgLR.jpg'), fit: BoxFit.cover),
-              ),
+      resizeToAvoidBottomInset: false,
+      appBar: AppBar(
+          elevation: 0,
+          backgroundColor: Colors.red.shade200,
+          leading: IconButton(
+            icon: const Icon(
+              Icons.arrow_back_ios_new_outlined,
+              size: 20,
             ),
-            SingleChildScrollView(
-              child: Obx(() => Column(
-                    mainAxisAlignment: MainAxisAlignment.start,
+            onPressed: () {
+              Get.to(Routes.INTRO);
+            },
+          )),
+      body: Container(
+        color: Colors.red.shade200,
+        child: Column(
+          children: [
+            Expanded(
+              flex: 2,
+              child: Container(
+                color: Colors.red.shade200,
+                child: Padding(
+                  padding: const EdgeInsets.only(bottom: 20, left: 20),
+                  child: Column(
+                    mainAxisAlignment: MainAxisAlignment.spaceEvenly,
                     crossAxisAlignment: CrossAxisAlignment.start,
                     children: [
-                      Padding(
-                        padding: const EdgeInsets.only(top: 10.0),
-                        child: Center(
-                          child: Image.asset(
-                            'assets/icons/logo_login.png',
-                            width: 350,
-                          ),
-                        ),
-                      ),
-                      Container(
-                        color: Colors.white,
-                        margin: const EdgeInsets.only(left: 10, right: 10),
-                        child: Container(
-                          decoration: BoxDecoration(
-                            color: Colors.white,
-                            boxShadow: [
-                              BoxShadow(
-                                color: Colors.grey.withOpacity(0.5),
-                                spreadRadius: 2,
-                                blurRadius: 8,
-                                offset: const Offset(0, 3),
-                              ),
-                            ],
-                            borderRadius: BorderRadius.circular(15.0),
-                          ),
-                          margin: const EdgeInsets.symmetric(horizontal: 10),
-                          child: SizedBox(
-                            width: double.infinity,
-                            child: Form(
-                                key: formKey,
-                                autovalidateMode: AutovalidateMode.always,
-                                child: Column(
-                                  children: [
-                                    //username
-                                    10.height,
-                                    if (controller.isRegis)
-                                      Padding(
-                                        padding: const EdgeInsets.only(
-                                            left: 20, right: 20, top: 20),
-                                        child: Row(
-                                          children: [
-                                            const Icon(
-                                              Icons.person,
-                                              color: colorPrimary,
-                                            ),
-                                            10.width,
-                                            SizedBox(
-                                              height: 60,
-                                              width: textFieldWidth,
-                                              child: AppTextField(
-                                                textFieldType:
-                                                    TextFieldType.NAME,
-                                                showCursor: true,
-                                                cursorColor: colorPrimary,
-                                                controller: controller.nameC,
-                                                textInputAction:
-                                                    TextInputAction.next,
-                                                decoration: const InputDecoration(
-                                                    contentPadding:
-                                                        EdgeInsets.only(
-                                                            top: 10, bottom: 5),
-                                                    labelText: "Username",
-                                                    labelStyle: TextStyle(
-                                                        color: colorPrimary),
-                                                    border: UnderlineInputBorder(
-                                                        borderSide: BorderSide(
-                                                            color:
-                                                                grey)),
-                                                    focusedBorder: OutlineInputBorder(
-                                                        borderSide: BorderSide(
-                                                            color:
-                                                                colorPrimary)),
-                                                    enabledBorder: OutlineInputBorder(
-                                                        borderSide: BorderSide(
-                                                            color:
-                                                                colorPrimary)),
-                                                    errorBorder: OutlineInputBorder(
-                                                        borderSide: BorderSide(
-                                                            color:
-                                                                redColor))),
-                                                validator: (value) {
-                                                  if (value!.isEmpty) {
-                                                    return 'Username wajib diisi';
-                                                  }
-                                                  return null;
-                                                },
-                                              ),
-                                            ),
-                                          ],
-                                        ),
-                                      ),
-                                    5.height,
-                                    //email
-                                    Padding(
-                                      padding: const EdgeInsets.only(
-                                          left: 20, right: 20),
-                                      child: Row(
-                                        children: [
-                                          const Icon(
-                                            Icons.email,
-                                            color: colorPrimary,
-                                          ),
-                                          10.width,
-                                          SizedBox(
-                                            height: 60,
-                                            width: textFieldWidth,
-                                            child: AppTextField(
-                                              textFieldType:
-                                                  TextFieldType.EMAIL,
-                                              showCursor: true,
-                                              cursorColor: colorPrimary,
-                                              controller: controller.emailC,
-                                              textInputAction:
-                                                  TextInputAction.next,
-                                              decoration: const InputDecoration(
-                                                  contentPadding:
-                                                      EdgeInsets.only(
-                                                          top: 10, bottom: 5),
-                                                  labelText: "Email",
-                                                  labelStyle: TextStyle(
-                                                      color: colorPrimary),
-                                                  border: UnderlineInputBorder(
-                                                      borderSide: BorderSide(
-                                                          color: grey)),
-                                                  focusedBorder:
-                                                      OutlineInputBorder(
-                                                          borderSide: BorderSide(
-                                                              color:
-                                                                  colorPrimary)),
-                                                  enabledBorder:
-                                                      OutlineInputBorder(
-                                                          borderSide: BorderSide(
-                                                              color:
-                                                                  colorPrimary)),
-                                                  errorBorder:
-                                                      OutlineInputBorder(
-                                                          borderSide: BorderSide(
-                                                              color:
-                                                                  redColor))),
-                                              validator: (value) {
-                                                if (value!.isEmpty) {
-                                                  return 'Email wajib diisi';
-                                                }
-                                                return null;
-                                              },
-                                            ),
-                                          ),
-                                        ],
-                                      ),
-                                    ),
-                                    5.height,
-                                    //password
-                                    Padding(
-                                      padding: const EdgeInsets.only(
-                                          left: 20, right: 20),
-                                      child: Row(
-                                        children: [
-                                          const Icon(
-                                            Icons.lock_outline,
-                                            color: colorPrimary,
-                                          ),
-                                          10.width,
-                                          SizedBox(
-                                            height: 60,
-                                            width: textFieldWidth,
-                                            child: AppTextField(
-                                              textFieldType:
-                                                  TextFieldType.PASSWORD,
-                                              showCursor: true,
-                                              isPassword:
-                                                  controller.isPassHidden.value,
-                                              cursorColor: colorPrimary,
-                                              controller: controller.passC,
-                                              textInputAction:
-                                                  TextInputAction.next,
-                                              decoration: InputDecoration(
-                                                  contentPadding:
-                                                      const EdgeInsets.only(
-                                                          top: 10, bottom: 5),
-                                                  labelText: "Password",
-                                                  labelStyle: const TextStyle(
-                                                      color: colorPrimary),
-                                                  suffixIcon: IconButton(
-                                                    onPressed: () {
-                                                      controller
-                                                          .togglePasswordVisibility();
-                                                    },
-                                                    icon: controller
-                                                            .isPassHidden.value
-                                                        ? const Icon(Icons
-                                                            .visibility_off)
-                                                        : const Icon(
-                                                            Icons.visibility),
-                                                  ),
-                                                  border:
-                                                      const UnderlineInputBorder(
-                                                          borderSide: BorderSide(
-                                                              color:
-                                                                  grey)),
-                                                  focusedBorder:
-                                                      const OutlineInputBorder(
-                                                          borderSide: BorderSide(
-                                                              color:
-                                                                  colorPrimary)),
-                                                  enabledBorder:
-                                                      const OutlineInputBorder(
-                                                          borderSide: BorderSide(
-                                                              color:
-                                                                  colorPrimary)),
-                                                  errorBorder:
-                                                        const OutlineInputBorder(
-                                                            borderSide: BorderSide(
-                                                                color:
-                                                                    redColor))),
-                                              validator: (value) {
-                                                if (value!.isEmpty) {
-                                                  return 'Harap isi password Anda';
-                                                }
-                                                return null;
-                                              },
-                                            ),
-                                          )
-                                        ],
-                                      ),
-                                    ),
-                                    5.height,
-                                    //confirm password
-                                    if (controller.isRegis)
-                                      Padding(
-                                        padding: const EdgeInsets.only(
-                                            left: 20, right: 20),
-                                        child: Row(
-                                          children: [
-                                            const Icon(
-                                              Icons.lock_outline,
-                                              color: colorPrimary,
-                                            ),
-                                            10.width,
-                                            SizedBox(
-                                              height: 60,
-                                              width: textFieldWidth,
-                                              child: AppTextField(
-                                                textFieldType:
-                                                    TextFieldType.PASSWORD,
-                                                showCursor: true,
-                                                isPassword: controller
-                                                    .isPassHidden.value,
-                                                cursorColor: colorPrimary,
-                                                controller: controller.passC2,
-                                                textInputAction:
-                                                    TextInputAction.next,
-                                                decoration: InputDecoration(
-                                                    contentPadding:
-                                                        const EdgeInsets.only(
-                                                            top: 10, bottom: 5),
-                                                    labelText:
-                                                        "Konfirmasi Password",
-                                                    labelStyle: const TextStyle(
-                                                        color: colorPrimary),
-                                                    suffixIcon: IconButton(
-                                                      onPressed: () {
-                                                        controller
-                                                            .togglePasswordVisibility();
-                                                      },
-                                                      icon: controller
-                                                              .isPassHidden
-                                                              .value
-                                                          ? const Icon(Icons
-                                                              .visibility_off)
-                                                          : const Icon(
-                                                              Icons.visibility),
-                                                    ),
-                                                    border: const UnderlineInputBorder(
-                                                        borderSide: BorderSide(
-                                                            color:
-                                                                grey)),
-                                                    focusedBorder:
-                                                        const OutlineInputBorder(
-                                                            borderSide: BorderSide(
-                                                                color:
-                                                                    colorPrimary)),
-                                                    enabledBorder:
-                                                        const OutlineInputBorder(
-                                                            borderSide: BorderSide(
-                                                                color:
-                                                                    colorPrimary)),
-                                                    errorBorder:
-                                                        const OutlineInputBorder(
-                                                            borderSide: BorderSide(
-                                                                color:
-                                                                    redColor))),
-                                                validator: (value) {
-                                                  if (value!.isEmpty) {
-                                                    return 'Harap isi password Anda';
-                                                  }
-                                                  if (value !=
-                                                      controller.passC.text) {
-                                                    return 'Kata sandi tidak cocok';
-                                                  }
-                                                  return null;
-                                                },
-                                              ),
-                                            )
-                                          ],
-                                        ),
-                                      ),
-                                    5.height,
-                                    //alamat
-                                    if (controller.isRegis)
-                                      Padding(
-                                        padding: const EdgeInsets.only(
-                                            left: 20, right: 20),
-                                        child: Row(
-                                          children: [
-                                            const Icon(
-                                              Icons.location_on,
-                                              color: colorPrimary,
-                                            ),
-                                            10.width,
-                                            SizedBox(
-                                              height: 60,
-                                              width: textFieldWidth,
-                                              child: AppTextField(
-                                                textFieldType:
-                                                    TextFieldType.MULTILINE,
-                                                showCursor: true,
-                                                cursorColor: colorPrimary,
-                                                controller: controller.adressC,
-                                                textInputAction:
-                                                    TextInputAction.next,
-                                                decoration: const InputDecoration(
-                                                    contentPadding:
-                                                        EdgeInsets.only(
-                                                            top: 10, bottom: 5),
-                                                    labelText: 'Alamat',
-                                                    labelStyle: TextStyle(
-                                                        color: colorPrimary),
-                                                    border: UnderlineInputBorder(
-                                                        borderSide: BorderSide(
-                                                            color:
-                                                                grey)),
-                                                    focusedBorder: OutlineInputBorder(
-                                                        borderSide: BorderSide(
-                                                            color:
-                                                                colorPrimary)),
-                                                    enabledBorder: OutlineInputBorder(
-                                                        borderSide: BorderSide(
-                                                            color:
-                                                                colorPrimary)),
-                                                    errorBorder: OutlineInputBorder(
-                                                        borderSide: BorderSide(
-                                                            color:
-                                                                redColor))),
-                                                validator: (value) {
-                                                  if (value!.isEmpty) {
-                                                    return 'Alamat wajib diisi';
-                                                  }
-                                                  return null;
-                                                },
-                                              ),
-                                            ),
-                                          ],
-                                        ),
-                                      ),
-                                    if (controller.isRegis)
-                                    20.height,
-                                  ],
-                                )),
-                          ),
-                        ),
-                      ),
-                      //button
-                      Padding(
-                        padding:
-                            const EdgeInsets.only(top: 25, left: 20, right: 20),
-                        child: ElevatedButton(
-                          onPressed: () {
-                            if (formKey.currentState!.validate()) {
-                              if (controller.isRegis) {
-                                if (controller.isSaving) {
-                                  showDialog(
-                                      context: context,
-                                      builder: (BuildContext context) {
-                                        return AlertDialog(
-                                          content: Column(
-                                            mainAxisSize: MainAxisSize.min,
-                                            children: <Widget>[
-                                              const CircularProgressIndicator(
-                                                  color: colorPrimary),
-                                              15.height,
-                                              const Text(
-                                                "Mohon tunggu sebentar...",
-                                                style: TextStyle(
-                                                    fontWeight: FontWeight.bold,
-                                                    color: colorPrimary),
-                                              )
-                                            ],
-                                          ),
-                                        );
-                                      });
-                                } else {
-                                  controller.signup();
-                                }
-                              } else {
-                                if (controller.isSaving) {
-                                  showDialog(
-                                    context: context,
-                                    builder: (BuildContext context) {
-                                      return AlertDialog(
-                                        content: Column(
-                                          mainAxisSize: MainAxisSize.min,
-                                          children: <Widget>[
-                                            const CircularProgressIndicator(
-                                                color: colorPrimary),
-                                            15.height,
-                                            const Center(
-                                              child: Text(
-                                                'Loading..',
-                                                style: TextStyle(
-                                                    fontWeight: FontWeight.bold,
-                                                    color: colorPrimary),
-                                              ),
-                                            )
-                                          ],
-                                        ),
-                                      );
-                                    },
-                                  );
-                                } else {
-                                  controller.login();
-                                }
-                              }
-                            }
-                          },
-                          style: ElevatedButton.styleFrom(
-                            elevation: 8,
-                            shadowColor: Colors.grey,
-                            backgroundColor: colorPrimary,
-                            minimumSize: const Size(double.infinity, 45),
-                          ),
-                          child: Text(
-                            controller.isRegis ? 'Daftar' : 'Masuk',
-                            style: const TextStyle(
-                                color: Colors.white, fontSize: 15),
-                          ),
-                        ),
-                      ),
-                      Align(
-                        alignment: Alignment.center,
-                        child: InkWell(
-                          onTap: () {
-                            controller.isRegis = !controller.isRegis;
-                          },
-                          child: Padding(
-                            padding: const EdgeInsets.only(top: 15),
+                      Obx(() => Align(
+                            alignment: Alignment.centerLeft,
                             child: Text(
-                              controller.isRegis
-                                  ? 'Sudah Punya Akun? Login Disini'
-                                  : 'Belum Punya Akun? Daftar Disini',
+                              controller.isRegis ? 'Daftar' : 'Login',
                               style: const TextStyle(
-                                  color: colorPrimary,
-                                  fontStyle: FontStyle.italic),
+                                  fontSize: 40,
+                                  fontWeight: FontWeight.w900,
+                                  color: Colors.black),
+                            ),
+                          )),
+                      14.height,
+                      Obx(() => Text(
+                            controller.isRegis
+                                ? 'Hai, Selamat datang di SmartLib, silahkan isi \ndata dibawah ini untuk mendaftar.'
+                                : "Masukkan email dan password kamu untuk login",
+                            style: const TextStyle(
+                                fontSize: 16,
+                                fontWeight: FontWeight.bold,
+                                color: Colors.black),
+                          )),
+                    ],
+                  ),
+                ),
+              ),
+            ),
+            Expanded(
+              flex: 7,
+              child: Container(
+                decoration: const BoxDecoration(
+                    boxShadow: [
+                      BoxShadow(
+                          color: Colors.black26,
+                          offset: Offset(-1, -2),
+                          blurRadius: 15),
+                    ],
+                    color: Colors.white,
+                    borderRadius:
+                        BorderRadius.vertical(top: Radius.circular(70))),
+                child: Obx(
+                  () => Form(
+                    key: formKey,
+                    child: SingleChildScrollView(
+                      child: Column(
+                        children: [
+                          50.height,
+                          if (controller.isRegis)
+                            Padding(
+                              padding:
+                                  const EdgeInsets.symmetric(horizontal: 20),
+                              child: AppTextField(
+                                textFieldType: TextFieldType.NAME,
+                                decoration: InputDecoration(
+                                  hintText: 'Nama Pengguna',
+                                  hintStyle: TextStyle(
+                                      fontSize: 14,
+                                      color: Colors.grey.shade400,
+                                      fontWeight: FontWeight.bold),
+                                  contentPadding: const EdgeInsets.all(25),
+                                  prefixIcon: Padding(
+                                    padding: const EdgeInsets.all(20.0),
+                                    child: Icon(
+                                      Icons.person_2_rounded,
+                                      size: 25,
+                                      color: Colors.grey.shade400,
+                                    ),
+                                  ),
+                                  fillColor: Colors.grey.shade200,
+                                  focusColor: Colors.grey.shade200,
+                                  focusedBorder: OutlineInputBorder(
+                                    borderRadius: BorderRadius.circular(100),
+                                    borderSide: const BorderSide(
+                                      color: Colors.white,
+                                    ),
+                                  ),
+                                  filled: true,
+                                  enabledBorder: OutlineInputBorder(
+                                    borderRadius: BorderRadius.circular(100),
+                                    borderSide:
+                                        const BorderSide(color: Colors.white),
+                                  ),
+                                ),
+                                controller: controller.nameC,
+                                validator: (val) {
+                                  if (val!.isEmpty) {
+                                    return 'Masukkan nama anda terlebih dahulu...';
+                                  }
+                                  return null;
+                                },
+                              ),
+                            ),
+                          12.height,
+                          Padding(
+                            padding: const EdgeInsets.symmetric(horizontal: 20),
+                            child: AppTextField(
+                              textFieldType: TextFieldType.EMAIL,
+                              decoration: InputDecoration(
+                                hintText: 'Email Pengguna',
+                                hintStyle: TextStyle(
+                                    fontSize: 14,
+                                    color: Colors.grey.shade400,
+                                    fontWeight: FontWeight.bold),
+                                contentPadding: const EdgeInsets.all(25),
+                                prefixIcon: Padding(
+                                  padding: const EdgeInsets.all(20.0),
+                                  child: Icon(
+                                    Icons.email_rounded,
+                                    size: 25,
+                                    color: Colors.grey.shade400,
+                                  ),
+                                ),
+                                fillColor: Colors.grey.shade200,
+                                focusColor: Colors.grey.shade200,
+                                focusedBorder: OutlineInputBorder(
+                                  borderRadius: BorderRadius.circular(100),
+                                  borderSide: const BorderSide(
+                                    color: Colors.white,
+                                  ),
+                                ),
+                                filled: true,
+                                enabledBorder: OutlineInputBorder(
+                                  borderRadius: BorderRadius.circular(100),
+                                  borderSide:
+                                      const BorderSide(color: Colors.white),
+                                ),
+                              ),
+                              controller: controller.emailC,
+                              validator: (val) {
+                                if (val!.isEmpty) {
+                                  return 'Masukkan email anda terlebih dahulu...';
+                                }
+                                return null;
+                              },
                             ),
                           ),
-                        ),
-                      ),
-                      Padding(
-                        padding: const EdgeInsets.only(bottom: 20.0),
-                        child: Align(
-                          alignment: Alignment.center,
-                          child: InkWell(
-                            onTap: () {
-                              controller.resetPassword(controller.emailC.text);
-                            },
-                            child: Padding(
-                              padding: const EdgeInsets.only(top: 12),
-                              child: Text(
-                                controller.isRegis ? '' : 'Lupa Password',
-                                style: const TextStyle(
-                                    color: colorPrimary,
-                                    fontStyle: FontStyle.italic),
+                          12.height,
+                          Padding(
+                            padding: const EdgeInsets.symmetric(horizontal: 20),
+                            child: AppTextField(
+                              textFieldType: TextFieldType.PASSWORD,
+                              decoration: InputDecoration(
+                                  hintText: 'Password',
+                                  hintStyle: TextStyle(
+                                      fontSize: 14,
+                                      color: Colors.grey.shade400,
+                                      fontWeight: FontWeight.bold),
+                                  contentPadding: const EdgeInsets.all(25),
+                                  prefixIcon: Padding(
+                                    padding: const EdgeInsets.all(20.0),
+                                    child: Icon(
+                                      Icons.password,
+                                      size: 25,
+                                      color: Colors.grey.shade400,
+                                    ),
+                                  ),
+                                  fillColor: Colors.grey.shade200,
+                                  focusColor: Colors.grey.shade200,
+                                  focusedBorder: OutlineInputBorder(
+                                    borderRadius: BorderRadius.circular(100),
+                                    borderSide: const BorderSide(
+                                      color: Colors.white,
+                                    ),
+                                  ),
+                                  filled: true,
+                                  enabledBorder: OutlineInputBorder(
+                                    borderRadius: BorderRadius.circular(100),
+                                    borderSide:
+                                        const BorderSide(color: Colors.white),
+                                  ),
+                                  suffixIcon: IconButton(
+                                    onPressed: () {
+                                      controller.togglePasswordVisibility();
+                                    },
+                                    icon: controller.isPassHidden.value
+                                        ? const Icon(Icons.visibility_off)
+                                        : const Icon(Icons.visibility),
+                                  )),
+                              obscuringCharacter: '*',
+                              isPassword: controller.isPassHidden.value,
+                              controller: controller.passC,
+                              validator: (val) {
+                                if (val!.isEmpty) {
+                                  return 'Masukkan password anda terlebih dahulu...';
+                                }
+                                return null;
+                              },
+                            ),
+                          ),
+                          12.height,
+                          if (controller.isRegis)
+                            Padding(
+                              padding:
+                                  const EdgeInsets.symmetric(horizontal: 20),
+                              child: AppTextField(
+                                textFieldType: TextFieldType.PASSWORD,
+                                decoration: InputDecoration(
+                                    hintText: 'Konfirmasi Password',
+                                    hintStyle: TextStyle(
+                                        fontSize: 14,
+                                        color: Colors.grey.shade400,
+                                        fontWeight: FontWeight.bold),
+                                    contentPadding: const EdgeInsets.all(25),
+                                    prefixIcon: Padding(
+                                      padding: const EdgeInsets.all(20.0),
+                                      child: Icon(
+                                        Icons.password,
+                                        size: 25,
+                                        color: Colors.grey.shade400,
+                                      ),
+                                    ),
+                                    fillColor: Colors.grey.shade200,
+                                    focusColor: Colors.grey.shade200,
+                                    focusedBorder: OutlineInputBorder(
+                                      borderRadius: BorderRadius.circular(100),
+                                      borderSide: const BorderSide(
+                                        color: Colors.white,
+                                      ),
+                                    ),
+                                    filled: true,
+                                    enabledBorder: OutlineInputBorder(
+                                      borderRadius: BorderRadius.circular(100),
+                                      borderSide:
+                                          const BorderSide(color: Colors.white),
+                                    ),
+                                    suffixIcon: IconButton(
+                                      onPressed: () {
+                                        controller.togglePasswordVisibility();
+                                      },
+                                      icon: controller.isPassHidden.value
+                                          ? const Icon(Icons.visibility_off)
+                                          : const Icon(Icons.visibility),
+                                    )),
+                                obscuringCharacter: '*',
+                                isPassword: controller.isPassHidden.value,
+                                controller: controller.passC2,
+                                validator: (val) {
+                                  if (val!.isEmpty) {
+                                    return 'Masukkan password anda terlebih dahulu...';
+                                  }
+                                  if (val != controller.passC.text) {
+                                    return 'Kata sandi yang anda masukkan tidak cocok';
+                                  }
+                                  return null;
+                                },
+                              ),
+                            ),
+                          12.height,
+                          if (controller.isRegis)
+                            Padding(
+                              padding:
+                                  const EdgeInsets.symmetric(horizontal: 20),
+                              child: AppTextField(
+                                textFieldType: TextFieldType.MULTILINE,
+                                decoration: InputDecoration(
+                                  hintText: 'Alamat',
+                                  hintStyle: TextStyle(
+                                      fontSize: 14,
+                                      color: Colors.grey.shade400,
+                                      fontWeight: FontWeight.bold),
+                                  contentPadding: const EdgeInsets.all(25),
+                                  prefixIcon: Padding(
+                                    padding: const EdgeInsets.all(20.0),
+                                    child: Icon(
+                                      Icons.location_on,
+                                      size: 25,
+                                      color: Colors.grey.shade400,
+                                    ),
+                                  ),
+                                  fillColor: Colors.grey.shade200,
+                                  focusColor: Colors.grey.shade200,
+                                  focusedBorder: OutlineInputBorder(
+                                    borderRadius: BorderRadius.circular(100),
+                                    borderSide: const BorderSide(
+                                      color: Colors.white,
+                                    ),
+                                  ),
+                                  filled: true,
+                                  enabledBorder: OutlineInputBorder(
+                                    borderRadius: BorderRadius.circular(100),
+                                    borderSide:
+                                        const BorderSide(color: Colors.white),
+                                  ),
+                                ),
+                                controller: controller.adressC,
+                                validator: (val) {
+                                  if (val!.isEmpty) {
+                                    return 'Masukkan alamat rumah anda terlebih dahulu...';
+                                  }
+                                  return null;
+                                },
+                              ),
+                            ),
+                          10.height,
+                          Padding(
+                            padding: const EdgeInsets.all(20.0),
+                            child: ElevatedButton(
+                              style: ButtonStyle(
+                                shadowColor: MaterialStateProperty.all(
+                                  Colors.black,
+                                ),
+                                backgroundColor: MaterialStateProperty.all(
+                                  Colors.black,
+                                ),
+                              ),
+                              onPressed: () async {
+                                if (formKey.currentState!.validate()) {
+                                  if (controller.isRegis) {
+                                    if (controller.isSaving) {
+                                      showDialog(
+                                          context: context,
+                                          builder: (BuildContext context) {
+                                            return AlertDialog(
+                                              content: Column(
+                                                mainAxisSize: MainAxisSize.min,
+                                                children: <Widget>[
+                                                  const CircularProgressIndicator(
+                                                      color: colorPrimary),
+                                                  15.height,
+                                                  const Text(
+                                                    "Mohon tunggu sebentar...",
+                                                    style: TextStyle(
+                                                        fontWeight:
+                                                            FontWeight.bold,
+                                                        color: colorPrimary),
+                                                  )
+                                                ],
+                                              ),
+                                            );
+                                          });
+                                    } else {
+                                      controller.signup();
+                                    }
+                                  } else {
+                                    if (controller.isSaving) {
+                                      showDialog(
+                                        context: context,
+                                        builder: (BuildContext context) {
+                                          return AlertDialog(
+                                            content: Column(
+                                              mainAxisSize: MainAxisSize.min,
+                                              children: <Widget>[
+                                                const CircularProgressIndicator(
+                                                    color: colorPrimary),
+                                                15.height,
+                                                const Center(
+                                                  child: Text(
+                                                    'Loading..',
+                                                    style: TextStyle(
+                                                        fontWeight:
+                                                            FontWeight.bold,
+                                                        color: colorPrimary),
+                                                  ),
+                                                )
+                                              ],
+                                            ),
+                                          );
+                                        },
+                                      );
+                                    } else {
+                                      controller.login();
+                                    }
+                                  }
+                                }
+                              },
+                              child: SizedBox(
+                                height: 60,
+                                width: double.infinity,
+                                child: Align(
+                                  alignment: Alignment.center,
+                                  child: Text(
+                                    controller.isRegis ? 'Daftar' : 'Login',
+                                    style: const TextStyle(
+                                      fontWeight: FontWeight.w900,
+                                      color: Colors.white,
+                                      fontSize: 20,
+                                    ),
+                                  ),
+                                ),
                               ),
                             ),
                           ),
-                        ),
-                      ),
-                      Padding(
-                        padding:
-                            const EdgeInsets.only(top: 10, left: 20, right: 20),
-                        child: ElevatedButton.icon(
-                            onPressed: () async {
+                          10.height,
+                          Align(
+                            alignment: Alignment.center,
+                            child: InkWell(
+                              onTap: () {
+                                controller.isRegis = !controller.isRegis;
+                              },
+                              child: Padding(
+                                padding: const EdgeInsets.only(top: 15),
+                                child: Text(
+                                  controller.isRegis
+                                      ? 'Sudah Punya Akun? Login Disini'
+                                      : 'Belum Punya Akun? Daftar Disini',
+                                  style: const TextStyle(
+                                      color: colorPrimary,
+                                      fontStyle: FontStyle.italic),
+                                ),
+                              ),
+                            ),
+                          ),
+                          if (controller.isRegis)
+                          InkWell(
+                            onTap: () async {
                               await controller.signInWithGoogle();
                             },
-                            style: ElevatedButton.styleFrom(
-                              elevation: 8,
-                              shadowColor: Colors.grey,
-                              backgroundColor: Colors.white,
-                              minimumSize: const Size(double.infinity, 45),
-                            ),
-                            icon: Image.asset(
-                              'assets/icons/google.png',
-                              width: 20,
-                            ),
-                            label: const Text(
-                              'Sign in With Google',
-                              style: TextStyle(
-                                color: colorPrimary,
-                                fontSize: 15,
+                            child: Container(
+                              height: MediaQuery.of(context).size.height / 4,
+                              width: double.infinity,
+                              decoration: BoxDecoration(
+                                  gradient: LinearGradient(
+                                colors: [
+                                  Colors.grey.shade50,
+                                  Colors.grey.shade50,
+                                ],
+                                begin: Alignment.topCenter,
+                                end: Alignment.bottomCenter,
+                              )),
+                              child: Column(
+                                mainAxisAlignment: MainAxisAlignment.center,
+                                children: [
+                                  Padding(
+                                    padding: const EdgeInsets.symmetric(
+                                        horizontal: 30),
+                                    child: Container(
+                                      height: 70,
+                                      decoration: BoxDecoration(
+                                        borderRadius:
+                                            BorderRadius.circular(100),
+                                        gradient: LinearGradient(
+                                            colors: [
+                                              Colors.grey.shade50,
+                                              Colors.white,
+                                            ],
+                                            begin: Alignment.topCenter,
+                                            end: Alignment.bottomCenter),
+                                        boxShadow: [
+                                          BoxShadow(
+                                            color: Colors.grey.shade300,
+                                            offset: const Offset(2, 3),
+                                            blurRadius: 10,
+                                          ),
+                                        ],
+                                      ),
+                                      child: Row(
+                                        children: [
+                                          10.width,
+                                          Transform.scale(
+                                            scale: 0.5,
+                                            child: Image.asset(
+                                              'assets/icons/google.png',
+                                            ),
+                                          ),
+                                          0.width,
+                                          Text(
+                                            'Daftar dengan Google',
+                                            style: TextStyle(
+                                                fontWeight: FontWeight.w800,
+                                                fontSize: 14,
+                                                color: Colors.grey.shade800),
+                                          ),
+                                          45.width,
+                                          const Icon(
+                                            Icons.arrow_forward,
+                                            size: 30,
+                                            color: Colors.black,
+                                          ),
+                                        ],
+                                      ),
+                                    ),
+                                  ),
+                                ],
                               ),
-                            )),
-                      )
-                    ],
-                  )),
-            )
+                            ),
+                          ),
+                        ],
+                      ),
+                    ),
+                  ),
+                ),
+              ),
+            ),
           ],
-        ));
+        ),
+      ),
+    );
   }
 }
