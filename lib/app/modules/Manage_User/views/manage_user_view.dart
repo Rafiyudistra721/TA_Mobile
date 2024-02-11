@@ -3,6 +3,7 @@ import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:ta_mobile/app/utils/colors.dart';
 import 'package:ta_mobile/app/utils/my_Box.dart';
+import 'package:ta_mobile/app/utils/my_drawer.dart';
 import 'package:ta_mobile/app/utils/my_tile.dart';
 
 import '../controllers/manage_user_controller.dart';
@@ -19,7 +20,7 @@ class ManageUserView extends GetView<ManageUserController> {
           crossAxisAlignment: CrossAxisAlignment.start,
           children: [
             // open drawer
-            myDrawer,
+            MyDrawer(),
 
             // first half of page
             Expanded(

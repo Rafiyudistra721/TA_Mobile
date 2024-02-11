@@ -99,7 +99,7 @@ class AppPages {
     ),
     GetPage(
       name: _Paths.TAMBAH_PETUGAS,
-      page: () => const TambahPetugasView(),
+      page: () => TambahPetugasView(),
       binding: TambahPetugasBinding(),
     ),
   ];

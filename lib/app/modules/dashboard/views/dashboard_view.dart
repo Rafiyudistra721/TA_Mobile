@@ -3,6 +3,7 @@ import 'package:get/get.dart';
 import 'package:ta_mobile/app/modules/dashboard/controllers/dashboard_controller.dart';
 import 'package:ta_mobile/app/utils/colors.dart';
 import 'package:ta_mobile/app/utils/my_Box.dart';
+import 'package:ta_mobile/app/utils/my_drawer.dart';
 import 'package:ta_mobile/app/utils/my_tile.dart';
 
 class DashboardView extends GetView<DashboardController> {
@@ -24,7 +25,7 @@ class DashboardView extends GetView<DashboardController> {
             crossAxisAlignment: CrossAxisAlignment.start,
             children: [
               // open drawer
-              myDrawer,
+              MyDrawer(),
 
               // first half of page
               Expanded(
@@ -98,7 +99,7 @@ class DashboardView extends GetView<DashboardController> {
     } else {
       return Scaffold(
         backgroundColor: defaultBackgroundColor,
-        drawer: myDrawer,
+        drawer: MyDrawer(),
         body: Padding(
           padding: const EdgeInsets.all(8.0),
           child: Column(

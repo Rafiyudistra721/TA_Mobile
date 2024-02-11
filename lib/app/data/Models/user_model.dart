@@ -99,4 +99,19 @@ class UserModel {
       return list;
     });
   }
+  Stream<List<UserModel>> allStreamList() async* {
+    yield* db.collectionReference
+    .snapshots()
+    .map((query) {
+      List<UserModel> list = [];
+      for (var doc in query.docs) {
+        list.add(
+          UserModel().fromJson(
+            doc,
+          ),
+        );
+      }
+      return list;
+    });
+  }
 }

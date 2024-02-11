@@ -49,10 +49,15 @@ class TambahPetugasController extends GetxController {
   List<UserModel> get listPetugas => rxPetugas.value;
   set listPetugas(List<UserModel> value) => rxPetugas.value = value;
 
+  RxList<UserModel> rxUser = RxList<UserModel>();
+  List<UserModel> get listUser => rxUser.value;
+  set listUser(List<UserModel> value) => rxUser.value = value;
+
   @override
   void onInit() {
     rxPetugas.bindStream(UserModel().petugasStreamList());
     rxPeminjam.bindStream(UserModel().peminjamStreamList());
+    rxUser.bindStream(UserModel().allStreamList());
     super.onInit();
   }
 
