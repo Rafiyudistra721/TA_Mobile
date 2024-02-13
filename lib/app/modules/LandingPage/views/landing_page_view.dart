@@ -1,6 +1,6 @@
-
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
+import 'package:google_fonts/google_fonts.dart';
 import 'package:nb_utils/nb_utils.dart';
 import 'package:ta_mobile/app/routes/app_pages.dart';
 import 'package:ta_mobile/app/utils/colors.dart';
@@ -19,6 +19,19 @@ class LandingPage extends GetView<LandingPageController> {
           return Scaffold(
             body: Stack(
               children: [
+                // Add a Container for the heavier vignette effect
+                Container(
+                  decoration: BoxDecoration(
+                    gradient: RadialGradient(
+                      colors: [
+                        Colors.black.withOpacity(
+                            1), // Adjust opacity for heavier effect
+                        Colors.white,
+                      ],
+                      radius: 10.0, // Adjust radius for more defined vignette
+                    ),
+                  ),
+                ),
                 Image.asset(
                   'assets/imgs/bigbgbackground.jpg', // Your background image
                   width: double.infinity,
@@ -26,27 +39,26 @@ class LandingPage extends GetView<LandingPageController> {
                   fit: BoxFit.cover,
                 ),
                 Positioned(
-                  bottom: 20,
-                  right: 20,
+                  top: 100, // Adjust padding from top
+                  left: 75, // Adjust padding from left
                   child: Column(
                     crossAxisAlignment: CrossAxisAlignment.start,
                     children: [
-                      Image.asset(
-                        'assets/icons/logo_landing.png',
-                        width: 200,
-                        height: 200,
+                      Text(
+                        'Hai, Selamat Datang di SmartLib.',
+                        style: GoogleFonts.urbanist(
+                          fontSize: 60,
+                          fontWeight: FontWeight.bold,
+                        ),
                       ),
-                      const SizedBox(height: 20),
-                      ElevatedButton(
-                        onPressed: () {
-                          Get.toNamed(Routes.LANDING_PAGE2);
-                        },
-                        child: const Text('Go to Next Page'),
-                      )
+                      const SizedBox(height: 5), // Adjust spacing between lines
+                      Text(
+                        'Jelajahi Berbagai Koleksi Buku Kami.',
+                        style: GoogleFonts.urbanist(fontSize: 40),
+                      ),
                     ],
                   ),
                 ),
-                // Add the white space with curved corners
                 Positioned(
                   top: 0,
                   right: 0,
@@ -54,23 +66,42 @@ class LandingPage extends GetView<LandingPageController> {
                   child: Container(
                     width: 700, // Adjust width as needed
                     decoration: BoxDecoration(
-                      color: Colors.white,
+                      color: Colors.white.withOpacity(1),
                       borderRadius: BorderRadius.only(
-                        topLeft: Radius.circular(30),
-                        bottomLeft: Radius.circular(30),
+                        topLeft: Radius.circular(15),
+                        bottomLeft: Radius.circular(15),
                       ),
+                    ),
+                    child: Column(
+                      // Add your remaining desktop layout widgets here
+                      children: [
+                        // ...
+                      ],
                     ),
                   ),
                 ),
-                // Position and style the button with curved border
                 Positioned(
-                  bottom: 200, // Adjust as needed (3/4 of the height)
-                  right: 275, // Adjust as needed to center
+                  // Calculate approximate center Y position slightly below middle
+                  top: 200, // Adjust vertical position
+                  right: 125, // Adjust horizontal position
+
+                  child: Image.asset(
+                    'assets/imgs/guyreadbook1.jpg', // Replace with your image path
+                    width: 400,
+                    height: 400,
+                    fit: BoxFit.cover,
+                  ),
+                ),
+                Positioned(
+                  // Calculate Y position based on desired layout
+                  top: Get.height * 0.75, // Adjust vertical position
+                  right: 275, // Center horizontally
+
                   child: Container(
                     decoration: BoxDecoration(
-                      borderRadius: BorderRadius.circular(50), // Circular border
+                      borderRadius: BorderRadius.circular(14),
                       border: Border.all(
-                        color: Color(0xffc1dbfe), // Replace with your desired color
+                        color: Colors.black, // Replace with your desired color
                         width: 2,
                       ),
                     ),
@@ -79,11 +110,11 @@ class LandingPage extends GetView<LandingPageController> {
                         Get.toNamed(Routes.AUTH);
                       },
                       child: Text(
-                        'Go to Next Page',
-                        style: TextStyle(
-                          fontSize: 14,
+                        '- Masuk -',
+                        style: GoogleFonts.urbanist(
+                          fontSize: 30,
                           fontWeight: FontWeight.bold,
-                          color: Colors.black, // Replace with your desired color
+                          color: Colors.blue, // Replace with your desired color
                         ),
                       ),
                     ),
@@ -93,7 +124,6 @@ class LandingPage extends GetView<LandingPageController> {
             ),
           );
         } else {
-          // Android layout
           return Scaffold(
               body: Container(
             decoration: BoxDecoration(

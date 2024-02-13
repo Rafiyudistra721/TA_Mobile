@@ -47,7 +47,7 @@ class AuthView extends GetView<AuthController> {
                             child: Text(
                               controller.isRegis ? 'Daftar' : 'Login',
                               style: GoogleFonts.urbanist(
-                                  fontSize: 40,
+                                  fontSize: 55,
                                   fontWeight: FontWeight.w900,
                                   color: Colors.black),
                             ),
@@ -436,7 +436,7 @@ class AuthView extends GetView<AuthController> {
                                       ? 'Sudah Punya Akun? Login Disini'
                                       : 'Belum Punya Akun? Daftar Disini',
                                   style: const TextStyle(
-                                      color: colorPrimary,
+                                      color: Colors.black,
                                       fontStyle: FontStyle.italic),
                                 ),
                               ),
