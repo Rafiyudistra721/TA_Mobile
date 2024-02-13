@@ -10,4 +10,5 @@ var drawerTextColor = TextStyle(
   color: Colors.grey[700],
 );
 var tilePadding = const EdgeInsets.only(left: 8.0, right: 8, top: 8);
+Color active = const Color(0xFF3C19C0);
 

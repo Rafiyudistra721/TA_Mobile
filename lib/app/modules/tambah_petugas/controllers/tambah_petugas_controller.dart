@@ -1,5 +1,6 @@
 // ignore_for_file: prefer_final_fields, avoid_print, invalid_use_of_protected_member, unnecessary_overrides
 
+import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:nb_utils/nb_utils.dart';
 import 'package:ta_mobile/app/data/Models/user_model.dart';
@@ -9,6 +10,9 @@ class TambahPetugasController extends GetxController {
   var _isSaving = false.obs;
   bool get isSaving => _isSaving.value;
   set isSaving(bool value) => _isSaving.value = value;
+
+  final verticalScrollController = ScrollController();
+  final horizontalScrollController = ScrollController();
 
   Future upLevel(UserModel userModel) async {
     isSaving = true;
