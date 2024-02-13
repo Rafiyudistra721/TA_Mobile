@@ -443,79 +443,79 @@ class AuthView extends GetView<AuthController> {
                             ),
                           ),
                           if (controller.isRegis)
-                          InkWell(
-                            onTap: () async {
-                              await controller.signInWithGoogle();
-                            },
-                            child: Container(
-                              height: MediaQuery.of(context).size.height / 4,
-                              width: double.infinity,
-                              decoration: BoxDecoration(
-                                  gradient: LinearGradient(
-                                colors: [
-                                  Colors.grey.shade50,
-                                  Colors.grey.shade50,
-                                ],
-                                begin: Alignment.topCenter,
-                                end: Alignment.bottomCenter,
-                              )),
-                              child: Column(
-                                mainAxisAlignment: MainAxisAlignment.center,
-                                children: [
-                                  Padding(
-                                    padding: const EdgeInsets.symmetric(
-                                        horizontal: 30),
-                                    child: Container(
-                                      height: 70,
-                                      decoration: BoxDecoration(
-                                        borderRadius:
-                                            BorderRadius.circular(100),
-                                        gradient: LinearGradient(
-                                            colors: [
-                                              Colors.grey.shade50,
-                                              Colors.white,
-                                            ],
-                                            begin: Alignment.topCenter,
-                                            end: Alignment.bottomCenter),
-                                        boxShadow: [
-                                          BoxShadow(
-                                            color: Colors.grey.shade300,
-                                            offset: const Offset(2, 3),
-                                            blurRadius: 10,
-                                          ),
-                                        ],
-                                      ),
-                                      child: Row(
-                                        children: [
-                                          10.width,
-                                          Transform.scale(
-                                            scale: 0.5,
-                                            child: Image.asset(
-                                              'assets/icons/google.png',
+                            InkWell(
+                              onTap: () async {
+                                await controller.signInWithGoogle();
+                              },
+                              child: Container(
+                                height: MediaQuery.of(context).size.height / 4,
+                                width: double.infinity,
+                                decoration: BoxDecoration(
+                                    gradient: LinearGradient(
+                                  colors: [
+                                    Colors.grey.shade50,
+                                    Colors.grey.shade50,
+                                  ],
+                                  begin: Alignment.topCenter,
+                                  end: Alignment.bottomCenter,
+                                )),
+                                child: Column(
+                                  mainAxisAlignment: MainAxisAlignment.center,
+                                  children: [
+                                    Padding(
+                                      padding: const EdgeInsets.symmetric(
+                                          horizontal: 30),
+                                      child: Container(
+                                        height: 70,
+                                        decoration: BoxDecoration(
+                                          borderRadius:
+                                              BorderRadius.circular(100),
+                                          gradient: LinearGradient(
+                                              colors: [
+                                                Colors.grey.shade50,
+                                                Colors.white,
+                                              ],
+                                              begin: Alignment.topCenter,
+                                              end: Alignment.bottomCenter),
+                                          boxShadow: [
+                                            BoxShadow(
+                                              color: Colors.grey.shade300,
+                                              offset: const Offset(2, 3),
+                                              blurRadius: 10,
                                             ),
-                                          ),
-                                          0.width,
-                                          Text(
-                                            'Daftar dengan Google',
-                                            style: TextStyle(
-                                                fontWeight: FontWeight.w800,
-                                                fontSize: 14,
-                                                color: Colors.grey.shade800),
-                                          ),
-                                          45.width,
-                                          const Icon(
-                                            Icons.arrow_forward,
-                                            size: 30,
-                                            color: Colors.black,
-                                          ),
-                                        ],
+                                          ],
+                                        ),
+                                        child: Row(
+                                          children: [
+                                            10.width,
+                                            Transform.scale(
+                                              scale: 0.5,
+                                              child: Image.asset(
+                                                'assets/icons/google.png',
+                                              ),
+                                            ),
+                                            0.width,
+                                            Text(
+                                              'Daftar dengan Google',
+                                              style: TextStyle(
+                                                  fontWeight: FontWeight.w800,
+                                                  fontSize: 14,
+                                                  color: Colors.grey.shade800),
+                                            ),
+                                            45.width,
+                                            const Icon(
+                                              Icons.arrow_forward,
+                                              size: 30,
+                                              color: Colors.black,
+                                            ),
+                                          ],
+                                        ),
                                       ),
                                     ),
-                                  ),
-                                ],
+                                  ],
+                                ),
                               ),
                             ),
-                          ),
                         ],
                       ),
                     ),
