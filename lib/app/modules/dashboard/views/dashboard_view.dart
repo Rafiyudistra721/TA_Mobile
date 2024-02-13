@@ -18,7 +18,6 @@ class DashboardView extends GetView<DashboardController> {
   Widget build(BuildContext context) {
     if (isDesktop(context)) {
       return Scaffold(
-        backgroundColor: defaultBackgroundColor,
         body: Padding(
           padding: const EdgeInsets.all(8.0),
           child: Row(

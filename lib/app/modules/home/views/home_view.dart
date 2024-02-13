@@ -12,11 +12,7 @@ class HomeView extends GetView<HomeController> {
   final authC = Get.put(AuthController());
   HomeView({Key? key}) : super(key: key);
 
-  void toggleTheme() {
-    controller.darkModeValue.value = !controller.darkModeValue.value;
-    Get.changeThemeMode(
-        controller.darkModeValue.value ? ThemeMode.dark : ThemeMode.light);
-  }
+
 
   @override
   Widget build(BuildContext context) {
@@ -62,7 +58,7 @@ class HomeView extends GetView<HomeController> {
                     ),
                     child: IconButton(
                       onPressed: () {
-                        toggleTheme();
+                        controller.toggleTheme();
                       },
                       icon: Icon(
                         (controller.darkModeValue.value)

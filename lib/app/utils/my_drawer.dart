@@ -2,11 +2,13 @@ import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:ta_mobile/app/modules/auth/controllers/auth_controller.dart';
+import 'package:ta_mobile/app/modules/home/controllers/home_controller.dart';
 import 'package:ta_mobile/app/routes/app_pages.dart';
 import 'package:ta_mobile/app/utils/colors.dart';
 
 class MyDrawer extends StatelessWidget {
   final AuthController authController = Get.put(AuthController());
+  final HomeController  homeController = Get.put(HomeController());
   MyDrawer({super.key});
 
   @override
@@ -54,9 +56,19 @@ class MyDrawer extends StatelessWidget {
                   Icons.textsms_rounded, 'MANAGE ULASAN', Routes.MANAGE_ULASAN),
               buildListTile(Icons.supervised_user_circle_rounded, 'MANAGE USER',
                   Routes.MANAGE_USER),
-              buildListTile(Icons.person_add_alt_rounded, 'TAMBAH PETUGAS',
-                  Routes.TAMBAH_PETUGAS),
               buildListTile(Icons.logout_rounded, 'LOG-OUT', null),
+              FloatingActionButton(
+                onPressed: () {
+                  homeController.toggleTheme();
+                  print(homeController.darkModeValue.value);
+                }, 
+              child: Icon(
+                        (homeController.darkModeValue.value)
+                            ? Icons.wb_sunny_rounded
+                            : Icons.nightlight_round,
+                        size: 18,
+                        color: Colors.grey,
+                      ),)
             ],
           )),
     );
