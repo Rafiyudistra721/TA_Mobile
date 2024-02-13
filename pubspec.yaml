@@ -33,5 +33,8 @@ flutter:
     - assets/stocks/1.png
     - assets/stocks/2.png
     - assets/stocks/3.png
+    - assets/imgs/bgbgimage.jpg
+    - assets/imgs/bigbgbackground.jpg
+    - assets/tsp.png
   uses-material-design: true
 
