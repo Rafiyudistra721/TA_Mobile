@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 
 import 'package:get/get.dart';
+import 'package:google_fonts/google_fonts.dart';
 import 'package:nb_utils/nb_utils.dart';
 import 'package:ta_mobile/app/routes/app_pages.dart';
 import 'package:ta_mobile/app/utils/colors.dart';
@@ -17,7 +18,7 @@ class AuthView extends GetView<AuthController> {
       resizeToAvoidBottomInset: false,
       appBar: AppBar(
           elevation: 0,
-          backgroundColor: Colors.red.shade200,
+          backgroundColor: Color(0xffc1dbfe),
           leading: IconButton(
             icon: const Icon(
               Icons.arrow_back_ios_new_outlined,
@@ -28,13 +29,13 @@ class AuthView extends GetView<AuthController> {
             },
           )),
       body: Container(
-        color: Colors.red.shade200,
+        color: Color(0xffc1dbfe),
         child: Column(
           children: [
             Expanded(
               flex: 2,
               child: Container(
-                color: Colors.red.shade200,
+                color: Color(0xffc1dbfe),
                 child: Padding(
                   padding: const EdgeInsets.only(bottom: 20, left: 20),
                   child: Column(
@@ -45,8 +46,8 @@ class AuthView extends GetView<AuthController> {
                             alignment: Alignment.centerLeft,
                             child: Text(
                               controller.isRegis ? 'Daftar' : 'Login',
-                              style: const TextStyle(
-                                  fontSize: 40,
+                              style: GoogleFonts.urbanist(
+                                  fontSize: 55,
                                   fontWeight: FontWeight.w900,
                                   color: Colors.black),
                             ),
@@ -56,7 +57,7 @@ class AuthView extends GetView<AuthController> {
                             controller.isRegis
                                 ? 'Hai, Selamat datang di SmartLib, silahkan isi \ndata dibawah ini untuk mendaftar.'
                                 : "Masukkan email dan password kamu untuk login",
-                            style: const TextStyle(
+                            style: GoogleFonts.urbanist(
                                 fontSize: 16,
                                 fontWeight: FontWeight.bold,
                                 color: Colors.black),
@@ -435,7 +436,7 @@ class AuthView extends GetView<AuthController> {
                                       ? 'Sudah Punya Akun? Login Disini'
                                       : 'Belum Punya Akun? Daftar Disini',
                                   style: const TextStyle(
-                                      color: colorPrimary,
+                                      color: Colors.black,
                                       fontStyle: FontStyle.italic),
                                 ),
                               ),
