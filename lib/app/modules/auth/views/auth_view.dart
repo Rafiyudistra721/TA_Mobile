@@ -4,7 +4,6 @@ import 'package:get/get.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:nb_utils/nb_utils.dart';
 import 'package:ta_mobile/app/routes/app_pages.dart';
-import 'package:ta_mobile/app/utils/colors.dart';
 
 import 'package:ta_mobile/app/modules/auth/controllers/auth_controller.dart';
 
@@ -18,7 +17,7 @@ class AuthView extends GetView<AuthController> {
       resizeToAvoidBottomInset: false,
       appBar: AppBar(
           elevation: 0,
-          backgroundColor: Color(0xffc1dbfe),
+          backgroundColor: const Color(0xffc1dbfe),
           leading: IconButton(
             icon: const Icon(
               Icons.arrow_back_ios_new_outlined,
@@ -29,13 +28,13 @@ class AuthView extends GetView<AuthController> {
             },
           )),
       body: Container(
-        color: Color(0xffc1dbfe),
+        color: const Color(0xffc1dbfe),
         child: Column(
           children: [
             Expanded(
               flex: 2,
               child: Container(
-                color: Color(0xffc1dbfe),
+                color: const Color(0xffc1dbfe),
                 child: Padding(
                   padding: const EdgeInsets.only(bottom: 20, left: 20),
                   child: Column(
@@ -356,15 +355,13 @@ class AuthView extends GetView<AuthController> {
                                               content: Column(
                                                 mainAxisSize: MainAxisSize.min,
                                                 children: <Widget>[
-                                                  const CircularProgressIndicator(
-                                                      color: colorPrimary),
+                                                  const CircularProgressIndicator(),
                                                   15.height,
                                                   const Text(
                                                     "Mohon tunggu sebentar...",
                                                     style: TextStyle(
                                                         fontWeight:
-                                                            FontWeight.bold,
-                                                        color: colorPrimary),
+                                                            FontWeight.bold),
                                                   )
                                                 ],
                                               ),
@@ -382,16 +379,14 @@ class AuthView extends GetView<AuthController> {
                                             content: Column(
                                               mainAxisSize: MainAxisSize.min,
                                               children: <Widget>[
-                                                const CircularProgressIndicator(
-                                                    color: colorPrimary),
+                                                const CircularProgressIndicator(),
                                                 15.height,
                                                 const Center(
                                                   child: Text(
                                                     'Loading..',
                                                     style: TextStyle(
                                                         fontWeight:
-                                                            FontWeight.bold,
-                                                        color: colorPrimary),
+                                                            FontWeight.bold),
                                                   ),
                                                 )
                                               ],

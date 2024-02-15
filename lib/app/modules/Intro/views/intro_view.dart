@@ -1,9 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:google_fonts/google_fonts.dart';
-import 'package:nb_utils/nb_utils.dart';
 import 'package:ta_mobile/app/modules/Intro/controllers/intro_controller.dart';
-import 'package:ta_mobile/app/modules/dashboard/controllers/dashboard_controller.dart';
 
 class SplashScreen extends GetView<IntroController> {
   const SplashScreen({super.key});
@@ -13,7 +11,6 @@ class SplashScreen extends GetView<IntroController> {
     return Scaffold(
       body: Container(
         alignment: Alignment.center,
-        color: Color(0xffc1dbfe),
         height: MediaQuery.of(context).size.height,
         width: MediaQuery.of(context).size.width,
         child: Column(

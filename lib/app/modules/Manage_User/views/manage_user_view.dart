@@ -23,7 +23,6 @@ class ManageUserView extends GetView<ManageUserController> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      backgroundColor: defaultBackgroundColor,
       body: Padding(
         padding: const EdgeInsets.all(8.0),
         child: Row(
@@ -34,7 +33,7 @@ class ManageUserView extends GetView<ManageUserController> {
 
             // first half of page
             Expanded(
-              flex: 2,
+              flex: 1,
               child: AdaptiveScrollbar(
                 controller: controller.verticalScrollController,
                 underColor: Colors.blueGrey.withOpacity(0.3),
@@ -47,74 +46,66 @@ class ManageUserView extends GetView<ManageUserController> {
                     crossAxisAlignment: CrossAxisAlignment.start,
                     mainAxisAlignment: MainAxisAlignment.start,
                     children: [
-                      AspectRatio(
-                        aspectRatio: 4,
-                        child: ListView(
-                          scrollDirection: Axis.horizontal,
-                          children: [
-                            Padding(
-                              padding: const EdgeInsets.all(8.0),
-                              child: Container(
-                                  decoration: BoxDecoration(
-                                      borderRadius: BorderRadius.circular(8),
-                                      color: Colors.grey[700]),
-                                  child: Column(
-                                    mainAxisAlignment: MainAxisAlignment.center,
-                                    children: [
-                                      Text(
-                                        'Jumlah Peminjam',
-                                        style:
-                                            GoogleFonts.urbanist(fontSize: 17),
-                                      ),
-                                      Obx(() => Text(
-                                            controller.listPeminjam.length
-                                                .toString(),
-                                            style: GoogleFonts.urbanist(
-                                                fontSize: 17),
-                                          )),
-                                    ],
-                                  )),
-                            ),
-                            Padding(
-                              padding: const EdgeInsets.all(8.0),
-                              child: Container(
-                                  decoration: BoxDecoration(
-                                      borderRadius: BorderRadius.circular(8),
-                                      color: Colors.grey[700]),
-                                  child: Column(
-                                    mainAxisAlignment: MainAxisAlignment.center,
-                                    children: [
-                                      Text(
-                                        'Jumlah Petugas',
-                                        style:
-                                            GoogleFonts.urbanist(fontSize: 17),
-                                      ),
-                                      Obx(() => Text(
-                                          controller.listPetugas.length
-                                              .toString(),
-                                          style: GoogleFonts.urbanist(
-                                              fontSize: 17))),
-                                    ],
-                                  )),
-                            ),
-                          ],
-                        ),
-                      ),
+                      // AspectRatio(
+                      //   aspectRatio: 6,
+                      //   child: ListView(
+                      //     scrollDirection: Axis.horizontal,
+                      //     children: [
+                      //       Padding(
+                      //         padding: const EdgeInsets.all(8.0),
+                      //         child: Container(
+                      //             decoration: BoxDecoration(
+                      //                 borderRadius: BorderRadius.circular(8)),
+                      //             child: Column(
+                      //               mainAxisAlignment: MainAxisAlignment.center,
+                      //               children: [
+                      //                 Text(
+                      //                   'Jumlah Peminjam',
+                      //                   style:
+                      //                       GoogleFonts.urbanist(fontSize: 17),
+                      //                 ),
+                      //                 Obx(() => Text(
+                      //                       controller.listPeminjam.length
+                      //                           .toString(),
+                      //                       style: GoogleFonts.urbanist(
+                      //                           fontSize: 17),
+                      //                     )),
+                      //               ],
+                      //             )),
+                      //       ),
+                      //       Padding(
+                      //         padding: const EdgeInsets.all(8.0),
+                      //         child: Container(
+                      //             decoration: BoxDecoration(
+                      //                 borderRadius: BorderRadius.circular(8),),
+                      //             child: Column(
+                      //               mainAxisAlignment: MainAxisAlignment.center,
+                      //               children: [
+                      //                 Text(
+                      //                   'Jumlah Petugas',
+                      //                   style:
+                      //                       GoogleFonts.urbanist(fontSize: 17),
+                      //                 ),
+                      //                 Obx(() => Text(
+                      //                     controller.listPetugas.length
+                      //                         .toString(),
+                      //                     style: GoogleFonts.urbanist(
+                      //                         fontSize: 17))),
+                      //               ],
+                      //             )),
+                      //       ),
+                      //     ],
+                      //   ),
+                      // ),
                       Text('Pengguna',
                           style: GoogleFonts.urbanist(
-                              fontSize: 30, color: Colors.black)),
+                              fontSize: 30)),
                       Obx(() => Padding(
                             padding: const EdgeInsets.all(16),
                             child: controller.listUser.isEmpty
                                 ? const Center(
                                     child: CircularProgressIndicator())
-                                : Theme(
-                                    data: ThemeData(
-                                        cardColor: Theme.of(context).cardColor,
-                                        textTheme: TextTheme(
-                                            bodySmall: TextStyle(
-                                                color: Colors.white))),
-                                    child: PaginatedDataTable(
+                                : PaginatedDataTable(
                                       showCheckboxColumn: false,
                                       showFirstLastButtons: true,
                                       columns: columns,
@@ -124,7 +115,7 @@ class ManageUserView extends GetView<ManageUserController> {
                                       rowsPerPage: 10,
                                     ),
                                   ),
-                          )),
+                          ),
                     ],
                   ),
                 ),
@@ -138,7 +129,7 @@ class ManageUserView extends GetView<ManageUserController> {
 }
 
 class MyData extends DataTableSource {
-  ManageUserController tambahPetugasController = ManageUserController();
+  ManageUserController manageUserController = ManageUserController();
     final HomeController  homeController = Get.put(HomeController());
 
   final List<UserModel> listUser;
@@ -147,19 +138,16 @@ class MyData extends DataTableSource {
   @override
   DataRow getRow(int index) => DataRow.byIndex(
           index: index,
-          color: MaterialStateColor.resolveWith((states) => homeController.darkModeValue.value
-          ? Colors.grey.shade800
-          : Colors.grey.shade500),
           cells: [
             DataCell(Text("${listUser[index].username}",
                 style:
-                    GoogleFonts.urbanist(fontSize: 15, color: homeController.darkModeValue.value? Colors.white : Colors.black))),
+                    GoogleFonts.urbanist(fontSize: 15))),
             DataCell(Text("${listUser[index].level}",
                 style:
-                    GoogleFonts.urbanist(fontSize: 15, color: homeController.darkModeValue.value? Colors.white : Colors.black))),
+                    GoogleFonts.urbanist(fontSize: 15))),
             DataCell(Text("${listUser[index].email}",
                 style:
-                    GoogleFonts.urbanist(fontSize: 15, color: homeController.darkModeValue.value? Colors.white : Colors.black))),
+                    GoogleFonts.urbanist(fontSize: 15))),
             DataCell(Row(
               children: [
                 listUser[index].level == 'Peminjam'
@@ -171,18 +159,14 @@ class MyData extends DataTableSource {
                             middleText:
                                 'Apakah anda yakin ingin menaikkan level pengguna ini menjadi petugas?',
                             onConfirm: () async {
-                              tambahPetugasController.upLevel(listUser[index]);
-                              Get.back();
+                              manageUserController.upLevel(listUser[index]);
                             },
                             textConfirm: 'Iya',
                             textCancel: 'Tidak',
-                            buttonColor: colorPrimary,
-                            confirmTextColor: Colors.black,
-                            cancelTextColor: colorPrimary,
                             titleStyle: GoogleFonts.urbanist(
-                                fontSize: 15, color: Colors.black),
+                                fontSize: 15),
                             middleTextStyle: GoogleFonts.urbanist(
-                                fontSize: 15, color: Colors.black),
+                                fontSize: 15),
                           );
                         },
                         child: const Text('UP LEVEL'))
@@ -195,19 +179,15 @@ class MyData extends DataTableSource {
                                 middleText:
                                     'Apakah anda yakin ingin menurunkan level pengguna ini menjadi peminjam?',
                                 onConfirm: () async {
-                                  tambahPetugasController
+                                  manageUserController
                                       .downLevel(listUser[index]);
-                                  Get.back();
                                 },
                                 textConfirm: 'Iya',
                                 textCancel: 'Tidak',
-                                buttonColor: colorPrimary,
-                                confirmTextColor: Colors.black,
-                                cancelTextColor: colorPrimary,
                                 titleStyle: GoogleFonts.urbanist(
-                                    fontSize: 15, color: Colors.black),
+                                    fontSize: 15),
                                 middleTextStyle: GoogleFonts.urbanist(
-                                    fontSize: 15, color: Colors.black),
+                                    fontSize: 15),
                               );
                             },
                             child: const Text('DOWN LEVEL'))
@@ -221,19 +201,15 @@ class MyData extends DataTableSource {
                             middleText:
                                 'Apakah anda yakin ingin memblokir pengguna?',
                             onConfirm: () async {
-                              tambahPetugasController
+                              manageUserController
                                   .block(listUser[index]);
-                              Get.back();
                             },
                             textConfirm: 'Iya',
                             textCancel: 'Tidak',
-                            buttonColor: colorPrimary,
-                            confirmTextColor: Colors.black,
-                            cancelTextColor: colorPrimary,
                             titleStyle: GoogleFonts.urbanist(
-                                fontSize: 15, color: Colors.black),
+                                fontSize: 15),
                             middleTextStyle: GoogleFonts.urbanist(
-                                fontSize: 15, color: Colors.black),
+                                fontSize: 15),
                           );
                         },
                         child: const Text('BLOCK'))
@@ -245,19 +221,15 @@ class MyData extends DataTableSource {
                             middleText:
                                 'Apakah anda yakin ingin membuka blokir pengguna?',
                             onConfirm: () async {
-                              tambahPetugasController
+                              manageUserController
                                   .unblock(listUser[index]);
-                              Get.back();
                             },
                             textConfirm: 'Iya',
                             textCancel: 'Tidak',
-                            buttonColor: colorPrimary,
-                            confirmTextColor: Colors.black,
-                            cancelTextColor: colorPrimary,
                             titleStyle: GoogleFonts.urbanist(
-                                fontSize: 15, color: Colors.black),
+                                fontSize: 15),
                             middleTextStyle: GoogleFonts.urbanist(
-                                fontSize: 15, color: Colors.black),
+                                fontSize: 15),
                           );
                         },
                         child: const Text('UNBLOCK'))

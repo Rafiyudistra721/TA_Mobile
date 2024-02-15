@@ -6,8 +6,6 @@ import '../modules/Intro/bindings/intro_binding.dart';
 import '../modules/Intro/views/intro_view.dart';
 import '../modules/LandingPage/bindings/landing_page_binding.dart';
 import '../modules/LandingPage/views/landing_page_view.dart';
-import '../modules/LandingPage2/bindings/landing_page2_binding.dart';
-import '../modules/LandingPage2/views/landing_page2_view.dart';
 import '../modules/Manage_Buku/bindings/manage_buku_binding.dart';
 import '../modules/Manage_Buku/views/manage_buku_view.dart';
 import '../modules/Manage_Kategori/bindings/manage_kategori_binding.dart';
@@ -22,8 +20,8 @@ import '../modules/dashboard/bindings/dashboard_binding.dart';
 import '../modules/dashboard/views/dashboard_view.dart';
 import '../modules/home/bindings/home_binding.dart';
 import '../modules/home/views/home_view.dart';
-import '../modules/Manage_User/bindings/Manage_User_binding.dart';
-import '../modules/Manage_User/views/Manage_User_view.dart';
+import '../modules/Manage_User/bindings/manage_user_binding.dart';
+import '../modules/Manage_User/views/manage_user_view.dart';
 
 // ignore_for_file: constant_identifier_names
 
@@ -47,23 +45,18 @@ class AppPages {
     ),
     GetPage(
       name: _Paths.DASHBOARD,
-      page: () => DashboardView(),
+      page: () => const DashboardView(),
       binding: DashboardBinding(),
     ),
     GetPage(
       name: _Paths.INTRO,
-      page: () => SplashScreen(),
+      page: () => const SplashScreen(),
       binding: IntroBinding(),
     ),
     GetPage(
       name: _Paths.LANDING_PAGE,
-      page: () => LandingPage(),
+      page: () => const LandingPage(),
       binding: LandingPageBinding(),
-    ),
-    GetPage(
-      name: _Paths.LANDING_PAGE2,
-      page: () => LandingPage2(),
-      binding: LandingPage2Binding(),
     ),
     GetPage(
       name: _Paths.ETALASE,
@@ -77,7 +70,7 @@ class AppPages {
     ),
     GetPage(
       name: _Paths.MANAGE_KATEGORI,
-      page: () => const ManageKategoriView(),
+      page: () => ManageKategoriView(),
       binding: ManageKategoriBinding(),
     ),
     GetPage(

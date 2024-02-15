@@ -404,12 +404,6 @@ class HomeView extends GetView<HomeController> {
                                         onPressed: () async {
                                           controller.changeCategory(
                                               temp: category.id!);
-                                          print(controller.selectedCategory.value);
-                                          print("------------------------------");
-                                          print(category.id);
-                                          print("--------------------------");
-                                          print(isActiveValue.value);
-                                          // print(controller.darkModeValue.value);
                                         },
                                         style: ElevatedButton.styleFrom(
                                           elevation: isActiveValue.value ? 6 : 0,

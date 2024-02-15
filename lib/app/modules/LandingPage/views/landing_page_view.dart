@@ -1,9 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:google_fonts/google_fonts.dart';
-import 'package:nb_utils/nb_utils.dart';
 import 'package:ta_mobile/app/routes/app_pages.dart';
-import 'package:ta_mobile/app/utils/colors.dart';
 
 import '../controllers/landing_page_controller.dart';
 
@@ -67,12 +65,12 @@ class LandingPage extends GetView<LandingPageController> {
                     width: 700, // Adjust width as needed
                     decoration: BoxDecoration(
                       color: Colors.white.withOpacity(1),
-                      borderRadius: BorderRadius.only(
+                      borderRadius: const BorderRadius.only(
                         topLeft: Radius.circular(15),
                         bottomLeft: Radius.circular(15),
                       ),
                     ),
-                    child: Column(
+                    child: const Column(
                       // Add your remaining desktop layout widgets here
                       children: [
                         // ...
@@ -126,7 +124,7 @@ class LandingPage extends GetView<LandingPageController> {
         } else {
           return Scaffold(
               body: Container(
-            decoration: BoxDecoration(
+            decoration: const BoxDecoration(
               image: DecorationImage(
                 image: AssetImage('assets/imgs/bgbgimage.jpg'),
                 fit: BoxFit.cover, // Ensures background fills entire screen

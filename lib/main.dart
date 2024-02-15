@@ -1,3 +1,5 @@
+// ignore_for_file: avoid_print
+
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:firebase_core/firebase_core.dart';
 import 'package:flutter/material.dart';
@@ -45,6 +47,7 @@ class MyApp extends StatelessWidget {
             debugShowCheckedModeBanner: false,
             theme: ThemeModel.lightTheme,
             darkTheme: ThemeModel.darkTheme,
+            themeMode: ThemeMode.light,
             title: "SmartLib",
             initialRoute: initialRoute,
             getPages: AppPages.routes,
