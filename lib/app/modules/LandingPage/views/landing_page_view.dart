@@ -10,6 +10,7 @@ class LandingPage extends GetView<LandingPageController> {
 
   @override
   Widget build(BuildContext context) {
+    var widthContainer = MediaQuery.of(context).size.width;
     return LayoutBuilder(
       builder: (context, constraints) {
         if (constraints.maxWidth > 600) {
@@ -45,14 +46,15 @@ class LandingPage extends GetView<LandingPageController> {
                       Text(
                         'Hai, Selamat Datang di SmartLib.',
                         style: GoogleFonts.urbanist(
-                          fontSize: 60,
-                          fontWeight: FontWeight.bold,
-                        ),
+                            fontSize: 60,
+                            fontWeight: FontWeight.bold,
+                            color: Colors.white),
                       ),
                       const SizedBox(height: 5), // Adjust spacing between lines
                       Text(
                         'Jelajahi Berbagai Koleksi Buku Kami.',
-                        style: GoogleFonts.urbanist(fontSize: 40),
+                        style: GoogleFonts.urbanist(
+                            fontSize: 40, color: Colors.white),
                       ),
                     ],
                   ),
@@ -62,7 +64,7 @@ class LandingPage extends GetView<LandingPageController> {
                   right: 0,
                   bottom: 0,
                   child: Container(
-                    width: 700, // Adjust width as needed
+                    width: widthContainer * .4, // Adjust width as needed
                     decoration: BoxDecoration(
                       color: Colors.white.withOpacity(1),
                       borderRadius: const BorderRadius.only(
@@ -70,51 +72,52 @@ class LandingPage extends GetView<LandingPageController> {
                         bottomLeft: Radius.circular(15),
                       ),
                     ),
-                    child: const Column(
+                    child: Column(
                       // Add your remaining desktop layout widgets here
                       children: [
-                        // ...
-                      ],
-                    ),
-                  ),
-                ),
-                Positioned(
-                  // Calculate approximate center Y position slightly below middle
-                  top: 200, // Adjust vertical position
-                  right: 125, // Adjust horizontal position
+                        Positioned(
+                          // Calculate approximate center Y position slightly below middle
+                          top: 200, // Adjust vertical position
+                          right: 125, // Adjust horizontal position
 
-                  child: Image.asset(
-                    'assets/imgs/guyreadbook1.jpg', // Replace with your image path
-                    width: 400,
-                    height: 400,
-                    fit: BoxFit.cover,
-                  ),
-                ),
-                Positioned(
-                  // Calculate Y position based on desired layout
-                  top: Get.height * 0.75, // Adjust vertical position
-                  right: 275, // Center horizontally
-
-                  child: Container(
-                    decoration: BoxDecoration(
-                      borderRadius: BorderRadius.circular(14),
-                      border: Border.all(
-                        color: Colors.black, // Replace with your desired color
-                        width: 2,
-                      ),
-                    ),
-                    child: TextButton(
-                      onPressed: () {
-                        Get.toNamed(Routes.AUTH);
-                      },
-                      child: Text(
-                        '- Masuk -',
-                        style: GoogleFonts.urbanist(
-                          fontSize: 30,
-                          fontWeight: FontWeight.bold,
-                          color: Colors.blue, // Replace with your desired color
+                          child: Image.asset(
+                            'assets/imgs/guyreadbook1.jpg', // Replace with your image path
+                            width: 400,
+                            height: 400,
+                            fit: BoxFit.cover,
+                          ),
                         ),
-                      ),
+                        Positioned(
+                          // Calculate Y position based on desired layout
+                          top: Get.height * .75, // Adjust vertical position
+                          right: 275, // Center horizontally
+
+                          child: Container(
+                            decoration: BoxDecoration(
+                              borderRadius: BorderRadius.circular(14),
+                              border: Border.all(
+                                color: Colors
+                                    .black, // Replace with your desired color
+                                width: 2,
+                              ),
+                            ),
+                            child: TextButton(
+                              onPressed: () {
+                                Get.toNamed(Routes.AUTH);
+                              },
+                              child: Text(
+                                '- Masuk -',
+                                style: GoogleFonts.urbanist(
+                                  fontSize: 30,
+                                  fontWeight: FontWeight.bold,
+                                  color: Colors
+                                      .blue, // Replace with your desired color
+                                ),
+                              ),
+                            ),
+                          ),
+                        ),
+                      ],
                     ),
                   ),
                 ),

@@ -92,6 +92,7 @@ class AuthView extends GetView<AuthController> {
                                   const EdgeInsets.symmetric(horizontal: 20),
                               child: AppTextField(
                                 textFieldType: TextFieldType.NAME,
+                                enableSuggestions: true,
                                 decoration: InputDecoration(
                                   hintText: 'Nama Pengguna',
                                   hintStyle: TextStyle(

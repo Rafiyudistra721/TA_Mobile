@@ -106,7 +106,7 @@ class ManageKategoriView extends GetView<ManageKategoriController> {
                                   contentPadding: EdgeInsets.zero,
                                   barrierDismissible: false,
                                   content: SizedBox(
-                                    height: 345,
+                                    height: 200,
                                     width: double.infinity,
                                     child: SingleChildScrollView(
                                         child: Column(
