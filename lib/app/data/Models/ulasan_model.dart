@@ -2,13 +2,15 @@
 
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:nb_utils/nb_utils.dart';
+import 'package:ta_mobile/app/data/Models/buku_model.dart';
+import 'package:ta_mobile/app/data/Models/user_model.dart';
 import 'package:ta_mobile/app/data/database.dart';
 import 'package:ta_mobile/app/integrations/firestore.dart';
 
 class UlasanModel {
   String? id;
-  String? userId;
-  String? bukuId;
+  UserModel? userId;
+  BukuModel? bukuId;
   String? ulasan;
   int? rating;
 
@@ -25,24 +27,24 @@ class UlasanModel {
     var json = doc.data() as Map<String, dynamic>?;
     return UlasanModel(
       id: doc.id,
-      userId: json!['Nama User'] as String?,
-      bukuId: json['Judul Buku'] as String?,
-      ulasan: json['Ulasan'] as String?,
-      rating: json['Rating'] as int?,
+      userId: json?['Nama User'] as UserModel,
+      bukuId: json?['Judul Buku'] as BukuModel,
+      ulasan: json?['Ulasan'] as String,
+      rating: json?['Rating'] as int,
     );
   }
 
   Map<String, dynamic> get toJson => {
         'id': id,
         'Nama User': userId,
-        'judul buku': bukuId,
+        'Judul Buku': bukuId,
         'Ulasan': ulasan,
-        'rating': rating,
+        'Rating': rating,
       };
 
   Database get db => Database(
-      collectionReference: firebaseFirestore.collection(kategoriCollection),
-      storageReference: firebaseStorage.ref(kategoriCollection));
+      collectionReference: firebaseFirestore.collection(ulasanCollection),
+      storageReference: firebaseStorage.ref(ulasanCollection));
 
   Future<UlasanModel> save() async {
     id == null ? id = await db.add(toJson) : await db.edit(toJson);
