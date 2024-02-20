@@ -1,4 +1,6 @@
 import 'package:get/get.dart';
+import 'package:ta_mobile/app/modules/Manage_User/bindings/manage_user_binding.dart';
+import 'package:ta_mobile/app/modules/Manage_User/views/manage_user_view.dart';
 
 import '../modules/Etalase/bindings/etalase_binding.dart';
 import '../modules/Etalase/views/etalase_view.dart';
@@ -12,10 +14,6 @@ import '../modules/Manage_Kategori/bindings/manage_kategori_binding.dart';
 import '../modules/Manage_Kategori/views/manage_kategori_view.dart';
 import '../modules/Manage_Peminjaman/bindings/manage_peminjaman_binding.dart';
 import '../modules/Manage_Peminjaman/views/manage_peminjaman_view.dart';
-import '../modules/Manage_Ulasan/bindings/manage_ulasan_binding.dart';
-import '../modules/Manage_Ulasan/views/manage_ulasan_view.dart';
-import '../modules/Manage_User/bindings/manage_user_binding.dart';
-import '../modules/Manage_User/views/manage_user_view.dart';
 import '../modules/auth/bindings/auth_binding.dart';
 import '../modules/auth/views/auth_view.dart';
 import '../modules/dashboard/bindings/dashboard_binding.dart';
@@ -67,18 +65,13 @@ class AppPages {
     ),
     GetPage(
       name: _Paths.MANAGE_BUKU,
-      page: () => const ManageBukuView(),
+      page: () =>  ManageBukuView(),
       binding: ManageBukuBinding(),
     ),
     GetPage(
       name: _Paths.MANAGE_KATEGORI,
       page: () => ManageKategoriView(),
       binding: ManageKategoriBinding(),
-    ),
-    GetPage(
-      name: _Paths.MANAGE_ULASAN,
-      page: () => const ManageUlasanView(),
-      binding: ManageUlasanBinding(),
     ),
     GetPage(
       name: _Paths.MANAGE_PEMINJAMAN,
