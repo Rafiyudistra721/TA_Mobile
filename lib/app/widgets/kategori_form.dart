@@ -22,29 +22,27 @@ class KategoriForm extends GetView<ManageKategoriController> {
           key: _form,
           child: Column(
             children: [
-              Card(
-                child: Container(
-                  padding: const EdgeInsets.all(10),
-                  child: Column(
-                    children: [
-                      AppTextField(
-                        textFieldType: TextFieldType.NAME,
-                        isValidationRequired: true,
-                        controller: controller.namaKategoriC,
-                        decoration: const InputDecoration(
-                            labelText: "Nama Kategori",
-                            hintText: "Isilah dengan nama kategori yang ingin anda tambahkan",
-                            labelStyle:
-                                TextStyle(fontSize: 15),
-                            focusedBorder: UnderlineInputBorder(
-                                borderSide: BorderSide())),
-                        validator: (value) => value.isEmptyOrNull
-                            ? "Bagian ini perlu diisi"
-                            : null,
-                      ),
-                      10.height
-                    ],
-                  ),
+              Container(
+                padding: const EdgeInsets.all(10),
+                child: Column(
+                  children: [
+                    AppTextField(
+                      textFieldType: TextFieldType.NAME,
+                      isValidationRequired: true,
+                      controller: controller.namaKategoriC,
+                      decoration: const InputDecoration(
+                          labelText: "Nama Kategori",
+                          hintText: "Isilah dengan nama kategori yang ingin anda tambahkan",
+                          labelStyle:
+                              TextStyle(fontSize: 15),
+                          focusedBorder: UnderlineInputBorder(
+                              borderSide: BorderSide())),
+                      validator: (value) => value.isEmptyOrNull
+                          ? "Bagian ini perlu diisi"
+                          : null,
+                    ),
+                    10.height
+                  ],
                 ),
               ),
               20.height,

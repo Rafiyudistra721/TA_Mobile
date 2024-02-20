@@ -137,7 +137,7 @@ class ManageKategoriView extends GetView<ManageKategoriController> {
                                   showFirstLastButtons: true,
                                   columns: columns,
                                   source: MyData(controller.listKategori),
-                                  columnSpacing: 50,
+                                  columnSpacing: Get.width *.55,
                                   horizontalMargin: 30,
                                   rowsPerPage: 10,
                                 ),

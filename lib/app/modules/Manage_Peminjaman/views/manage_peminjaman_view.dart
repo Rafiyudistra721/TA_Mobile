@@ -1,8 +1,8 @@
 import 'package:flutter/material.dart';
 
 import 'package:get/get.dart';
+import 'package:google_fonts/google_fonts.dart';
 import 'package:ta_mobile/app/utils/colors.dart';
-import 'package:ta_mobile/app/utils/my_Box.dart';
 import 'package:ta_mobile/app/utils/my_drawer.dart';
 import 'package:ta_mobile/app/utils/my_tile.dart';
 
@@ -28,21 +28,57 @@ class ManagePeminjamanView extends GetView<ManagePeminjamanController> {
               child: Column(
                 children: [
                   // first 4 boxes in grid
-                  AspectRatio(
-                    aspectRatio: 4,
-                    child: SizedBox(
-                      width: double.infinity,
-                      child: GridView.builder(
-                        itemCount: 4,
-                        gridDelegate:
-                            const SliverGridDelegateWithFixedCrossAxisCount(
-                                crossAxisCount: 4),
-                        itemBuilder: (context, index) {
-                          return MyBox();
-                        },
+                      AspectRatio(
+                        aspectRatio: 6,
+                        child: ListView(
+                          scrollDirection: Axis.horizontal,
+                          children: [
+                            Padding(
+                              padding: const EdgeInsets.all(8.0),
+                              child: Container(
+                                  decoration: BoxDecoration(
+                                      borderRadius: BorderRadius.circular(8)),
+                                  child: Column(
+                                    mainAxisAlignment: MainAxisAlignment.center,
+                                    children: [
+                                      Text(
+                                        'Jumlah Peminjam',
+                                        style:
+                                            GoogleFonts.urbanist(fontSize: 17),
+                                      ),
+                                      Obx(() => Text(
+                                            controller.listPinjam.length
+                                                .toString(),
+                                            style: GoogleFonts.urbanist(
+                                                fontSize: 17),
+                                          )),
+                                    ],
+                                  )),
+                            ),
+                            Padding(
+                              padding: const EdgeInsets.all(8.0),
+                              child: Container(
+                                  decoration: BoxDecoration(
+                                      borderRadius: BorderRadius.circular(8),),
+                                  child: Column(
+                                    mainAxisAlignment: MainAxisAlignment.center,
+                                    children: [
+                                      Text(
+                                        'Jumlah Petugas',
+                                        style:
+                                            GoogleFonts.urbanist(fontSize: 17),
+                                      ),
+                                      Obx(() => Text(
+                                          controller.listPinjam.length
+                                              .toString(),
+                                          style: GoogleFonts.urbanist(
+                                              fontSize: 17))),
+                                    ],
+                                  )),
+                            ),
+                          ],
+                        ),
                       ),
-                    ),
-                  ),
 
                   // list of previous days
                   Expanded(

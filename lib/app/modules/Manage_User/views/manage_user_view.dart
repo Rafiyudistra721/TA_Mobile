@@ -110,7 +110,7 @@ class ManageUserView extends GetView<ManageUserController> {
                                       showFirstLastButtons: true,
                                       columns: columns,
                                       source: MyData(controller.listUser),
-                                      columnSpacing: 50,
+                                      columnSpacing: MediaQuery.of(context).size.width / 11,
                                       horizontalMargin: 30,
                                       rowsPerPage: 10,
                                     ),

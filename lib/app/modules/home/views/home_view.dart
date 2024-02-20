@@ -5,6 +5,7 @@ import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:nb_utils/nb_utils.dart';
 import 'package:ta_mobile/app/modules/auth/controllers/auth_controller.dart';
+import 'package:ta_mobile/app/routes/app_pages.dart';
 
 import '../controllers/home_controller.dart';
 
@@ -495,8 +496,7 @@ class HomeView extends GetView<HomeController> {
                                 final book = filteredBooks[index];
                                 return GestureDetector(
                                   onTap: () {
-                                    Navigator.of(context).pushNamed(
-                                        'DetailPage',
+                                    Get.toNamed(Routes.DETAIL_BUKU,
                                         arguments: book);
                                   },
                                   child: Container(
