@@ -38,5 +38,6 @@ flutter:
     - assets/tsp.png
     - assets/imgs/guyreadbook1.jpg
     - assets/imgs/guyreadbook2.jpg
+    - assets/imgs/guyreadbookpng.png
   uses-material-design: true
 

@@ -44,6 +44,7 @@ class SplashScreen extends GetView<IntroController> {
                 color: Colors.black,
               ),
             ),
+            
           ],
         ),
       ),

@@ -16,7 +16,8 @@ class LandingPage extends GetView<LandingPageController> {
         if (constraints.maxWidth > 600) {
           // Desktop layout
           return Scaffold(
-            body: Stack(
+              body: Container(
+            child: Stack(
               children: [
                 // Add a Container for the heavier vignette effect
                 Container(
@@ -92,28 +93,25 @@ class LandingPage extends GetView<LandingPageController> {
                           top: Get.height * .75, // Adjust vertical position
                           right: 275, // Center horizontally
 
-                          child: Container(
-                            decoration: BoxDecoration(
-                              borderRadius: BorderRadius.circular(14),
-                              border: Border.all(
-                                color: Colors
-                                    .black, // Replace with your desired color
-                                width: 2,
-                              ),
-                            ),
-                            child: TextButton(
+                          child: FittedBox(
+                            fit: BoxFit
+                                .contain, // Adjust as needed: cover, fill, etc.
+                            child: ElevatedButton(
                               onPressed: () {
                                 Get.toNamed(Routes.AUTH);
                               },
                               child: Text(
-                                '- Masuk -',
+                                'Masuk',
                                 style: GoogleFonts.urbanist(
                                   fontSize: 30,
                                   fontWeight: FontWeight.bold,
-                                  color: Colors
-                                      .blue, // Replace with your desired color
+                                  color: Colors.blue, // Your desired color
                                 ),
                               ),
+                              style: ElevatedButton.styleFrom(
+                                  backgroundColor: Colors.black,
+                                  padding: EdgeInsets.symmetric(
+                                      horizontal: 30, vertical: 20)),
                             ),
                           ),
                         ),
@@ -123,37 +121,136 @@ class LandingPage extends GetView<LandingPageController> {
                 ),
               ],
             ),
-          );
+          ));
         } else {
           return Scaffold(
-              body: Container(
-            decoration: const BoxDecoration(
-              image: DecorationImage(
-                image: AssetImage('assets/imgs/bgbgimage.jpg'),
-                fit: BoxFit.cover, // Ensures background fills entire screen
-              ),
-            ),
-            child: Center(
-              // Center the content horizontally and vertically
-              child: Column(
-                mainAxisAlignment: MainAxisAlignment.center,
-                children: [
-                  Image.asset(
-                    'assets/icons/logo_landing.png',
-                    width: 200,
-                    height: 200,
+            body: Stack(
+              children: [
+                // Background image covering the entire screen
+                Container(
+                  decoration: const BoxDecoration(
+                    image: DecorationImage(
+                      image: AssetImage('assets/imgs/bgbgimage.jpg'),
+                      fit: BoxFit.cover,
+                    ),
                   ),
-                  const SizedBox(height: 20),
-                  ElevatedButton(
-                    onPressed: () {
-                      Get.toNamed(Routes.AUTH);
-                    },
-                    child: const Text('Go to Next Page'),
-                  )
-                ],
-              ),
+                ),
+
+                Positioned.fill(
+                  child: Container(),
+                ),
+                // Centered content
+                Positioned(
+                  top: MediaQuery.of(context).size.height /
+                      3, // Adjust position as needed
+                  left: MediaQuery.of(context).size.width / 2 -
+                      100, // Adjust position as needed
+                  child: Column(
+                    mainAxisAlignment: MainAxisAlignment.center,
+                    children: [
+                      Image.asset(
+                        'assets/imgs/guyreadbookpng.png',
+                        width: 200,
+                        height: 200,
+                      ),
+                      const SizedBox(height: 20),
+                      // ... other content
+                    ],
+                  ),
+                ),
+
+                Positioned(
+                  top: 30,
+                  left: 30,
+                  child: Column(
+                    crossAxisAlignment: CrossAxisAlignment.start,
+                    children: [
+                      Text(
+                        "Selamat datang", // Replace with your desired big letter
+                        style: GoogleFonts.urbanist(
+                          fontSize: 40,
+                          fontWeight: FontWeight.bold,
+                          color: Colors.grey,
+                        ),
+                      ),
+                      Text(
+                        "di SmartLib", // Replace with your desired small letter
+                        style: GoogleFonts.urbanist(
+                            fontSize: 40,
+                            fontWeight: FontWeight.bold,
+                            color: Colors.white,
+                            height: (1)),
+                      ),
+                      Text(
+                        "Jelajahi Berbagai Koleksi Buku Kami", // Replace with your desired small letter
+                        style: GoogleFonts.urbanist(
+                            fontSize: 20,
+                            fontWeight: FontWeight.bold,
+                            color: Colors.white,
+                            height: (3)),
+                      ),
+                    ],
+                  ),
+                ),
+
+                Positioned(
+                  bottom: 150,
+                  right: 20,
+                  child: Column(
+                    crossAxisAlignment: CrossAxisAlignment.start,
+                    children: [
+                      Text(
+                        "Ambatakum", // Replace with your desired big letter
+                        style: GoogleFonts.urbanist(
+                            fontSize: 20,
+                            fontWeight: FontWeight.bold,
+                            color: Colors.grey),
+                      ),
+                    ],
+                  ),
+                ),
+
+                // White square at the bottom
+                Positioned(
+                  bottom: 0,
+                  left: 0,
+                  right: 0,
+                  height: MediaQuery.of(context).size.height /
+                      8, // 1/4 of the screen height
+                  child: Container(
+                    decoration: BoxDecoration(
+                      color: Colors.white,
+                      borderRadius: BorderRadius.circular(10),
+                    ),
+                    child: Center(
+                      child: Column(
+                        mainAxisAlignment: MainAxisAlignment.center,
+                        children: [
+                          ElevatedButton(
+                            onPressed: () {
+                              Get.toNamed(Routes.AUTH);
+                            },
+                            style: ElevatedButton.styleFrom(
+                              backgroundColor: Colors.black,
+                              padding: EdgeInsets.symmetric(
+                                  horizontal: 30, vertical: 20),
+                            ),
+                            child: Text(
+                              'Masuk',
+                              style: GoogleFonts.urbanist(
+                                color: Colors.white,
+                                fontSize: (25),
+                              ),
+                            ),
+                          ),
+                        ],
+                      ),
+                    ),
+                  ),
+                ),
+              ],
             ),
-          ));
+          );
         }
       },
     );
