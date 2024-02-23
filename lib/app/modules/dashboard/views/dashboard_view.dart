@@ -1,6 +1,5 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
-import 'package:nb_utils/nb_utils.dart';
 import 'package:ta_mobile/app/modules/dashboard/controllers/dashboard_controller.dart';
 import 'package:ta_mobile/app/utils/colors.dart';
 import 'package:ta_mobile/app/utils/my_Box.dart';
@@ -45,10 +44,10 @@ class DashboardView extends GetView<DashboardController> {
                                padding: const EdgeInsets.all(15.0),
                                child: Container(
                                    decoration: BoxDecoration( 
-                                    color: lightGray,
+                                    color: Colors.blueGrey.withOpacity(0.3),
                                     border: Border(
                                       top: BorderSide(
-                                        color: greenColor,
+                                        color:const Color(0xFF3C19C0),
                                         width: 10,
                                       ),
                                     ),
@@ -78,10 +77,10 @@ class DashboardView extends GetView<DashboardController> {
                                padding: const EdgeInsets.all(15.0),
                                child: Container(
                                    decoration: BoxDecoration( 
-                                    color: lightGray,
+                                    color: Colors.blueGrey.withOpacity(0.3),
                                     border: Border(
                                       top: BorderSide(
-                                        color: greenColor,
+                                        color:const Color(0xFF3C19C0),
                                         width: 10,
                                       ),
                                     ),
@@ -110,10 +109,10 @@ class DashboardView extends GetView<DashboardController> {
                                padding: const EdgeInsets.all(15.0),
                                child: Container(
                                    decoration: BoxDecoration( 
-                                    color: lightGray,
+                                    color: Colors.blueGrey.withOpacity(0.3),
                                     border: Border(
                                       top: BorderSide(
-                                        color: greenColor,
+                                        color:const Color(0xFF3C19C0),
                                         width: 10,
                                       ),
                                     ),
@@ -122,12 +121,12 @@ class DashboardView extends GetView<DashboardController> {
                                      mainAxisAlignment: MainAxisAlignment.center,
                                      children: [
                                        Text(
-                                         'Jumlah Peminjam',
+                                         'Jumlah Buku',
                                          style:
                                              GoogleFonts.urbanist(fontSize: 18),
                                        ),
                                        Obx(() => Text(
-                                             controller.listPeminjam.length
+                                             controller.listBuku.length
                                                  .toString(),
                                              style: GoogleFonts.urbanist(
                                                  fontSize: 17),
@@ -143,10 +142,10 @@ class DashboardView extends GetView<DashboardController> {
                                padding: const EdgeInsets.all(15.0),
                                child: Container(
                                    decoration: BoxDecoration( 
-                                    color: lightGray,
+                                    color: Colors.blueGrey.withOpacity(0.3),
                                     border: Border(
                                       top: BorderSide(
-                                        color: greenColor,
+                                        color:const Color(0xFF3C19C0),
                                         width: 10,
                                       ),
                                     ),
@@ -155,7 +154,7 @@ class DashboardView extends GetView<DashboardController> {
                                      mainAxisAlignment: MainAxisAlignment.center,
                                      children: [
                                        Text(
-                                         'Jumlah Petugas',
+                                         'Jumlah Buku Yang Dipinjam',
                                          style:
                                              GoogleFonts.urbanist(fontSize: 18),
                                        ),

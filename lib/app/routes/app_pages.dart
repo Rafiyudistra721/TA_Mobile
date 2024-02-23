@@ -73,7 +73,7 @@ class AppPages {
     ),
     GetPage(
       name: _Paths.MANAGE_PEMINJAMAN,
-      page: () => const ManagePeminjamanView(),
+      page: () => ManagePeminjamanView(),
       binding: ManagePeminjamanBinding(),
     ),
     GetPage(

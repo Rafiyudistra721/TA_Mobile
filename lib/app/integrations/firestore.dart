@@ -11,5 +11,6 @@ FirebaseAuth firebaseAuth = FirebaseAuth.instance;
 
 const usersCollection = "Collection_Users";
 const bukuCollection = "Collection_Buku";
+const pinjamCollection = "Collection_Pinjam";
 const kategoriCollection = "Collection_Kategori";
 const bookmarkCollection = "Collection_Bookmark";
