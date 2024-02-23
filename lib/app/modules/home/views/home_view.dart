@@ -13,8 +13,6 @@ class HomeView extends GetView<HomeController> {
   final authC = Get.put(AuthController());
   HomeView({Key? key}) : super(key: key);
 
-
-
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -393,8 +391,8 @@ class HomeView extends GetView<HomeController> {
                               itemCount: controller.categories.length,
                               itemBuilder: (context, index) {
                                 var category = controller.categories[index];
-                                var isActive =
-                                    category.id! == controller.selectedCategory.value;
+                                var isActive = category.id! ==
+                                    controller.selectedCategory.value;
                                 var isActiveValue = isActive.obs;
                                 return Hero(
                                     tag: 'category_${category.id}',
@@ -407,13 +405,13 @@ class HomeView extends GetView<HomeController> {
                                               temp: category.id!);
                                         },
                                         style: ElevatedButton.styleFrom(
-                                          elevation: isActiveValue.value ? 6 : 0,
-                                          backgroundColor:
-                                            isActiveValue.value
-                                                ? Colors.red
-                                                : controller.darkModeValue.value
-                                                    ? Colors.grey.shade700
-                                                    : Colors.green,
+                                          elevation:
+                                              isActiveValue.value ? 6 : 0,
+                                          backgroundColor: isActiveValue.value
+                                              ? Colors.red
+                                              : controller.darkModeValue.value
+                                                  ? Colors.grey.shade700
+                                                  : Colors.green,
                                         ),
                                         child: Padding(
                                           padding: const EdgeInsets.all(8.0),
@@ -422,7 +420,8 @@ class HomeView extends GetView<HomeController> {
                                             style: TextStyle(
                                               color: isActiveValue.value
                                                   ? Colors.white
-                                                  : controller.darkModeValue.value
+                                                  : controller
+                                                          .darkModeValue.value
                                                       ? Colors.white
                                                       : Colors.grey.shade800,
                                             ),
