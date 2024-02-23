@@ -79,7 +79,7 @@ class HomeView extends GetView<HomeController> {
           children: [
             Obx(() => Text(
                   'SmartLib',
-                  style: GoogleFonts.lobster(
+                  style: GoogleFonts.urbanist(
                     color: (controller.darkModeValue.value)
                         ? Colors.red.shade200
                         : Colors.red.shade800,
@@ -462,7 +462,7 @@ class HomeView extends GetView<HomeController> {
                                 Navigator.of(context).pushNamed('viewScreen');
                               },
                               child: Text(
-                                'Lihat Semua ▶️',
+                                'Lihat Semua ▶',
                                 style: TextStyle(
                                   fontSize: 14,
                                   color: Colors.amber.shade500,
