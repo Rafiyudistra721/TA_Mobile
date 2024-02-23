@@ -112,7 +112,7 @@ class ManageUserView extends GetView<ManageUserController> {
                                       source: MyData(controller.listUser),
                                       columnSpacing: MediaQuery.of(context).size.width / 11,
                                       horizontalMargin: 30,
-                                      rowsPerPage: 10,
+                                      rowsPerPage: 5,
                                     ),
                                   ),
                           ),

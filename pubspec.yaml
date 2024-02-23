@@ -17,6 +17,7 @@ dependencies:
   carousel_slider: 4.2.1
   google_fonts: 6.1.0
   adaptive_scrollbar: 2.1.2
+  image_picker: 1.0.7
   flutter: 
     sdk: flutter
 
@@ -39,5 +40,6 @@ flutter:
     - assets/imgs/guyreadbook1.jpg
     - assets/imgs/guyreadbook2.jpg
     - assets/imgs/guyreadbookpng.png
+    - assets/test.jpg
   uses-material-design: true
 

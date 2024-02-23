@@ -49,8 +49,6 @@ class MyDrawer extends StatelessWidget {
                   Icons.info, 'Manage Kategori', Routes.MANAGE_KATEGORI),
               buildListTile(Icons.view_timeline, 'Manage Peminjaman',
                   Routes.MANAGE_PEMINJAMAN),
-              buildListTile(
-                  Icons.textsms_rounded, 'Manage Ulasan', Routes.MANAGE_ULASAN),
               if (authController.user.level == 'Admin')
                 buildListTile(Icons.supervised_user_circle_rounded,
                     'Manage User', Routes.MANAGE_USER),
