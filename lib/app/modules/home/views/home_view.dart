@@ -36,7 +36,7 @@ class HomeView extends GetView<HomeController> {
                         authC.logout();
                       },
                       icon: const Icon(
-                        Icons.shopping_cart,
+                        Icons.logout,
                         size: 18,
                       ),
                     ),
@@ -488,9 +488,9 @@ class HomeView extends GetView<HomeController> {
                           return SizedBox(
                             height: 300,
                             width: double.infinity,
-                            child: ListView.builder(
+                            child: GridView.builder(gridDelegate: SliverGridDelegateWithFixedCrossAxisCount(crossAxisCount: 2),
                               itemCount: filteredBooks.length,
-                              scrollDirection: Axis.horizontal,
+                              scrollDirection: Axis.vertical,
                               itemBuilder: (context, index) {
                                 final book = filteredBooks[index];
                                 return GestureDetector(
@@ -561,54 +561,3 @@ class HomeView extends GetView<HomeController> {
   }
 }
 
-// class CategoryButton extends GetView<HomeController> {
-//   final String categoryName;
-//   final RxBool isActivated;
-//   final VoidCallback onPressed;
-
-//   CategoryButton({
-//     Key? key,
-//     required this.categoryName,
-//     required this.isActivated,
-//     required this.onPressed,
-//   }) : super(key: key);
-
-//   @override
-//   Widget build(BuildContext context) {
-//     return Padding(
-//       padding: const EdgeInsets.only(
-//         left: 10,
-//         top: 10,
-//         bottom: 10,
-//       ),
-//       child: Obx(() => ElevatedButton(
-//             onPressed: onPressed,
-//             style: ButtonStyle(
-//               elevation: MaterialStateProperty.all(isActivated.value ? 6 : 0),
-//               backgroundColor: MaterialStateProperty.all(
-//                 isActivated.value
-//                     ? Colors.red
-//                     : (controller.darkModeValue.value)
-//                         ? Colors.grey.shade700
-//                         : Colors.grey.shade200,
-//               ),
-//             ),
-//             child: Padding(
-//               padding: const EdgeInsets.all(1.0),
-//               child: Text(
-//                 categoryName,
-//                 style: TextStyle(
-//                   fontWeight: FontWeight.bold,
-//                   fontSize: 14,
-//                   color: isActivated.value
-//                       ? Colors.white
-//                       : (controller.darkModeValue.value)
-//                           ? Colors.white
-//                           : Colors.grey.shade800,
-//                 ),
-//               ),
-//             ),
-//           )),
-//     );
-//   }
-// }
