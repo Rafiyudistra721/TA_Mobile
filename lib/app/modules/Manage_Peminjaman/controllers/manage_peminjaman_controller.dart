@@ -1,4 +1,4 @@
-// ignore_for_file: unnecessary_overrides, invalid_use_of_protected_member
+// ignore_for_file: unnecessary_overrides, invalid_use_of_protected_member, prefer_final_fields, avoid_print
 
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';

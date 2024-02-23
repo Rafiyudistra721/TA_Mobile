@@ -1,6 +1,5 @@
 // ignore_for_file: must_be_immutable
 
-
 import 'package:adaptive_scrollbar/adaptive_scrollbar.dart';
 import 'package:flutter/material.dart';
 
@@ -10,7 +9,7 @@ import 'package:nb_utils/nb_utils.dart';
 import 'package:ta_mobile/app/data/Models/buku_model.dart';
 import 'package:ta_mobile/app/utils/colors.dart';
 import 'package:ta_mobile/app/utils/my_drawer.dart';
-import 'package:ta_mobile/app/widgets/buku__form.dart';
+import 'package:ta_mobile/app/widgets/buku_form.dart';
 
 import '../controllers/manage_buku_controller.dart';
 
@@ -113,7 +112,8 @@ class ManageBukuView extends GetView<ManageBukuController> {
                                   contentPadding: EdgeInsets.zero,
                                   barrierDismissible: false,
                                   content: SizedBox(
-                                    height: 435,
+                                    height: MediaQuery.of(context).size.height -
+                                        107,
                                     width: double.infinity,
                                     child: SingleChildScrollView(
                                         child: Column(
@@ -124,7 +124,7 @@ class ManageBukuView extends GetView<ManageBukuController> {
                                       ],
                                     )),
                                   ),
-                                  title: "Tambah Aset",
+                                  title: "Tambah Buku",
                                   titleStyle: const TextStyle(
                                     fontSize: 20,
                                   ),
@@ -144,7 +144,8 @@ class ManageBukuView extends GetView<ManageBukuController> {
                                   showFirstLastButtons: true,
                                   columns: columns,
                                   source: MyData(controller.listBuku),
-                                  columnSpacing: MediaQuery.of(context).size.width / 14,
+                                  columnSpacing:
+                                      MediaQuery.of(context).size.width * .03,
                                   horizontalMargin: 30,
                                   rowsPerPage: 5,
                                   dataRowMaxHeight: 200,
@@ -164,24 +165,23 @@ class ManageBukuView extends GetView<ManageBukuController> {
 }
 
 class MyData extends DataTableSource {
-  ManageBukuController managebukuController =
-      ManageBukuController();
+  ManageBukuController managebukuController = ManageBukuController();
   final List<BukuModel> listBuku;
 
   MyData(this.listBuku);
   @override
   DataRow getRow(int index) => DataRow.byIndex(index: index, cells: [
-        DataCell 
-          (listBuku[index].coverBuku.isEmptyOrNull
-        ? Image.asset(
-          "assets/test.jpg", height: 180, width:180,
-        )
-        : Image.network(
-          listBuku[index].coverBuku ?? "", 
-          height: 180,
-          width: 180,
-        )
-        ),
+        DataCell(listBuku[index].coverBuku.isEmptyOrNull
+            ? Image.asset(
+                "assets/test.jpg",
+                height: 180,
+                width: 180,
+              )
+            : Image.network(
+                listBuku[index].coverBuku ?? "",
+                width: 180,
+                height: 180,
+              )),
         DataCell(Text("${listBuku[index].judul}",
             style: GoogleFonts.urbanist(fontSize: 15))),
         DataCell(Text("${listBuku[index].penulis}",
@@ -197,19 +197,32 @@ class MyData extends DataTableSource {
             ElevatedButton(
                 onPressed: () {
                   Get.defaultDialog(
-                    title: 'Hapus Buku?',
-                    middleText:
-                        'Apakah anda yakin ingin menghapus buku ini?',
-                    onConfirm: () async {
-                      managebukuController.delete(listBuku[index]);
-                    },
-                    textConfirm: 'Iya',
-                    textCancel: 'Tidak',
-                    titleStyle: GoogleFonts.urbanist(fontSize: 15),
-                    middleTextStyle: GoogleFonts.urbanist(fontSize: 15),
+                    contentPadding: EdgeInsets.zero,
+                    barrierDismissible: false,
+                    content: SizedBox(
+                      height: Get.height * .84,
+                      width: double.infinity,
+                      child: SingleChildScrollView(
+                          child: Column(
+                        children: [
+                          BukuForm(
+                            bukuModel: listBuku[index],
+                          ),
+                        ],
+                      )),
+                    ),
+                    title: "Tambah Buku",
+                    titleStyle: const TextStyle(
+                      fontSize: 20,
+                    ),
                   );
                 },
-                child: const Text('HAPUS'))
+                child: const Icon(Icons.edit_rounded)),
+            ElevatedButton(
+                onPressed: () async {
+                  managebukuController.delete(listBuku[index]);
+                },
+                child: const Icon(Icons.delete_rounded))
           ],
         )),
       ]);

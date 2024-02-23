@@ -6,7 +6,6 @@ import 'package:get/get.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:ta_mobile/app/data/Models/user_model.dart';
 import 'package:ta_mobile/app/modules/Manage_User/controllers/manage_user_controller.dart';
-import 'package:ta_mobile/app/modules/home/controllers/home_controller.dart';
 import 'package:ta_mobile/app/utils/colors.dart';
 import 'package:ta_mobile/app/utils/my_drawer.dart';
 import 'package:adaptive_scrollbar/adaptive_scrollbar.dart';
@@ -130,7 +129,7 @@ class ManageUserView extends GetView<ManageUserController> {
 
 class MyData extends DataTableSource {
   ManageUserController manageUserController = ManageUserController();
-    final HomeController  homeController = Get.put(HomeController());
+    // final HomeController  homeController = Get.put(HomeController());
 
   final List<UserModel> listUser;
 

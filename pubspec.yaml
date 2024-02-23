@@ -18,6 +18,8 @@ dependencies:
   google_fonts: 6.1.0
   adaptive_scrollbar: 2.1.2
   image_picker: 1.0.7
+  dotted_border: 2.1.0
+  file_picker: 6.1.1
   flutter: 
     sdk: flutter
 
@@ -27,7 +29,10 @@ dev_dependencies:
     sdk: flutter
 
 flutter: 
+  fonts: 
+    - family: Urbanist
   assets: 
+    - assets/fonts/
     - assets/icons/logo_login.png
     - assets/icons/google.png
     - assets/icons/logo_landing.png

@@ -31,146 +31,144 @@ class DashboardView extends GetView<DashboardController> {
               // first half of page
               Expanded(
                 flex: 2,
-                
                 child: Column(
                   children: [
                     // first 4 boxes in grid
-                     AspectRatio(
-                         aspectRatio: 4,
-                         child: Row(
-                           children: [
-                            Expanded(
-                              flex: 8,
+                    AspectRatio(
+                      aspectRatio: 4,
+                      child: Row(
+                        children: [
+                          Expanded(
+                            flex: 8,
                             child: Padding(
-                               padding: const EdgeInsets.all(15.0),
-                               child: Container(
-                                   decoration: BoxDecoration( 
-                                    color: lightGray,
-                                    border: Border(
-                                      top: BorderSide(
-                                        color: greenColor,
-                                        width: 10,
+                              padding: const EdgeInsets.all(15.0),
+                              child: Container(
+                                  decoration: BoxDecoration(
+                                      color: lightGray,
+                                      border: const Border(
+                                        top: BorderSide(
+                                          color: greenColor,
+                                          width: 10,
+                                        ),
                                       ),
-                                    ),
-                                       borderRadius: BorderRadius.circular(5)),
-                                   child: Column(
-                                     mainAxisAlignment: MainAxisAlignment.center,
-                                     children: [
-                                       Text(
-                                         'Jumlah Peminjam',
-                                         style:
-                                             GoogleFonts.urbanist(fontSize: 18),
-                                       ),
-                                       Obx(() => Text(
-                                             controller.listPeminjam.length
-                                                 .toString(),
-                                             style: GoogleFonts.urbanist(
-                                                 fontSize: 17),
-                                           )),
-                                     ],
-                                   )),
-                             ),
-                             ),
-                             Expanded(
-                              flex: 8,
-                             
-                             child: Padding(
-                               padding: const EdgeInsets.all(15.0),
-                               child: Container(
-                                   decoration: BoxDecoration( 
-                                    color: lightGray,
-                                    border: Border(
-                                      top: BorderSide(
-                                        color: greenColor,
-                                        width: 10,
+                                      borderRadius: BorderRadius.circular(5)),
+                                  child: Column(
+                                    mainAxisAlignment: MainAxisAlignment.center,
+                                    children: [
+                                      Text(
+                                        'Jumlah Peminjam',
+                                        style:
+                                            GoogleFonts.urbanist(fontSize: 18),
                                       ),
-                                    ),
-                                       borderRadius: BorderRadius.circular(5),),
-                                   child: Column(
-                                     mainAxisAlignment: MainAxisAlignment.center,
-                                     children: [
-                                       Text(
-                                         'Jumlah Petugas',
-                                         style:
-                                             GoogleFonts.urbanist(fontSize: 18),
-                                       ),
-                                       Obx(() => Text(
-                                           controller.listPetugas.length
-                                               .toString(),
-                                           style: GoogleFonts.urbanist(
-                                               fontSize: 17))),
-                                     ],
-                                   )),
-                                   ),
-                             ),
-                             Expanded(
-                              flex: 8,
-                             
-                            child: Padding(
-                               padding: const EdgeInsets.all(15.0),
-                               child: Container(
-                                   decoration: BoxDecoration( 
-                                    color: lightGray,
-                                    border: Border(
-                                      top: BorderSide(
-                                        color: greenColor,
-                                        width: 10,
-                                      ),
-                                    ),
-                                       borderRadius: BorderRadius.circular(5)),
-                                   child: Column(
-                                     mainAxisAlignment: MainAxisAlignment.center,
-                                     children: [
-                                       Text(
-                                         'Jumlah Peminjam',
-                                         style:
-                                             GoogleFonts.urbanist(fontSize: 18),
-                                       ),
-                                       Obx(() => Text(
-                                             controller.listPeminjam.length
-                                                 .toString(),
-                                             style: GoogleFonts.urbanist(
-                                                 fontSize: 17),
-                                           )),
-                                     ],
-                                   )),
-                             ),
-                             ),
-                             Expanded(
-                              flex: 8,
-                             
-                            child: Padding(
-                               padding: const EdgeInsets.all(15.0),
-                               child: Container(
-                                   decoration: BoxDecoration( 
-                                    color: lightGray,
-                                    border: Border(
-                                      top: BorderSide(
-                                        color: greenColor,
-                                        width: 10,
-                                      ),
-                                    ),
-                                       borderRadius: BorderRadius.circular(5),),
-                                   child: Column(
-                                     mainAxisAlignment: MainAxisAlignment.center,
-                                     children: [
-                                       Text(
-                                         'Jumlah Petugas',
-                                         style:
-                                             GoogleFonts.urbanist(fontSize: 18),
-                                       ),
-                                       Obx(() => Text(
-                                           controller.listPetugas.length
-                                               .toString(),
-                                           style: GoogleFonts.urbanist(
-                                               fontSize: 17))),
-                                     ],
-                                   )),
+                                      Obx(() => Text(
+                                            controller.listPeminjam.length
+                                                .toString(),
+                                            style: GoogleFonts.urbanist(
+                                                fontSize: 17),
+                                          )),
+                                    ],
+                                  )),
                             ),
-                             ),
-                           ],
-                         ),
-                       ),
+                          ),
+                          Expanded(
+                            flex: 8,
+                            child: Padding(
+                              padding: const EdgeInsets.all(15.0),
+                              child: Container(
+                                  decoration: BoxDecoration(
+                                    color: lightGray,
+                                    border: const Border(
+                                      top: BorderSide(
+                                        color: greenColor,
+                                        width: 10,
+                                      ),
+                                    ),
+                                    borderRadius: BorderRadius.circular(5),
+                                  ),
+                                  child: Column(
+                                    mainAxisAlignment: MainAxisAlignment.center,
+                                    children: [
+                                      Text(
+                                        'Jumlah Petugas',
+                                        style:
+                                            GoogleFonts.urbanist(fontSize: 18),
+                                      ),
+                                      Obx(() => Text(
+                                          controller.listPetugas.length
+                                              .toString(),
+                                          style: GoogleFonts.urbanist(
+                                              fontSize: 17))),
+                                    ],
+                                  )),
+                            ),
+                          ),
+                          Expanded(
+                            flex: 8,
+                            child: Padding(
+                              padding: const EdgeInsets.all(15.0),
+                              child: Container(
+                                  decoration: BoxDecoration(
+                                      color: lightGray,
+                                      border: const Border(
+                                        top: BorderSide(
+                                          color: greenColor,
+                                          width: 10,
+                                        ),
+                                      ),
+                                      borderRadius: BorderRadius.circular(5)),
+                                  child: Column(
+                                    mainAxisAlignment: MainAxisAlignment.center,
+                                    children: [
+                                      Text(
+                                        'Jumlah Peminjam',
+                                        style:
+                                            GoogleFonts.urbanist(fontSize: 18),
+                                      ),
+                                      Obx(() => Text(
+                                            controller.listPeminjam.length
+                                                .toString(),
+                                            style: GoogleFonts.urbanist(
+                                                fontSize: 17),
+                                          )),
+                                    ],
+                                  )),
+                            ),
+                          ),
+                          Expanded(
+                            flex: 8,
+                            child: Padding(
+                              padding: const EdgeInsets.all(15.0),
+                              child: Container(
+                                  decoration: BoxDecoration(
+                                    color: lightGray,
+                                    border: const Border(
+                                      top: BorderSide(
+                                        color: greenColor,
+                                        width: 10,
+                                      ),
+                                    ),
+                                    borderRadius: BorderRadius.circular(5),
+                                  ),
+                                  child: Column(
+                                    mainAxisAlignment: MainAxisAlignment.center,
+                                    children: [
+                                      Text(
+                                        'Jumlah Petugas',
+                                        style:
+                                            GoogleFonts.urbanist(fontSize: 18),
+                                      ),
+                                      Obx(() => Text(
+                                          controller.listPetugas.length
+                                              .toString(),
+                                          style: GoogleFonts.urbanist(
+                                              fontSize: 17))),
+                                    ],
+                                  )),
+                            ),
+                          ),
+                        ],
+                      ),
+                    ),
                   ],
                 ),
               ),
@@ -197,7 +195,7 @@ class DashboardView extends GetView<DashboardController> {
                         const SliverGridDelegateWithFixedCrossAxisCount(
                             crossAxisCount: 2),
                     itemBuilder: (context, index) {
-                      return MyBox();
+                      return const MyBox();
                     },
                   ),
                 ),
@@ -219,5 +217,3 @@ class DashboardView extends GetView<DashboardController> {
     }
   }
 }
-
-

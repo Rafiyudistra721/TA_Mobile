@@ -1,6 +1,5 @@
 // ignore_for_file: non_constant_identifier_names
 
-import 'dart:io';
 
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:nb_utils/nb_utils.dart';
@@ -56,14 +55,10 @@ class BukuModel {
       collectionReference: firebaseFirestore.collection(bukuCollection),
       storageReference: firebaseStorage.ref(bukuCollection));
 
-  Future<BukuModel> save({File? file}) async {
+  Future<BukuModel> save() async {
     id == null ? id = await db.add(toJson) : await db.edit(toJson);
-    if (file != null && id != null) {
-      coverBuku = await db.upload(id: id!, file: file);
-      db.edit(toJson);
-    }
     return this;
-  } 
+    }
 
   Future delete() async {
     (id == null) ? toast("Error Invalid ID") : await db.delete(id!, url: coverBuku);
