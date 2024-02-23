@@ -11,9 +11,9 @@ class PinjamModel {
   String? id;
   String? userId;
   String? bukuId;
-  String? tanggalPinjam;
-  String? tanggalKembali;
-  int? statusPinjam;
+  DateTime? tanggalPinjam;
+  DateTime? tanggalKembali;
+  String? statusPinjam;
 
   PinjamModel({
     this.id,
@@ -28,39 +28,35 @@ class PinjamModel {
     var json = doc.data() as Map<String, dynamic>?;
     return PinjamModel(
       id: doc.id,
-      userId: json!['Judul'] as String?,
-      bukuId: json['Penulis'] as String?,
-      tanggalPinjam: json['CoverBuku'] as String?,
-      tanggalKembali: json['Penerbit'] as String?,
-      statusPinjam: json['Tahun Terbit'] as int?,
+      userId: json!['User'] as String?,
+      bukuId: json['Buku'] as String?,
+      tanggalPinjam: (json['Tanggal Pinjam'] as Timestamp).toDate(),
+      tanggalKembali: (json['Tanggal Kembali'] as Timestamp).toDate(),
+      statusPinjam: json['Status'] as String?,
     );
   }
 
   Map<String, dynamic> get toJson => {
         'id': id,
-        'Judul': userId,
-        "Penulis": bukuId,
-        "CoverBuku": tanggalPinjam,
-        "Penerbit": tanggalKembali,
-        "Tahun Terbit": statusPinjam,
+        'User': userId,
+        "Buku": bukuId,
+        "TanggalPinjam": tanggalPinjam,
+        "TanggalKembali": tanggalKembali,
+        "Status": statusPinjam,
       };
 
   Database db = Database(
-      collectionReference: firebaseFirestore.collection(bukuCollection),
-      storageReference: firebaseStorage.ref(bukuCollection));
+      collectionReference: firebaseFirestore.collection(pinjamCollection),
+      storageReference: firebaseStorage.ref(pinjamCollection));
 
   Future<PinjamModel> save({File? file}) async {
     id == null ? id = await db.add(toJson) : await db.edit(toJson);
-    if (file != null && id != null) {
-      tanggalPinjam = await db.upload(id: id!, file: file);
-      db.edit(toJson);
-    }
     return this;
   }
 
   Future delete() async {
     (id == null)
-        ? toast("Error Invalid ID"): await db.delete(id!, url: tanggalPinjam);
+        ? toast("Error Invalid ID"): await db.delete(id!);
   }
 
   Stream<List<PinjamModel>> streamList() async* {

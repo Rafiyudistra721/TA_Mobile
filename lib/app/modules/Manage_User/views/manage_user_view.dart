@@ -45,60 +45,9 @@ class ManageUserView extends GetView<ManageUserController> {
                     crossAxisAlignment: CrossAxisAlignment.start,
                     mainAxisAlignment: MainAxisAlignment.start,
                     children: [
-                      // AspectRatio(
-                      //   aspectRatio: 6,
-                      //   child: ListView(
-                      //     scrollDirection: Axis.horizontal,
-                      //     children: [
-                      //       Padding(
-                      //         padding: const EdgeInsets.all(8.0),
-                      //         child: Container(
-                      //             decoration: BoxDecoration(
-                      //                 borderRadius: BorderRadius.circular(8)),
-                      //             child: Column(
-                      //               mainAxisAlignment: MainAxisAlignment.center,
-                      //               children: [
-                      //                 Text(
-                      //                   'Jumlah Peminjam',
-                      //                   style:
-                      //                       GoogleFonts.urbanist(fontSize: 17),
-                      //                 ),
-                      //                 Obx(() => Text(
-                      //                       controller.listPeminjam.length
-                      //                           .toString(),
-                      //                       style: GoogleFonts.urbanist(
-                      //                           fontSize: 17),
-                      //                     )),
-                      //               ],
-                      //             )),
-                      //       ),
-                      //       Padding(
-                      //         padding: const EdgeInsets.all(8.0),
-                      //         child: Container(
-                      //             decoration: BoxDecoration(
-                      //                 borderRadius: BorderRadius.circular(8),),
-                      //             child: Column(
-                      //               mainAxisAlignment: MainAxisAlignment.center,
-                      //               children: [
-                      //                 Text(
-                      //                   'Jumlah Petugas',
-                      //                   style:
-                      //                       GoogleFonts.urbanist(fontSize: 17),
-                      //                 ),
-                      //                 Obx(() => Text(
-                      //                     controller.listPetugas.length
-                      //                         .toString(),
-                      //                     style: GoogleFonts.urbanist(
-                      //                         fontSize: 17))),
-                      //               ],
-                      //             )),
-                      //       ),
-                      //     ],
-                      //   ),
-                      // ),
-                      Text('Pengguna',
-                          style: GoogleFonts.urbanist(
-                              fontSize: 30)),
+                      Padding(padding: EdgeInsets.all(16),
+                          child: Text('Daftar Pengguna',
+                              style: GoogleFonts.urbanist(fontSize: 30)),),
                       Obx(() => Padding(
                             padding: const EdgeInsets.all(16),
                             child: controller.listUser.isEmpty

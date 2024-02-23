@@ -44,62 +44,12 @@ class ManageKategoriView extends GetView<ManageKategoriController> {
                     crossAxisAlignment: CrossAxisAlignment.start,
                     mainAxisAlignment: MainAxisAlignment.start,
                     children: [
-                      // AspectRatio(
-                      //   aspectRatio: 6,
-                      //   child: ListView(
-                      //     scrollDirection: Axis.horizontal,
-                      //     children: [
-                      //       Padding(
-                      //         padding: const EdgeInsets.all(8.0),
-                      //         child: Container(
-                      //             decoration: BoxDecoration(
-                      //                 borderRadius: BorderRadius.circular(8)),
-                      //             child: Column(
-                      //               mainAxisAlignment: MainAxisAlignment.center,
-                      //               children: [
-                      //                 Text(
-                      //                   'Jumlah Peminjam',
-                      //                   style:
-                      //                       GoogleFonts.urbanist(fontSize: 17),
-                      //                 ),
-                      //                 Obx(() => Text(
-                      //                       controller.listPeminjam.length
-                      //                           .toString(),
-                      //                       style: GoogleFonts.urbanist(
-                      //                           fontSize: 17),
-                      //                     )),
-                      //               ],
-                      //             )),
-                      //       ),
-                      //       Padding(
-                      //         padding: const EdgeInsets.all(8.0),
-                      //         child: Container(
-                      //             decoration: BoxDecoration(
-                      //                 borderRadius: BorderRadius.circular(8),),
-                      //             child: Column(
-                      //               mainAxisAlignment: MainAxisAlignment.center,
-                      //               children: [
-                      //                 Text(
-                      //                   'Jumlah Petugas',
-                      //                   style:
-                      //                       GoogleFonts.urbanist(fontSize: 17),
-                      //                 ),
-                      //                 Obx(() => Text(
-                      //                     controller.listPetugas.length
-                      //                         .toString(),
-                      //                     style: GoogleFonts.urbanist(
-                      //                         fontSize: 17))),
-                      //               ],
-                      //             )),
-                      //       ),
-                      //     ],
-                      //   ),
-                      // ),
                       Row(
                         mainAxisAlignment: MainAxisAlignment.spaceBetween,
                         children: [
-                          Text('Daftar Kategori',
-                              style: GoogleFonts.urbanist(fontSize: 30)),
+                          Padding(padding: EdgeInsets.all(16),
+                          child: Text('Daftar Kategori',
+                              style: GoogleFonts.urbanist(fontSize: 30)),),
                           ElevatedButton.icon(
                               onPressed: () {
                                 Get.defaultDialog(
@@ -137,7 +87,7 @@ class ManageKategoriView extends GetView<ManageKategoriController> {
                                   showFirstLastButtons: true,
                                   columns: columns,
                                   source: MyData(controller.listKategori),
-                                  columnSpacing: MediaQuery.of(context).size.width / 8,
+                                  columnSpacing: MediaQuery.of(context).size.width *.65,
                                   horizontalMargin: 30,
                                   rowsPerPage: 5,
                                 ),

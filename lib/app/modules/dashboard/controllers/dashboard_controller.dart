@@ -2,8 +2,8 @@
 
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
-import 'package:nb_utils/nb_utils.dart';
 import 'package:ta_mobile/app/data/Models/user_model.dart';
+import 'package:ta_mobile/app/data/Models/buku_model.dart';
 
 class DashboardController extends GetxController {
 
@@ -13,69 +13,6 @@ class DashboardController extends GetxController {
 
   final verticalScrollController = ScrollController();
   final horizontalScrollController = ScrollController();
-
-  Future upLevel(UserModel userModel) async {
-    isSaving = true;
-    userModel.level = 'Petugas';
-
-    try {
-      await userModel.save();
-      toast('Level pengguna telah diubah menjadi Petugas');
-      print('Success');
-      Get.back();
-    } catch (e) {
-      print(e);
-    } finally {
-      isSaving = false;
-    }
-  }
-  Future downLevel(UserModel userModel) async {
-    isSaving = true;
-    userModel.level = 'Peminjam';
-
-    try {
-      await userModel.save();
-      toast('Level pengguna telah diubah menjadi Peminjam');
-      print('Success');
-      Get.back();
-    } catch (e) {
-      print(e);
-    } finally {
-      isSaving = false;
-    }
-  }
-
-  Future block(UserModel userModel) async {
-    isSaving = true;
-    userModel.level = 'Terblokir';
-
-    try {
-      await userModel.save();
-      toast('Pengguna telah terblokir');
-      print('Success');
-      Get.back();
-    } catch (e) {
-      print(e);
-    } finally {
-      isSaving = false;
-    }
-  }
-
-  Future unblock(UserModel userModel) async {
-    isSaving = true;
-    userModel.level = 'Peminjam';
-
-    try {
-      await userModel.save();
-      toast('Pengguna telah terblokir');
-      print('Success');
-      Get.back();
-    } catch (e) {
-      print(e);
-    } finally {
-      isSaving = false;
-    }
-  }
 
   RxList<UserModel> rxPeminjam = RxList<UserModel>();
   List<UserModel> get listPeminjam => rxPeminjam.value;
@@ -89,11 +26,16 @@ class DashboardController extends GetxController {
   List<UserModel> get listUser => rxUser.value;
   set listUser(List<UserModel> value) => rxUser.value = value;
 
+  RxList<BukuModel> rxBuku = RxList<BukuModel>();
+  List<BukuModel> get listBuku => rxBuku.value;
+  set listBuku(List<BukuModel> value) => rxBuku.value = value;
+
   @override
   void onInit() {
     rxPetugas.bindStream(UserModel().petugasStreamList());
     rxPeminjam.bindStream(UserModel().peminjamStreamList());
     rxUser.bindStream(UserModel().allStreamList());
+    rxBuku.bindStream(BukuModel().streamList());
     super.onInit();
   }
 
