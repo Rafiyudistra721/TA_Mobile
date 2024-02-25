@@ -1,4 +1,4 @@
-// ignore_for_file: prefer_interpolation_to_compose_strings, avoid_print, prefer_final_fields
+// ignore_for_file: prefer_interpolation_to_compose_strings, avoid_print, prefer_final_fields, unnecessary_overrides
 
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
@@ -8,7 +8,6 @@ import 'package:nb_utils/nb_utils.dart';
 import 'package:ta_mobile/app/data/Models/user_model.dart';
 import 'package:ta_mobile/app/integrations/firestore.dart';
 import 'package:ta_mobile/app/routes/app_pages.dart';
-import 'package:ta_mobile/app/utils/colors.dart';
 
 class AuthController extends GetxController {
   TextEditingController nameC = TextEditingController();
@@ -199,11 +198,7 @@ class AuthController extends GetxController {
                 Get.toNamed(Routes.AUTH);
                 isRegis = false;
               },
-              buttonColor: colorPrimary,
-              cancelTextColor: colorPrimary,
-              confirmTextColor: Colors.white,
-              titleStyle: const TextStyle(color: colorPrimary),
-              middleTextStyle: const TextStyle(color: colorPrimary));
+              confirmTextColor: Colors.white,);
         });
       }
       isSaving = false;
@@ -230,15 +225,10 @@ class AuthController extends GetxController {
         isSaving = false;
         emailC.clear();
         passC.clear();
-        Get.offAndToNamed(Routes.LANDING_PAGE);
       },
       textConfirm: 'Iya',
       textCancel: 'Tidak',
-      buttonColor: colorPrimary,
       confirmTextColor: Colors.black,
-      cancelTextColor: colorPrimary,
-      titleStyle: const TextStyle(color: colorPrimary),
-      middleTextStyle: const TextStyle(color: colorPrimary),
     );
   }
 
@@ -254,22 +244,14 @@ class AuthController extends GetxController {
             Get.back();
           },
           textConfirm: 'Oke',
-          buttonColor: colorPrimary,
-          cancelTextColor: colorPrimary,
-          confirmTextColor: Colors.white,
-          titleStyle: const TextStyle(color: colorPrimary),
-          middleTextStyle: const TextStyle(color: colorPrimary));
+          confirmTextColor: Colors.white,);
     } else {
       Get.defaultDialog(
           title: 'Error',
           middleText: 'Email yang anda kirim tidak valid',
           textConfirm: 'Oke',
           onConfirm: () => Get.back(),
-          buttonColor: colorPrimary,
-          cancelTextColor: colorPrimary,
-          confirmTextColor: Colors.white,
-          titleStyle: const TextStyle(color: colorPrimary),
-          middleTextStyle: const TextStyle(color: colorPrimary));
+          confirmTextColor: Colors.white,);
     }
   }
 

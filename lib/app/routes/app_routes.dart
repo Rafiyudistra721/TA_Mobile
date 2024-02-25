@@ -14,10 +14,10 @@ abstract class Routes {
   static const ETALASE = _Paths.ETALASE;
   static const MANAGE_BUKU = _Paths.MANAGE_BUKU;
   static const MANAGE_KATEGORI = _Paths.MANAGE_KATEGORI;
-  static const MANAGE_USER = _Paths.MANAGE_USER;
   static const MANAGE_ULASAN = _Paths.MANAGE_ULASAN;
   static const MANAGE_PEMINJAMAN = _Paths.MANAGE_PEMINJAMAN;
-  static const TAMBAH_PETUGAS = _Paths.TAMBAH_PETUGAS;
+  static const MANAGE_USER = _Paths.MANAGE_USER;
+  static const DETAIL_BUKU = _Paths.DETAIL_BUKU;
 }
 
 abstract class _Paths {
@@ -34,5 +34,5 @@ abstract class _Paths {
   static const MANAGE_USER = '/manage-user';
   static const MANAGE_ULASAN = '/manage-ulasan';
   static const MANAGE_PEMINJAMAN = '/manage-peminjaman';
-  static const TAMBAH_PETUGAS = '/tambah-petugas';
+  static const DETAIL_BUKU = '/detail-buku';
 }

@@ -1,10 +1,19 @@
 import 'package:flutter/material.dart';
+import 'package:ta_mobile/app/utils/colors.dart';
 
 class ThemeModel {
-  static final lightTheme = ThemeData.light(
-    useMaterial3: true,
-  );
-  static final darkTheme = ThemeData.dark(
-    useMaterial3: true,
-  );
+  static final lightTheme = ThemeData(
+      brightness: Brightness.light,
+      primarySwatch: PrimarySwatchLight(0xffffffff),
+      primaryColor: const Color(0xffffffff),
+      colorScheme: colorSchemeLight,
+      useMaterial3: true,
+      fontFamily: 'Urbanist');
+  static final darkTheme = ThemeData(
+      brightness: Brightness.dark,
+      primarySwatch: PrimarySwatchDark(0xff282C3E),
+      primaryColor: const Color(0xff212232),
+      colorScheme: colorSchemeDark,
+      useMaterial3: true,
+      fontFamily: 'Urbanist');
 }

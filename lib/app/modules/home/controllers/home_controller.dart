@@ -1,5 +1,6 @@
 // ignore_for_file: unnecessary_overrides, avoid_print
 
+import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:ta_mobile/app/data/Models/buku_model.dart';
 import 'package:ta_mobile/app/data/Models/kategori_model.dart';
@@ -9,6 +10,12 @@ class HomeController extends GetxController {
   var selectedCategory = ''.obs;
   var allBooks = <BukuModel>[].obs;
   final darkModeValue = Get.isDarkMode.obs;
+
+    void toggleTheme() {
+    darkModeValue.value = !darkModeValue.value;
+    Get.changeThemeMode(
+        darkModeValue.value ? ThemeMode.dark : ThemeMode.light);
+  }
 
   void fetchCategories() async {
     try {

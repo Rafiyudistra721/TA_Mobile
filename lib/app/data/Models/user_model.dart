@@ -67,8 +67,42 @@ class UserModel {
     });
   }
 
-  Stream<List<UserModel>> allstreamList() async* {
-    yield* db.collectionReference.snapshots().map((query) {
+  Stream<List<UserModel>> petugasStreamList() async* {
+    yield* db.collectionReference
+    .where("level", isEqualTo: "Petugas")
+    .snapshots()
+    .map((query) {
+      List<UserModel> list = [];
+      for (var doc in query.docs) {
+        list.add(
+          UserModel().fromJson(
+            doc,
+          ),
+        );
+      }
+      return list;
+    });
+  }
+  Stream<List<UserModel>> peminjamStreamList() async* {
+    yield* db.collectionReference
+    .where("level", isEqualTo: "Peminjam")
+    .snapshots()
+    .map((query) {
+      List<UserModel> list = [];
+      for (var doc in query.docs) {
+        list.add(
+          UserModel().fromJson(
+            doc,
+          ),
+        );
+      }
+      return list;
+    });
+  }
+  Stream<List<UserModel>> allStreamList() async* {
+    yield* db.collectionReference
+    .snapshots()
+    .map((query) {
       List<UserModel> list = [];
       for (var doc in query.docs) {
         list.add(
