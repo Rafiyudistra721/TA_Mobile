@@ -1,19 +1,16 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
+import 'package:google_fonts/google_fonts.dart';
 import 'package:ta_mobile/app/modules/Intro/controllers/intro_controller.dart';
-
 
 class SplashScreen extends GetView<IntroController> {
   const SplashScreen({super.key});
-
-  
 
   @override
   Widget build(BuildContext context) {
     return Scaffold(
       body: Container(
         alignment: Alignment.center,
-        color: Colors.blue.shade200,
         height: MediaQuery.of(context).size.height,
         width: MediaQuery.of(context).size.width,
         child: Column(
@@ -22,29 +19,18 @@ class SplashScreen extends GetView<IntroController> {
             const SizedBox(
               height: 80,
             ),
-            SizedBox(
-              height: MediaQuery.of(context).size.height * 0.5,
-              width: MediaQuery.of(context).size.width * 0.5,
-              child: TweenAnimationBuilder(
-                tween: Tween<double>(begin: 3, end: 1),
-                duration: const Duration(seconds: 1),
-                curve: Curves.elasticOut,
-                builder: (context, value, child) {
-                  return Transform.scale(
-                    scale: value,
-                    child: TweenAnimationBuilder(
-                      tween: Tween<double>(begin: 2, end: 0),
-                      duration: const Duration(seconds: 5),
-                      curve: Curves.elasticOut,
-                      builder: (context, value, child) {
-                        return Transform.rotate(
-                          angle: value,
-                          child: Image.asset('assets/icons/logo_login.png'),
-                        );
-                      },
-                    ),
-                  );
-                },
+            TweenAnimationBuilder(
+              tween: Tween<double>(begin: 0.0, end: 1.0),
+              duration: const Duration(seconds: 1),
+              curve: Curves.easeIn,
+              builder: (context, value, child) => Opacity(
+                opacity: value,
+                child: Image.asset(
+                  'assets/icons/logo_login.png',
+                  height:375,
+                  width: 375,
+                  ),
+
               ),
             ),
             const SizedBox(
@@ -52,13 +38,13 @@ class SplashScreen extends GetView<IntroController> {
             ),
             Text(
               'SmartLib',
-              style: TextStyle(
-                color: Colors.black,
-                letterSpacing: 0,
-                fontWeight: FontWeight.bold,
+              style: GoogleFonts.urbanist(
                 fontSize: 50,
+                fontWeight: FontWeight.bold,
+                color: Colors.black,
               ),
             ),
+            
           ],
         ),
       ),

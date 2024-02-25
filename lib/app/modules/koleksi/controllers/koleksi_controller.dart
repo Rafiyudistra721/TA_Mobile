@@ -1,7 +1,7 @@
 import 'package:get/get.dart';
 
-class LandingPage2Controller extends GetxController {
-  //TODO: Implement LandingPage2Controller
+class KoleksiController extends GetxController {
+  //TODO: Implement KoleksiController
 
   final count = 0.obs;
   @override

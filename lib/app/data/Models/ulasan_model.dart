@@ -25,24 +25,24 @@ class UlasanModel {
     var json = doc.data() as Map<String, dynamic>?;
     return UlasanModel(
       id: doc.id,
-      userId: json!['Nama User'] as String?,
-      bukuId: json['Judul Buku'] as String?,
-      ulasan: json['Ulasan'] as String?,
-      rating: json['Rating'] as int?,
+      userId: json?['Nama User'] as String,
+      bukuId: json?['Judul Buku'] as String,
+      ulasan: json?['Ulasan'] as String,
+      rating: json?['Rating'] as int,
     );
   }
 
   Map<String, dynamic> get toJson => {
         'id': id,
         'Nama User': userId,
-        'judul buku': bukuId,
+        'Judul Buku': bukuId,
         'Ulasan': ulasan,
-        'rating': rating,
+        'Rating': rating,
       };
 
   Database get db => Database(
-      collectionReference: firebaseFirestore.collection(kategoriCollection),
-      storageReference: firebaseStorage.ref(kategoriCollection));
+      collectionReference: firebaseFirestore.collection(ulasanCollection),
+      storageReference: firebaseStorage.ref(ulasanCollection));
 
   Future<UlasanModel> save() async {
     id == null ? id = await db.add(toJson) : await db.edit(toJson);

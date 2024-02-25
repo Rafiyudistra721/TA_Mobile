@@ -1,3 +1,5 @@
+// ignore_for_file: avoid_print
+
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:firebase_core/firebase_core.dart';
 import 'package:flutter/material.dart';
@@ -10,12 +12,11 @@ import 'package:ta_mobile/firebase_options.dart';
 
 import 'app/routes/app_pages.dart';
 
-
 void main() async {
   WidgetsFlutterBinding.ensureInitialized();
   await Firebase.initializeApp(options: DefaultFirebaseOptions.currentPlatform);
   await GoogleFonts.pendingFonts([
-    GoogleFonts.ubuntu(),
+    GoogleFonts.urbanist(),
     
   ]);
 
@@ -46,6 +47,7 @@ class MyApp extends StatelessWidget {
             debugShowCheckedModeBanner: false,
             theme: ThemeModel.lightTheme,
             darkTheme: ThemeModel.darkTheme,
+            themeMode: ThemeMode.light,
             title: "SmartLib",
             initialRoute: initialRoute,
             getPages: AppPages.routes,
@@ -56,4 +58,3 @@ class MyApp extends StatelessWidget {
     );
   }
 }
-

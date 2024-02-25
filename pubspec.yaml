@@ -16,6 +16,12 @@ dependencies:
   google_sign_in: 6.2.1
   carousel_slider: 4.2.1
   google_fonts: 6.1.0
+  adaptive_scrollbar: 2.1.2
+  image_picker: 1.0.7
+  dotted_border: 2.1.0
+  file_picker: 6.1.1
+  intl: 0.19.0
+  dropdown_search: 5.0.6
   flutter: 
     sdk: flutter
 
@@ -25,6 +31,30 @@ dev_dependencies:
     sdk: flutter
 
 flutter: 
+  fonts: 
+    - family: Urbanist
+      fonts:
+      - asset:  assets/fonts/Urbanist-Thin.ttf
+        weight: 100
+      - asset:  assets/fonts/Urbanist-ExtraLight.ttf
+        weight: 200
+      - asset:  assets/fonts/Urbanist-Light.ttf
+        weight: 300
+      - asset:  assets/fonts/Urbanist-Regular.ttf
+        weight: 400
+        style: normal
+      - asset:  assets/fonts/Urbanist-Medium.ttf
+        weight: 500
+      - asset:  assets/fonts/Urbanist-SemiBold.ttf
+        weight: 600
+      - asset:  assets/fonts/Urbanist-Bold.ttf
+        weight: 700
+      - asset:  assets/fonts/Urbanist-ExtraBold.ttf
+        weight: 800
+      - asset:  assets/fonts/Urbanist-Black.ttf
+        weight: 900
+
+
   assets: 
     - assets/icons/logo_login.png
     - assets/icons/google.png
@@ -32,5 +62,12 @@ flutter:
     - assets/stocks/1.png
     - assets/stocks/2.png
     - assets/stocks/3.png
+    - assets/imgs/bgbgimage.jpg
+    - assets/imgs/bigbgbackground.jpg
+    - assets/tsp.png
+    - assets/imgs/guyreadbook1.jpg
+    - assets/imgs/guyreadbook2.jpg
+    - assets/imgs/guyreadbookpng.png
+    - assets/test.jpg
   uses-material-design: true
 

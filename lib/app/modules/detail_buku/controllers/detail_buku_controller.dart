@@ -1,7 +1,7 @@
 import 'package:get/get.dart';
 
-class TambahPetugasController extends GetxController {
-  //TODO: Implement TambahPetugasController
+class DetailBukuController extends GetxController {
+  //TODO: Implement DetailBukuController
 
   final count = 0.obs;
   @override

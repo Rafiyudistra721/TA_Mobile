@@ -5,18 +5,13 @@ import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:nb_utils/nb_utils.dart';
 import 'package:ta_mobile/app/modules/auth/controllers/auth_controller.dart';
+import 'package:ta_mobile/app/routes/app_pages.dart';
 
 import '../controllers/home_controller.dart';
 
 class HomeView extends GetView<HomeController> {
   final authC = Get.put(AuthController());
   HomeView({Key? key}) : super(key: key);
-
-  void toggleTheme() {
-    controller.darkModeValue.value = !controller.darkModeValue.value;
-    Get.changeThemeMode(
-        controller.darkModeValue.value ? ThemeMode.dark : ThemeMode.light);
-  }
 
   @override
   Widget build(BuildContext context) {
@@ -41,7 +36,7 @@ class HomeView extends GetView<HomeController> {
                         authC.logout();
                       },
                       icon: const Icon(
-                        Icons.shopping_cart,
+                        Icons.logout,
                         size: 18,
                       ),
                     ),
@@ -62,7 +57,7 @@ class HomeView extends GetView<HomeController> {
                     ),
                     child: IconButton(
                       onPressed: () {
-                        toggleTheme();
+                        controller.toggleTheme();
                       },
                       icon: Icon(
                         (controller.darkModeValue.value)
@@ -82,7 +77,7 @@ class HomeView extends GetView<HomeController> {
           children: [
             Obx(() => Text(
                   'SmartLib',
-                  style: GoogleFonts.lobster(
+                  style: GoogleFonts.urbanist(
                     color: (controller.darkModeValue.value)
                         ? Colors.red.shade200
                         : Colors.red.shade800,
@@ -396,8 +391,8 @@ class HomeView extends GetView<HomeController> {
                               itemCount: controller.categories.length,
                               itemBuilder: (context, index) {
                                 var category = controller.categories[index];
-                                var isActive =
-                                    category.id! == controller.selectedCategory.value;
+                                var isActive = category.id! ==
+                                    controller.selectedCategory.value;
                                 var isActiveValue = isActive.obs;
                                 return Hero(
                                     tag: 'category_${category.id}',
@@ -408,21 +403,15 @@ class HomeView extends GetView<HomeController> {
                                         onPressed: () async {
                                           controller.changeCategory(
                                               temp: category.id!);
-                                          print(controller.selectedCategory.value);
-                                          print("------------------------------");
-                                          print(category.id);
-                                          print("--------------------------");
-                                          print(isActiveValue.value);
-                                          // print(controller.darkModeValue.value);
                                         },
                                         style: ElevatedButton.styleFrom(
-                                          elevation: isActiveValue.value ? 6 : 0,
-                                          backgroundColor:
-                                            isActiveValue.value
-                                                ? Colors.red
-                                                : controller.darkModeValue.value
-                                                    ? Colors.grey.shade700
-                                                    : Colors.green,
+                                          elevation:
+                                              isActiveValue.value ? 6 : 0,
+                                          backgroundColor: isActiveValue.value
+                                              ? Colors.red
+                                              : controller.darkModeValue.value
+                                                  ? Colors.grey.shade700
+                                                  : Colors.green,
                                         ),
                                         child: Padding(
                                           padding: const EdgeInsets.all(8.0),
@@ -431,7 +420,8 @@ class HomeView extends GetView<HomeController> {
                                             style: TextStyle(
                                               color: isActiveValue.value
                                                   ? Colors.white
-                                                  : controller.darkModeValue.value
+                                                  : controller
+                                                          .darkModeValue.value
                                                       ? Colors.white
                                                       : Colors.grey.shade800,
                                             ),
@@ -471,7 +461,7 @@ class HomeView extends GetView<HomeController> {
                                 Navigator.of(context).pushNamed('viewScreen');
                               },
                               child: Text(
-                                'Lihat Semua ▶️',
+                                'Lihat Semua ▶',
                                 style: TextStyle(
                                   fontSize: 14,
                                   color: Colors.amber.shade500,
@@ -498,15 +488,14 @@ class HomeView extends GetView<HomeController> {
                           return SizedBox(
                             height: 300,
                             width: double.infinity,
-                            child: ListView.builder(
+                            child: GridView.builder(gridDelegate: const SliverGridDelegateWithFixedCrossAxisCount(crossAxisCount: 2),
                               itemCount: filteredBooks.length,
-                              scrollDirection: Axis.horizontal,
+                              scrollDirection: Axis.vertical,
                               itemBuilder: (context, index) {
                                 final book = filteredBooks[index];
                                 return GestureDetector(
                                   onTap: () {
-                                    Navigator.of(context).pushNamed(
-                                        'DetailPage',
+                                    Get.toNamed(Routes.DETAIL_BUKU,
                                         arguments: book);
                                   },
                                   child: Container(
@@ -547,7 +536,7 @@ class HomeView extends GetView<HomeController> {
                                         ),
                                         5.height,
                                         Text(
-                                          book.kategoriId!,
+                                          "${controller.categories.firstWhere((cat) => cat.id == book.kategoriId).namaKategori}",
                                           style: const TextStyle(
                                               color: Colors.grey),
                                         ),
@@ -572,54 +561,3 @@ class HomeView extends GetView<HomeController> {
   }
 }
 
-// class CategoryButton extends GetView<HomeController> {
-//   final String categoryName;
-//   final RxBool isActivated;
-//   final VoidCallback onPressed;
-
-//   CategoryButton({
-//     Key? key,
-//     required this.categoryName,
-//     required this.isActivated,
-//     required this.onPressed,
-//   }) : super(key: key);
-
-//   @override
-//   Widget build(BuildContext context) {
-//     return Padding(
-//       padding: const EdgeInsets.only(
-//         left: 10,
-//         top: 10,
-//         bottom: 10,
-//       ),
-//       child: Obx(() => ElevatedButton(
-//             onPressed: onPressed,
-//             style: ButtonStyle(
-//               elevation: MaterialStateProperty.all(isActivated.value ? 6 : 0),
-//               backgroundColor: MaterialStateProperty.all(
-//                 isActivated.value
-//                     ? Colors.red
-//                     : (controller.darkModeValue.value)
-//                         ? Colors.grey.shade700
-//                         : Colors.grey.shade200,
-//               ),
-//             ),
-//             child: Padding(
-//               padding: const EdgeInsets.all(1.0),
-//               child: Text(
-//                 categoryName,
-//                 style: TextStyle(
-//                   fontWeight: FontWeight.bold,
-//                   fontSize: 14,
-//                   color: isActivated.value
-//                       ? Colors.white
-//                       : (controller.darkModeValue.value)
-//                           ? Colors.white
-//                           : Colors.grey.shade800,
-//                 ),
-//               ),
-//             ),
-//           )),
-//     );
-//   }
-// }
