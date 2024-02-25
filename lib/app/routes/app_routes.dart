@@ -18,6 +18,7 @@ abstract class Routes {
   static const MANAGE_PEMINJAMAN = _Paths.MANAGE_PEMINJAMAN;
   static const MANAGE_USER = _Paths.MANAGE_USER;
   static const DETAIL_BUKU = _Paths.DETAIL_BUKU;
+  static const PEMINJAMAN = _Paths.PEMINJAMAN;
 }
 
 abstract class _Paths {
@@ -35,4 +36,5 @@ abstract class _Paths {
   static const MANAGE_ULASAN = '/manage-ulasan';
   static const MANAGE_PEMINJAMAN = '/manage-peminjaman';
   static const DETAIL_BUKU = '/detail-buku';
+  static const PEMINJAMAN = '/peminjaman';
 }
