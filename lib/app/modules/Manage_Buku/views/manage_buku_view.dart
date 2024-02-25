@@ -7,6 +7,7 @@ import 'package:get/get.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:nb_utils/nb_utils.dart';
 import 'package:ta_mobile/app/data/Models/buku_model.dart';
+import 'package:ta_mobile/app/data/Models/kategori_model.dart';
 import 'package:ta_mobile/app/utils/colors.dart';
 import 'package:ta_mobile/app/utils/my_drawer.dart';
 import 'package:ta_mobile/app/widgets/buku_form.dart';
@@ -18,6 +19,7 @@ class ManageBukuView extends GetView<ManageBukuController> {
   var columns = const [
     DataColumn(label: Text('Cover Buku')),
     DataColumn(label: Text('Judul Buku')),
+    DataColumn(label: Text('Kategori')),
     DataColumn(label: Text('Penulis')),
     DataColumn(label: Text('Penerbit')),
     DataColumn(label: Text('Tahun Terbit')),
@@ -53,9 +55,11 @@ class ManageBukuView extends GetView<ManageBukuController> {
                       Row(
                         mainAxisAlignment: MainAxisAlignment.spaceBetween,
                         children: [
-                          Padding(padding: EdgeInsets.all(16), 
-                          child: Text('Daftar Buku',
-                              style: GoogleFonts.urbanist(fontSize: 30)),),
+                          Padding(
+                            padding: const EdgeInsets.all(16),
+                            child: Text('Daftar Buku',
+                                style: GoogleFonts.urbanist(fontSize: 30)),
+                          ),
                           ElevatedButton.icon(
                               onPressed: () {
                                 Get.defaultDialog(
@@ -81,7 +85,7 @@ class ManageBukuView extends GetView<ManageBukuController> {
                                 );
                               },
                               icon: const Icon(Icons.add),
-                              label: const Text('Tambah Buku'))
+                              label: const Text('Tambah Buku')),
                         ],
                       ),
                       Obx(
@@ -93,7 +97,7 @@ class ManageBukuView extends GetView<ManageBukuController> {
                                   showCheckboxColumn: false,
                                   showFirstLastButtons: true,
                                   columns: columns,
-                                  source: MyData(controller.listBuku),
+                                  source: MyData(controller.listBuku, controller.categories),
                                   columnSpacing:
                                       MediaQuery.of(context).size.width * .03,
                                   horizontalMargin: 30,
@@ -117,8 +121,9 @@ class ManageBukuView extends GetView<ManageBukuController> {
 class MyData extends DataTableSource {
   ManageBukuController managebukuController = ManageBukuController();
   final List<BukuModel> listBuku;
+  final List<KategoriModel> categories;
 
-  MyData(this.listBuku);
+  MyData(this.listBuku, this.categories);
   @override
   DataRow getRow(int index) => DataRow.byIndex(index: index, cells: [
         DataCell(listBuku[index].coverBuku.isEmptyOrNull
@@ -133,6 +138,8 @@ class MyData extends DataTableSource {
                 height: 180,
               )),
         DataCell(Text("${listBuku[index].judul}",
+            style: GoogleFonts.urbanist(fontSize: 15))),
+        DataCell(Text("${categories.firstWhere((cat) => cat.id == listBuku[index].kategoriId).namaKategori}",
             style: GoogleFonts.urbanist(fontSize: 15))),
         DataCell(Text("${listBuku[index].penulis}",
             style: GoogleFonts.urbanist(fontSize: 15))),

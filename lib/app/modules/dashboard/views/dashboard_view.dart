@@ -40,46 +40,45 @@ class DashboardView extends GetView<DashboardController> {
                           Expanded(
                             flex: 8,
                             child: Padding(
-                               padding: const EdgeInsets.all(15.0),
-                               child: Container(
-                                   decoration: BoxDecoration( 
-                                    color: Colors.blueGrey.withOpacity(0.3),
-                                    border: Border(
-                                      top: BorderSide(
-                                        color:const Color(0xFF3C19C0),
-                                        width: 10,
+                              padding: const EdgeInsets.all(15.0),
+                              child: Container(
+                                  decoration: BoxDecoration(
+                                      color: Colors.blueGrey.withOpacity(0.3),
+                                      border: const Border(
+                                        top: BorderSide(
+                                          color: Color(0xFF3C19C0),
+                                          width: 10,
+                                        ),
                                       ),
-                                    ),
-                                       borderRadius: BorderRadius.circular(5)),
-                                   child: Column(
-                                     mainAxisAlignment: MainAxisAlignment.center,
-                                     children: [
-                                       Text(
-                                         'Jumlah Peminjam',
-                                         style:
-                                             GoogleFonts.urbanist(fontSize: 18),
-                                       ),
-                                       Obx(() => Text(
-                                             controller.listPeminjam.length
-                                                 .toString(),
-                                             style: GoogleFonts.urbanist(
-                                                 fontSize: 17),
-                                           )),
-                                     ],
-                                   )),
-                             ),
-                             ),
-                             Expanded(
-                              flex: 8,
-                             
-                             child: Padding(
-                               padding: const EdgeInsets.all(15.0),
-                               child: Container(
-                                   decoration: BoxDecoration( 
+                                      borderRadius: BorderRadius.circular(5)),
+                                  child: Column(
+                                    mainAxisAlignment: MainAxisAlignment.center,
+                                    children: [
+                                      Text(
+                                        'Jumlah Peminjam',
+                                        style:
+                                            GoogleFonts.urbanist(fontSize: 18),
+                                      ),
+                                      Obx(() => Text(
+                                            controller.listPeminjam.length
+                                                .toString(),
+                                            style: GoogleFonts.urbanist(
+                                                fontSize: 17),
+                                          )),
+                                    ],
+                                  )),
+                            ),
+                          ),
+                          Expanded(
+                            flex: 8,
+                            child: Padding(
+                              padding: const EdgeInsets.all(15.0),
+                              child: Container(
+                                  decoration: BoxDecoration(
                                     color: Colors.blueGrey.withOpacity(0.3),
-                                    border: Border(
+                                    border: const Border(
                                       top: BorderSide(
-                                        color:const Color(0xFF3C19C0),
+                                        color: Color(0xFF3C19C0),
                                         width: 10,
                                       ),
                                     ),
@@ -105,65 +104,65 @@ class DashboardView extends GetView<DashboardController> {
                           Expanded(
                             flex: 8,
                             child: Padding(
-                               padding: const EdgeInsets.all(15.0),
-                               child: Container(
-                                   decoration: BoxDecoration( 
-                                    color: Colors.blueGrey.withOpacity(0.3),
-                                    border: Border(
-                                      top: BorderSide(
-                                        color:const Color(0xFF3C19C0),
-                                        width: 10,
+                              padding: const EdgeInsets.all(15.0),
+                              child: Container(
+                                  decoration: BoxDecoration(
+                                      color: Colors.blueGrey.withOpacity(0.3),
+                                      border: const Border(
+                                        top: BorderSide(
+                                          color: Color(0xFF3C19C0),
+                                          width: 10,
+                                        ),
                                       ),
-                                    ),
-                                       borderRadius: BorderRadius.circular(5)),
-                                   child: Column(
-                                     mainAxisAlignment: MainAxisAlignment.center,
-                                     children: [
-                                       Text(
-                                         'Jumlah Buku',
-                                         style:
-                                             GoogleFonts.urbanist(fontSize: 18),
-                                       ),
-                                       Obx(() => Text(
-                                             controller.listBuku.length
-                                                 .toString(),
-                                             style: GoogleFonts.urbanist(
-                                                 fontSize: 17),
-                                           )),
-                                     ],
-                                   )),
-                             ),
-                             ),
-                             Expanded(
-                              flex: 8,
-                             
+                                      borderRadius: BorderRadius.circular(5)),
+                                  child: Column(
+                                    mainAxisAlignment: MainAxisAlignment.center,
+                                    children: [
+                                      Text(
+                                        'Jumlah Buku',
+                                        style:
+                                            GoogleFonts.urbanist(fontSize: 18),
+                                      ),
+                                      Obx(() => Text(
+                                            controller.listBuku.length
+                                                .toString(),
+                                            style: GoogleFonts.urbanist(
+                                                fontSize: 17),
+                                          )),
+                                    ],
+                                  )),
+                            ),
+                          ),
+                          Expanded(
+                            flex: 8,
                             child: Padding(
-                               padding: const EdgeInsets.all(15.0),
-                               child: Container(
-                                   decoration: BoxDecoration( 
+                              padding: const EdgeInsets.all(15.0),
+                              child: Container(
+                                  decoration: BoxDecoration(
                                     color: Colors.blueGrey.withOpacity(0.3),
-                                    border: Border(
+                                    border: const Border(
                                       top: BorderSide(
-                                        color:const Color(0xFF3C19C0),
+                                        color: Color(0xFF3C19C0),
                                         width: 10,
                                       ),
                                     ),
-                                       borderRadius: BorderRadius.circular(5),),
-                                   child: Column(
-                                     mainAxisAlignment: MainAxisAlignment.center,
-                                     children: [
-                                       Text(
-                                         'Jumlah Buku Yang Dipinjam',
-                                         style:
-                                             GoogleFonts.urbanist(fontSize: 18),
-                                       ),
-                                       Obx(() => Text(
-                                           controller.listPetugas.length
-                                               .toString(),
-                                           style: GoogleFonts.urbanist(
-                                               fontSize: 17))),
-                                     ],
-                                   )),
+                                    borderRadius: BorderRadius.circular(5),
+                                  ),
+                                  child: Column(
+                                    mainAxisAlignment: MainAxisAlignment.center,
+                                    children: [
+                                      Text(
+                                        'Jumlah Buku Yang Dipinjam',
+                                        style:
+                                            GoogleFonts.urbanist(fontSize: 18),
+                                      ),
+                                      Obx(() => Text(
+                                          controller.listPetugas.length
+                                              .toString(),
+                                          style: GoogleFonts.urbanist(
+                                              fontSize: 17))),
+                                    ],
+                                  )),
                             ),
                           ),
                         ],

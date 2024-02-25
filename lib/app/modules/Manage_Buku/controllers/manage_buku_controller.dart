@@ -1,13 +1,13 @@
 // ignore_for_file: unnecessary_overrides, invalid_use_of_protected_member, avoid_print, prefer_final_fields
 
-import 'dart:typed_data';
-
 import 'package:file_picker/_internal/file_picker_web.dart';
 import 'package:file_picker/file_picker.dart';
+import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:nb_utils/nb_utils.dart';
 import 'package:ta_mobile/app/data/Models/buku_model.dart';
+import 'package:ta_mobile/app/data/Models/kategori_model.dart';
 import 'package:ta_mobile/app/integrations/firestore.dart';
 
 class ManageBukuController extends GetxController {
@@ -15,6 +15,11 @@ class ManageBukuController extends GetxController {
   FilePickerResult? results;
   Uint8List? pickedFile;
   var imagePath = ''.obs;
+  var categories = <KategoriModel>[].obs;
+  String? selectedCategory;
+  KategoriModel? selectedCategoryView;
+
+
   TextEditingController judulC = TextEditingController();
   TextEditingController penulisC = TextEditingController();
   TextEditingController penerbitC = TextEditingController();
@@ -40,6 +45,7 @@ class ManageBukuController extends GetxController {
     sinopsisC.text = bukuModel.sinopsis ?? '';
   }
 
+
   Future pickFile() async {
     final FilePickerResult? result = await FilePickerWeb.platform.pickFiles(type: FileType.image);
     if (result != null && result.files.isNotEmpty) {
@@ -60,19 +66,6 @@ class ManageBukuController extends GetxController {
 
       final uploadTask = storageRef.putData(file!);
 
-      // final progress = StreamBuilder<TaskSnapshot>(
-      //   stream: uploadTask.snapshotEvents,
-      //   builder: (context, snapshot) {
-      //     if (snapshot.hasData) {
-      //       final progress =
-      //           snapshot.data!.bytesTransferred / snapshot.data!.totalBytes;
-      //       return LinearProgressIndicator(value: progress);
-      //     } else {
-      //       return CircularProgressIndicator();
-      //     }
-      //   },
-      // );
-
       final downloadUrl = await (await uploadTask).ref.getDownloadURL();
       return downloadUrl;
     } catch (e) {
@@ -92,6 +85,7 @@ class ManageBukuController extends GetxController {
     bukuModel.penerbit = penerbitC.text;
     bukuModel.tahunTerbit = int.tryParse(tahunterbitC.text);
     bukuModel.sinopsis = sinopsisC.text;
+    bukuModel.kategoriId = selectedCategory;
 
     try {
       String downloadUrl = await uploadFile(pickedFile, results);
@@ -138,14 +132,31 @@ class ManageBukuController extends GetxController {
     }
   }
 
+    void fetchCategories() async {
+    try {
+      final kategoriModel = KategoriModel();
+      kategoriModel.streamList().listen((categoriesList) {
+        categories.assignAll(categoriesList);
+      });
+    } catch (e) {
+      print('Error fetching categories:  $e');
+    }
+  }
+
   RxList<BukuModel> rxBuku = RxList<BukuModel>();
   List<BukuModel> get listBuku => rxBuku.value;
   set listBuku(List<BukuModel> value) => rxBuku.value = value;
 
+  // RxList<KategoriModel> rxKategori = RxList<KategoriModel>();
+  // List<KategoriModel> get listKategori => rxKategori.value;
+  // set listKategori(List<KategoriModel> value) => rxKategori.value = value;
+
   @override
   void onInit() {
     rxBuku.bindStream(BukuModel().streamList());
+    // rxKategori.bindStream(KategoriModel().streamList());
     super.onInit();
+    fetchCategories();
   }
 
   @override

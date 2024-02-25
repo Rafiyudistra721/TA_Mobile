@@ -28,21 +28,21 @@ class PinjamModel {
     var json = doc.data() as Map<String, dynamic>?;
     return PinjamModel(
       id: doc.id,
-      userId: json!['User'] as String?,
-      bukuId: json['Buku'] as String?,
-      tanggalPinjam: (json['Tanggal Pinjam'] as Timestamp).toDate(),
-      tanggalKembali: (json['Tanggal Kembali'] as Timestamp).toDate(),
-      statusPinjam: json['Status'] as String?,
+      userId: json!['userId'] as String?,
+      bukuId: json['bukuId'] as String?,
+      tanggalPinjam: (json['tanggalPinjam'] as Timestamp).toDate(),
+      tanggalKembali: (json['tanggalKembali'] as Timestamp).toDate(),
+      statusPinjam: json['statusPinjam'] as String?,
     );
   }
 
   Map<String, dynamic> get toJson => {
         'id': id,
-        'User': userId,
-        "Buku": bukuId,
-        "TanggalPinjam": tanggalPinjam,
-        "TanggalKembali": tanggalKembali,
-        "Status": statusPinjam,
+        'userId': userId,
+        "bukuId": bukuId,
+        "tanggalPinjam": tanggalPinjam,
+        "tanggalKembali": tanggalKembali,
+        "statusPinjam": statusPinjam,
       };
 
   Database db = Database(

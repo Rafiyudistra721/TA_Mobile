@@ -20,6 +20,8 @@ dependencies:
   image_picker: 1.0.7
   dotted_border: 2.1.0
   file_picker: 6.1.1
+  intl: 0.19.0
+  dropdown_search: 5.0.6
   flutter: 
     sdk: flutter
 
@@ -31,8 +33,29 @@ dev_dependencies:
 flutter: 
   fonts: 
     - family: Urbanist
+      fonts:
+      - asset:  assets/fonts/Urbanist-Thin.ttf
+        weight: 100
+      - asset:  assets/fonts/Urbanist-ExtraLight.ttf
+        weight: 200
+      - asset:  assets/fonts/Urbanist-Light.ttf
+        weight: 300
+      - asset:  assets/fonts/Urbanist-Regular.ttf
+        weight: 400
+        style: normal
+      - asset:  assets/fonts/Urbanist-Medium.ttf
+        weight: 500
+      - asset:  assets/fonts/Urbanist-SemiBold.ttf
+        weight: 600
+      - asset:  assets/fonts/Urbanist-Bold.ttf
+        weight: 700
+      - asset:  assets/fonts/Urbanist-ExtraBold.ttf
+        weight: 800
+      - asset:  assets/fonts/Urbanist-Black.ttf
+        weight: 900
+
+
   assets: 
-    - assets/fonts/
     - assets/icons/logo_login.png
     - assets/icons/google.png
     - assets/icons/logo_landing.png

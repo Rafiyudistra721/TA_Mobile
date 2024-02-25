@@ -1,10 +1,12 @@
 // ignore_for_file: prefer_final_fields, must_be_immutable
 
 import 'package:dotted_border/dotted_border.dart';
+import 'package:dropdown_search/dropdown_search.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:nb_utils/nb_utils.dart';
 import 'package:ta_mobile/app/data/Models/buku_model.dart';
+import 'package:ta_mobile/app/data/Models/kategori_model.dart';
 import 'package:ta_mobile/app/modules/Manage_Buku/controllers/manage_buku_controller.dart';
 
 class BukuForm extends GetView<ManageBukuController> {
@@ -114,6 +116,28 @@ class BukuForm extends GetView<ManageBukuController> {
                             : null,
                       ),
                       10.height,
+                      DropdownSearch<KategoriModel>(
+                        items: controller.categories,
+                        itemAsString: (item) => item.namaKategori!,
+                        onChanged: (value) {
+                          if (value != null) {
+                            controller.selectedCategory = value.id;
+                          }
+                        },
+                        dropdownDecoratorProps: const DropDownDecoratorProps(
+                            dropdownSearchDecoration: InputDecoration(
+                                prefixIcon: Icon(Icons.category_rounded),
+                                labelText: "Kategori",
+                                labelStyle: TextStyle(fontSize: 15),
+                                contentPadding: EdgeInsets.zero)),
+                        validator: (value) =>
+                            value == null ? "Bagian ini perlu dipilih" : null,
+                        selectedItem: bukuModel.kategoriId.isEmptyOrNull
+                            ? KategoriModel(id: '0', namaKategori: 'Kategori')
+                            : controller.categories.firstWhere((element) =>
+                                element.id == bukuModel.kategoriId),
+                      ),
+                      10.height,
                       AppTextField(
                         textFieldType: TextFieldType.NAME,
                         isValidationRequired: true,
@@ -128,6 +152,7 @@ class BukuForm extends GetView<ManageBukuController> {
                             ? "Bagian ini perlu diisi"
                             : null,
                       ),
+                      10.height,
                       AppTextField(
                         textFieldType: TextFieldType.NAME,
                         isValidationRequired: true,
@@ -142,6 +167,7 @@ class BukuForm extends GetView<ManageBukuController> {
                             ? "Bagian ini perlu diisi"
                             : null,
                       ),
+                      10.height,
                       AppTextField(
                         textFieldType: TextFieldType.NUMBER,
                         isValidationRequired: true,
@@ -159,6 +185,7 @@ class BukuForm extends GetView<ManageBukuController> {
                                 ? "Masukkan angka saja"
                                 : null,
                       ),
+                      10.height,
                       AppTextField(
                         textFieldType: TextFieldType.MULTILINE,
                         isValidationRequired: true,

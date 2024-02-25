@@ -78,4 +78,22 @@ class BukuModel {
     return list;
   });
 }
+  Stream<List<BukuModel>> streamListFromKategori() async* {
+  yield* firebaseFirestore
+  .collection(kategoriCollection)
+  .doc(kategoriId)
+  .collection(bukuCollection)
+  .snapshots()
+  .map((query) {
+    List<BukuModel> list = [];
+    for (var doc in query.docs) {
+      list.add(
+        BukuModel().fromJson(
+          doc,
+        ),
+      );
+    }
+    return list;
+  });
+}
 }

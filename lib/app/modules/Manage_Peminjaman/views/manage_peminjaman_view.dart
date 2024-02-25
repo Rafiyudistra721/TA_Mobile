@@ -4,13 +4,14 @@ import 'package:flutter/material.dart';
 
 import 'package:get/get.dart';
 import 'package:google_fonts/google_fonts.dart';
+import 'package:intl/intl.dart';
+import 'package:ta_mobile/app/data/Models/buku_model.dart';
 import 'package:ta_mobile/app/data/Models/pinjam_model.dart';
+import 'package:ta_mobile/app/data/Models/user_model.dart';
 import 'package:ta_mobile/app/modules/Manage_Peminjaman/controllers/manage_peminjaman_controller.dart';
-import 'package:ta_mobile/app/modules/home/controllers/home_controller.dart';
 import 'package:ta_mobile/app/utils/colors.dart';
 import 'package:ta_mobile/app/utils/my_drawer.dart';
 import 'package:adaptive_scrollbar/adaptive_scrollbar.dart';
-
 
 class ManagePeminjamanView extends GetView<ManagePeminjamanController> {
   ManagePeminjamanView({Key? key}) : super(key: key);
@@ -48,28 +49,29 @@ class ManagePeminjamanView extends GetView<ManagePeminjamanController> {
                     crossAxisAlignment: CrossAxisAlignment.start,
                     mainAxisAlignment: MainAxisAlignment.start,
                     children: [
-                      Padding(padding: EdgeInsets.all(16),
-                          child: Text('Daftar Peminjam',
-                              style: GoogleFonts.urbanist(fontSize: 30)),),
-                              ElevatedButton(onPressed: () {
-                                print(controller.listPeminjam);
-                              }, child: Text("data")),
-                      Obx(() => Padding(
-                            padding: const EdgeInsets.all(16),
-                            child: controller.listPeminjam.isEmpty
-                                ? const Center(
-                                    child: CircularProgressIndicator())
-                                : PaginatedDataTable(
-                                      showCheckboxColumn: false,
-                                      showFirstLastButtons: true,
-                                      columns: columns,
-                                      source: MyData(controller.listPeminjam),
-                                      columnSpacing: MediaQuery.of(context).size.width / 6 ,
-                                      horizontalMargin: 30,
-                                      rowsPerPage: 5,
-                                    ),
-                                  ),
-                          ),
+                      Padding(
+                        padding: const EdgeInsets.all(16),
+                        child: Text('Daftar Peminjam',
+                            style: GoogleFonts.urbanist(fontSize: 30)),
+                      ),
+                      Obx(
+                        () => Padding(
+                          padding: const EdgeInsets.all(16),
+                          child: controller.listPeminjaman.isEmpty
+                              ? const Center(child: CircularProgressIndicator())
+                              : PaginatedDataTable(
+                                  showCheckboxColumn: false,
+                                  showFirstLastButtons: true,
+                                  columns: columns,
+                                  source: MyData(controller.listPeminjaman,
+                                      controller.books, controller.users),
+                                  columnSpacing:
+                                      MediaQuery.of(context).size.width * .03,
+                                  horizontalMargin: 30,
+                                  rowsPerPage: 10,
+                                ),
+                        ),
+                      ),
                     ],
                   ),
                 ),
@@ -83,75 +85,80 @@ class ManagePeminjamanView extends GetView<ManagePeminjamanController> {
 }
 
 class MyData extends DataTableSource {
-  ManagePeminjamanController managePeminjamanController = ManagePeminjamanController();
-    final HomeController  homeController = Get.put(HomeController());
+  ManagePeminjamanController managePeminjamanController =
+      ManagePeminjamanController();
 
-  final List<PinjamModel> listPeminjam;
+  final List<PinjamModel> listPeminjaman;
+  final List<BukuModel> listBuku;
+  final List<UserModel> listUser;
 
-  MyData(this.listPeminjam);
+  MyData(this.listPeminjaman, this.listBuku, this.listUser);
   @override
   DataRow getRow(int index) => DataRow.byIndex(
+          color: MaterialStatePropertyAll(
+              listPeminjaman[index].statusPinjam == 'Menunggu Konfirmasi'
+                  ? Colors.grey[400]
+                  : listPeminjaman[index].statusPinjam == 'Diterima'
+                      ? Colors.green[400]
+                      : Colors.red[400]),
           index: index,
           cells: [
-            DataCell(Text("${listPeminjam[index].userId}",
-                style:
-                    GoogleFonts.urbanist(fontSize: 15))),
-            DataCell(Text("${listPeminjam[index].bukuId}",
-                style:
-                    GoogleFonts.urbanist(fontSize: 15))),
-            DataCell(Text("${listPeminjam[index].tanggalPinjam}",
-                style:
-                    GoogleFonts.urbanist(fontSize: 15))),
-            DataCell(Text("${listPeminjam[index].tanggalKembali}",
-                style:
-                    GoogleFonts.urbanist(fontSize: 15))),
-             DataCell(Text("${listPeminjam[index].statusPinjam}",
-                style:
-                    GoogleFonts.urbanist(fontSize: 15))),        
+            DataCell(Text(
+                "${listUser.firstWhere((cat) => cat.id == listPeminjaman[index].userId).username}",
+                style: GoogleFonts.urbanist(fontSize: 15))),
+            DataCell(Text(
+                "${listBuku.firstWhere((cat) => cat.id == listPeminjaman[index].bukuId).judul}",
+                style: GoogleFonts.urbanist(fontSize: 15))),
+            DataCell(Text(
+                DateFormat("EEE, dd MMM y")
+                    .format(listPeminjaman[index].tanggalPinjam!),
+                style: GoogleFonts.urbanist(fontSize: 15))),
+            DataCell(Text(
+                DateFormat("EEE, dd MMM y")
+                    .format(listPeminjaman[index].tanggalKembali!),
+                style: GoogleFonts.urbanist(fontSize: 15))),
+            DataCell(Text("${listPeminjaman[index].statusPinjam}",
+                style: GoogleFonts.urbanist(fontSize: 15))),
             DataCell(Row(
               children: [
-                listPeminjam[index].statusPinjam == 'Diterima'
+                listPeminjaman[index].statusPinjam == 'Menunggu Konfirmasi'
                     ? ElevatedButton(
                         onPressed: () {
                           Get.defaultDialog(
-                            title:
-                                'Terima permintaan peminjaman?',
+                            title: 'Terima permintaan peminjaman?',
                             middleText:
                                 'Apakah anda yakin ingin menerima permintaan peminjaman ini?',
                             onConfirm: () async {
-                              managePeminjamanController.terima(listPeminjam[index]);
+                              managePeminjamanController
+                                  .terima(listPeminjaman[index]);
                             },
                             textConfirm: 'Iya',
                             textCancel: 'Tidak',
-                            titleStyle: GoogleFonts.urbanist(
-                                fontSize: 15),
-                            middleTextStyle: GoogleFonts.urbanist(
-                                fontSize: 15),
+                            titleStyle: GoogleFonts.urbanist(fontSize: 15),
+                            middleTextStyle: GoogleFonts.urbanist(fontSize: 15),
                           );
                         },
                         child: const Text('DITERIMA'))
-                    : listPeminjam[index].statusPinjam == 'Ditolak'
-                        ? ElevatedButton(
-                            onPressed: () {
-                              Get.defaultDialog(
-                                title:
-                                    'Tolak permintaan peminjaman?',
-                                middleText:
-                                    'Apakah anda yakin ingin menolak permintaan peminjaman ini?',
-                                onConfirm: () async {
-                                  managePeminjamanController
-                                      .tolak(listPeminjam[index]);
-                                },
-                                textConfirm: 'Iya',
-                                textCancel: 'Tidak',
-                                titleStyle: GoogleFonts.urbanist(
-                                    fontSize: 15),
-                                middleTextStyle: GoogleFonts.urbanist(
-                                    fontSize: 15),
-                              );
+                    : const SizedBox(),
+                listPeminjaman[index].statusPinjam == 'Menunggu Konfirmasi'
+                    ? ElevatedButton(
+                        onPressed: () {
+                          Get.defaultDialog(
+                            title: 'Tolak permintaan peminjaman?',
+                            middleText:
+                                'Apakah anda yakin ingin menolak permintaan peminjaman ini?',
+                            onConfirm: () async {
+                              managePeminjamanController
+                                  .tolak(listPeminjaman[index]);
                             },
-                            child: const Text('DITOLAK'))
-                        : const SizedBox(width: 0),
+                            textConfirm: 'Iya',
+                            textCancel: 'Tidak',
+                            titleStyle: GoogleFonts.urbanist(fontSize: 15),
+                            middleTextStyle: GoogleFonts.urbanist(fontSize: 15),
+                          );
+                        },
+                        child: const Text('DITOLAK'))
+                    : const SizedBox()
               ],
             )),
           ]);
@@ -159,7 +166,7 @@ class MyData extends DataTableSource {
   @override
   bool get isRowCountApproximate => false;
   @override
-  int get rowCount => listPeminjam.length;
+  int get rowCount => listPeminjaman.length;
   @override
   int get selectedRowCount => 0;
 }

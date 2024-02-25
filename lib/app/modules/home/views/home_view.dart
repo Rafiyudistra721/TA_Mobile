@@ -488,7 +488,7 @@ class HomeView extends GetView<HomeController> {
                           return SizedBox(
                             height: 300,
                             width: double.infinity,
-                            child: GridView.builder(gridDelegate: SliverGridDelegateWithFixedCrossAxisCount(crossAxisCount: 2),
+                            child: GridView.builder(gridDelegate: const SliverGridDelegateWithFixedCrossAxisCount(crossAxisCount: 2),
                               itemCount: filteredBooks.length,
                               scrollDirection: Axis.vertical,
                               itemBuilder: (context, index) {
@@ -536,7 +536,7 @@ class HomeView extends GetView<HomeController> {
                                         ),
                                         5.height,
                                         Text(
-                                          book.kategoriId!,
+                                          "${controller.categories.firstWhere((cat) => cat.id == book.kategoriId).namaKategori}",
                                           style: const TextStyle(
                                               color: Colors.grey),
                                         ),

@@ -45,7 +45,7 @@ class ManageUserView extends GetView<ManageUserController> {
                     crossAxisAlignment: CrossAxisAlignment.start,
                     mainAxisAlignment: MainAxisAlignment.start,
                     children: [
-                      Padding(padding: EdgeInsets.all(16),
+                      Padding(padding: const EdgeInsets.all(16),
                           child: Text('Daftar Pengguna',
                               style: GoogleFonts.urbanist(fontSize: 30)),),
                       Obx(() => Padding(

@@ -1,9 +1,6 @@
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/material.dart';
-import 'package:google_fonts/google_fonts.dart';
-import 'package:nb_utils/nb_utils.dart';
 import 'package:ta_mobile/app/integrations/firestore.dart';
-import 'package:ta_mobile/app/routes/app_pages.dart';
 import 'package:get/get.dart';
 
 import '../controllers/detail_buku_controller.dart';
@@ -93,19 +90,19 @@ class DetailBukuView extends GetView<DetailBukuController> {
                       const Spacer(
                         flex: 8,
                       ),
-                      Padding(
-                        padding: const EdgeInsets.symmetric(
+                      const Padding(
+                        padding: EdgeInsets.symmetric(
                             horizontal: 20.0, vertical: 5),
                         child: Row(
                           crossAxisAlignment: CrossAxisAlignment.end,
                           children: [
                             Text(
                               'e.name',
-                              style: const TextStyle(
+                              style: TextStyle(
                                   fontWeight: FontWeight.w800, fontSize: 33),
                             ),
-                            const Spacer(),
-                            const Padding(
+                            Spacer(),
+                            Padding(
                               padding: EdgeInsets.all(5.0),
                               child: Text(
                                 '℈',
@@ -116,12 +113,12 @@ class DetailBukuView extends GetView<DetailBukuController> {
                                 ),
                               ),
                             ),
-                            const SizedBox(
+                            SizedBox(
                               width: 3,
                             ),
                             Text(
                               'harga',
-                              style: const TextStyle(
+                              style: TextStyle(
                                 fontWeight: FontWeight.w800,
                                 fontSize: 33,
                               ),
@@ -129,11 +126,11 @@ class DetailBukuView extends GetView<DetailBukuController> {
                           ],
                         ),
                       ),
-                      Padding(
-                        padding: const EdgeInsets.symmetric(horizontal: 20.0),
+                      const Padding(
+                        padding: EdgeInsets.symmetric(horizontal: 20.0),
                         child: Text(
                           'Category',
-                          style: const TextStyle(
+                          style: TextStyle(
                             fontWeight: FontWeight.bold,
                             fontSize: 23,
                             color: Colors.grey,
@@ -149,11 +146,11 @@ class DetailBukuView extends GetView<DetailBukuController> {
                           color: Colors.grey.shade200,
                         ),
                       ),
-                      Padding(
-                        padding: const EdgeInsets.symmetric(horizontal: 20.0),
+                      const Padding(
+                        padding: EdgeInsets.symmetric(horizontal: 20.0),
                         child: Row(
                           mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                          children: const [
+                          children: [
                             Text(
                               '⭐️ 5.4',
                               style: TextStyle(
@@ -226,11 +223,11 @@ class DetailBukuView extends GetView<DetailBukuController> {
                                   allFav = favourite!.docs;
                               if (allFav.isNotEmpty) {
                                 int check = 0;
-                                allFav.forEach((f) {
+                                for (var f in allFav) {
                                   if (f['name'] == 'e.name') {
                                     check = 1;
                                   }
-                                });
+                                }
                                 if (check == 0) {
                                   return ElevatedButton(
                                     style: ButtonStyle(

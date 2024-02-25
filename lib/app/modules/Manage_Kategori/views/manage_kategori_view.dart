@@ -47,7 +47,7 @@ class ManageKategoriView extends GetView<ManageKategoriController> {
                       Row(
                         mainAxisAlignment: MainAxisAlignment.spaceBetween,
                         children: [
-                          Padding(padding: EdgeInsets.all(16),
+                          Padding(padding: const EdgeInsets.all(16),
                           child: Text('Daftar Kategori',
                               style: GoogleFonts.urbanist(fontSize: 30)),),
                           ElevatedButton.icon(

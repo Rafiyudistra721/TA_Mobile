@@ -225,7 +225,6 @@ class AuthController extends GetxController {
         isSaving = false;
         emailC.clear();
         passC.clear();
-        Get.offAndToNamed(Routes.LANDING_PAGE);
       },
       textConfirm: 'Iya',
       textCancel: 'Tidak',
