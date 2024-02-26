@@ -1,9 +1,9 @@
+import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 
 import 'package:get/get.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:nb_utils/nb_utils.dart';
-import 'package:ta_mobile/app/routes/app_pages.dart';
 
 import 'package:ta_mobile/app/modules/auth/controllers/auth_controller.dart';
 
@@ -17,16 +17,7 @@ class AuthView extends GetView<AuthController> {
       resizeToAvoidBottomInset: false,
       appBar: AppBar(
           elevation: 0,
-          backgroundColor: const Color(0xffc1dbfe),
-          leading: IconButton(
-            icon: const Icon(
-              Icons.arrow_back_ios_new_outlined,
-              size: 20,
-            ),
-            onPressed: () {
-              Get.to(Routes.INTRO);
-            },
-          )),
+          backgroundColor: const Color(0xffc1dbfe),),
       body: Container(
         color: const Color(0xffc1dbfe),
         child: Column(
@@ -44,7 +35,7 @@ class AuthView extends GetView<AuthController> {
                       Obx(() => Align(
                             alignment: Alignment.centerLeft,
                             child: Text(
-                              controller.isRegis ? 'Daftar' : 'Login',
+                              controller.isRegis ? 'Daftar' : 'Masuk',
                               style: GoogleFonts.urbanist(
                                   fontSize: 55,
                                   fontWeight: FontWeight.w900,
@@ -407,7 +398,7 @@ class AuthView extends GetView<AuthController> {
                                 child: Align(
                                   alignment: Alignment.center,
                                   child: Text(
-                                    controller.isRegis ? 'Daftar' : 'Login',
+                                    controller.isRegis ? 'Daftar' : 'Masuk',
                                     style: const TextStyle(
                                       fontWeight: FontWeight.w900,
                                       color: Colors.white,
@@ -432,13 +423,15 @@ class AuthView extends GetView<AuthController> {
                                       ? 'Sudah Punya Akun? Login Disini'
                                       : 'Belum Punya Akun? Daftar Disini',
                                   style: const TextStyle(
-                                      color: Colors.black,
+                                      color: Colors.blue,
+                                      fontSize: 15,
+                                      fontWeight: FontWeight.w800,
                                       fontStyle: FontStyle.italic),
                                 ),
                               ),
                             ),
                           ),
-                          if (controller.isRegis)
+                          if (!kIsWeb || controller.isRegis)
                             InkWell(
                               onTap: () async {
                                 await controller.signInWithGoogle();
@@ -482,15 +475,14 @@ class AuthView extends GetView<AuthController> {
                                           ],
                                         ),
                                         child: Row(
+                                          mainAxisAlignment: MainAxisAlignment.spaceAround,
                                           children: [
-                                            10.width,
                                             Transform.scale(
                                               scale: 0.5,
                                               child: Image.asset(
                                                 'assets/icons/google.png',
                                               ),
                                             ),
-                                            0.width,
                                             Text(
                                               'Daftar dengan Google',
                                               style: TextStyle(
@@ -498,7 +490,6 @@ class AuthView extends GetView<AuthController> {
                                                   fontSize: 14,
                                                   color: Colors.grey.shade800),
                                             ),
-                                            45.width,
                                             const Icon(
                                               Icons.arrow_forward,
                                               size: 30,
