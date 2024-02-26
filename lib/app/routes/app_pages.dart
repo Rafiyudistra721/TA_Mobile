@@ -1,4 +1,6 @@
 import 'package:get/get.dart';
+import 'package:ta_mobile/app/modules/koleksi/bindings/koleksi_binding.dart';
+import 'package:ta_mobile/app/modules/koleksi/views/koleksi_view.dart';
 
 import '../modules/Etalase/bindings/etalase_binding.dart';
 import '../modules/Etalase/views/etalase_view.dart';
@@ -94,6 +96,11 @@ class AppPages {
       name: _Paths.PEMINJAMAN,
       page: () => const PeminjamanView(),
       binding: PeminjamanBinding(),
+    ),
+    GetPage(
+      name: _Paths.KOLEKSI,
+      page: () => const KoleksiView(),
+      binding: KoleksiBinding(),
     ),
   ];
 }
