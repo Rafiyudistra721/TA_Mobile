@@ -71,6 +71,31 @@ class HomeView extends GetView<HomeController> {
             ),
           ),
           8.width,
+          Padding(
+            padding: const EdgeInsets.all(12.0),
+            child: SizedBox(
+              width: 33.0, // Use double value for width
+              child: Obx(
+                () => Container(
+                  alignment: Alignment.center,
+                  decoration: BoxDecoration(
+                    color: controller.darkModeValue.value
+                        ? Colors.grey.shade600
+                        : Colors.grey.shade200,
+                    borderRadius: BorderRadius.circular(
+                        100.0), // Use double value for radius
+                  ),
+                  child: IconButton(
+                    icon: const Icon(
+                      Icons.logout,
+                      size: 18.0, // Use double value for size
+                    ),
+                    onPressed: () => Get.toNamed(Routes.KOLEKSI),
+                  ),
+                ),
+              ),
+            ),
+          ),
         ],
         centerTitle: false,
         title: Row(
@@ -488,7 +513,10 @@ class HomeView extends GetView<HomeController> {
                           return SizedBox(
                             height: 300,
                             width: double.infinity,
-                            child: GridView.builder(gridDelegate: const SliverGridDelegateWithFixedCrossAxisCount(crossAxisCount: 2),
+                            child: GridView.builder(
+                              gridDelegate:
+                                  const SliverGridDelegateWithFixedCrossAxisCount(
+                                      crossAxisCount: 2),
                               itemCount: filteredBooks.length,
                               scrollDirection: Axis.vertical,
                               itemBuilder: (context, index) {
@@ -560,4 +588,3 @@ class HomeView extends GetView<HomeController> {
     );
   }
 }
-

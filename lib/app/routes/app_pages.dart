@@ -14,10 +14,10 @@ import '../modules/Manage_Kategori/bindings/manage_kategori_binding.dart';
 import '../modules/Manage_Kategori/views/manage_kategori_view.dart';
 import '../modules/Manage_Peminjaman/bindings/manage_peminjaman_binding.dart';
 import '../modules/Manage_Peminjaman/views/manage_peminjaman_view.dart';
+import '../modules/Manage_Ulasan/bindings/manage_ulasan_binding.dart';
+import '../modules/Manage_Ulasan/views/manage_ulasan_view.dart';
 import '../modules/Manage_User/bindings/manage_user_binding.dart';
 import '../modules/Manage_User/views/manage_user_view.dart';
-import '../modules/Peminjaman/bindings/peminjaman_binding.dart';
-import '../modules/Peminjaman/views/peminjaman_view.dart';
 import '../modules/auth/bindings/auth_binding.dart';
 import '../modules/auth/views/auth_view.dart';
 import '../modules/dashboard/bindings/dashboard_binding.dart';
@@ -54,7 +54,7 @@ class AppPages {
     ),
     GetPage(
       name: _Paths.INTRO,
-      page: () => const SplashScreen(),
+      page: () => const IntroView(),
       binding: IntroBinding(),
     ),
     GetPage(
@@ -93,9 +93,9 @@ class AppPages {
       binding: DetailBukuBinding(),
     ),
     GetPage(
-      name: _Paths.PEMINJAMAN,
-      page: () => const PeminjamanView(),
-      binding: PeminjamanBinding(),
+      name: _Paths.MANAGE_ULASAN,
+      page: () => const ManageUlasanView(),
+      binding: ManageUlasanBinding(),
     ),
     GetPage(
       name: _Paths.KOLEKSI,
