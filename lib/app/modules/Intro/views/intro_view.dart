@@ -3,8 +3,8 @@ import 'package:get/get.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:ta_mobile/app/modules/Intro/controllers/intro_controller.dart';
 
-class SplashScreen extends GetView<IntroController> {
-  const SplashScreen({super.key});
+class IntroView extends GetView<IntroController> {
+  const IntroView({super.key});
 
   @override
   Widget build(BuildContext context) {

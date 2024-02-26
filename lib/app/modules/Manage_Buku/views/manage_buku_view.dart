@@ -8,6 +8,7 @@ import 'package:google_fonts/google_fonts.dart';
 import 'package:nb_utils/nb_utils.dart';
 import 'package:ta_mobile/app/data/Models/buku_model.dart';
 import 'package:ta_mobile/app/data/Models/kategori_model.dart';
+import 'package:ta_mobile/app/routes/app_pages.dart';
 import 'package:ta_mobile/app/utils/colors.dart';
 import 'package:ta_mobile/app/utils/my_drawer.dart';
 import 'package:ta_mobile/app/widgets/buku_form.dart';
@@ -17,14 +18,14 @@ import '../controllers/manage_buku_controller.dart';
 class ManageBukuView extends GetView<ManageBukuController> {
   ManageBukuView({Key? key}) : super(key: key);
   var columns = const [
-    DataColumn(label: Text('Cover Buku')),
-    DataColumn(label: Text('Judul Buku')),
-    DataColumn(label: Text('Kategori')),
-    DataColumn(label: Text('Penulis')),
-    DataColumn(label: Text('Penerbit')),
-    DataColumn(label: Text('Tahun Terbit')),
-    DataColumn(label: Text('Sinopsis')),
-    DataColumn(label: Text('Actions')),
+    DataColumn(label: Text('Cover Buku', style: TextStyle(fontSize: 20))),
+    DataColumn(label: Text('Judul Buku', style: TextStyle(fontSize: 20))),
+    DataColumn(label: Text('Kategori', style: TextStyle(fontSize: 20))),
+    DataColumn(label: Text('Penulis', style: TextStyle(fontSize: 20))),
+    DataColumn(label: Text('Penerbit', style: TextStyle(fontSize: 20))),
+    DataColumn(label: Text('Tahun Terbit', style: TextStyle(fontSize: 20))),
+    DataColumn(label: Text('Sinopsis', style: TextStyle(fontSize: 20))),
+    DataColumn(label: Text('Actions', style: TextStyle(fontSize: 20))),
   ];
   @override
   Widget build(BuildContext context) {
@@ -125,7 +126,12 @@ class MyData extends DataTableSource {
 
   MyData(this.listBuku, this.categories);
   @override
-  DataRow getRow(int index) => DataRow.byIndex(index: index, cells: [
+  DataRow getRow(int index) => DataRow.byIndex(
+    index: index, 
+    onLongPress: () {
+      Get.toNamed(Routes.MANAGE_ULASAN, arguments: listBuku[index]);
+    },
+    cells: [
         DataCell(listBuku[index].coverBuku.isEmptyOrNull
             ? Image.asset(
                 "assets/test.jpg",
@@ -138,17 +144,17 @@ class MyData extends DataTableSource {
                 height: 180,
               )),
         DataCell(Text("${listBuku[index].judul}",
-            style: GoogleFonts.urbanist(fontSize: 15))),
+            style: GoogleFonts.urbanist(fontSize: 17))),
         DataCell(Text("${categories.firstWhere((cat) => cat.id == listBuku[index].kategoriId).namaKategori}",
-            style: GoogleFonts.urbanist(fontSize: 15))),
+            style: GoogleFonts.urbanist(fontSize: 17))),
         DataCell(Text("${listBuku[index].penulis}",
-            style: GoogleFonts.urbanist(fontSize: 15))),
+            style: GoogleFonts.urbanist(fontSize: 17))),
         DataCell(Text("${listBuku[index].penerbit}",
-            style: GoogleFonts.urbanist(fontSize: 15))),
+            style: GoogleFonts.urbanist(fontSize: 17))),
         DataCell(Text("${listBuku[index].tahunTerbit}",
-            style: GoogleFonts.urbanist(fontSize: 15))),
+            style: GoogleFonts.urbanist(fontSize: 17))),
         DataCell(Text("${listBuku[index].sinopsis}",
-            style: GoogleFonts.urbanist(fontSize: 15))),
+            style: GoogleFonts.urbanist(fontSize: 17))),
         DataCell(Row(
           children: [
             ElevatedButton(

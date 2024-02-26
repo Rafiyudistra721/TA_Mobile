@@ -41,12 +41,14 @@ class UlasanModel {
       };
 
   Database get db => Database(
-      collectionReference: firebaseFirestore.collection(ulasanCollection),
-      storageReference: firebaseStorage.ref(ulasanCollection));
+      collectionReference: firebaseFirestore
+      .collection(bukuCollection)
+      .doc(bukuId)
+      .collection(ulasanCollection),
+      storageReference: firebaseStorage.ref(bukuCollection).child(ulasanCollection));
 
   Future<UlasanModel> save() async {
     id == null ? id = await db.add(toJson) : await db.edit(toJson);
-
     return this;
   }
 
