@@ -2,6 +2,7 @@ import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/material.dart';
 import 'package:ta_mobile/app/integrations/firestore.dart';
 import 'package:get/get.dart';
+import 'package:ta_mobile/app/routes/app_pages.dart';
 
 import '../controllers/detail_buku_controller.dart';
 
@@ -43,10 +44,10 @@ class DetailBukuView extends GetView<DetailBukuController> {
                 const EdgeInsets.only(left: 26, top: 10, bottom: 10, right: 22),
             child: ElevatedButton(
               onPressed: () {
-                Navigator.pushNamed(context, 'CartScreen');
+                Get.toNamed(Routes.KOLEKSI);
               },
               child: const Icon(
-                Icons.shopping_cart,
+                Icons.shopping_basket_outlined,
                 color: Colors.grey,
               ),
             ),
@@ -91,13 +92,13 @@ class DetailBukuView extends GetView<DetailBukuController> {
                         flex: 8,
                       ),
                       const Padding(
-                        padding: EdgeInsets.symmetric(
-                            horizontal: 20.0, vertical: 5),
+                        padding:
+                            EdgeInsets.symmetric(horizontal: 20.0, vertical: 5),
                         child: Row(
                           crossAxisAlignment: CrossAxisAlignment.end,
                           children: [
                             Text(
-                              'e.name',
+                              'BUKU 1',
                               style: TextStyle(
                                   fontWeight: FontWeight.w800, fontSize: 33),
                             ),
@@ -105,7 +106,7 @@ class DetailBukuView extends GetView<DetailBukuController> {
                             Padding(
                               padding: EdgeInsets.all(5.0),
                               child: Text(
-                                '℈',
+                                '',
                                 style: TextStyle(
                                   fontWeight: FontWeight.bold,
                                   fontSize: 22,
@@ -117,7 +118,7 @@ class DetailBukuView extends GetView<DetailBukuController> {
                               width: 3,
                             ),
                             Text(
-                              'harga',
+                              'STOK : 1 ',
                               style: TextStyle(
                                 fontWeight: FontWeight.w800,
                                 fontSize: 33,
@@ -129,7 +130,7 @@ class DetailBukuView extends GetView<DetailBukuController> {
                       const Padding(
                         padding: EdgeInsets.symmetric(horizontal: 20.0),
                         child: Text(
-                          'Category',
+                          'Fiksi',
                           style: TextStyle(
                             fontWeight: FontWeight.bold,
                             fontSize: 23,
@@ -160,7 +161,7 @@ class DetailBukuView extends GetView<DetailBukuController> {
                             ),
                             Spacer(),
                             Text(
-                              '⏰ 10-20 hours',
+                              '',
                               style: TextStyle(
                                 fontSize: 22,
                                 fontWeight: FontWeight.w600,
@@ -176,7 +177,7 @@ class DetailBukuView extends GetView<DetailBukuController> {
                         padding: const EdgeInsets.symmetric(
                             horizontal: 20.0, vertical: 40),
                         child: Text(
-                          'description',
+                          'Deskripsi',
                           style: TextStyle(
                             fontWeight: FontWeight.w500,
                             fontSize: 22,
@@ -207,7 +208,7 @@ class DetailBukuView extends GetView<DetailBukuController> {
                                   height: 70,
                                   width: double.infinity,
                                   child: const Text(
-                                    'Add to Cart',
+                                    'Tambah Ke Koleksi',
                                     style: TextStyle(
                                       fontSize: 25,
                                       fontWeight: FontWeight.bold,
@@ -236,15 +237,13 @@ class DetailBukuView extends GetView<DetailBukuController> {
                                         Colors.red.shade500,
                                       ),
                                     ),
-                                    onPressed: () {
-                                      
-                                    },
+                                    onPressed: () {},
                                     child: Container(
                                       alignment: Alignment.center,
                                       height: 70,
                                       width: double.infinity,
                                       child: const Text(
-                                        'Add to Cart',
+                                        'Tambah Ke Koleksi',
                                         style: TextStyle(
                                           fontSize: 25,
                                           fontWeight: FontWeight.bold,
@@ -279,7 +278,7 @@ class DetailBukuView extends GetView<DetailBukuController> {
                                       height: 70,
                                       width: double.infinity,
                                       child: const Text(
-                                        'Added to Cart',
+                                        'Tambah Ke Koleksi',
                                         style: TextStyle(
                                           fontSize: 25,
                                           fontWeight: FontWeight.bold,
@@ -296,15 +295,13 @@ class DetailBukuView extends GetView<DetailBukuController> {
                                       Colors.red.shade500,
                                     ),
                                   ),
-                                  onPressed: () {
-                                    
-                                  },
+                                  onPressed: () {},
                                   child: Container(
                                     alignment: Alignment.center,
                                     height: 70,
                                     width: double.infinity,
                                     child: const Text(
-                                      'Add to Cart',
+                                      'Tambah Ke Koleksi',
                                       style: TextStyle(
                                         fontSize: 25,
                                         fontWeight: FontWeight.bold,
@@ -322,14 +319,14 @@ class DetailBukuView extends GetView<DetailBukuController> {
                                 ),
                               ),
                               onPressed: () {
-                                
+                                Get.toNamed(Routes.KOLEKSI);
                               },
                               child: Container(
                                 alignment: Alignment.center,
                                 height: 70,
                                 width: double.infinity,
                                 child: const Text(
-                                  'Add to Cart',
+                                  'Tambah Ke Koleksi',
                                   style: TextStyle(
                                     fontSize: 25,
                                     fontWeight: FontWeight.bold,
@@ -354,7 +351,7 @@ class DetailBukuView extends GetView<DetailBukuController> {
                           tag: '',
                           child: Transform.translate(
                             offset: const Offset(0, -250),
-                            child: Image.asset(''),
+                            child: Image.asset('assets/test.jpg'),
                           ),
                         ),
                       ),
