@@ -120,7 +120,7 @@ class KoleksiView extends GetView<KoleksiController> {
                               Padding(
                                 padding: const EdgeInsets.symmetric(vertical: 4.0, horizontal: 10),
                                 child: Text(
-                                  'Category', // Example category
+                                  'Fiksi', // Example category
                                   style: const TextStyle(
                                     color: Colors.grey,
                                     fontWeight: FontWeight.w700,
