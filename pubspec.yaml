@@ -2,60 +2,60 @@ name: ta_mobile
 version: 1.0.0+1
 publish_to: none
 description: A new Flutter project.
-environment: 
-  sdk: '>=3.2.0 <4.0.0'
+environment:
+  sdk: ">=3.2.0 <4.0.0"
 
-dependencies: 
-  cupertino_icons: ^1.0.2
-  get: 4.6.6
-  firebase_core: 2.24.2
-  firebase_auth: 4.15.3
-  cloud_firestore: 4.13.6
-  firebase_storage: 11.5.6
-  nb_utils: 6.1.0
-  google_sign_in: 6.2.1
-  carousel_slider: 4.2.1
-  google_fonts: 6.1.0
+dependencies:
   adaptive_scrollbar: 2.1.2
-  image_picker: 1.0.7
+  carousel_slider: 4.2.1
+  cloud_firestore: 4.13.6
+  convex_bottom_bar: ^3.2.0
+  cupertino_icons: ^1.0.2
   dotted_border: 2.1.0
-  file_picker: 6.1.1
-  intl: 0.19.0
   dropdown_search: 5.0.6
-  flutter: 
+  file_picker: 6.1.1
+  firebase_auth: 4.15.3
+  firebase_core: 2.24.2
+  firebase_storage: 11.5.6
+  flutter:
     sdk: flutter
+  get: 4.6.6
+  google_fonts: 6.1.0
+  google_sign_in: 6.2.1
+  image_picker: 1.0.7
+  intl: 0.19.0
+  nb_utils: 6.1.0
 
-dev_dependencies: 
+dev_dependencies:
   flutter_lints: ^2.0.0
-  flutter_test: 
+  flutter_test:
     sdk: flutter
 
-flutter: 
-  fonts: 
+flutter:
+  fonts:
     - family: Urbanist
       fonts:
-      - asset:  assets/fonts/Urbanist-Thin.ttf
-        weight: 100
-      - asset:  assets/fonts/Urbanist-ExtraLight.ttf
-        weight: 200
-      - asset:  assets/fonts/Urbanist-Light.ttf
-        weight: 300
-      - asset:  assets/fonts/Urbanist-Regular.ttf
-        weight: 400
-        style: normal
-      - asset:  assets/fonts/Urbanist-Medium.ttf
-        weight: 500
-      - asset:  assets/fonts/Urbanist-SemiBold.ttf
-        weight: 600
-      - asset:  assets/fonts/Urbanist-Bold.ttf
-        weight: 700
-      - asset:  assets/fonts/Urbanist-ExtraBold.ttf
-        weight: 800
-      - asset:  assets/fonts/Urbanist-Black.ttf
-        weight: 900
+        - asset: assets/fonts/Urbanist-Thin.ttf
+          weight: 100
+        - asset: assets/fonts/Urbanist-ExtraLight.ttf
+          weight: 200
+        - asset: assets/fonts/Urbanist-Light.ttf
+          weight: 300
+        - asset: assets/fonts/Urbanist-Regular.ttf
+          weight: 400
+          style: normal
+        - asset: assets/fonts/Urbanist-Medium.ttf
+          weight: 500
+        - asset: assets/fonts/Urbanist-SemiBold.ttf
+          weight: 600
+        - asset: assets/fonts/Urbanist-Bold.ttf
+          weight: 700
+        - asset: assets/fonts/Urbanist-ExtraBold.ttf
+          weight: 800
+        - asset: assets/fonts/Urbanist-Black.ttf
+          weight: 900
 
-
-  assets: 
+  assets:
     - assets/icons/logo_login.png
     - assets/icons/google.png
     - assets/icons/logo_landing.png
@@ -70,4 +70,3 @@ flutter:
     - assets/imgs/guyreadbookpng.png
     - assets/test.jpg
   uses-material-design: true
-

@@ -1,15 +1,15 @@
 import 'package:flutter/material.dart';
-import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:get/get.dart';
 import 'package:google_fonts/google_fonts.dart';
-import 'package:ta_mobile/app/integrations/firestore.dart';
 import '../controllers/koleksi_controller.dart';
+import 'package:ta_mobile/app/widgets/navbottombar.dart';
 
 class KoleksiView extends GetView<KoleksiController> {
   const KoleksiView({Key? key}) : super(key: key);
   @override
   Widget build(BuildContext context) {
     return Scaffold(
+      bottomNavigationBar: BottomNav(initialindex: 1,),
       floatingActionButton: FloatingActionButton.extended(
         backgroundColor: Colors.red,
         onPressed: () {},
