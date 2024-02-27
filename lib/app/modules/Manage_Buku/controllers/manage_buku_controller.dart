@@ -23,6 +23,7 @@ class ManageBukuController extends GetxController {
   TextEditingController judulC = TextEditingController();
   TextEditingController penulisC = TextEditingController();
   TextEditingController penerbitC = TextEditingController();
+  TextEditingController jumlahC = TextEditingController();
   TextEditingController tahunterbitC = TextEditingController();
   TextEditingController sinopsisC = TextEditingController();
   final verticalScrollController = ScrollController();
@@ -41,6 +42,7 @@ class ManageBukuController extends GetxController {
     judulC.text = bukuModel.judul ?? '';
     penulisC.text = bukuModel.penulis ?? '';
     penerbitC.text = bukuModel.penerbit ?? '';
+    jumlahC.text = bukuModel.jumlah?.toString() ?? '';
     tahunterbitC.text = bukuModel.tahunTerbit?.toString() ?? '';
     sinopsisC.text = bukuModel.sinopsis ?? '';
   }
@@ -83,6 +85,7 @@ class ManageBukuController extends GetxController {
     bukuModel.judul = judulC.text;
     bukuModel.penulis = penulisC.text;
     bukuModel.penerbit = penerbitC.text;
+    bukuModel.jumlah = int.tryParse(jumlahC.text) ;
     bukuModel.tahunTerbit = int.tryParse(tahunterbitC.text);
     bukuModel.sinopsis = sinopsisC.text;
     bukuModel.kategoriId = selectedCategory;

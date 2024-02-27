@@ -92,7 +92,7 @@ class AppPages {
     ),
     GetPage(
       name: _Paths.MANAGE_ULASAN,
-      page: () => const ManageUlasanView(),
+      page: () => ManageUlasanView(),
       binding: ManageUlasanBinding(),
     ),
   ];

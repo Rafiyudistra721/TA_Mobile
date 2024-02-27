@@ -171,6 +171,24 @@ class BukuForm extends GetView<ManageBukuController> {
                       AppTextField(
                         textFieldType: TextFieldType.NUMBER,
                         isValidationRequired: true,
+                        controller: controller.jumlahC,
+                        decoration: const InputDecoration(
+                            labelText: "Jumlah",
+                            hintText:
+                                "Jumlah Buku Saat ini",
+                            labelStyle: TextStyle(fontSize: 15),
+                            focusedBorder:
+                                UnderlineInputBorder(borderSide: BorderSide())),
+                        validator: (value) => value.isEmptyOrNull
+                            ? "Bagian ini perlu diisi"
+                            : controller.checkIsDouble(value) == false
+                                ? "Masukkan angka saja"
+                                : null,
+                      ),
+                      10.height,
+                      AppTextField(
+                        textFieldType: TextFieldType.NUMBER,
+                        isValidationRequired: true,
                         controller: controller.tahunterbitC,
                         decoration: const InputDecoration(
                             labelText: "Tahun Terbit",

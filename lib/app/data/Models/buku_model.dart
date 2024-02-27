@@ -12,6 +12,7 @@ class BukuModel {
   String? penulis;
   String? coverBuku;
   String? penerbit;
+  int? jumlah;
   int? tahunTerbit;
   String? sinopsis;
   String? kategoriId;
@@ -22,6 +23,7 @@ class BukuModel {
       this.penulis,
       this.coverBuku,
       this.penerbit,
+      this.jumlah,
       this.tahunTerbit,
       this.sinopsis,
       this.kategoriId});
@@ -34,6 +36,7 @@ class BukuModel {
       penulis: json['penulis'] as String?,
       coverBuku: json['coverBuku'] as String?,
       penerbit: json['penerbit'] as String?,
+      jumlah: json['jumlah'] as int?,
       tahunTerbit: json['tahunTerbit'] as int?,
       sinopsis: json['sinopsis'] as String?,
       kategoriId: json["kategoriId"] as String?,
@@ -46,6 +49,7 @@ class BukuModel {
         "penulis": penulis,
         "coverBuku": coverBuku,
         "penerbit": penerbit,
+        "jumlah": jumlah,
         "tahunTerbit": tahunTerbit,
         "sinopsis": sinopsis,
         "kategoriId": kategoriId
@@ -67,24 +71,6 @@ class BukuModel {
   Stream<List<BukuModel>> streamList() async* {
   var Query = db.collectionReference;
   yield* Query.snapshots().map((query) {
-    List<BukuModel> list = [];
-    for (var doc in query.docs) {
-      list.add(
-        BukuModel().fromJson(
-          doc,
-        ),
-      );
-    }
-    return list;
-  });
-}
-  Stream<List<BukuModel>> streamListFromKategori() async* {
-  yield* firebaseFirestore
-  .collection(kategoriCollection)
-  .doc(kategoriId)
-  .collection(bukuCollection)
-  .snapshots()
-  .map((query) {
     List<BukuModel> list = [];
     for (var doc in query.docs) {
       list.add(

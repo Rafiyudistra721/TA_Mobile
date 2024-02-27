@@ -57,7 +57,6 @@ class AuthController extends GetxController {
         username: users.displayName ?? '',
         email: users.email!,
         alamat: '',
-        fotoProfil: users.photoURL ?? '',
         level: 'Peminjam',
         dibuatTanggal: DateTime.now(),
       );
@@ -169,7 +168,6 @@ class AuthController extends GetxController {
         username: nameC.text,
         email: emailC.text,
         alamat: adressC.text,
-        fotoProfil: '',
         level: 'Peminjam',
         dibuatTanggal: DateTime.now(),
       );
