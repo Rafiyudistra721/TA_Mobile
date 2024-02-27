@@ -360,7 +360,7 @@ class DetailBukuView extends GetView<DetailBukuController> {
                 ],
               ),
             ),
-          ),
+          )
         ],
       ),
     );

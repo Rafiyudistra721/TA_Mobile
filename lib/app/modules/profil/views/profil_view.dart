@@ -13,63 +13,107 @@ class ProfilView extends GetView<ProfilController> {
 
   @override
   Widget build(BuildContext context) {
-   return Scaffold(
+    return Scaffold(
       appBar: AppBar(
         title: const Text('Profile'),
         centerTitle: true,
       ),
       body: Container(
-        color: Colors.lightBlue, // Background color outside the container
+        decoration: BoxDecoration(
+          color: Colors.lightBlue,
+        ),
         child: Center(
-          child: Container(
-            width: 400, // Adjust width as needed
-            height: 500, // Adjust height as needed
-            padding: const EdgeInsets.all(20.0),
-            decoration: BoxDecoration(
-              color: Colors.white,
-              borderRadius: BorderRadius.circular(15.0),
-              boxShadow: [
-                BoxShadow(
-                  color: Colors.black.withOpacity(0.5),
-                  spreadRadius: 5,
-                  blurRadius: 7,
-                  offset: const Offset(0, 3),
+          child: Column(
+            mainAxisAlignment: MainAxisAlignment.center,
+            crossAxisAlignment: CrossAxisAlignment.center,
+            children: [
+              Container(
+                width: 500,
+                height: 300,
+                padding: const EdgeInsets.all(20.0),
+                margin: const EdgeInsets.all(20.0),
+                decoration: BoxDecoration(
+                  color: Colors.white,
+                  borderRadius: BorderRadius.circular(15.0),
+                  boxShadow: [
+                    BoxShadow(
+                      color: Colors.black.withOpacity(0.5),
+                      spreadRadius: 5,
+                      blurRadius: 7,
+                      offset: const Offset(0, 3),
+                    ),
+                  ],
                 ),
-              ],
-            ),
-            child: Column(
-              crossAxisAlignment: CrossAxisAlignment.start, // Align text to the left
-              children: [
-                Column(
+                child: Column(
                   crossAxisAlignment: CrossAxisAlignment.start,
                   children: [
+                    SizedBox(height: 10),
                     Text(
-                      'Username: ',
+                      'Username:',
+                      style: TextStyle(
+                        fontSize: 25,
+                        fontWeight: FontWeight.bold),
+                    ),
+                    Text(
+                      'User1',
                       style: TextStyle(fontSize: 20),
                     ),
                     SizedBox(height: 10),
                     Text(
-                      'Email: ',
+                      'Email:',
+                      style: TextStyle(
+                        fontSize: 25,
+                        fontWeight: FontWeight.bold),
+                    ),
+                    Text(
+                      'user1@example.com', // Add email here
                       style: TextStyle(fontSize: 20),
                     ),
                     SizedBox(height: 10),
                     Text(
-                      'Alamat: ',
+                      'Alamat:',
+                      style: TextStyle(
+                        fontSize: 25,
+                        fontWeight: FontWeight.bold),
+                    ),
+                    Text(
+                      'Jl. A', // Add address here
                       style: TextStyle(fontSize: 20),
                     ),
                   ],
                 ),
-                Expanded(
-                  child: Container(), // Use Expanded widget with an empty container to push the button to the bottom
+              ),
+              SizedBox(height: 20),
+              Container(
+                width: 500,
+                padding: const EdgeInsets.all(20.0),
+                margin: const EdgeInsets.all(20.0),
+                decoration: BoxDecoration(
+                  color: Colors.white,
+                  borderRadius: BorderRadius.circular(15.0),
+                  boxShadow: [
+                    BoxShadow(
+                      color: Colors.black.withOpacity(0.5),
+                      spreadRadius: 5,
+                      blurRadius: 7,
+                      offset: const Offset(0, 3),
+                    ),
+                  ],
                 ),
-                ElevatedButton(
-                  onPressed: () {
-                    authC.logout();
-                  },
-                  child: Text('Logout'),
+                child: Column(
+                  crossAxisAlignment: CrossAxisAlignment.start,
+                  children: [
+                    SizedBox(height: 20),
+                    ElevatedButton(
+                      onPressed: () {
+                        authC.logout();
+                      },
+                      child: Text('Logout'),
+                    ),
+                  ],
                 ),
-              ],
-            ),
+              ),
+            ],
           ),
         ),
       ),

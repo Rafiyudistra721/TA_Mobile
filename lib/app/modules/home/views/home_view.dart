@@ -541,7 +541,7 @@ class HomeView extends GetView<HomeController> {
                                   },
                                   child: Container(
                                     margin: const EdgeInsets.symmetric(
-                                        vertical: 10, horizontal: 20),
+                                        vertical: 10, horizontal: 30),
                                     padding: const EdgeInsets.all(20),
                                     decoration: BoxDecoration(
                                       borderRadius: BorderRadius.circular(20),
