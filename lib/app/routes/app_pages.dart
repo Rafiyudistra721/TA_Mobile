@@ -16,6 +16,8 @@ import '../modules/Manage_Ulasan/bindings/manage_ulasan_binding.dart';
 import '../modules/Manage_Ulasan/views/manage_ulasan_view.dart';
 import '../modules/Manage_User/bindings/manage_user_binding.dart';
 import '../modules/Manage_User/views/manage_user_view.dart';
+import '../modules/Profil/bindings/profil_binding.dart';
+import '../modules/Profil/views/profil_view.dart';
 import '../modules/auth/bindings/auth_binding.dart';
 import '../modules/auth/views/auth_view.dart';
 import '../modules/dashboard/bindings/dashboard_binding.dart';
@@ -24,6 +26,8 @@ import '../modules/detail_buku/bindings/detail_buku_binding.dart';
 import '../modules/detail_buku/views/detail_buku_view.dart';
 import '../modules/home/bindings/home_binding.dart';
 import '../modules/home/views/home_view.dart';
+import '../modules/koleksi/bindings/koleksi_binding.dart';
+import '../modules/koleksi/views/koleksi_view.dart';
 
 // ignore_for_file: constant_identifier_names
 
@@ -94,6 +98,16 @@ class AppPages {
       name: _Paths.MANAGE_ULASAN,
       page: () => ManageUlasanView(),
       binding: ManageUlasanBinding(),
+    ),
+    GetPage(
+      name: _Paths.KOLEKSI,
+      page: () => const KoleksiView(),
+      binding: KoleksiBinding(),
+    ),
+    GetPage(
+      name: _Paths.PROFIL,
+      page: () => ProfilView(),
+      binding: ProfilBinding(),
     ),
   ];
 }

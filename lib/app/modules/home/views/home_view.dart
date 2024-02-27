@@ -6,8 +6,10 @@ import 'package:get/get.dart';
 import 'package:nb_utils/nb_utils.dart';
 import 'package:ta_mobile/app/modules/auth/controllers/auth_controller.dart';
 import 'package:ta_mobile/app/routes/app_pages.dart';
+import 'package:ta_mobile/app/widgets/navbottombar.dart';
 
 import '../controllers/home_controller.dart';
+
 
 class HomeView extends GetView<HomeController> {
   final authC = Get.put(AuthController());
@@ -16,6 +18,7 @@ class HomeView extends GetView<HomeController> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
+      bottomNavigationBar: BottomNav(initialindex: 0,),
       appBar: AppBar(
         elevation: 0,
         actions: [
@@ -32,14 +35,12 @@ class HomeView extends GetView<HomeController> {
                       borderRadius: BorderRadius.circular(100),
                     ),
                     child: IconButton(
-                      onPressed: () {
-                        authC.logout();
-                      },
-                      icon: const Icon(
-                        Icons.logout,
-                        size: 18,
-                      ),
+                    icon: const Icon(
+                      Icons.book,
+                      size: 18.0, // Use double value for size
                     ),
+                    onPressed: () => Get.toNamed(Routes.KOLEKSI),
+                  ),
                   )),
             ),
           ),
@@ -71,16 +72,44 @@ class HomeView extends GetView<HomeController> {
             ),
           ),
           8.width,
+          Padding(
+            padding: const EdgeInsets.all(12.0),
+            child: SizedBox(
+              width: 33.0, // Use double value for width
+              child: Obx(
+                () => Container(
+                  alignment: Alignment.center,
+                  decoration: BoxDecoration(
+                    color: controller.darkModeValue.value
+                        ? Colors.grey.shade600
+                        : Colors.grey.shade200,
+                    borderRadius: BorderRadius.circular(
+                        100.0), // Use double value for radius
+                  ),
+                  child: IconButton(
+                      onPressed: () {
+                        authC.logout();
+                      },
+                      icon: const Icon(
+                        Icons.logout,
+                        size: 18,
+                      ),
+                    ),
+                ),
+              ),
+            ),
+          ),
         ],
         centerTitle: false,
         title: Row(
+          mainAxisAlignment: MainAxisAlignment.start,
           children: [
             Obx(() => Text(
                   'SmartLib',
                   style: GoogleFonts.urbanist(
                     color: (controller.darkModeValue.value)
-                        ? Colors.red.shade200
-                        : Colors.red.shade800,
+                        ? Colors.grey
+                        : Colors.lightBlue,
                     fontWeight: FontWeight.w700,
                     fontSize: 30,
                   ),
@@ -88,6 +117,15 @@ class HomeView extends GetView<HomeController> {
           ],
         ),
       ),
+      // drawer: Drawer(
+      //   child: SingleChildScrollView(
+      //     child: Column(
+      //       children: [
+      //         MyHeaderDrawer(),
+      //       ],
+      //     ),
+      //   ),
+      // ),
       body: Column(
         children: [
           Expanded(
@@ -111,7 +149,7 @@ class HomeView extends GetView<HomeController> {
             child: Column(
               children: [
                 Expanded(
-                  flex: 5,
+                  flex: 6,
                   child: CarouselSlider(
                     options: CarouselOptions(
                       enlargeCenterPage: true,
@@ -486,9 +524,12 @@ class HomeView extends GetView<HomeController> {
                                       .toList();
 
                           return SizedBox(
-                            height: 300,
+                            height: 370,
                             width: double.infinity,
-                            child: GridView.builder(gridDelegate: const SliverGridDelegateWithFixedCrossAxisCount(crossAxisCount: 2),
+                            child: GridView.builder(
+                              gridDelegate:
+                                  const SliverGridDelegateWithFixedCrossAxisCount(
+                                      crossAxisCount: 2),
                               itemCount: filteredBooks.length,
                               scrollDirection: Axis.vertical,
                               itemBuilder: (context, index) {
@@ -500,7 +541,7 @@ class HomeView extends GetView<HomeController> {
                                   },
                                   child: Container(
                                     margin: const EdgeInsets.symmetric(
-                                        vertical: 10, horizontal: 20),
+                                        vertical: 10, horizontal: 30),
                                     padding: const EdgeInsets.all(20),
                                     decoration: BoxDecoration(
                                       borderRadius: BorderRadius.circular(20),
@@ -557,7 +598,6 @@ class HomeView extends GetView<HomeController> {
           ),
         ],
       ),
-    );
+      );
   }
 }
-

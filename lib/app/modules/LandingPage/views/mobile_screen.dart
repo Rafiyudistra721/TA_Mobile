@@ -87,7 +87,7 @@ class MobileScreen extends GetView<LandingPageController> {
               crossAxisAlignment: CrossAxisAlignment.start,
               children: [
                 Text(
-                  "Ambatakum", // Replace with your desired big letter
+                  "", // Replace with your desired big letter
                   style: GoogleFonts.urbanist(
                       fontSize: 20,
                       fontWeight: FontWeight.bold,
