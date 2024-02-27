@@ -11,8 +11,7 @@ class DetailBukuView extends GetView<DetailBukuController> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      backgroundColor:
-          (Get.isDarkMode) ? Colors.red.shade200 : Colors.red.shade100,
+      backgroundColor: Colors.lightBlue, // Updated to blue color
       appBar: AppBar(
         leadingWidth: 100,
         leading: Padding(
@@ -28,10 +27,8 @@ class DetailBukuView extends GetView<DetailBukuController> {
             ),
           ),
         ),
-        foregroundColor:
-            (Get.isDarkMode) ? Colors.red.shade200 : Colors.red.shade100,
-        backgroundColor:
-            (Get.isDarkMode) ? Colors.red.shade200 : Colors.red.shade100,
+        foregroundColor: Colors.lightBlue, // Updated to blue color
+        backgroundColor: Colors.lightBlue, // Updated to blue color
         elevation: 0,
         bottomOpacity: 0.0,
         scrolledUnderElevation: 0,
@@ -67,7 +64,7 @@ class DetailBukuView extends GetView<DetailBukuController> {
             flex: 5,
             child: Container(
               decoration: BoxDecoration(
-                color: (Get.isDarkMode) ? Colors.grey.shade900 : Colors.white,
+                color: Colors.white,
                 borderRadius: const BorderRadius.only(
                   topLeft: Radius.circular(60),
                   topRight: Radius.circular(60),
@@ -188,154 +185,28 @@ class DetailBukuView extends GetView<DetailBukuController> {
                       ),
                       Padding(
                         padding: const EdgeInsets.all(20.0),
-                        child: StreamBuilder(
-                          stream: firebaseFirestore
-                              .collection("cartProduct")
-                              .snapshots(),
-                          builder: (context, snapshot) {
-                            if (snapshot.hasError) {
-                              return ElevatedButton(
-                                style: ButtonStyle(
-                                  backgroundColor: MaterialStateProperty.all(
-                                    Colors.red.shade500,
-                                  ),
-                                ),
-                                onPressed: () {
-                                  ;
-                                },
-                                child: Container(
-                                  alignment: Alignment.center,
-                                  height: 70,
-                                  width: double.infinity,
-                                  child: const Text(
-                                    'Tambah Ke Koleksi',
-                                    style: TextStyle(
-                                      fontSize: 25,
-                                      fontWeight: FontWeight.bold,
-                                      color: Colors.white,
-                                    ),
-                                  ),
-                                ),
-                              );
-                            } else if (snapshot.hasData) {
-                              QuerySnapshot<Map<String, dynamic>>? favourite =
-                                  snapshot.data;
-                              List<QueryDocumentSnapshot<Map<String, dynamic>>>
-                                  allFav = favourite!.docs;
-                              if (allFav.isNotEmpty) {
-                                int check = 0;
-                                for (var f in allFav) {
-                                  if (f['name'] == 'e.name') {
-                                    check = 1;
-                                  }
-                                }
-                                if (check == 0) {
-                                  return ElevatedButton(
-                                    style: ButtonStyle(
-                                      backgroundColor:
-                                          MaterialStateProperty.all(
-                                        Colors.red.shade500,
-                                      ),
-                                    ),
-                                    onPressed: () {},
-                                    child: Container(
-                                      alignment: Alignment.center,
-                                      height: 70,
-                                      width: double.infinity,
-                                      child: const Text(
-                                        'Tambah Ke Koleksi',
-                                        style: TextStyle(
-                                          fontSize: 25,
-                                          fontWeight: FontWeight.bold,
-                                          color: Colors.white,
-                                        ),
-                                      ),
-                                    ),
-                                  );
-                                } else {
-                                  return ElevatedButton(
-                                    style: ButtonStyle(
-                                      backgroundColor:
-                                          MaterialStateProperty.all(
-                                        Colors.grey.shade500,
-                                      ),
-                                    ),
-                                    onPressed: () {
-                                      ScaffoldMessenger.of(context)
-                                          .showSnackBar(
-                                        const SnackBar(
-                                          backgroundColor: Colors.red,
-                                          duration: Duration(seconds: 1),
-                                          behavior: SnackBarBehavior.floating,
-                                          content: Text(
-                                            'Product Already addaed to cart',
-                                          ),
-                                        ),
-                                      );
-                                    },
-                                    child: Container(
-                                      alignment: Alignment.center,
-                                      height: 70,
-                                      width: double.infinity,
-                                      child: const Text(
-                                        'Tambah Ke Koleksi',
-                                        style: TextStyle(
-                                          fontSize: 25,
-                                          fontWeight: FontWeight.bold,
-                                          color: Colors.white,
-                                        ),
-                                      ),
-                                    ),
-                                  );
-                                }
-                              } else {
-                                return ElevatedButton(
-                                  style: ButtonStyle(
-                                    backgroundColor: MaterialStateProperty.all(
-                                      Colors.red.shade500,
-                                    ),
-                                  ),
-                                  onPressed: () {},
-                                  child: Container(
-                                    alignment: Alignment.center,
-                                    height: 70,
-                                    width: double.infinity,
-                                    child: const Text(
-                                      'Tambah Ke Koleksi',
-                                      style: TextStyle(
-                                        fontSize: 25,
-                                        fontWeight: FontWeight.bold,
-                                        color: Colors.white,
-                                      ),
-                                    ),
-                                  ),
-                                );
-                              }
-                            }
-                            return ElevatedButton(
-                              style: ButtonStyle(
-                                backgroundColor: MaterialStateProperty.all(
-                                  Colors.red.shade500,
-                                ),
-                              ),
-                              onPressed: () {
-                                Get.toNamed(Routes.KOLEKSI);
-                              },
-                              child: Container(
-                                alignment: Alignment.center,
-                                height: 70,
-                                width: double.infinity,
-                                child: const Text(
-                                  'Tambah Ke Koleksi',
-                                  style: TextStyle(
-                                    fontSize: 25,
-                                    fontWeight: FontWeight.bold,
-                                    color: Colors.white,
-                                  ),
-                                ),
-                              ),
-                            );
+                        child: ElevatedButton(
+                          onPressed: () {
+                            Get.toNamed(Routes.KOLEKSI);
                           },
+                          style: ButtonStyle(
+                            backgroundColor: MaterialStateProperty.all(
+                              Colors.black,
+                            ),
+                          ),
+                          child: Container(
+                            alignment: Alignment.center,
+                            height: 70,
+                            width: double.infinity,
+                            child: const Text(
+                              'Tambah Ke Koleksi',
+                              style: TextStyle(
+                                fontSize: 25,
+                                fontWeight: FontWeight.bold,
+                                color: Colors.white,
+                              ),
+                            ),
+                          ),
                         ),
                       ),
                       const Spacer(),
@@ -360,7 +231,7 @@ class DetailBukuView extends GetView<DetailBukuController> {
                 ],
               ),
             ),
-          )
+          ),
         ],
       ),
     );

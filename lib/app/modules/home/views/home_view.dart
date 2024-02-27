@@ -108,8 +108,8 @@ class HomeView extends GetView<HomeController> {
                   'SmartLib',
                   style: GoogleFonts.urbanist(
                     color: (controller.darkModeValue.value)
-                        ? Colors.red.shade200
-                        : Colors.red.shade800,
+                        ? Colors.grey
+                        : Colors.lightBlue,
                     fontWeight: FontWeight.w700,
                     fontSize: 30,
                   ),
