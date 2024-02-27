@@ -4,6 +4,7 @@ import 'package:get/get.dart';
 import 'package:ta_mobile/app/modules/auth/controllers/auth_controller.dart';
 import 'package:ta_mobile/app/routes/app_pages.dart';
 import 'package:ta_mobile/app/widgets/navbottombar.dart';
+import 'package:ta_mobile/app/widgets/navbar.dart';
 
 import '../controllers/profil_controller.dart';
 

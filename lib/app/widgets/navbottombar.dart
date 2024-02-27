@@ -1,5 +1,5 @@
+import 'package:nb_utils/nb_utils.dart';
 import 'package:ta_mobile/app/routes/app_pages.dart';
-import 'package:ta_mobile/app/utils/colors.dart';
 import 'package:convex_bottom_bar/convex_bottom_bar.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
@@ -10,10 +10,10 @@ class BottomNav extends StatelessWidget {
   @override
   Widget build(BuildContext context){
       return ConvexAppBar(
-        backgroundColor: defaultBackgroundColor,
+        backgroundColor: lightBlue,
         color: Colors.black,
-        activeColor: Colors.purple,
-        style: TabStyle.fixedCircle,
+        activeColor:Color(0xFF3C19C0),
+        style: TabStyle.reactCircle,
         items: const [
           TabItem(icon: Icons.home),
           TabItem(icon: Icons.book),
@@ -21,14 +21,14 @@ class BottomNav extends StatelessWidget {
         ],
         onTap: (index){
           if (index == 0) {
-            Get.toNamed(Routes.HOME);
+            Get.offNamed(Routes.HOME);
           } else if (index == 1) {
-            Get.toNamed(Routes.KOLEKSI);
+            Get.offNamed(Routes.KOLEKSI);
           } else if (index == 2) {
-            Get.toNamed(Routes.PROFIL);
+            Get.offNamed(Routes.PROFIL);
           }
         },
-        initialActiveIndex: 0,
+        initialActiveIndex: initialindex,
         // onTap: (int i) => print('click index=$i')
       );
   }

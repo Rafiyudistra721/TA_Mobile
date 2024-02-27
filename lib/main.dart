@@ -23,6 +23,8 @@ void main() async {
   runApp(MyApp());
 }
 
+
+
 class MyApp extends StatelessWidget {
   final authC = Get.put(AuthController(), permanent: true);
 
@@ -36,7 +38,7 @@ class MyApp extends StatelessWidget {
           print(snapshot.data);
           String initialRoute = Routes.INTRO;
           Future.delayed(const Duration(seconds: 2), () {
-            Get.offAndToNamed(snapshot.data != null
+            Get.offNamed(snapshot.data != null
                 ? authC.user.level == "Admin" || authC.user.level == "Petugas"
                     ? Routes.DASHBOARD
                     : Routes.HOME

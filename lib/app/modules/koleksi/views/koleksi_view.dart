@@ -2,11 +2,17 @@ import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:nb_utils/nb_utils.dart';
+// import 'package:google_fonts/google_fonts.dart';
+// import 'package:ta_mobile/app/widgets/navbar.dart';
 import '../controllers/koleksi_controller.dart';
-import 'package:ta_mobile/app/widgets/navbottombar.dart';
+import 'package:ta_mobile/app/modules/koleksi/views/web_screen.dart';
+import 'package:ta_mobile/app/modules/koleksi/views/mobile_screen.dart';
+import 'package:ta_mobile/app/modules/koleksi/views/responsive_layout.dart';
+// import 'package:ta_mobile/app/widgets/navbottombar.dart';
 
 class KoleksiView extends GetView<KoleksiController> {
   const KoleksiView({Key? key}) : super(key: key);
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
