@@ -106,7 +106,7 @@ class AppPages {
     ),
     GetPage(
       name: _Paths.PROFIL,
-      page: () => const ProfilView(),
+      page: () => ProfilView(),
       binding: ProfilBinding(),
     ),
   ];

@@ -2,6 +2,7 @@ import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/material.dart';
 import 'package:ta_mobile/app/integrations/firestore.dart';
 import 'package:get/get.dart';
+import 'package:ta_mobile/app/routes/app_pages.dart';
 
 import '../controllers/detail_buku_controller.dart';
 
@@ -10,8 +11,7 @@ class DetailBukuView extends GetView<DetailBukuController> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      backgroundColor:
-          (Get.isDarkMode) ? Colors.red.shade200 : Colors.red.shade100,
+      backgroundColor: Colors.lightBlue, // Updated to blue color
       appBar: AppBar(
         leadingWidth: 100,
         leading: Padding(
@@ -27,10 +27,8 @@ class DetailBukuView extends GetView<DetailBukuController> {
             ),
           ),
         ),
-        foregroundColor:
-            (Get.isDarkMode) ? Colors.red.shade200 : Colors.red.shade100,
-        backgroundColor:
-            (Get.isDarkMode) ? Colors.red.shade200 : Colors.red.shade100,
+        foregroundColor: Colors.lightBlue, // Updated to blue color
+        backgroundColor: Colors.lightBlue, // Updated to blue color
         elevation: 0,
         bottomOpacity: 0.0,
         scrolledUnderElevation: 0,
@@ -43,10 +41,10 @@ class DetailBukuView extends GetView<DetailBukuController> {
                 const EdgeInsets.only(left: 26, top: 10, bottom: 10, right: 22),
             child: ElevatedButton(
               onPressed: () {
-                Navigator.pushNamed(context, 'CartScreen');
+                Get.toNamed(Routes.KOLEKSI);
               },
               child: const Icon(
-                Icons.shopping_cart,
+                Icons.shopping_basket_outlined,
                 color: Colors.grey,
               ),
             ),
@@ -66,7 +64,7 @@ class DetailBukuView extends GetView<DetailBukuController> {
             flex: 5,
             child: Container(
               decoration: BoxDecoration(
-                color: (Get.isDarkMode) ? Colors.grey.shade900 : Colors.white,
+                color: Colors.white,
                 borderRadius: const BorderRadius.only(
                   topLeft: Radius.circular(60),
                   topRight: Radius.circular(60),
@@ -91,13 +89,13 @@ class DetailBukuView extends GetView<DetailBukuController> {
                         flex: 8,
                       ),
                       const Padding(
-                        padding: EdgeInsets.symmetric(
-                            horizontal: 20.0, vertical: 5),
+                        padding:
+                            EdgeInsets.symmetric(horizontal: 20.0, vertical: 5),
                         child: Row(
                           crossAxisAlignment: CrossAxisAlignment.end,
                           children: [
                             Text(
-                              'e.name',
+                              'BUKU 1',
                               style: TextStyle(
                                   fontWeight: FontWeight.w800, fontSize: 33),
                             ),
@@ -105,7 +103,7 @@ class DetailBukuView extends GetView<DetailBukuController> {
                             Padding(
                               padding: EdgeInsets.all(5.0),
                               child: Text(
-                                '℈',
+                                '',
                                 style: TextStyle(
                                   fontWeight: FontWeight.bold,
                                   fontSize: 22,
@@ -117,7 +115,7 @@ class DetailBukuView extends GetView<DetailBukuController> {
                               width: 3,
                             ),
                             Text(
-                              'harga',
+                              'STOK : 1 ',
                               style: TextStyle(
                                 fontWeight: FontWeight.w800,
                                 fontSize: 33,
@@ -129,7 +127,7 @@ class DetailBukuView extends GetView<DetailBukuController> {
                       const Padding(
                         padding: EdgeInsets.symmetric(horizontal: 20.0),
                         child: Text(
-                          'Category',
+                          'Fiksi',
                           style: TextStyle(
                             fontWeight: FontWeight.bold,
                             fontSize: 23,
@@ -160,7 +158,7 @@ class DetailBukuView extends GetView<DetailBukuController> {
                             ),
                             Spacer(),
                             Text(
-                              '⏰ 10-20 hours',
+                              '',
                               style: TextStyle(
                                 fontSize: 22,
                                 fontWeight: FontWeight.w600,
@@ -176,7 +174,7 @@ class DetailBukuView extends GetView<DetailBukuController> {
                         padding: const EdgeInsets.symmetric(
                             horizontal: 20.0, vertical: 40),
                         child: Text(
-                          'description',
+                          'Deskripsi',
                           style: TextStyle(
                             fontWeight: FontWeight.w500,
                             fontSize: 22,
@@ -187,158 +185,28 @@ class DetailBukuView extends GetView<DetailBukuController> {
                       ),
                       Padding(
                         padding: const EdgeInsets.all(20.0),
-                        child: StreamBuilder(
-                          stream: firebaseFirestore
-                              .collection("cartProduct")
-                              .snapshots(),
-                          builder: (context, snapshot) {
-                            if (snapshot.hasError) {
-                              return ElevatedButton(
-                                style: ButtonStyle(
-                                  backgroundColor: MaterialStateProperty.all(
-                                    Colors.red.shade500,
-                                  ),
-                                ),
-                                onPressed: () {
-                                  ;
-                                },
-                                child: Container(
-                                  alignment: Alignment.center,
-                                  height: 70,
-                                  width: double.infinity,
-                                  child: const Text(
-                                    'Add to Cart',
-                                    style: TextStyle(
-                                      fontSize: 25,
-                                      fontWeight: FontWeight.bold,
-                                      color: Colors.white,
-                                    ),
-                                  ),
-                                ),
-                              );
-                            } else if (snapshot.hasData) {
-                              QuerySnapshot<Map<String, dynamic>>? favourite =
-                                  snapshot.data;
-                              List<QueryDocumentSnapshot<Map<String, dynamic>>>
-                                  allFav = favourite!.docs;
-                              if (allFav.isNotEmpty) {
-                                int check = 0;
-                                for (var f in allFav) {
-                                  if (f['name'] == 'e.name') {
-                                    check = 1;
-                                  }
-                                }
-                                if (check == 0) {
-                                  return ElevatedButton(
-                                    style: ButtonStyle(
-                                      backgroundColor:
-                                          MaterialStateProperty.all(
-                                        Colors.red.shade500,
-                                      ),
-                                    ),
-                                    onPressed: () {
-                                      
-                                    },
-                                    child: Container(
-                                      alignment: Alignment.center,
-                                      height: 70,
-                                      width: double.infinity,
-                                      child: const Text(
-                                        'Add to Cart',
-                                        style: TextStyle(
-                                          fontSize: 25,
-                                          fontWeight: FontWeight.bold,
-                                          color: Colors.white,
-                                        ),
-                                      ),
-                                    ),
-                                  );
-                                } else {
-                                  return ElevatedButton(
-                                    style: ButtonStyle(
-                                      backgroundColor:
-                                          MaterialStateProperty.all(
-                                        Colors.grey.shade500,
-                                      ),
-                                    ),
-                                    onPressed: () {
-                                      ScaffoldMessenger.of(context)
-                                          .showSnackBar(
-                                        const SnackBar(
-                                          backgroundColor: Colors.red,
-                                          duration: Duration(seconds: 1),
-                                          behavior: SnackBarBehavior.floating,
-                                          content: Text(
-                                            'Product Already addaed to cart',
-                                          ),
-                                        ),
-                                      );
-                                    },
-                                    child: Container(
-                                      alignment: Alignment.center,
-                                      height: 70,
-                                      width: double.infinity,
-                                      child: const Text(
-                                        'Added to Cart',
-                                        style: TextStyle(
-                                          fontSize: 25,
-                                          fontWeight: FontWeight.bold,
-                                          color: Colors.white,
-                                        ),
-                                      ),
-                                    ),
-                                  );
-                                }
-                              } else {
-                                return ElevatedButton(
-                                  style: ButtonStyle(
-                                    backgroundColor: MaterialStateProperty.all(
-                                      Colors.red.shade500,
-                                    ),
-                                  ),
-                                  onPressed: () {
-                                    
-                                  },
-                                  child: Container(
-                                    alignment: Alignment.center,
-                                    height: 70,
-                                    width: double.infinity,
-                                    child: const Text(
-                                      'Add to Cart',
-                                      style: TextStyle(
-                                        fontSize: 25,
-                                        fontWeight: FontWeight.bold,
-                                        color: Colors.white,
-                                      ),
-                                    ),
-                                  ),
-                                );
-                              }
-                            }
-                            return ElevatedButton(
-                              style: ButtonStyle(
-                                backgroundColor: MaterialStateProperty.all(
-                                  Colors.red.shade500,
-                                ),
-                              ),
-                              onPressed: () {
-                                
-                              },
-                              child: Container(
-                                alignment: Alignment.center,
-                                height: 70,
-                                width: double.infinity,
-                                child: const Text(
-                                  'Add to Cart',
-                                  style: TextStyle(
-                                    fontSize: 25,
-                                    fontWeight: FontWeight.bold,
-                                    color: Colors.white,
-                                  ),
-                                ),
-                              ),
-                            );
+                        child: ElevatedButton(
+                          onPressed: () {
+                            Get.toNamed(Routes.KOLEKSI);
                           },
+                          style: ButtonStyle(
+                            backgroundColor: MaterialStateProperty.all(
+                              Colors.black,
+                            ),
+                          ),
+                          child: Container(
+                            alignment: Alignment.center,
+                            height: 70,
+                            width: double.infinity,
+                            child: const Text(
+                              'Tambah Ke Koleksi',
+                              style: TextStyle(
+                                fontSize: 25,
+                                fontWeight: FontWeight.bold,
+                                color: Colors.white,
+                              ),
+                            ),
+                          ),
                         ),
                       ),
                       const Spacer(),
@@ -354,7 +222,7 @@ class DetailBukuView extends GetView<DetailBukuController> {
                           tag: '',
                           child: Transform.translate(
                             offset: const Offset(0, -250),
-                            child: Image.asset(''),
+                            child: Image.asset('assets/test.jpg'),
                           ),
                         ),
                       ),
