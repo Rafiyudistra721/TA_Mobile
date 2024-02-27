@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 
 import 'package:get/get.dart';
 import 'package:ta_mobile/app/widgets/navbottombar.dart';
+import 'package:ta_mobile/app/widgets/navbar.dart';
 
 import '../controllers/profil_controller.dart';
 
