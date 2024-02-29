@@ -1,202 +1,114 @@
 import 'package:flutter/material.dart';
+import 'package:flutter/services.dart';
 import 'package:get/get.dart';
-import 'package:google_fonts/google_fonts.dart';
-import '../controllers/koleksi_controller.dart';
+import 'package:nb_utils/nb_utils.dart';
+import 'package:ta_mobile/app/modules/koleksi/controllers/koleksi_controller.dart';
+import 'package:ta_mobile/app/routes/app_pages.dart';
+import 'package:ta_mobile/app/widgets/AppBar.dart';
 
 class WebScreen extends GetView<KoleksiController> {
   const WebScreen({Key? key}) : super(key: key);
-  @override
+   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      appBar: AppBar(
+      appBar: appBar,
+         body: Column(
+        children: [
+          Expanded(
+            child: Column(
+              children: [
+                30.height,
+                Expanded(
+                  flex: 12,
+                  child: Column(
+                    children: [
+                      Obx(() {
+                        if (controller.allBooks.isEmpty) {
+                          return const CircularProgressIndicator();
+                        } else {
+                          final filteredBooks =
+                              controller.selectedCategory.isEmpty
+                                  ? controller.allBooks
+                                  : controller.allBooks
+                                      .where((book) =>
+                                          book.kategoriId ==
+                                          controller.selectedCategory.value)
+                                      .toList();
 
-      ),
-      body: SingleChildScrollView(
-        child: Column(
-          children: [
-            ListView.builder(
-              shrinkWrap: true,
-              physics: NeverScrollableScrollPhysics(),
-              itemCount: 5, // Example itemCount
-              padding: const EdgeInsets.all(20),
-              itemBuilder: (context, i) {
-                return GestureDetector(
-                  onTap: () {},
-                  child: Container(
-                    margin: const EdgeInsets.all(6),
-                    decoration: BoxDecoration(
-                      boxShadow: [
-                        BoxShadow(
-                          color: (Get.isDarkMode)
-                              ? Colors.grey.shade900
-                              : Colors.grey.shade300,
-                          offset: const Offset(1, 2),
-                          blurRadius: 8,
-                        )
-                      ],
-                      borderRadius: BorderRadius.circular(30),
-                      color: (Get.isDarkMode) ? Colors.grey.shade800 : Colors.white,
-                    ),
-                    height: 140,
-                    width: double.infinity,
-                    alignment: Alignment.center,
-                    child: ListTile(
-                      leading: Transform.scale(
-                        scale: 1.6,
-                        child: Hero(
-                          tag: 'product_image_$i',
-                          child: Transform.translate(
-                            offset: const Offset(3, 10),
-                            child: Image.asset(
-                              'assets/test.jpg', // Example image path
-                            ),
-                          ),
-                        ),
-                      ),
-                      isThreeLine: true,
-                      title: Padding(
-                        padding: const EdgeInsets.only(left: 10, top: 8.0),
-                        child: Text(
-                          'BUKU 1', // Example product name
-                          style: const TextStyle(
-                            fontWeight: FontWeight.w700,
-                            letterSpacing: 0,
-                            fontSize: 22,
-                          ),
-                        ),
-                      ),
-                      trailing: Column(
-                        mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                        children: [
-                          SizedBox(
-                            height: 20,
-                            width: 50,
-                            child: ElevatedButton(
-                              style: ButtonStyle(
-                                backgroundColor: MaterialStateProperty.all(
-                                  Colors.red.shade500,
-                                ),
-                              ),
-                              onPressed: () {},
-                              child: const Icon(
-                                Icons.delete,
-                                color: Colors.white,
-                                size: 20,
-                              ),
-                            ),
-                          ),
-                          Text(
-                            'Price', // Example price
-                            style: const TextStyle(
-                              color: Colors.grey,
-                              fontWeight: FontWeight.w700,
-                              letterSpacing: 2,
-                              fontSize: 16,
-                            ),
-                          ),
-                        ],
-                      ),
-                      subtitle: Column(
-                        crossAxisAlignment: CrossAxisAlignment.start,
-                        children: [
-                          Row(
-                            children: [
-                              Padding(
-                                padding: const EdgeInsets.symmetric(vertical: 4.0, horizontal: 10),
-                                child: Text(
-                                  'Fiksi', // Example category
-                                  style: const TextStyle(
-                                    color: Colors.grey,
-                                    fontWeight: FontWeight.w700,
-                                    letterSpacing: 2,
-                                    fontSize: 16,
+                          return SizedBox(
+                            height: 720,
+                            child: GridView.builder(
+                              gridDelegate:
+                                  const SliverGridDelegateWithFixedCrossAxisCount(
+                                      crossAxisCount: 6),
+                              itemCount: filteredBooks.length,
+                              scrollDirection: Axis.vertical,
+                              itemBuilder: (context, index) {
+                                final book = filteredBooks[index];
+                                return GestureDetector(
+                                  onTap: () {
+                                    Get.toNamed(Routes.DETAIL_BUKU,
+                                        arguments: book);
+                                  },
+                                  child: Container(
+                                    margin: const EdgeInsets.symmetric(
+                                        vertical: 10, horizontal: 20),
+                                    padding: const EdgeInsets.all(10),
+                                    decoration: BoxDecoration(
+                                      borderRadius: BorderRadius.circular(20),
+                                      color: Colors.white,
+                                      boxShadow: [
+                                        BoxShadow(
+                                          color: Colors.grey.withOpacity(0.5),
+                                          spreadRadius: 2,
+                                          blurRadius: 5,
+                                          offset: const Offset(0, 3),
+                                        ),
+                                      ],
+                                    ),
+                                    child: Column(
+                                      crossAxisAlignment:
+                                          CrossAxisAlignment.center,
+                                      children: [
+                                        Hero(
+                                            tag: book.id!,
+                                            child: Image.network(
+                                              book.coverBuku!,
+                                              height: 210,
+                                              width: 150,
+                                              fit: BoxFit.cover,
+                                            )),
+                                        10.height,
+                                        Text(
+                                          book.judul!,
+                                          style: const TextStyle(
+                                              fontSize: 20,
+                                              color: Colors.black,
+                                              fontWeight: FontWeight.bold),
+                                        ),
+                                        5.height,
+                                        Text(
+                                          "${controller.categories.firstWhere((cat) => cat.id == book.kategoriId).namaKategori}",
+                                          style: const TextStyle(
+                                              color: Colors.grey),
+                                        ),
+                                      ],
+                                    ),
                                   ),
-                                ),
-                              ),
-                              const Spacer(),
-                            ],
-                          ),
-                          const SizedBox(height: 8),
-                          Row(
-                            mainAxisAlignment: MainAxisAlignment.spaceAround,
-                            children: [
-                              IconButton(
-                                color: Colors.grey,
-                                onPressed: () {},
-                                icon: const Icon(
-                                  Icons.remove,
-                                  size: 25,
-                                ),
-                              ),
-                              Container(
-                                alignment: Alignment.center,
-                                height: 30,
-                                width: 30,
-                                decoration: BoxDecoration(
-                                  borderRadius: BorderRadius.circular(5),
-                                  color: Colors.grey.shade400,
-                                ),
-                                child: Text(
-                                  '1', // Example quantity
-                                  style: const TextStyle(
-                                    fontWeight: FontWeight.bold,
-                                    fontSize: 22,
-                                    color: Colors.white,
-                                  ),
-                                ),
-                              ),
-                              IconButton(
-                                color: Colors.grey,
-                                onPressed: () {},
-                                icon: const Icon(
-                                  Icons.add,
-                                  size: 25,
-                                ),
-                              ),
-                              const SizedBox(width: 160 - 76),
-                            ],
-                          ),
-                        ],
-                      ),
-                    ),
+                                );
+                              },
+                            ),
+                          );
+                        }
+                      })
+                    ],
                   ),
-                );
-              },
+                ),
+              ],
             ),
-            Align(
-              alignment: Alignment.centerLeft,
-              child: Column(
-                crossAxisAlignment: CrossAxisAlignment.start,
-                children: [
-                  Padding(
-                    padding: const EdgeInsets.symmetric(horizontal: 20.0, vertical: 3),
-                    child: Text(
-                      'Total Amount : \$100', // Example total amount
-                      style: GoogleFonts.alata(
-                        letterSpacing: 1,
-                        fontSize: 20,
-                        fontWeight: FontWeight.bold,
-                      ),
-                    ),
-                  ),
-                  Padding(
-                    padding: const EdgeInsets.symmetric(horizontal: 20.0, vertical: 8),
-                    child: Text(
-                      'Total Quantity : 3', // Example total quantity
-                      style: GoogleFonts.alata(
-                        letterSpacing: 1,
-                        fontSize: 20,
-                        fontWeight: FontWeight.bold,
-                      ),
-                    ),
-                  ),
-                ],
-              ),
-            ),
-          ],
-        ),
+          ),
+        ],
       ),
-    );
-  }
+      );
 }
-    
+}

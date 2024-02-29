@@ -1,6 +1,5 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
-import 'package:google_fonts/google_fonts.dart';
 import 'package:ta_mobile/app/modules/Intro/controllers/intro_controller.dart';
 
 class IntroView extends GetView<IntroController> {
@@ -36,15 +35,6 @@ class IntroView extends GetView<IntroController> {
             const SizedBox(
               height: 80,
             ),
-            Text(
-              'SmartLib',
-              style: GoogleFonts.urbanist(
-                fontSize: 50,
-                fontWeight: FontWeight.bold,
-                color: Colors.black,
-              ),
-            ),
-            
           ],
         ),
       ),
