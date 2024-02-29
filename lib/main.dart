@@ -17,13 +17,10 @@ void main() async {
   await Firebase.initializeApp(options: DefaultFirebaseOptions.currentPlatform);
   await GoogleFonts.pendingFonts([
     GoogleFonts.urbanist(),
-    
   ]);
 
   runApp(MyApp());
 }
-
-
 
 class MyApp extends StatelessWidget {
   final authC = Get.put(AuthController(), permanent: true);
@@ -39,9 +36,12 @@ class MyApp extends StatelessWidget {
           String initialRoute = Routes.INTRO;
           Future.delayed(const Duration(seconds: 2), () {
             Get.offNamed(snapshot.data != null
-                ? authC.user.level == "Admin" || authC.user.level == "Petugas"
-                    ? Routes.DASHBOARD
-                    : Routes.HOME
+                ? snapshot.data!.emailVerified
+                    ? authC.user.level == "Admin" ||
+                            authC.user.level == "Petugas"
+                        ? Routes.DASHBOARD
+                        : Routes.HOME
+                    : Routes.AUTH
                 : Routes.LANDING_PAGE);
           });
 

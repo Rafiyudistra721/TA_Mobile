@@ -54,7 +54,7 @@ class ManageUlasanView extends GetView<ManageUlasanController> {
                         children: [
                           Padding(
                             padding: const EdgeInsets.all(16),
-                            child: Text('Daftar Ulasan: ${buku.judul}',
+                            child: Text('Daftar Ulasan Buku "${buku.judul}"',
                                 style: GoogleFonts.urbanist(fontSize: 30)),
                           ),
                         ],
@@ -70,10 +70,9 @@ class ManageUlasanView extends GetView<ManageUlasanController> {
                                   columns: columns,
                                   source: MyData(controller.listUlasan, controller.users),
                                   columnSpacing:
-                                      MediaQuery.of(context).size.width * .03,
+                                      MediaQuery.of(context).size.width * .05,
                                   horizontalMargin: 30,
-                                  rowsPerPage: 5,
-                                  dataRowMaxHeight: 200,
+                                  dataRowMaxHeight: 50,
                                 ),
                         ),
                       ),
