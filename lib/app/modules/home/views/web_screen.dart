@@ -3,17 +3,17 @@ import 'package:carousel_slider/carousel_slider.dart';
 import 'package:get/get.dart';
 import 'package:nb_utils/nb_utils.dart';
 import 'package:ta_mobile/app/routes/app_pages.dart';
-import 'package:ta_mobile/app/widgets/navbar.dart';
 import '../controllers/home_controller.dart';
+import 'package:ta_mobile/app/widgets/AppBar.dart';
 
 class WebScreen extends GetView<HomeController> {
   const WebScreen({Key? key}) : super(key: key);
-   @override
+  @override
   Widget build(BuildContext context) {
     return Scaffold(
-         body: Column(
+      appBar: appBar,
+      body: Column(
         children: [
-          NavBar(),
           Expanded(
             flex: 20,
             child: Column(
@@ -22,7 +22,7 @@ class WebScreen extends GetView<HomeController> {
                   flex: 8,
                   child: CarouselSlider(
                     options: CarouselOptions(
-                      aspectRatio: 42/8,
+                      aspectRatio: 42 / 8,
                       enlargeCenterPage: true,
                       pauseAutoPlayOnManualNavigate: true,
                       autoPlay: true,
@@ -269,22 +269,19 @@ class WebScreen extends GetView<HomeController> {
                     ],
                   ),
                 ),
-                Expanded(
-                  flex: 3,
+                Padding(
+                  padding: const EdgeInsets.only(top: 50),
                   child: Column(
-                    crossAxisAlignment: CrossAxisAlignment.start,
+                    crossAxisAlignment: CrossAxisAlignment.center,
                     children: [
-                      const Padding(
-                        padding: EdgeInsets.symmetric(
-                            horizontal: 40.0, vertical: 10,), 
-                        child: Align(
-                          alignment: Alignment.centerLeft,
-                          child: Text(
-                            'Kategori',
-                            style: TextStyle(
-                              fontWeight: FontWeight.bold,
-                              fontSize: 28,
-                            ),
+                      Padding(
+                        padding: const EdgeInsets.only(left: 20),
+                        child: Text(
+                          textAlign: TextAlign.start,
+                          'Genre Buku',
+                          style: TextStyle(
+                            fontSize: 40,
+                            fontWeight: FontWeight.w700,
                           ),
                         ),
                       ),
@@ -293,22 +290,23 @@ class WebScreen extends GetView<HomeController> {
                           return const CircularProgressIndicator();
                         } else {
                           return SizedBox(
-                            height: 70,
-                            width: double.infinity,
-                            child: ListView.builder(
-                              scrollDirection: Axis.horizontal,
-                              itemCount: controller.categories.length,
-                              itemBuilder: (context, index) {
-                                var category = controller.categories[index];
-                                var isActive = category.id! ==
-                                    controller.selectedCategory.value;
-                                var isActiveValue = isActive.obs;
-                                return Hero(
-                                    tag: 'category_${category.id}',
-                                    child: Padding(
-                                      padding: const EdgeInsets.symmetric(
-                                          vertical: 8.0, horizontal: 8.0),
-                                      child: ElevatedButton(
+                            height: 50,
+                            child: Padding(
+                              padding: const EdgeInsets.symmetric(horizontal: 400),
+                              child: ListView.builder(
+                                scrollDirection: Axis.horizontal,
+                                itemCount: controller.categories.length,
+                                itemBuilder: (context, index) {
+                                  var category = controller.categories[index];
+                                  var isActive = category.id! ==
+                                      controller.selectedCategory.value;
+                                  var isActiveValue = isActive.obs;
+                                  return Hero(
+                                      tag: 'category_${category.id}',
+                                      child: Padding(
+                                        padding: const EdgeInsets.symmetric(
+                                            vertical: 8.0, horizontal: 8.0),
+                                        child: ElevatedButton(
                                         onPressed: () async {
                                           controller.changeCategory(
                                               temp: category.id!);
@@ -320,25 +318,28 @@ class WebScreen extends GetView<HomeController> {
                                               ? Colors.red
                                               : controller.darkModeValue.value
                                                   ? Colors.white
-                                                  : Color.fromARGB(255, 25, 97, 192),
+                                                  : Color.fromARGB(255, 255, 255, 255),
                                         ),
-                                        child: Padding(
-                                          padding: const EdgeInsets.all(8.0),
-                                          child: Text(
-                                            category.namaKategori!,
-                                            style: TextStyle(
-                                              color: isActiveValue.value
-                                                  ? Colors.white
-                                                  : controller
-                                                          .darkModeValue.value
-                                                      ? Colors.white
-                                                      : Colors.black,
+                                          child: Padding(
+                                            padding: const EdgeInsets.all(4),
+                                            child: Text(
+                                              category.namaKategori!,
+                                              style: TextStyle(
+                                                fontWeight: FontWeight.bold,
+                                                fontSize: 18,
+                                                color: isActiveValue.value
+                                                    ? Colors.white
+                                                    : controller
+                                                            .darkModeValue.value
+                                                        ? Colors.white
+                                                        : Colors.black,
+                                              ),
                                             ),
                                           ),
                                         ),
-                                      ),
-                                    ));
-                              },
+                                      ));
+                                },
+                              ),
                             ),
                           );
                         }
@@ -354,20 +355,10 @@ class WebScreen extends GetView<HomeController> {
                         padding: const EdgeInsets.only(left: 35.0, right: 30),
                         child: Row(
                           children: [
-                            Obx(() => Text(
-                                  'Lagi Populer',
-                                  style: TextStyle(
-                                    fontSize: 28,
-                                    fontWeight: FontWeight.bold,
-                                    color: (controller.darkModeValue.value)
-                                        ? Colors.white
-                                        : Colors.grey.shade900,
-                                  ),
-                                )),
                             const Spacer(),
                             GestureDetector(
                               onTap: () {
-                                Navigator.of(context).pushNamed('viewScreen');
+                                Get.offNamed(Routes.SEMUA_BUKU);
                               },
                               child: Text(
                                 'Lihat Semua ▶',
@@ -396,7 +387,6 @@ class WebScreen extends GetView<HomeController> {
 
                           return SizedBox(
                             height: 320,
-                            width: double.infinity,
                             child: GridView.builder(
                               gridDelegate:
                                   const SliverGridDelegateWithFixedCrossAxisCount(
@@ -413,7 +403,7 @@ class WebScreen extends GetView<HomeController> {
                                   child: Container(
                                     margin: const EdgeInsets.symmetric(
                                         vertical: 10, horizontal: 20),
-                                    padding: const EdgeInsets.all(20),
+                                    padding: const EdgeInsets.all(10),
                                     decoration: BoxDecoration(
                                       borderRadius: BorderRadius.circular(20),
                                       color: Colors.white,
@@ -434,8 +424,9 @@ class WebScreen extends GetView<HomeController> {
                                             tag: book.id!,
                                             child: Image.network(
                                               book.coverBuku!,
-                                              height: 170,
-                                              width: 120,
+                                              
+                                              // height: 200,
+                                              // width: 160,
                                               fit: BoxFit.cover,
                                             )),
                                         10.height,
@@ -469,6 +460,6 @@ class WebScreen extends GetView<HomeController> {
           ),
         ],
       ),
-      );
-}
+    );
+  }
 }

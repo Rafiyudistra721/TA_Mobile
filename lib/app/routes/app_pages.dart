@@ -18,6 +18,8 @@ import '../modules/Manage_User/bindings/manage_user_binding.dart';
 import '../modules/Manage_User/views/manage_user_view.dart';
 import '../modules/Profil/bindings/profil_binding.dart';
 import '../modules/Profil/views/profil_view.dart';
+import '../modules/SemuaBuku/bindings/semua_buku_binding.dart';
+import '../modules/SemuaBuku/views/semua_buku_view.dart';
 import '../modules/auth/bindings/auth_binding.dart';
 import '../modules/auth/views/auth_view.dart';
 import '../modules/dashboard/bindings/dashboard_binding.dart';
@@ -41,7 +43,7 @@ class AppPages {
   static final routes = [
     GetPage(
       name: _Paths.HOME,
-      page: () => HomeView(),
+      page: () =>  HomeView(),
       binding: HomeBinding(),
     ),
     GetPage(
@@ -108,6 +110,11 @@ class AppPages {
       name: _Paths.PROFIL,
       page: () => ProfilView(),
       binding: ProfilBinding(),
+    ),
+    GetPage(
+      name: _Paths.SEMUA_BUKU,
+      page: () => const SemuaBukuView(),
+      binding: SemuaBukuBinding(),
     ),
   ];
 }
