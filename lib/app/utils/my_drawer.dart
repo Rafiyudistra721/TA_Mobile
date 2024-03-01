@@ -85,7 +85,7 @@ class MyDrawer extends StatelessWidget {
       selected: route != null && Get.currentRoute == route,
       onTap: () {
         if (route != null) {
-          Get.offAndToNamed(route);
+          Get.offAllNamed(route);
         } else {
           authController.logout();
         }

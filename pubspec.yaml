@@ -2,10 +2,10 @@ name: ta_mobile
 version: 1.0.0+1
 publish_to: none
 description: A new Flutter project.
-environment:
-  sdk: ">=3.2.0 <4.0.0"
+environment: 
+  sdk: '>=3.2.0 <4.0.0'
 
-dependencies:
+dependencies: 
   adaptive_scrollbar: 2.1.2
   carousel_slider: 4.2.1
   cloud_firestore: 4.13.6
@@ -17,24 +17,25 @@ dependencies:
   firebase_auth: 4.15.3
   firebase_core: 2.24.2
   firebase_storage: 11.5.6
-  flutter:
-    sdk: flutter
   get: 4.6.6
   google_fonts: 6.1.0
   google_sign_in: 6.2.1
   image_picker: 1.0.7
   intl: 0.19.0
-  nb_utils: 6.1.0
-
-dev_dependencies:
-  flutter_lints: ^2.0.0
-  flutter_test:
+  flutter_rating_bar: 4.0.1
+  nb_utils: 6.1.2
+  flutter: 
     sdk: flutter
 
-flutter:
-  fonts:
+dev_dependencies: 
+  flutter_lints: ^2.0.0
+  flutter_test: 
+    sdk: flutter
+
+flutter: 
+  fonts: 
     - family: Urbanist
-      fonts:
+      fonts: 
         - asset: assets/fonts/Urbanist-Thin.ttf
           weight: 100
         - asset: assets/fonts/Urbanist-ExtraLight.ttf
@@ -42,8 +43,8 @@ flutter:
         - asset: assets/fonts/Urbanist-Light.ttf
           weight: 300
         - asset: assets/fonts/Urbanist-Regular.ttf
-          weight: 400
           style: normal
+          weight: 400
         - asset: assets/fonts/Urbanist-Medium.ttf
           weight: 500
         - asset: assets/fonts/Urbanist-SemiBold.ttf
@@ -54,8 +55,7 @@ flutter:
           weight: 800
         - asset: assets/fonts/Urbanist-Black.ttf
           weight: 900
-
-  assets:
+  assets: 
     - assets/icons/logo_login.png
     - assets/icons/google.png
     - assets/icons/logo_landing.png
@@ -70,3 +70,4 @@ flutter:
     - assets/imgs/guyreadbookpng.png
     - assets/test.jpg
   uses-material-design: true
+

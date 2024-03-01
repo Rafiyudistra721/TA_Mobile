@@ -5,7 +5,7 @@ import 'package:get/get.dart';
 import 'package:ta_mobile/app/data/Models/buku_model.dart';
 import 'package:ta_mobile/app/data/Models/kategori_model.dart';
 
-class HomeController extends GetxController {
+class SemuaBukuController extends GetxController {
   var categories = <KategoriModel>[].obs;
   var selectedCategory = ''.obs;
   var allBooks = <BukuModel>[].obs;

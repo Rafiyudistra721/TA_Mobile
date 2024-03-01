@@ -10,7 +10,7 @@ class UlasanModel {
   String? userId;
   String? bukuId;
   String? ulasan;
-  int? rating;
+  double? rating;
 
   UlasanModel({
     this.id,
@@ -25,19 +25,19 @@ class UlasanModel {
     var json = doc.data() as Map<String, dynamic>?;
     return UlasanModel(
       id: doc.id,
-      userId: json?['Nama User'] as String,
-      bukuId: json?['Judul Buku'] as String,
-      ulasan: json?['Ulasan'] as String,
-      rating: json?['Rating'] as int,
+      userId: json?['userId'] as String,
+      bukuId: json?['bukuId'] as String,
+      ulasan: json?['ulasan'] as String,
+      rating: json?['rating'] as double,
     );
   }
 
   Map<String, dynamic> get toJson => {
         'id': id,
-        'Nama User': userId,
-        'Judul Buku': bukuId,
-        'Ulasan': ulasan,
-        'Rating': rating,
+        'userId': userId,
+        'bukuId': bukuId,
+        'ulasan': ulasan,
+        'rating': rating,
       };
 
   Database get db => Database(

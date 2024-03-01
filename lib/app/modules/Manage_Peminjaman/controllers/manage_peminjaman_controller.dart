@@ -34,6 +34,47 @@ class ManagePeminjamanController extends GetxController {
     }
   }
 
+  Future dipinjam(PinjamModel pinjamModel) async {
+    isSaving = true;
+    final hariIni = DateTime.now();
+    pinjamModel.statusPinjam = 'Dipinjam';
+    pinjamModel.tanggalPinjam = hariIni;
+    pinjamModel.tanggalKembali = hariIni.add(const Duration(days: 7));
+
+    try {
+      await pinjamModel.save();
+      toast('Buku telah dipinjamkan');
+      print('Success');
+      Get.back();
+    } catch (e) {
+      print(e);
+    } finally {
+      isSaving = false;
+    }
+  }
+
+  Future pengembalian(PinjamModel pinjamModel) async {
+    isSaving = true;
+    pinjamModel.statusPinjam = 'Dikembalikan';
+    try {
+      await pinjamModel.save();
+      toast('Buku telah dipinjamkan');
+      print('Success');
+      Get.back();
+    } catch (e) {
+      print(e);
+    } finally {
+      isSaving = false;
+    }
+  }
+
+  void checkIsLate(PinjamModel pinjamModel) {
+    if (DateTime.parse(pinjamModel.tanggalKembali!.toIso8601String())
+        .difference(DateTime.now()).inDays < 0) {
+      pinjamModel.statusPinjam = 'Terlambat';
+    }
+  }
+
   Future tolak(PinjamModel pinjamModel) async {
     isSaving = true;
     pinjamModel.statusPinjam = 'Ditolak';
@@ -73,15 +114,24 @@ class ManagePeminjamanController extends GetxController {
   }
 
   RxList<PinjamModel> rxPeminjaman = RxList<PinjamModel>();
-  List<PinjamModel> get listPeminjaman => rxPeminjaman.value;
-  set listPeminjaman(List<PinjamModel> value) => rxPeminjaman.value = value;
+  // List<PinjamModel> get listPeminjaman => rxPeminjaman.value;
+  // set listPeminjaman(List<PinjamModel> value) => rxPeminjaman.value = value;
 
   @override
   void onInit() {
+    super.onInit();
     rxPeminjaman.bindStream(PinjamModel().streamList());
+    rxPeminjaman.listen((listPeminjaman) {
+      updatePeminjamanStatus(listPeminjaman);
+    });
     fetchUsers();
     fetchBuku();
-    super.onInit();
+  }
+
+    void updatePeminjamanStatus(List<PinjamModel> peminjamanList) {
+    peminjamanList.forEach((pinjamModel) {
+      checkIsLate(pinjamModel);
+    });
   }
 
   @override

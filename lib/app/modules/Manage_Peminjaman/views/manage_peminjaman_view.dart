@@ -57,13 +57,13 @@ class ManagePeminjamanView extends GetView<ManagePeminjamanController> {
                       Obx(
                         () => Padding(
                           padding: const EdgeInsets.all(16),
-                          child: controller.listPeminjaman.isEmpty
+                          child: controller.rxPeminjaman.isEmpty
                               ? const Center(child: CircularProgressIndicator())
                               : PaginatedDataTable(
                                   showCheckboxColumn: false,
                                   showFirstLastButtons: true,
                                   columns: columns,
-                                  source: MyData(controller.listPeminjaman,
+                                  source: MyData(controller.rxPeminjaman,
                                       controller.books, controller.users),
                                   columnSpacing:
                                       MediaQuery.of(context).size.width * .03,
@@ -100,7 +100,9 @@ class MyData extends DataTableSource {
                   ? Colors.grey[400]
                   : listPeminjaman[index].statusPinjam == 'Diterima'
                       ? Colors.green[400]
-                      : Colors.red[400]),
+                      : listPeminjaman[index].statusPinjam == 'Dipinjam'
+                          ?  Colors.blue[400]
+                          :  Colors.red[400]),
           index: index,
           cells: [
             DataCell(Text(
@@ -139,7 +141,43 @@ class MyData extends DataTableSource {
                           );
                         },
                         child: const Text('DITERIMA'))
-                    : const SizedBox(),
+                    : listPeminjaman[index].statusPinjam == 'Diterima'
+                        ? ElevatedButton(
+                        onPressed: () {
+                          Get.defaultDialog(
+                            title: 'Ubah Status?',
+                            middleText:
+                                'Apakah anda yakin ingin mengubah status peminjaman menjadi Dipinjam?',
+                            onConfirm: () async {
+                              managePeminjamanController
+                                  .dipinjam(listPeminjaman[index]);
+                            },
+                            textConfirm: 'Iya',
+                            textCancel: 'Tidak',
+                            titleStyle: GoogleFonts.urbanist(fontSize: 15),
+                            middleTextStyle: GoogleFonts.urbanist(fontSize: 15),
+                          );
+                        },
+                        child: const Text('KONFIRMASI'))
+                        : listPeminjaman[index].statusPinjam == 'Dipinjam'
+                        ? ElevatedButton(
+                        onPressed: () {
+                          Get.defaultDialog(
+                            title: 'Konfirmasi Pengembalian Buku?',
+                            middleText:
+                                'Apakah anda yakin ingin mengonfirmasi pengembalian buku ini?',
+                            onConfirm: () async {
+                              managePeminjamanController
+                                  .pengembalian(listPeminjaman[index]);
+                            },
+                            textConfirm: 'Iya',
+                            textCancel: 'Tidak',
+                            titleStyle: GoogleFonts.urbanist(fontSize: 15),
+                            middleTextStyle: GoogleFonts.urbanist(fontSize: 15),
+                          );
+                        },
+                        child: const Text('PENGEMBALIAN'))
+                        :
                 listPeminjaman[index].statusPinjam == 'Menunggu Konfirmasi'
                     ? ElevatedButton(
                         onPressed: () {
