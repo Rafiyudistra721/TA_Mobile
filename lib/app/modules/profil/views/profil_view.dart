@@ -51,9 +51,8 @@ class ProfilView extends GetView<ProfilController> {
                     SizedBox(height: 10),
                     Text(
                       'Username:',
-                      style: TextStyle(
-                        fontSize: 25,
-                        fontWeight: FontWeight.bold),
+                      style:
+                          TextStyle(fontSize: 25, fontWeight: FontWeight.bold),
                     ),
                     Text(
                       'User1',
@@ -62,9 +61,8 @@ class ProfilView extends GetView<ProfilController> {
                     SizedBox(height: 10),
                     Text(
                       'Email:',
-                      style: TextStyle(
-                        fontSize: 25,
-                        fontWeight: FontWeight.bold),
+                      style:
+                          TextStyle(fontSize: 25, fontWeight: FontWeight.bold),
                     ),
                     Text(
                       'user1@example.com', // Add email here
@@ -73,9 +71,8 @@ class ProfilView extends GetView<ProfilController> {
                     SizedBox(height: 10),
                     Text(
                       'Alamat:',
-                      style: TextStyle(
-                        fontSize: 25,
-                        fontWeight: FontWeight.bold),
+                      style:
+                          TextStyle(fontSize: 25, fontWeight: FontWeight.bold),
                     ),
                     Text(
                       'Jl. A', // Add address here
