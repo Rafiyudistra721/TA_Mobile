@@ -24,6 +24,8 @@ import '../modules/auth/bindings/auth_binding.dart';
 import '../modules/auth/views/auth_view.dart';
 import '../modules/dashboard/bindings/dashboard_binding.dart';
 import '../modules/dashboard/views/dashboard_view.dart';
+import '../modules/denda/bindings/denda_binding.dart';
+import '../modules/denda/views/denda_view.dart';
 import '../modules/detail_buku/bindings/detail_buku_binding.dart';
 import '../modules/detail_buku/views/detail_buku_view.dart';
 import '../modules/home/bindings/home_binding.dart';
@@ -43,7 +45,7 @@ class AppPages {
   static final routes = [
     GetPage(
       name: _Paths.HOME,
-      page: () =>  HomeView(),
+      page: () => HomeView(),
       binding: HomeBinding(),
     ),
     GetPage(
@@ -115,6 +117,11 @@ class AppPages {
       name: _Paths.SEMUA_BUKU,
       page: () => const SemuaBukuView(),
       binding: SemuaBukuBinding(),
+    ),
+    GetPage(
+      name: _Paths.DENDA,
+      page: () => const DendaView(),
+      binding: DendaBinding(),
     ),
   ];
 }

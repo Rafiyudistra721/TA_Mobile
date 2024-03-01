@@ -16,12 +16,16 @@ class ProfilView extends GetView<ProfilController> {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        title: const Text('Profile'),
+        title: const Text('Profile', style: TextStyle(
+          fontSize: 30,
+          fontWeight: FontWeight.bold,
+        ),),
         centerTitle: true,
+        backgroundColor: Color(0xFF52958B),
       ),
       body: Container(
         decoration: BoxDecoration(
-          color: Colors.lightBlue,
+          color: Color(0xFF52958B),
         ),
         child: Center(
           child: Column(
@@ -99,14 +103,19 @@ class ProfilView extends GetView<ProfilController> {
                   ],
                 ),
                 child: Column(
-                  crossAxisAlignment: CrossAxisAlignment.start,
+                  crossAxisAlignment: CrossAxisAlignment.center,
+                  mainAxisAlignment: MainAxisAlignment.center,
                   children: [
-                    SizedBox(height: 20),
+                    SizedBox(height: 20,
+                    width: 100,),
                     ElevatedButton(
                       onPressed: () {
                         authC.logout();
                       },
-                      child: Text('Logout'),
+                      
+                      child: Text('Logout',
+                      style: TextStyle(fontWeight: FontWeight.bold,
+                      fontSize: 30, color: Colors.black),),
                     ),
                   ],
                 ),

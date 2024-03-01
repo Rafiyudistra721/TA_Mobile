@@ -25,7 +25,7 @@ class IntroView extends GetView<IntroController> {
               builder: (context, value, child) => Opacity(
                 opacity: value,
                 child: Image.asset(
-                  'assets/icons/logo_login.png',
+                  'assets/icons/logofinalfinal.png',
                   height:375,
                   width: 375,
                   ),
