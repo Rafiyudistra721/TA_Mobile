@@ -63,13 +63,13 @@ class Web_Screen extends GetView<DetailBukuController> {
           Expanded(
             flex: 5,
             child: Container(
-              decoration: BoxDecoration(
+              decoration: const BoxDecoration(
                 color: Colors.white,
-                borderRadius: const BorderRadius.only(
+                borderRadius: BorderRadius.only(
                   topLeft: Radius.circular(60),
                   topRight: Radius.circular(60),
                 ),
-                boxShadow: const [
+                boxShadow: [
                   BoxShadow(
                       color: Colors.black12,
                       offset: Offset(-2, -3),

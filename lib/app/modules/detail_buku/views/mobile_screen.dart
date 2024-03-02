@@ -11,7 +11,7 @@ class Mobile_Screen extends GetView<DetailBukuController> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      backgroundColor: const Color.fromARGB(255, 255, 255, 255), // Updated to blue color
+      backgroundColor: const Color(0xFF52958B), // Updated to blue color
       appBar: AppBar(
         leadingWidth: 100,
         leading: Padding(
@@ -27,8 +27,8 @@ class Mobile_Screen extends GetView<DetailBukuController> {
             ),
           ),
         ),
-        foregroundColor: Colors.lightBlue, // Updated to blue color
-        backgroundColor: Colors.lightBlue, // Updated to blue color
+        foregroundColor: Color(0xFF52958B), // Updated to blue color
+        backgroundColor: Color(0xFF52958B), // Updated to blue color
         elevation: 0,
         bottomOpacity: 0.0,
         scrolledUnderElevation: 0,
@@ -149,14 +149,6 @@ class Mobile_Screen extends GetView<DetailBukuController> {
                         child: Row(
                           mainAxisAlignment: MainAxisAlignment.spaceBetween,
                           children: [
-                            Text(
-                              '⭐️ 5.4',
-                              style: TextStyle(
-                                fontSize: 22,
-                                fontWeight: FontWeight.w600,
-                              ),
-                            ),
-                            Spacer(),
                             Text(
                               '',
                               style: TextStyle(
