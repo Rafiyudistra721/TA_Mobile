@@ -2,7 +2,9 @@
 import 'package:flutter/material.dart';
 // import 'package:ta_mobile/app/integrations/firestore.dart';
 import 'package:get/get.dart';
+import 'package:nb_utils/nb_utils.dart';
 import 'package:ta_mobile/app/routes/app_pages.dart';
+import 'package:ta_mobile/app/widgets/AppBar.dart';
 
 import '../controllers/detail_buku_controller.dart';
 
@@ -11,228 +13,188 @@ class Web_Screen extends GetView<DetailBukuController> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      backgroundColor: const Color.fromARGB(255, 255, 255, 255), // Updated to blue color
-      appBar: AppBar(
-        leadingWidth: 100,
-        leading: Padding(
-          padding:
-              const EdgeInsets.only(left: 22, top: 10, bottom: 10, right: 20),
-          child: ElevatedButton(
-            onPressed: () {
-              Navigator.pop(context);
-            },
-            child: const Icon(
-              Icons.arrow_back_ios_rounded,
-              color: Colors.grey,
-            ),
-          ),
-        ),
-        foregroundColor: const Color.fromARGB(255, 255, 255, 255), // Updated to blue color
-        backgroundColor: const Color.fromARGB(255, 247, 247, 247), // Updated to blue color
-        elevation: 0,
-        bottomOpacity: 0.0,
-        scrolledUnderElevation: 0,
-        actions: [
-          const SizedBox(
-            width: 10,
-          ),
-          Padding(
-            padding:
-                const EdgeInsets.only(left: 26, top: 10, bottom: 10, right: 22),
-            child: ElevatedButton(
-              onPressed: () {
-                Get.toNamed(Routes.KOLEKSI);
-              },
-              child: const Icon(
-                Icons.shopping_basket_outlined,
-                color: Colors.grey,
+      backgroundColor:
+          const Color.fromARGB(255, 255, 255, 255), // Updated to blue color
+      appBar: appBar,
+      body: Padding(
+        padding: EdgeInsets.all(10),
+        child: Column(
+          mainAxisAlignment: MainAxisAlignment.start,
+          crossAxisAlignment: CrossAxisAlignment.center,
+          children: [
+            Padding(
+              padding: const EdgeInsets.all(8.0),
+              child: Text(
+                'Detail Buku',
+                style: TextStyle(
+                    fontWeight: FontWeight.w700,
+                    fontFamily: 'urbanist',
+                    fontSize: 32),
               ),
             ),
-          ),
-          const SizedBox(
-            width: 6,
-          )
-        ],
-      ),
-      body: Column(
-        children: [
-          const Expanded(
-            flex: 2,
-            child: SizedBox(),
-          ),
-          Expanded(
-            flex: 5,
-            child: Container(
-              decoration: BoxDecoration(
-                color: Colors.white,
-                borderRadius: const BorderRadius.only(
-                  topLeft: Radius.circular(60),
-                  topRight: Radius.circular(60),
-                ),
-                boxShadow: const [
-                  BoxShadow(
-                      color: Colors.black12,
-                      offset: Offset(-2, -3),
-                      blurRadius: 12)
-                ],
-              ),
-              child: Stack(
-                children: [
-                  Column(
-                    crossAxisAlignment: CrossAxisAlignment.start,
-                    mainAxisAlignment: MainAxisAlignment.spaceEvenly,
-                    children: [
-                      const SizedBox(
-                        height: 80,
-                      ),
-                      const Spacer(
-                        flex: 8,
-                      ),
-                      const Padding(
-                        padding:
-                            EdgeInsets.symmetric(horizontal: 20.0, vertical: 5),
-                        child: Row(
-                          crossAxisAlignment: CrossAxisAlignment.end,
+            Expanded(
+                child: SingleChildScrollView(
+              child: Container(
+                padding: EdgeInsets.symmetric(vertical: 80),
+                color: const Color.fromARGB(255, 255, 255, 255),
+                child: Column(
+                  children: [
+                    Row(
+                      children: [
+                        const SizedBox(
+                          width: 20,
+                        ),
+                        Image.asset(
+                          'assets/test.jpg',
+                          height: defaultInkWellRadius,
+                          width: 300,
+                          fit: BoxFit.scaleDown,
+                        ),
+
+                        const SizedBox(width: 40), // Add spacing
+                        // Text on the right
+                        Expanded(
+                          child: Column(
+                            crossAxisAlignment: CrossAxisAlignment.start,
+                            children: [
+                              Text(
+                                'Judul',
+                                style: const TextStyle(
+                                    fontSize: 38,
+                                    fontWeight: FontWeight.w700,
+                                    fontFamily: 'urbanist'),
+                              ),
+                              const SizedBox(
+                                  height: 10), // Add spacing between texts
+                              Text(
+                                'Penulis:',
+                                style: const TextStyle(
+                                    fontSize: 22,
+                                    fontWeight: FontWeight.w500,
+                                    fontFamily: 'urbanist'),
+                              ),
+                              const SizedBox(
+                                  height: 10), // Add spacing between texts
+                              Text(
+                                'Penerbit:',
+                                style: const TextStyle(
+                                    fontSize: 22,
+                                    fontWeight: FontWeight.w500,
+                                    fontFamily: 'urbanist'),
+                              ),
+                              const SizedBox(
+                                  height: 10), // Add spacing between texts
+                              Text(
+                                'Tahun Terbit:',
+                                style: const TextStyle(
+                                    fontSize: 22,
+                                    fontWeight: FontWeight.w500,
+                                    fontFamily: 'urbanist'),
+                              ),
+                              const SizedBox(
+                                  height: 10), // Add spacing between texts
+                              Text(
+                                'Kategori:',
+                                style: const TextStyle(
+                                    fontSize: 22,
+                                    fontWeight: FontWeight.w500,
+                                    fontFamily: 'urbanist'),
+                              ),
+                              const SizedBox(height: 10),
+                              Text(
+                                'Sinopsis:',
+                                style: const TextStyle(
+                                    fontSize: 22,
+                                    fontWeight: FontWeight.w500,
+                                    fontFamily: 'urbanist'),
+                              ),
+                              const SizedBox(
+                                width: 10,
+                                height: 20,
+                              ),
+                              Row(// Use another Row to align icon and number
+                                  children: [
+                                const Icon(
+                                  // Replace with your desired icon
+                                  Icons.star,
+                                  color: Colors.amber,
+                                  size: 28,
+                                ),
+                                const SizedBox(
+                                    width:
+                                        5), // Add spacing between icon and number
+                                Text(
+                                  '4.5', // Replace with your rating value
+                                  style: const TextStyle(
+                                    fontSize: 22,
+                                    color: Colors.amber,
+                                  ),
+                                )
+                              ]),
+                            ],
+                          ),
+                        ),
+                      ],
+                    ),
+                    50.height,
+                    Column(
+                      mainAxisAlignment: MainAxisAlignment.start,
+                      children: [
+                        Row(
                           children: [
-                            Text(
-                              'BUKU 1',
-                              style: TextStyle(
-                                  fontWeight: FontWeight.w800, fontSize: 33),
-                            ),
-                            Spacer(),
-                            Padding(
-                              padding: EdgeInsets.all(5.0),
-                              child: Text(
-                                '',
-                                style: TextStyle(
-                                  fontWeight: FontWeight.bold,
-                                  fontSize: 22,
-                                  color: Colors.red,
+                            Expanded(
+                              child: Padding(
+                                padding: const EdgeInsets.only(left: 50),
+                                child: Text(
+                                  'Ulasan',
+                                  style: const TextStyle(
+                                      fontSize: 42,
+                                      fontWeight: FontWeight.w700,
+                                      fontFamily: 'urbanist'),
                                 ),
                               ),
                             ),
-                            SizedBox(
-                              width: 3,
-                            ),
-                            Text(
-                              'STOK : 1 ',
-                              style: TextStyle(
-                                fontWeight: FontWeight.w800,
-                                fontSize: 33,
-                              ),
-                            ),
                           ],
                         ),
-                      ),
-                      const Padding(
-                        padding: EdgeInsets.symmetric(horizontal: 20.0),
-                        child: Text(
-                          'Fiksi',
-                          style: TextStyle(
-                            fontWeight: FontWeight.bold,
-                            fontSize: 23,
-                            color: Colors.grey,
-                          ),
-                        ),
-                      ),
-                      const Spacer(),
-                      const Spacer(),
-                      Padding(
-                        padding: const EdgeInsets.symmetric(horizontal: 20.0),
-                        child: Divider(
-                          thickness: 1.7,
-                          color: Colors.grey.shade200,
-                        ),
-                      ),
-                      const Padding(
-                        padding: EdgeInsets.symmetric(horizontal: 20.0),
-                        child: Row(
-                          mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                          children: [
-                            Text(
-                              '⭐️ 5.4',
-                              style: TextStyle(
-                                fontSize: 22,
-                                fontWeight: FontWeight.w600,
-                              ),
-                            ),
-                            Spacer(),
-                            Text(
-                              '',
-                              style: TextStyle(
-                                fontSize: 22,
-                                fontWeight: FontWeight.w600,
-                              ),
-                            ),
-                            SizedBox(
-                              width: 5,
-                            ),
-                          ],
-                        ),
-                      ),
-                      Padding(
-                        padding: const EdgeInsets.symmetric(
-                            horizontal: 20.0, vertical: 40),
-                        child: Text(
-                          'Deskripsi',
-                          style: TextStyle(
-                            fontWeight: FontWeight.w500,
-                            fontSize: 22,
-                            wordSpacing: 1.4,
-                            color: Colors.grey.shade700,
-                          ),
-                        ),
-                      ),
-                      Padding(
-                        padding: const EdgeInsets.all(20.0),
-                        child: ElevatedButton(
-                          onPressed: () {
-                            Get.toNamed(Routes.KOLEKSI);
-                          },
-                          style: ButtonStyle(
-                            backgroundColor: MaterialStateProperty.all(
-                              Colors.black,
-                            ),
-                          ),
-                          child: Container(
-                            alignment: Alignment.center,
-                            height: 70,
-                            width: double.infinity,
-                            child: const Text(
-                              'Tambah Ke Koleksi',
-                              style: TextStyle(
-                                fontSize: 25,
-                                fontWeight: FontWeight.bold,
-                                color: Colors.white,
-                              ),
-                            ),
-                          ),
-                        ),
-                      ),
-                      const Spacer(),
-                    ],
-                  ),
-                  Transform.translate(
-                    offset: const Offset(0, -150),
-                    child: Transform.scale(
-                      scale: 0.6,
-                      child: Align(
-                        alignment: Alignment.topCenter,
-                        child: Hero(
-                          tag: '',
-                          child: Transform.translate(
-                            offset: const Offset(0, -250),
-                            child: Image.asset('assets/test.jpg'),
-                          ),
-                        ),
-                      ),
+                      ],
                     ),
-                  ),
-                ],
+                    const SizedBox(
+                      height: 20,
+                    ),
+                    Align(
+                        alignment: Alignment.centerLeft,
+                        child: DataTable(
+                          columns: [
+                            DataColumn(label: Text('Name')),
+                            DataColumn(label: Text('Rating')),
+                            DataColumn(label: Text('Review')),
+                          ],
+                          rows: [
+                            DataRow(cells: [
+                              DataCell(Text('User 1')),
+                              DataCell(Text('4.5')),
+                              DataCell(Text('Great book!')),
+                            ]),
+                            DataRow(cells: [
+                              DataCell(Text('User 2')),
+                              DataCell(Text('5')),
+                              DataCell(Text('Excellent read.')),
+                            ]),
+                            // Add more DataRow as needed
+                          ],
+                          decoration: BoxDecoration(
+                            color: Colors.grey,
+                            border: Border.all(color: const Color.fromARGB(255, 0, 0, 0), width: 1.0),
+                            borderRadius: BorderRadius.circular(5),
+                          ),
+                        )
+                        ),
+                  ],
+                ),
               ),
-            ),
-          ),
-        ],
+            ))
+          ],
+        ),
       ),
     );
   }

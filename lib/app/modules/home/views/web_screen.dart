@@ -424,9 +424,8 @@ class WebScreen extends GetView<HomeController> {
                                             tag: book.id!,
                                             child: Image.network(
                                               book.coverBuku!,
-                                              
-                                              // height: 200,
-                                              // width: 160,
+                                              height: 200,
+                                              width: 160,
                                               fit: BoxFit.cover,
                                             )),
                                         10.height,
