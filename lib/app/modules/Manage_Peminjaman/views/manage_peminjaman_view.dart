@@ -26,59 +26,56 @@ class ManagePeminjamanView extends GetView<ManagePeminjamanController> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      body: Padding(
-        padding: const EdgeInsets.all(8.0),
-        child: Row(
-          crossAxisAlignment: CrossAxisAlignment.start,
-          children: [
-            // open drawer
-            MyDrawer(),
-
-            // first half of page
-            Expanded(
-              flex: 1,
-              child: AdaptiveScrollbar(
+      body: Row(
+        crossAxisAlignment: CrossAxisAlignment.start,
+        children: [
+          // open drawer
+          MyDrawer(),
+      
+          // first half of page
+          Expanded(
+            flex: 1,
+            child: AdaptiveScrollbar(
+              controller: controller.verticalScrollController,
+              underColor: Colors.blueGrey.withOpacity(0.3),
+              sliderDefaultColor: active.withOpacity(0.7),
+              sliderActiveColor: active,
+              child: SingleChildScrollView(
                 controller: controller.verticalScrollController,
-                underColor: Colors.blueGrey.withOpacity(0.3),
-                sliderDefaultColor: active.withOpacity(0.7),
-                sliderActiveColor: active,
-                child: SingleChildScrollView(
-                  controller: controller.verticalScrollController,
-                  scrollDirection: Axis.vertical,
-                  child: Column(
-                    crossAxisAlignment: CrossAxisAlignment.start,
-                    mainAxisAlignment: MainAxisAlignment.start,
-                    children: [
-                      Padding(
+                scrollDirection: Axis.vertical,
+                child: Column(
+                  crossAxisAlignment: CrossAxisAlignment.start,
+                  mainAxisAlignment: MainAxisAlignment.start,
+                  children: [
+                    Padding(
+                      padding: const EdgeInsets.all(16),
+                      child: Text('Daftar Peminjam',
+                          style: GoogleFonts.urbanist(fontSize: 30)),
+                    ),
+                    Obx(
+                      () => Padding(
                         padding: const EdgeInsets.all(16),
-                        child: Text('Daftar Peminjam',
-                            style: GoogleFonts.urbanist(fontSize: 30)),
+                        child: controller.rxPeminjaman.isEmpty
+                            ? const Center(child: CircularProgressIndicator())
+                            : PaginatedDataTable(
+                                showCheckboxColumn: false,
+                                showFirstLastButtons: true,
+                                columns: columns,
+                                source: MyData(controller.rxPeminjaman,
+                                    controller.books, controller.users),
+                                columnSpacing:
+                                    MediaQuery.of(context).size.width * .03,
+                                horizontalMargin: 30,
+                                rowsPerPage: 10,
+                              ),
                       ),
-                      Obx(
-                        () => Padding(
-                          padding: const EdgeInsets.all(16),
-                          child: controller.rxPeminjaman.isEmpty
-                              ? const Center(child: CircularProgressIndicator())
-                              : PaginatedDataTable(
-                                  showCheckboxColumn: false,
-                                  showFirstLastButtons: true,
-                                  columns: columns,
-                                  source: MyData(controller.rxPeminjaman,
-                                      controller.books, controller.users),
-                                  columnSpacing:
-                                      MediaQuery.of(context).size.width * .03,
-                                  horizontalMargin: 30,
-                                  rowsPerPage: 10,
-                                ),
-                        ),
-                      ),
-                    ],
-                  ),
+                    ),
+                  ],
                 ),
               ),
             ),
-          ],
-        ),
+          ),
+        ],
       ),
     );
   }
@@ -95,14 +92,14 @@ class MyData extends DataTableSource {
   MyData(this.listPeminjaman, this.listBuku, this.listUser);
   @override
   DataRow getRow(int index) => DataRow.byIndex(
-          color: MaterialStatePropertyAll(
-              listPeminjaman[index].statusPinjam == 'Menunggu Konfirmasi'
-                  ? Colors.grey[400]
-                  : listPeminjaman[index].statusPinjam == 'Diterima'
-                      ? Colors.green[400]
-                      : listPeminjaman[index].statusPinjam == 'Dipinjam'
-                          ?  Colors.blue[400]
-                          :  Colors.red[400]),
+          // color: MaterialStatePropertyAll(
+          //     listPeminjaman[index].statusPinjam == 'Menunggu Konfirmasi'
+          //         ? Colors.grey[400]
+          //         : listPeminjaman[index].statusPinjam == 'Diterima'
+          //             ? Colors.green[400]
+          //             : listPeminjaman[index].statusPinjam == 'Dipinjam'
+          //                 ?  Colors.blue[400]
+          //                 :  Colors.red[400]),
           index: index,
           cells: [
             DataCell(Text(
@@ -125,6 +122,9 @@ class MyData extends DataTableSource {
               children: [
                 listPeminjaman[index].statusPinjam == 'Menunggu Konfirmasi'
                     ? ElevatedButton(
+                        style: ButtonStyle(
+                            backgroundColor:
+                                MaterialStatePropertyAll(Colors.grey[400])),
                         onPressed: () {
                           Get.defaultDialog(
                             title: 'Terima permintaan peminjaman?',
@@ -143,41 +143,85 @@ class MyData extends DataTableSource {
                         child: const Text('DITERIMA'))
                     : listPeminjaman[index].statusPinjam == 'Diterima'
                         ? ElevatedButton(
-                        onPressed: () {
-                          Get.defaultDialog(
-                            title: 'Ubah Status?',
-                            middleText:
-                                'Apakah anda yakin ingin mengubah status peminjaman menjadi Dipinjam?',
-                            onConfirm: () async {
-                              managePeminjamanController
-                                  .dipinjam(listPeminjaman[index]);
+                            style: ButtonStyle(
+                                backgroundColor: MaterialStatePropertyAll(
+                                    Colors.green[400])),
+                            onPressed: () {
+                              Get.defaultDialog(
+                                title: 'Ubah Status?',
+                                middleText:
+                                    'Apakah anda yakin ingin mengubah status peminjaman menjadi Dipinjam?',
+                                onConfirm: () async {
+                                  managePeminjamanController.dipinjam(
+                                      listPeminjaman[index],
+                                      listBuku.firstWhere((cat) =>
+                                          cat.id ==
+                                          listPeminjaman[index].bukuId));
+                                },
+                                textConfirm: 'Iya',
+                                textCancel: 'Tidak',
+                                titleStyle: GoogleFonts.urbanist(fontSize: 15),
+                                middleTextStyle:
+                                    GoogleFonts.urbanist(fontSize: 15),
+                              );
                             },
-                            textConfirm: 'Iya',
-                            textCancel: 'Tidak',
-                            titleStyle: GoogleFonts.urbanist(fontSize: 15),
-                            middleTextStyle: GoogleFonts.urbanist(fontSize: 15),
-                          );
-                        },
-                        child: const Text('KONFIRMASI'))
+                            child: const Text('KONFIRMASI'))
                         : listPeminjaman[index].statusPinjam == 'Dipinjam'
-                        ? ElevatedButton(
-                        onPressed: () {
-                          Get.defaultDialog(
-                            title: 'Konfirmasi Pengembalian Buku?',
-                            middleText:
-                                'Apakah anda yakin ingin mengonfirmasi pengembalian buku ini?',
-                            onConfirm: () async {
-                              managePeminjamanController
-                                  .pengembalian(listPeminjaman[index]);
-                            },
-                            textConfirm: 'Iya',
-                            textCancel: 'Tidak',
-                            titleStyle: GoogleFonts.urbanist(fontSize: 15),
-                            middleTextStyle: GoogleFonts.urbanist(fontSize: 15),
-                          );
-                        },
-                        child: const Text('PENGEMBALIAN'))
-                        :
+                            ? ElevatedButton(
+                                style: ButtonStyle(
+                                    backgroundColor: MaterialStatePropertyAll(
+                                        Colors.blue[400])),
+                                onPressed: () {
+                                  Get.defaultDialog(
+                                    title: 'Konfirmasi Pengembalian Buku?',
+                                    middleText:
+                                        'Apakah anda yakin ingin mengonfirmasi pengembalian buku ini?',
+                                    onConfirm: () async {
+                                      managePeminjamanController.pengembalian(
+                                          listPeminjaman[index],
+                                          listBuku.firstWhere((cat) =>
+                                              cat.id ==
+                                              listPeminjaman[index].bukuId));
+                                    },
+                                    textConfirm: 'Iya',
+                                    textCancel: 'Tidak',
+                                    titleStyle:
+                                        GoogleFonts.urbanist(fontSize: 15),
+                                    middleTextStyle:
+                                        GoogleFonts.urbanist(fontSize: 15),
+                                  );
+                                },
+                                child: const Text('PENGEMBALIAN'))
+                            : listPeminjaman[index].statusPinjam == 'Terlambat'
+                                ? ElevatedButton(
+                                    style: ButtonStyle(
+                                        backgroundColor:
+                                            MaterialStatePropertyAll(
+                                                Colors.red[400])),
+                                    onPressed: () {
+                                      Get.defaultDialog(
+                                        title: 'Konfirmasi Pengembalian Buku yang terlambat?',
+                                        middleText:
+                                            'Apakah anda yakin ingin mengonfirmasi pengembalian buku ini?',
+                                        onConfirm: () async {
+                                          managePeminjamanController
+                                              .pengembalian(
+                                                  listPeminjaman[index],
+                                                  listBuku.firstWhere((cat) =>
+                                                      cat.id ==
+                                                      listPeminjaman[index]
+                                                          .bukuId));
+                                        },
+                                        textConfirm: 'Iya',
+                                        textCancel: 'Tidak',
+                                        titleStyle:
+                                            GoogleFonts.urbanist(fontSize: 15),
+                                        middleTextStyle:
+                                            GoogleFonts.urbanist(fontSize: 15),
+                                      );
+                                    },
+                                    child: const Text('PENGEMBALIAN BUKU TERLAMBAT'))
+                                : Container(),
                 listPeminjaman[index].statusPinjam == 'Menunggu Konfirmasi'
                     ? ElevatedButton(
                         onPressed: () {

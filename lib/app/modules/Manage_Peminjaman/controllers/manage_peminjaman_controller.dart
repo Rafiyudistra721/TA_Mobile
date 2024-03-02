@@ -34,15 +34,17 @@ class ManagePeminjamanController extends GetxController {
     }
   }
 
-  Future dipinjam(PinjamModel pinjamModel) async {
+  Future dipinjam(PinjamModel pinjamModel, BukuModel bukuModel) async {
     isSaving = true;
     final hariIni = DateTime.now();
     pinjamModel.statusPinjam = 'Dipinjam';
     pinjamModel.tanggalPinjam = hariIni;
     pinjamModel.tanggalKembali = hariIni.add(const Duration(days: 7));
+    bukuModel.jumlah = bukuModel.jumlah! -1;
 
     try {
       await pinjamModel.save();
+      await bukuModel.save();
       toast('Buku telah dipinjamkan');
       print('Success');
       Get.back();
@@ -53,11 +55,14 @@ class ManagePeminjamanController extends GetxController {
     }
   }
 
-  Future pengembalian(PinjamModel pinjamModel) async {
+  Future pengembalian(PinjamModel pinjamModel, BukuModel bukuModel) async {
     isSaving = true;
     pinjamModel.statusPinjam = 'Dikembalikan';
+    bukuModel.jumlah = bukuModel.jumlah! + 1;
+
     try {
       await pinjamModel.save();
+      await bukuModel.save();
       toast('Buku telah dipinjamkan');
       print('Success');
       Get.back();
@@ -68,11 +73,19 @@ class ManagePeminjamanController extends GetxController {
     }
   }
 
-  void checkIsLate(PinjamModel pinjamModel) {
-    if (DateTime.parse(pinjamModel.tanggalKembali!.toIso8601String())
+  void checkIsLate(PinjamModel pinjamModel) async {
+  if (pinjamModel.statusPinjam != 'Dikembalikan' && DateTime.parse(pinjamModel.tanggalKembali!.toIso8601String())
         .difference(DateTime.now()).inDays < 0) {
-      pinjamModel.statusPinjam = 'Terlambat';
+    isSaving = true;
+    pinjamModel.statusPinjam = 'Terlambat';
+    try {
+      await pinjamModel.save();
+    } catch (e) {
+      print(e);
+    } finally {
+      isSaving = false;
     }
+  }
   }
 
   Future tolak(PinjamModel pinjamModel) async {
@@ -98,7 +111,7 @@ class ManagePeminjamanController extends GetxController {
         users.assignAll(usersList);
       });
     } catch (e) {
-      print('Error fetching categories:  $e');
+      print('Gagal mendapatkan data pengguna:  $e');
     }
   }
 
@@ -109,7 +122,7 @@ class ManagePeminjamanController extends GetxController {
         books.assignAll(categoriesList);
       });
     } catch (e) {
-      print('Error fetching categories:  $e');
+      print('Gagal mendapatkan data buku:  $e');
     }
   }
 

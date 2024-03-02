@@ -1,8 +1,8 @@
-import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:nb_utils/nb_utils.dart';
 import 'package:ta_mobile/app/modules/auth/controllers/auth_controller.dart';
+import 'package:ta_mobile/app/utils/scalesize.dart';
 
 class WebScreenAuth extends GetView<AuthController> {
   final GlobalKey<FormState> formKey = GlobalKey();
@@ -21,68 +21,79 @@ class WebScreenAuth extends GetView<AuthController> {
               bottom: 20,
               left: 20,
               child: Container(
-                width: widthContainers * .49,
-                // alignment: Alignment.center,
-                padding: const EdgeInsets.all(20),
-                decoration: const BoxDecoration(
-                    boxShadow: [
-                      BoxShadow(
-                    color: Colors.black26,
-                    offset: Offset(-1, -2),
-                    blurRadius: 15,
-                  ),
-                    ],
-                    borderRadius: BorderRadius.only(
-                        bottomLeft: Radius.circular(10),
-                        topLeft: Radius.circular(10)),
-                    gradient: LinearGradient(
-                        colors: <Color>[Color(0xff004D47), Color(0xff128277)])),
-                child: Obx(() => Column(
-                                  mainAxisAlignment: MainAxisAlignment.center,
-                                  crossAxisAlignment: CrossAxisAlignment.center,
-                                  children: [
-                                    Text( controller.isRegis
-                                      ?'Halo!'
-                                      :'Selamat Datang Kembali!',
-                                      style: const TextStyle(
-                                        fontSize: 43,
-                                        color: Colors.white,
-                                        fontWeight: FontWeight.bold
-                                      ),
-                                    ),
-                                    20.height,
-                                    Text( controller.isRegis
-                                    ? 'Silahkan lengkapi data-data di samping ini untuk mendaftar'
-                                    : 'Masukkan Email dan Password anda untuk masuk',
-                                      style: const TextStyle(
-                                        fontSize: 18,
-                                        color: Colors.white,
-                                      ),
-                                    ),
-                                    50.height,
-                                    Text( controller.isRegis
-                                    ? 'Jika anda sudah memiliki akun, klik tombol dibawah ini'
-                                    : 'Jika anda belum memiliki akun, klik tombol dibawah ini',
-                                      style: const TextStyle(
-                                        fontSize: 13,
-                                        color: Colors.white,
-                                      ),
-                    ),
-                    20.height,
-                    OutlinedButton(
-                      onPressed: () {
-                        controller.isRegis = !controller.isRegis;
-                      }, 
-                      style: const ButtonStyle(
-                        foregroundColor: MaterialStatePropertyAll(Colors.white),
-                        side: MaterialStatePropertyAll(BorderSide(color: Colors.white))),
-                      child: Text(controller.isRegis
-                          ? "Masuk"
-                          : "Daftar"
-                          ))
-                  ],
-                ))
-              )),
+                  width: widthContainers * .49,
+                  // alignment: Alignment.center,
+                  padding: const EdgeInsets.all(20),
+                  decoration: const BoxDecoration(
+                      boxShadow: [
+                        BoxShadow(
+                          color: Colors.black26,
+                          offset: Offset(-1, -2),
+                          blurRadius: 15,
+                        ),
+                      ],
+                      borderRadius: BorderRadius.only(
+                          bottomLeft: Radius.circular(10),
+                          topLeft: Radius.circular(10)),
+                      gradient: LinearGradient(colors: <Color>[
+                        Color(0xff004D47),
+                        Color(0xff128277)
+                      ])),
+                  child: Obx(() => Column(
+                        mainAxisAlignment: MainAxisAlignment.center,
+                        crossAxisAlignment: CrossAxisAlignment.center,
+                        children: [
+                          Text(
+                            controller.isRegis
+                                ? 'Halo!'
+                                : 'Selamat Datang Kembali!',
+                            style: const TextStyle(
+                                color: Colors.white,
+                                fontWeight: FontWeight.bold),
+                            textScaler: TextScaler.linear(
+                                ScaleSize.textScaleFactor(context,
+                                    maxTextScaleFactor: 3)),
+                          ),
+                          20.height,
+                          Text(
+                            controller.isRegis
+                                ? 'Silahkan lengkapi data-data di samping ini untuk mendaftar'
+                                : 'Masukkan Email dan Password anda untuk masuk',
+                            style: const TextStyle(
+                              color: Colors.white,
+                            ),
+                            textScaler: TextScaler.linear(
+                                ScaleSize.textScaleFactor(context,
+                                    maxTextScaleFactor: 1.4)),
+                          ),
+                          50.height,
+                          Text(
+                            controller.isRegis
+                                ? 'Anda sudah memiliki akun? klik tombol dibawah ini'
+                                : 'Anda belum memiliki akun? klik tombol dibawah ini',
+                            style: const TextStyle(
+                              color: Colors.white,
+                            ),
+                            textScaler: TextScaler.linear(
+                                ScaleSize.textScaleFactor(context,
+                                    maxTextScaleFactor: 1.1)),
+                          ),
+                          20.height,
+                          OutlinedButton(
+                              onPressed: () {
+                                controller.isRegis = !controller.isRegis;
+                              },
+                              style: const ButtonStyle(
+                                  foregroundColor:
+                                      MaterialStatePropertyAll(Colors.white),
+                                  side: MaterialStatePropertyAll(
+                                      BorderSide(color: Colors.white))),
+                              child: Text(
+                                controller.isRegis ? "Masuk" : "Daftar",
+                                style: const TextStyle(fontSize: 18),
+                              ))
+                        ],
+                      )))),
           Positioned(
             top: 20,
             bottom: 20,

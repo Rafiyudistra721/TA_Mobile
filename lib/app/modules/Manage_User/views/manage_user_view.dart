@@ -22,55 +22,52 @@ class ManageUserView extends GetView<ManageUserController> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      body: Padding(
-        padding: const EdgeInsets.all(8.0),
-        child: Row(
-          crossAxisAlignment: CrossAxisAlignment.start,
-          children: [
-            // open drawer
-            MyDrawer(),
-
-            // first half of page
-            Expanded(
-              flex: 1,
-              child: AdaptiveScrollbar(
+      body: Row(
+        crossAxisAlignment: CrossAxisAlignment.start,
+        children: [
+          // open drawer
+          MyDrawer(),
+      
+          // first half of page
+          Expanded(
+            flex: 1,
+            child: AdaptiveScrollbar(
+              controller: controller.verticalScrollController,
+              underColor: Colors.blueGrey.withOpacity(0.3),
+              sliderDefaultColor: active.withOpacity(0.7),
+              sliderActiveColor: active,
+              child: SingleChildScrollView(
                 controller: controller.verticalScrollController,
-                underColor: Colors.blueGrey.withOpacity(0.3),
-                sliderDefaultColor: active.withOpacity(0.7),
-                sliderActiveColor: active,
-                child: SingleChildScrollView(
-                  controller: controller.verticalScrollController,
-                  scrollDirection: Axis.vertical,
-                  child: Column(
-                    crossAxisAlignment: CrossAxisAlignment.start,
-                    mainAxisAlignment: MainAxisAlignment.start,
-                    children: [
-                      Padding(padding: const EdgeInsets.all(16),
-                          child: Text('Daftar Pengguna',
-                              style: GoogleFonts.urbanist(fontSize: 30)),),
-                      Obx(() => Padding(
-                            padding: const EdgeInsets.all(16),
-                            child: controller.listUser.isEmpty
-                                ? const Center(
-                                    child: CircularProgressIndicator())
-                                : PaginatedDataTable(
-                                      showCheckboxColumn: false,
-                                      showFirstLastButtons: true,
-                                      columns: columns,
-                                      source: MyData(controller.listUser),
-                                      columnSpacing: MediaQuery.of(context).size.width / 11,
-                                      horizontalMargin: 30,
-                                      rowsPerPage: 5,
-                                    ),
+                scrollDirection: Axis.vertical,
+                child: Column(
+                  crossAxisAlignment: CrossAxisAlignment.start,
+                  mainAxisAlignment: MainAxisAlignment.start,
+                  children: [
+                    Padding(padding: const EdgeInsets.all(16),
+                        child: Text('Daftar Pengguna',
+                            style: GoogleFonts.urbanist(fontSize: 30)),),
+                    Obx(() => Padding(
+                          padding: const EdgeInsets.all(16),
+                          child: controller.listUser.isEmpty
+                              ? const Center(
+                                  child: CircularProgressIndicator())
+                              : PaginatedDataTable(
+                                    showCheckboxColumn: false,
+                                    showFirstLastButtons: true,
+                                    columns: columns,
+                                    source: MyData(controller.listUser),
+                                    columnSpacing: MediaQuery.of(context).size.width / 11,
+                                    horizontalMargin: 30,
+                                    rowsPerPage: 5,
                                   ),
-                          ),
-                    ],
-                  ),
+                                ),
+                        ),
+                  ],
                 ),
               ),
             ),
-          ],
-        ),
+          ),
+        ],
       ),
     );
   }

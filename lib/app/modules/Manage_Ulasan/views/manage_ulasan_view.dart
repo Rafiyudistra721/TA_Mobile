@@ -27,62 +27,59 @@ class ManageUlasanView extends GetView<ManageUlasanController> {
   Widget build(BuildContext context) {
     controller.modelToController(buku);
     return Scaffold(
-      body: Padding(
-        padding: const EdgeInsets.all(8.0),
-        child: Row(
-          crossAxisAlignment: CrossAxisAlignment.start,
-          children: [
-            // open drawer
-            MyDrawer(),
-            // first half of page
-            Expanded(
-              flex: 1,
-              child: AdaptiveScrollbar(
+      body: Row(
+        crossAxisAlignment: CrossAxisAlignment.start,
+        children: [
+          // open drawer
+          MyDrawer(),
+          // first half of page
+          Expanded(
+            flex: 1,
+            child: AdaptiveScrollbar(
+              controller: controller.verticalScrollController,
+              underColor: Colors.blueGrey.withOpacity(0.3),
+              sliderDefaultColor: active.withOpacity(0.7),
+              sliderActiveColor: active,
+              child: SingleChildScrollView(
                 controller: controller.verticalScrollController,
-                underColor: Colors.blueGrey.withOpacity(0.3),
-                sliderDefaultColor: active.withOpacity(0.7),
-                sliderActiveColor: active,
-                child: SingleChildScrollView(
-                  controller: controller.verticalScrollController,
-                  scrollDirection: Axis.vertical,
-                  child: Column(
-                    crossAxisAlignment: CrossAxisAlignment.start,
-                    mainAxisAlignment: MainAxisAlignment.start,
-                    children: [
-                      Row(
-                        mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                        children: [
-                          Padding(
-                            padding: const EdgeInsets.all(16),
-                            child: Text('Daftar Ulasan Buku "${buku.judul}"',
-                                style: GoogleFonts.urbanist(fontSize: 30)),
-                          ),
-                        ],
-                      ),
-                      Obx(
-                        () => Padding(
+                scrollDirection: Axis.vertical,
+                child: Column(
+                  crossAxisAlignment: CrossAxisAlignment.start,
+                  mainAxisAlignment: MainAxisAlignment.start,
+                  children: [
+                    Row(
+                      mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                      children: [
+                        Padding(
                           padding: const EdgeInsets.all(16),
-                          child: controller.listUlasan.isEmpty
-                              ? const Center(child: Text('Belum ada ulasan yang diberikan oleh pengguna'))
-                              : PaginatedDataTable(
-                                  showCheckboxColumn: false,
-                                  showFirstLastButtons: true,
-                                  columns: columns,
-                                  source: MyData(controller.listUlasan, controller.users),
-                                  columnSpacing:
-                                      MediaQuery.of(context).size.width * .05,
-                                  horizontalMargin: 30,
-                                  dataRowMaxHeight: 50,
-                                ),
+                          child: Text('Daftar Ulasan Buku "${buku.judul}"',
+                              style: GoogleFonts.urbanist(fontSize: 30)),
                         ),
+                      ],
+                    ),
+                    Obx(
+                      () => Padding(
+                        padding: const EdgeInsets.all(16),
+                        child: controller.listUlasan.isEmpty
+                            ? const Center(child: Text('Belum ada ulasan yang diberikan oleh pengguna'))
+                            : PaginatedDataTable(
+                                showCheckboxColumn: false,
+                                showFirstLastButtons: true,
+                                columns: columns,
+                                source: MyData(controller.listUlasan, controller.users),
+                                columnSpacing:
+                                    MediaQuery.of(context).size.width * .05,
+                                horizontalMargin: 30,
+                                dataRowMaxHeight: 50,
+                              ),
                       ),
-                    ],
-                  ),
+                    ),
+                  ],
                 ),
               ),
             ),
-          ],
-        ),
+          ),
+        ],
       ),
     );
   }

@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
+import 'package:ta_mobile/app/modules/auth/controllers/auth_controller.dart';
 import 'package:ta_mobile/app/modules/dashboard/controllers/dashboard_controller.dart';
 import 'package:ta_mobile/app/utils/colors.dart';
 import 'package:ta_mobile/app/utils/my_Box.dart';
@@ -8,7 +9,8 @@ import 'package:ta_mobile/app/utils/my_tile.dart';
 import 'package:google_fonts/google_fonts.dart';
 
 class DashboardView extends GetView<DashboardController> {
-  const DashboardView({Key? key}) : super(key: key);
+  final authC = Get.put(AuthController()); 
+  DashboardView({Key? key}) : super(key: key);
   bool isDesktop(BuildContext context) =>
       MediaQuery.of(context).size.width >= 600;
 
@@ -19,62 +21,28 @@ class DashboardView extends GetView<DashboardController> {
   Widget build(BuildContext context) {
     if (isDesktop(context)) {
       return Scaffold(
-        body: Padding(
-          padding: const EdgeInsets.all(8.0),
-          child: Row(
-            crossAxisAlignment: CrossAxisAlignment.start,
-            children: [
-              // open drawer
-              MyDrawer(),
-
-              // first half of page
-              Expanded(
-                flex: 2,
-                child: Column(
-                  children: [
-                    // first 4 boxes in grid
-                    AspectRatio(
-                      aspectRatio: 4,
-                      child: Row(
-                        children: [
-                          Expanded(
-                            flex: 8,
-                            child: Padding(
-                              padding: const EdgeInsets.all(15.0),
-                              child: Container(
-                                  decoration: BoxDecoration(
-                                      color: Colors.blueGrey.withOpacity(0.3),
-                                      border: const Border(
-                                        top: BorderSide(
-                                          color: Color(0xFF3C19C0),
-                                          width: 10,
-                                        ),
-                                      ),
-                                      borderRadius: BorderRadius.circular(5)),
-                                  child: Column(
-                                    mainAxisAlignment: MainAxisAlignment.center,
-                                    children: [
-                                      Text(
-                                        'Jumlah Peminjam',
-                                        style:
-                                            GoogleFonts.urbanist(fontSize: 18),
-                                      ),
-                                      Obx(() => Text(
-                                            controller.listPeminjam.length
-                                                .toString(),
-                                            style: GoogleFonts.urbanist(
-                                                fontSize: 17),
-                                          )),
-                                    ],
-                                  )),
-                            ),
-                          ),
-                          Expanded(
-                            flex: 8,
-                            child: Padding(
-                              padding: const EdgeInsets.all(15.0),
-                              child: Container(
-                                  decoration: BoxDecoration(
+        body: Row(
+          crossAxisAlignment: CrossAxisAlignment.start,
+          children: [
+            // open drawer
+            MyDrawer(),
+        
+            // first half of page
+            Expanded(
+              flex: 2,
+              child: Column(
+                children: [
+                  // first 4 boxes in grid
+                  AspectRatio(
+                    aspectRatio: 4,
+                    child: Row(
+                      children: [
+                        Expanded(
+                          flex: 8,
+                          child: Padding(
+                            padding: const EdgeInsets.all(15.0),
+                            child: Container(
+                                decoration: BoxDecoration(
                                     color: Colors.blueGrey.withOpacity(0.3),
                                     border: const Border(
                                       top: BorderSide(
@@ -82,63 +50,63 @@ class DashboardView extends GetView<DashboardController> {
                                         width: 10,
                                       ),
                                     ),
-                                    borderRadius: BorderRadius.circular(5),
-                                  ),
-                                  child: Column(
-                                    mainAxisAlignment: MainAxisAlignment.center,
-                                    children: [
-                                      Text(
-                                        'Jumlah Petugas',
-                                        style:
-                                            GoogleFonts.urbanist(fontSize: 18),
-                                      ),
-                                      Obx(() => Text(
-                                          controller.listPetugas.length
+                                    borderRadius: BorderRadius.circular(5)),
+                                child: Column(
+                                  mainAxisAlignment: MainAxisAlignment.center,
+                                  children: [
+                                    Text(
+                                      'Jumlah Peminjam',
+                                      style:
+                                          GoogleFonts.urbanist(fontSize: 18),
+                                    ),
+                                    Obx(() => Text(
+                                          controller.listPeminjam.length
                                               .toString(),
                                           style: GoogleFonts.urbanist(
-                                              fontSize: 17))),
-                                    ],
-                                  )),
-                            ),
+                                              fontSize: 17),
+                                        )),
+                                  ],
+                                )),
                           ),
-                          Expanded(
-                            flex: 8,
-                            child: Padding(
-                              padding: const EdgeInsets.all(15.0),
-                              child: Container(
-                                  decoration: BoxDecoration(
-                                      color: Colors.blueGrey.withOpacity(0.3),
-                                      border: const Border(
-                                        top: BorderSide(
-                                          color: Color(0xFF3C19C0),
-                                          width: 10,
-                                        ),
-                                      ),
-                                      borderRadius: BorderRadius.circular(5)),
-                                  child: Column(
-                                    mainAxisAlignment: MainAxisAlignment.center,
-                                    children: [
-                                      Text(
-                                        'Jumlah Buku',
-                                        style:
-                                            GoogleFonts.urbanist(fontSize: 18),
-                                      ),
-                                      Obx(() => Text(
-                                            controller.listBuku.length
-                                                .toString(),
-                                            style: GoogleFonts.urbanist(
-                                                fontSize: 17),
-                                          )),
-                                    ],
-                                  )),
-                            ),
+                        ),
+                        Expanded(
+                          flex: 8,
+                          child: Padding(
+                            padding: const EdgeInsets.all(15.0),
+                            child: Container(
+                                decoration: BoxDecoration(
+                                  color: Colors.blueGrey.withOpacity(0.3),
+                                  border: const Border(
+                                    top: BorderSide(
+                                      color: Color(0xFF3C19C0),
+                                      width: 10,
+                                    ),
+                                  ),
+                                  borderRadius: BorderRadius.circular(5),
+                                ),
+                                child: Column(
+                                  mainAxisAlignment: MainAxisAlignment.center,
+                                  children: [
+                                    Text(
+                                      'Jumlah Petugas',
+                                      style:
+                                          GoogleFonts.urbanist(fontSize: 18),
+                                    ),
+                                    Obx(() => Text(
+                                        controller.listPetugas.length
+                                            .toString(),
+                                        style: GoogleFonts.urbanist(
+                                            fontSize: 17))),
+                                  ],
+                                )),
                           ),
-                          Expanded(
-                            flex: 8,
-                            child: Padding(
-                              padding: const EdgeInsets.all(15.0),
-                              child: Container(
-                                  decoration: BoxDecoration(
+                        ),
+                        Expanded(
+                          flex: 8,
+                          child: Padding(
+                            padding: const EdgeInsets.all(15.0),
+                            child: Container(
+                                decoration: BoxDecoration(
                                     color: Colors.blueGrey.withOpacity(0.3),
                                     border: const Border(
                                       top: BorderSide(
@@ -146,33 +114,64 @@ class DashboardView extends GetView<DashboardController> {
                                         width: 10,
                                       ),
                                     ),
-                                    borderRadius: BorderRadius.circular(5),
-                                  ),
-                                  child: Column(
-                                    mainAxisAlignment: MainAxisAlignment.center,
-                                    children: [
-                                      Text(
-                                        'Jumlah Buku Yang Dipinjam',
-                                        style:
-                                            GoogleFonts.urbanist(fontSize: 18),
-                                      ),
-                                      Obx(() => Text(
-                                          controller.listPetugas.length
+                                    borderRadius: BorderRadius.circular(5)),
+                                child: Column(
+                                  mainAxisAlignment: MainAxisAlignment.center,
+                                  children: [
+                                    Text(
+                                      'Jumlah Buku',
+                                      style:
+                                          GoogleFonts.urbanist(fontSize: 18),
+                                    ),
+                                    Obx(() => Text(
+                                          controller.listBuku.length
                                               .toString(),
                                           style: GoogleFonts.urbanist(
-                                              fontSize: 17))),
-                                    ],
-                                  )),
-                            ),
+                                              fontSize: 17),
+                                        )),
+                                  ],
+                                )),
                           ),
-                        ],
-                      ),
+                        ),
+                        Expanded(
+                          flex: 8,
+                          child: Padding(
+                            padding: const EdgeInsets.all(15.0),
+                            child: Container(
+                                decoration: BoxDecoration(
+                                  color: Colors.blueGrey.withOpacity(0.3),
+                                  border: const Border(
+                                    top: BorderSide(
+                                      color: Color(0xFF3C19C0),
+                                      width: 10,
+                                    ),
+                                  ),
+                                  borderRadius: BorderRadius.circular(5),
+                                ),
+                                child: Column(
+                                  mainAxisAlignment: MainAxisAlignment.center,
+                                  children: [
+                                    Text(
+                                      'Jumlah Buku Yang Dipinjam',
+                                      style:
+                                          GoogleFonts.urbanist(fontSize: 18),
+                                    ),
+                                    Obx(() => Text(
+                                        controller.listPetugas.length
+                                            .toString(),
+                                        style: GoogleFonts.urbanist(
+                                            fontSize: 17))),
+                                  ],
+                                )),
+                          ),
+                        ),
+                      ],
                     ),
-                  ],
-                ),
+                  ),
+                ],
               ),
-            ],
-          ),
+            ),
+          ],
         ),
       );
     } else {
@@ -209,6 +208,9 @@ class DashboardView extends GetView<DashboardController> {
                   },
                 ),
               ),
+              ElevatedButton(
+                onPressed: () => authC.logout(), 
+                child: Text('Logout'))
             ],
           ),
         ),

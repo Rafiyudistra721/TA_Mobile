@@ -21,85 +21,82 @@ class ManageKategoriView extends GetView<ManageKategoriController> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      body: Padding(
-        padding: const EdgeInsets.all(8.0),
-        child: Row(
-          crossAxisAlignment: CrossAxisAlignment.start,
-          children: [
-            // open drawer
-            MyDrawer(),
-
-            // first half of page
-            Expanded(
-              flex: 1,
-              child: AdaptiveScrollbar(
+      body: Row(
+        crossAxisAlignment: CrossAxisAlignment.start,
+        children: [
+          // open drawer
+          MyDrawer(),
+      
+          // first half of page
+          Expanded(
+            flex: 1,
+            child: AdaptiveScrollbar(
+              controller: controller.verticalScrollController,
+              underColor: Colors.blueGrey.withOpacity(0.3),
+              sliderDefaultColor: active.withOpacity(0.7),
+              sliderActiveColor: active,
+              child: SingleChildScrollView(
                 controller: controller.verticalScrollController,
-                underColor: Colors.blueGrey.withOpacity(0.3),
-                sliderDefaultColor: active.withOpacity(0.7),
-                sliderActiveColor: active,
-                child: SingleChildScrollView(
-                  controller: controller.verticalScrollController,
-                  scrollDirection: Axis.vertical,
-                  child: Column(
-                    crossAxisAlignment: CrossAxisAlignment.start,
-                    mainAxisAlignment: MainAxisAlignment.start,
-                    children: [
-                      Row(
-                        mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                        children: [
-                          Padding(padding: const EdgeInsets.all(16),
-                          child: Text('Daftar Kategori',
-                              style: GoogleFonts.urbanist(fontSize: 30)),),
-                          ElevatedButton.icon(
-                              onPressed: () {
-                                Get.defaultDialog(
-                                  contentPadding: EdgeInsets.zero,
-                                  barrierDismissible: false,
-                                  content: SizedBox(
-                                    height: 200,
-                                    width: double.infinity,
-                                    child: SingleChildScrollView(
-                                        child: Column(
-                                      children: [
-                                        KategoriForm(
-                                          kategoriModel: KategoriModel(),
-                                        ),
-                                      ],
-                                    )),
-                                  ),
-                                  title: "Tambah Aset",
-                                  titleStyle: const TextStyle(
-                                    fontSize: 20,
-                                  ),
-                                );
-                              },
-                              icon: const Icon(Icons.add),
-                              label: const Text('Tambah Kategori'))
-                        ],
-                      ),
-                      Obx(
-                        () => Padding(
-                          padding: const EdgeInsets.all(16),
-                          child: controller.listKategori.isEmpty
-                              ? const Center(child: CircularProgressIndicator())
-                              : PaginatedDataTable(
-                                  showCheckboxColumn: false,
-                                  showFirstLastButtons: true,
-                                  columns: columns,
-                                  source: MyData(controller.listKategori),
-                                  columnSpacing: MediaQuery.of(context).size.width *.55,
-                                  horizontalMargin: 30,
-                                  rowsPerPage: 9,
+                scrollDirection: Axis.vertical,
+                child: Column(
+                  crossAxisAlignment: CrossAxisAlignment.start,
+                  mainAxisAlignment: MainAxisAlignment.start,
+                  children: [
+                    Row(
+                      mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                      children: [
+                        Padding(padding: const EdgeInsets.all(16),
+                        child: Text('Daftar Kategori',
+                            style: GoogleFonts.urbanist(fontSize: 30)),),
+                        ElevatedButton.icon(
+                            onPressed: () {
+                              Get.defaultDialog(
+                                contentPadding: EdgeInsets.zero,
+                                barrierDismissible: false,
+                                content: SizedBox(
+                                  height: 200,
+                                  width: double.infinity,
+                                  child: SingleChildScrollView(
+                                      child: Column(
+                                    children: [
+                                      KategoriForm(
+                                        kategoriModel: KategoriModel(),
+                                      ),
+                                    ],
+                                  )),
                                 ),
-                        ),
+                                title: "Tambah Aset",
+                                titleStyle: const TextStyle(
+                                  fontSize: 20,
+                                ),
+                              );
+                            },
+                            icon: const Icon(Icons.add),
+                            label: const Text('Tambah Kategori'))
+                      ],
+                    ),
+                    Obx(
+                      () => Padding(
+                        padding: const EdgeInsets.all(16),
+                        child: controller.listKategori.isEmpty
+                            ? const Center(child: CircularProgressIndicator())
+                            : PaginatedDataTable(
+                                showCheckboxColumn: false,
+                                showFirstLastButtons: true,
+                                columns: columns,
+                                source: MyData(controller.listKategori),
+                                columnSpacing: MediaQuery.of(context).size.width *.55,
+                                horizontalMargin: 30,
+                                rowsPerPage: 9,
+                              ),
                       ),
-                    ],
-                  ),
+                    ),
+                  ],
                 ),
               ),
             ),
-          ],
-        ),
+          ),
+        ],
       ),
     );
   }
@@ -119,18 +116,7 @@ class MyData extends DataTableSource {
           children: [
             ElevatedButton(
                 onPressed: () {
-                  Get.defaultDialog(
-                    title: 'Hapus kategori?',
-                    middleText:
-                        'Apakah anda yakin ingin menghapus kategori ini?',
-                    onConfirm: () async {
-                      manageKategoriController.delete(listKategori[index]);
-                    },
-                    textConfirm: 'Iya',
-                    textCancel: 'Tidak',
-                    titleStyle: GoogleFonts.urbanist(fontSize: 15),
-                    middleTextStyle: GoogleFonts.urbanist(fontSize: 15),
-                  );
+                  manageKategoriController.delete(listKategori[index]);
                 },
                 child: const Text('HAPUS'))
           ],
