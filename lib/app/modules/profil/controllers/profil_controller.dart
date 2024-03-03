@@ -1,9 +1,14 @@
 import 'package:get/get.dart';
+import 'package:ta_mobile/app/data/Models/user_model.dart';
+import 'package:ta_mobile/app/data/Models/buku_model.dart';
+import 'package:ta_mobile/app/data/Models/kategori_model.dart';
+
 
 class ProfilController extends GetxController {
-  //TODO: Implement ProfilController
+  var profil = <UserModel>[].obs;
 
   final count = 0.obs;
+
   @override
   void onInit() {
     super.onInit();

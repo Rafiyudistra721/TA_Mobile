@@ -296,7 +296,7 @@ class MobileScreen extends GetView<HomeController> {
                                 return GestureDetector(
                                   onTap: () {
                                     Get.toNamed(Routes.DETAIL_BUKU,
-                                        arguments: book);
+                                        arguments: controller.allBooks[index]);
                                   },
                                   child: Container(
                                     margin: const EdgeInsets.symmetric(

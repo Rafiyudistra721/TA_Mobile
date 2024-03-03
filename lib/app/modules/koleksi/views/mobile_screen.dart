@@ -9,31 +9,27 @@ class MobileScreen extends GetView<KoleksiController> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      bottomNavigationBar: BottomNav(
-        initialindex: 1,
-      ),
       appBar: AppBar(
         title: Text(
           'KOLEKSI',
-          style: GoogleFonts.urbanist(
+          style: TextStyle(
             fontSize: 30,
             fontWeight: FontWeight.bold,
           ),
         ),
       ),
-      body: SingleChildScrollView(
-        child: Column(
-          children: [
-            SingleChildScrollView(
+      body: Column(
+        children: [
+          Expanded(
+            child: SingleChildScrollView(
               child: Column(
                 children: [
                   Container(
-                    height: 5 * (140 + 20) +
-                        20, // Adjust the height based on the number of items
+                    height: 5 * (140 + 20) + 20,
                     child: ListView.builder(
                       shrinkWrap: true,
                       physics: NeverScrollableScrollPhysics(),
-                      itemCount: 3, // Example itemCount
+                      itemCount: 3,
                       padding: const EdgeInsets.all(20),
                       itemBuilder: (context, i) {
                         return GestureDetector(
@@ -66,7 +62,7 @@ class MobileScreen extends GetView<KoleksiController> {
                                       child: Transform.translate(
                                         offset: const Offset(5, 10),
                                         child: Image.asset(
-                                          'assets/test.jpg', // Example image path
+                                          'assets/test.jpg',
                                         ),
                                       ),
                                     ),
@@ -76,7 +72,7 @@ class MobileScreen extends GetView<KoleksiController> {
                                     padding: const EdgeInsets.only(
                                         left: 10, top: 8.0),
                                     child: Text(
-                                      'BUKU 1', // Example product name
+                                      'BUKU 1',
                                       style: const TextStyle(
                                         fontWeight: FontWeight.w700,
                                         letterSpacing: 0,
@@ -94,7 +90,7 @@ class MobileScreen extends GetView<KoleksiController> {
                                             padding: const EdgeInsets.symmetric(
                                                 vertical: 4.0, horizontal: 10),
                                             child: Text(
-                                              'Fiksi', // Example category
+                                              'Fiksi',
                                               style: const TextStyle(
                                                 color: Colors.grey,
                                                 fontWeight: FontWeight.w700,
@@ -129,7 +125,7 @@ class MobileScreen extends GetView<KoleksiController> {
                                               color: Colors.grey.shade400,
                                             ),
                                             child: Text(
-                                              '1', // Example quantity
+                                              '1',
                                               style: const TextStyle(
                                                 fontWeight: FontWeight.bold,
                                                 fontSize: 22,
@@ -204,7 +200,9 @@ class MobileScreen extends GetView<KoleksiController> {
                 ],
               ),
             ),
-            SingleChildScrollView(
+          ),
+          Expanded(
+            child: SingleChildScrollView(
               child: Column(
                 children: [
                   Align(
@@ -216,8 +214,8 @@ class MobileScreen extends GetView<KoleksiController> {
                           padding: const EdgeInsets.symmetric(
                               horizontal: 20.0, vertical: 3),
                           child: Text(
-                            'Jumlah Buku : 3', // Example total amount
-                            style: GoogleFonts.alata(
+                            'Jumlah Buku : 3',
+                            style: TextStyle(
                               letterSpacing: 1,
                               fontSize: 20,
                               fontWeight: FontWeight.bold,
@@ -228,8 +226,8 @@ class MobileScreen extends GetView<KoleksiController> {
                           padding: const EdgeInsets.symmetric(
                               horizontal: 20.0, vertical: 8),
                           child: Text(
-                            'Jumlah Buku Di Pinjam : 2', // Example total quantity
-                            style: GoogleFonts.alata(
+                            'Jumlah Buku Di Pinjam : 2',
+                            style: TextStyle(
                               letterSpacing: 1,
                               fontSize: 20,
                               fontWeight: FontWeight.bold,
@@ -242,7 +240,7 @@ class MobileScreen extends GetView<KoleksiController> {
                   ListView.builder(
                     shrinkWrap: true,
                     physics: NeverScrollableScrollPhysics(),
-                    itemCount: 2, // Example itemCount
+                    itemCount: 2,
                     padding: const EdgeInsets.all(20),
                     itemBuilder: (context, i) {
                       return GestureDetector(
@@ -275,7 +273,7 @@ class MobileScreen extends GetView<KoleksiController> {
                                       MainAxisAlignment.spaceBetween,
                                   children: [
                                     Text(
-                                      'BUKU 1', // Example product name
+                                      'BUKU 1',
                                       style: const TextStyle(
                                         fontWeight: FontWeight.w700,
                                         letterSpacing: 0,
@@ -283,7 +281,7 @@ class MobileScreen extends GetView<KoleksiController> {
                                       ),
                                     ),
                                     Text(
-                                      'Start Date: 01/01/2024', // Example start date
+                                      'Start Date: 01/01/2024',
                                       style: TextStyle(
                                         fontSize: 16,
                                         fontWeight: FontWeight.bold,
@@ -300,7 +298,7 @@ class MobileScreen extends GetView<KoleksiController> {
                                       MainAxisAlignment.spaceBetween,
                                   children: [
                                     Text(
-                                      'Fiksi', // Example category
+                                      'Fiksi',
                                       style: const TextStyle(
                                         color: Colors.grey,
                                         fontWeight: FontWeight.w700,
@@ -309,7 +307,7 @@ class MobileScreen extends GetView<KoleksiController> {
                                       ),
                                     ),
                                     Text(
-                                      'End Date: 01/02/2024', // Example end date
+                                      'End Date: 01/02/2024',
                                       style: TextStyle(
                                         fontSize: 16,
                                         fontWeight: FontWeight.bold,
@@ -330,7 +328,7 @@ class MobileScreen extends GetView<KoleksiController> {
                                     color: Colors.grey.shade400,
                                   ),
                                   child: Text(
-                                    '1', // Example quantity
+                                    '1',
                                     style: const TextStyle(
                                       fontWeight: FontWeight.bold,
                                       fontSize: 22,
@@ -348,7 +346,7 @@ class MobileScreen extends GetView<KoleksiController> {
                                     child: Hero(
                                       tag: 'product_image_$i',
                                       child: Image.asset(
-                                        'assets/test.jpg', // Example image path
+                                        'assets/test.jpg',
                                         fit: BoxFit.cover,
                                       ),
                                     ),
@@ -386,9 +384,10 @@ class MobileScreen extends GetView<KoleksiController> {
                 ],
               ),
             ),
-          ],
-        ),
+          ),
+        ],
       ),
     );
   }
 }
+
