@@ -15,8 +15,18 @@ import '../controllers/manage_kategori_controller.dart';
 class ManageKategoriView extends GetView<ManageKategoriController> {
   ManageKategoriView({Key? key}) : super(key: key);
   var columns = const [
-    DataColumn(label: Text('Nama Kategori')),
-    DataColumn(label: Text('Actions')),
+    DataColumn(
+        label: Text(
+      'Nama Kategori',
+      style: TextStyle(
+          fontSize: 15, fontWeight: FontWeight.w900, color: Colors.white),
+    )),
+    DataColumn(
+        label: Text(
+      'Aksi',
+      style: TextStyle(
+          fontSize: 15, fontWeight: FontWeight.w900, color: Colors.white),
+    )),
   ];
   @override
   Widget build(BuildContext context) {
@@ -26,7 +36,7 @@ class ManageKategoriView extends GetView<ManageKategoriController> {
         children: [
           // open drawer
           MyDrawer(),
-      
+
           // first half of page
           Expanded(
             flex: 1,
@@ -42,50 +52,61 @@ class ManageKategoriView extends GetView<ManageKategoriController> {
                   crossAxisAlignment: CrossAxisAlignment.start,
                   mainAxisAlignment: MainAxisAlignment.start,
                   children: [
-                    Row(
-                      mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                      children: [
-                        Padding(padding: const EdgeInsets.all(16),
-                        child: Text('Daftar Kategori',
-                            style: GoogleFonts.urbanist(fontSize: 30)),),
-                        ElevatedButton.icon(
-                            onPressed: () {
-                              Get.defaultDialog(
-                                contentPadding: EdgeInsets.zero,
-                                barrierDismissible: false,
-                                content: SizedBox(
-                                  height: 200,
-                                  width: double.infinity,
-                                  child: SingleChildScrollView(
-                                      child: Column(
-                                    children: [
-                                      KategoriForm(
-                                        kategoriModel: KategoriModel(),
-                                      ),
-                                    ],
-                                  )),
-                                ),
-                                title: "Tambah Aset",
-                                titleStyle: const TextStyle(
-                                  fontSize: 20,
-                                ),
-                              );
-                            },
-                            icon: const Icon(Icons.add),
-                            label: const Text('Tambah Kategori'))
-                      ],
-                    ),
+                    // AppBar(),
                     Obx(
                       () => Padding(
                         padding: const EdgeInsets.all(16),
                         child: controller.listKategori.isEmpty
                             ? const Center(child: CircularProgressIndicator())
                             : PaginatedDataTable(
+                                header: Padding(
+                                  padding: const EdgeInsets.symmetric(
+                                      horizontal: 15, vertical: 10),
+                                  child: Text('Daftar Kategori',
+                                      style: GoogleFonts.urbanist(
+                                          fontSize: 30,
+                                          fontWeight: FontWeight.w900)),
+                                ),
+                                actions: [
+                                  Padding(
+                                    padding: const EdgeInsets.symmetric(
+                                        horizontal: 15, vertical: 15),
+                                    child: FloatingActionButton.extended(
+                                      onPressed: () {
+                                        Get.defaultDialog(
+                                          contentPadding: EdgeInsets.zero,
+                                          barrierDismissible: false,
+                                          content: SizedBox(
+                                            height: 200,
+                                            width: double.infinity,
+                                            child: SingleChildScrollView(
+                                                child: Column(
+                                              children: [
+                                                KategoriForm(
+                                                  kategoriModel:
+                                                      KategoriModel(),
+                                                ),
+                                              ],
+                                            )),
+                                          ),
+                                          title: "Tambah Kategori",
+                                          titleStyle: const TextStyle(
+                                            fontSize: 20,
+                                          ),
+                                        );
+                                      },
+                                      icon:
+                                          const Icon(Icons.add_circle_rounded),
+                                      label: const Text("Tambah Kategori"),
+                                    ),
+                                  ),
+                                ],
                                 showCheckboxColumn: false,
                                 showFirstLastButtons: true,
                                 columns: columns,
                                 source: MyData(controller.listKategori),
-                                columnSpacing: MediaQuery.of(context).size.width *.55,
+                                columnSpacing:
+                                    MediaQuery.of(context).size.width * .55,
                                 horizontalMargin: 30,
                                 rowsPerPage: 9,
                               ),
@@ -111,7 +132,8 @@ class MyData extends DataTableSource {
   @override
   DataRow getRow(int index) => DataRow.byIndex(index: index, cells: [
         DataCell(Text("${listKategori[index].namaKategori}",
-            style: GoogleFonts.urbanist(fontSize: 15))),
+            style: GoogleFonts.urbanist(
+                fontSize: 16, fontWeight: FontWeight.w500))),
         DataCell(Row(
           children: [
             ElevatedButton(

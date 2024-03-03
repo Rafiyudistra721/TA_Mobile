@@ -16,12 +16,42 @@ import 'package:adaptive_scrollbar/adaptive_scrollbar.dart';
 class ManagePeminjamanView extends GetView<ManagePeminjamanController> {
   ManagePeminjamanView({Key? key}) : super(key: key);
   var columns = const [
-    DataColumn(label: Text('Username')),
-    DataColumn(label: Text('Buku')),
-    DataColumn(label: Text('Tanggal Pinjam')),
-    DataColumn(label: Text('Tanggal Kembali')),
-    DataColumn(label: Text('Status Pinjam')),
-    DataColumn(label: Text('Actions')),
+    DataColumn(
+        label: Text(
+      'Username',
+      style: TextStyle(
+          fontSize: 15, fontWeight: FontWeight.w900, color: Colors.white),
+    )),
+    DataColumn(
+        label: Text('Buku',
+            style: TextStyle(
+                fontSize: 15,
+                fontWeight: FontWeight.w900,
+                color: Colors.white))),
+    DataColumn(
+        label: Text('Tanggal Pinjam',
+            style: TextStyle(
+                fontSize: 15,
+                fontWeight: FontWeight.w900,
+                color: Colors.white))),
+    DataColumn(
+        label: Text('Tanggal Kembali',
+            style: TextStyle(
+                fontSize: 15,
+                fontWeight: FontWeight.w900,
+                color: Colors.white))),
+    DataColumn(
+        label: Text('Status Pinjam',
+            style: TextStyle(
+                fontSize: 15,
+                fontWeight: FontWeight.w900,
+                color: Colors.white))),
+    DataColumn(
+        label: Text('Aksi',
+            style: TextStyle(
+                fontSize: 15,
+                fontWeight: FontWeight.w900,
+                color: Colors.white))),
   ];
   @override
   Widget build(BuildContext context) {
@@ -31,7 +61,6 @@ class ManagePeminjamanView extends GetView<ManagePeminjamanController> {
         children: [
           // open drawer
           MyDrawer(),
-      
           // first half of page
           Expanded(
             flex: 1,
@@ -47,17 +76,21 @@ class ManagePeminjamanView extends GetView<ManagePeminjamanController> {
                   crossAxisAlignment: CrossAxisAlignment.start,
                   mainAxisAlignment: MainAxisAlignment.start,
                   children: [
-                    Padding(
-                      padding: const EdgeInsets.all(16),
-                      child: Text('Daftar Peminjam',
-                          style: GoogleFonts.urbanist(fontSize: 30)),
-                    ),
+                    // AppBar(),
                     Obx(
                       () => Padding(
                         padding: const EdgeInsets.all(16),
                         child: controller.rxPeminjaman.isEmpty
                             ? const Center(child: CircularProgressIndicator())
                             : PaginatedDataTable(
+                                header: Padding(
+                                  padding:
+                                      const EdgeInsets.symmetric(horizontal: 15, vertical: 10),
+                                  child: Text('Daftar Peminjam',
+                                      style: GoogleFonts.urbanist(
+                                          fontSize: 30,
+                                          fontWeight: FontWeight.w900)),
+                                ),
                                 showCheckboxColumn: false,
                                 showFirstLastButtons: true,
                                 columns: columns,
@@ -104,20 +137,25 @@ class MyData extends DataTableSource {
           cells: [
             DataCell(Text(
                 "${listUser.firstWhere((cat) => cat.id == listPeminjaman[index].userId).username}",
-                style: GoogleFonts.urbanist(fontSize: 15))),
+                style: GoogleFonts.urbanist(
+                    fontSize: 15, fontWeight: FontWeight.w500))),
             DataCell(Text(
                 "${listBuku.firstWhere((cat) => cat.id == listPeminjaman[index].bukuId).judul}",
-                style: GoogleFonts.urbanist(fontSize: 15))),
+                style: GoogleFonts.urbanist(
+                    fontSize: 15, fontWeight: FontWeight.w500))),
             DataCell(Text(
                 DateFormat("EEE, dd MMM y")
                     .format(listPeminjaman[index].tanggalPinjam!),
-                style: GoogleFonts.urbanist(fontSize: 15))),
+                style: GoogleFonts.urbanist(
+                    fontSize: 15, fontWeight: FontWeight.w500))),
             DataCell(Text(
                 DateFormat("EEE, dd MMM y")
                     .format(listPeminjaman[index].tanggalKembali!),
-                style: GoogleFonts.urbanist(fontSize: 15))),
+                style: GoogleFonts.urbanist(
+                    fontSize: 15, fontWeight: FontWeight.w500))),
             DataCell(Text("${listPeminjaman[index].statusPinjam}",
-                style: GoogleFonts.urbanist(fontSize: 15))),
+                style: GoogleFonts.urbanist(
+                    fontSize: 15, fontWeight: FontWeight.w500))),
             DataCell(Row(
               children: [
                 listPeminjaman[index].statusPinjam == 'Menunggu Konfirmasi'
@@ -200,7 +238,8 @@ class MyData extends DataTableSource {
                                                 Colors.red[400])),
                                     onPressed: () {
                                       Get.defaultDialog(
-                                        title: 'Konfirmasi Pengembalian Buku yang terlambat?',
+                                        title:
+                                            'Konfirmasi Pengembalian Buku yang terlambat?',
                                         middleText:
                                             'Apakah anda yakin ingin mengonfirmasi pengembalian buku ini?',
                                         onConfirm: () async {
@@ -220,7 +259,8 @@ class MyData extends DataTableSource {
                                             GoogleFonts.urbanist(fontSize: 15),
                                       );
                                     },
-                                    child: const Text('PENGEMBALIAN BUKU TERLAMBAT'))
+                                    child: const Text(
+                                        'PENGEMBALIAN BUKU TERLAMBAT'))
                                 : Container(),
                 listPeminjaman[index].statusPinjam == 'Menunggu Konfirmasi'
                     ? ElevatedButton(

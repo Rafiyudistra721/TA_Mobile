@@ -21,18 +21,18 @@ class DashboardView extends GetView<DashboardController> {
   Widget build(BuildContext context) {
     if (isDesktop(context)) {
       return Scaffold(
+        // appBar: AppBar(),
         body: Row(
           crossAxisAlignment: CrossAxisAlignment.start,
           children: [
             // open drawer
             MyDrawer(),
-        
             // first half of page
             Expanded(
               flex: 2,
               child: Column(
                 children: [
-                  // first 4 boxes in grid
+                  // AppBar(),
                   AspectRatio(
                     aspectRatio: 4,
                     child: Row(
@@ -157,8 +157,8 @@ class DashboardView extends GetView<DashboardController> {
                                           GoogleFonts.urbanist(fontSize: 18),
                                     ),
                                     Obx(() => Text(
-                                        controller.listPetugas.length
-                                            .toString(),
+                                        "${controller.listBukuDipinjam.length + controller.listBukuTerlambat.length}"
+                                            ,
                                         style: GoogleFonts.urbanist(
                                             fontSize: 17))),
                                   ],

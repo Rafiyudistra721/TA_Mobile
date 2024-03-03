@@ -2,6 +2,7 @@
 
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
+import 'package:ta_mobile/app/data/Models/pinjam_model.dart';
 import 'package:ta_mobile/app/data/Models/user_model.dart';
 import 'package:ta_mobile/app/data/Models/buku_model.dart';
 
@@ -30,12 +31,23 @@ class DashboardController extends GetxController {
   List<BukuModel> get listBuku => rxBuku.value;
   set listBuku(List<BukuModel> value) => rxBuku.value = value;
 
+  RxList<PinjamModel> rxBukuDipinjam = RxList<PinjamModel>();
+  List<PinjamModel> get listBukuDipinjam => rxBukuDipinjam.value;
+  set listBukuDipinjam(List<PinjamModel> value) => rxBukuDipinjam.value = value;
+
+  RxList<PinjamModel> rxBukuTerlambat = RxList<PinjamModel>();
+  List<PinjamModel> get listBukuTerlambat => rxBukuTerlambat.value;
+  set listBukuTerlambat(List<PinjamModel> value) => rxBukuTerlambat.value = value;
+
+
   @override
   void onInit() {
     rxPetugas.bindStream(UserModel().petugasStreamList());
     rxPeminjam.bindStream(UserModel().peminjamStreamList());
     rxUser.bindStream(UserModel().allStreamList());
     rxBuku.bindStream(BukuModel().streamList());
+    rxBukuDipinjam.bindStream(PinjamModel().bukuDipinjamStreamList());
+    rxBukuTerlambat.bindStream(PinjamModel().bukuTerlambatStreamList());
     super.onInit();
   }
 
