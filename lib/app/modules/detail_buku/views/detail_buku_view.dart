@@ -12,6 +12,6 @@ class DetailBukuView extends GetView<DetailBukuController> {
   Widget build(BuildContext context) {
     return ResponsiveLayout(
       mobileScreen:  Mobile_Screen(), 
-      webScreen: const Web_Screen());
+      webScreen:  Web_Screen());
       }
     }
