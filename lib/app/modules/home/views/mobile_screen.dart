@@ -281,7 +281,7 @@ class MobileScreen extends GetView<HomeController> {
                                       .toList();
 
                           return SizedBox(
-                            height: 370, // Adjust the height of each container
+                            height: 350, // Adjust the height of each container
                             child: GridView.builder(
                               gridDelegate:
                                   const SliverGridDelegateWithFixedCrossAxisCount(

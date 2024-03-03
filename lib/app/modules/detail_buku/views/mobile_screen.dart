@@ -15,14 +15,13 @@ class Mobile_Screen extends GetView<DetailBukuController> {
 
   @override
   Widget build(BuildContext context) {
-    return Scaffold(
+   return Scaffold(
       backgroundColor: const Color(0xFF52958B),
       appBar: AppBar(
         leadingWidth: 100,
-        title: Text('DetailBuku'),
+        title: const Text('Detail Buku'),
         leading: Padding(
-          padding:
-              const EdgeInsets.only(left: 22, top: 10, bottom: 10, right: 20),
+          padding: const EdgeInsets.only(left: 22, top: 10, bottom: 10, right: 20),
           child: ElevatedButton(
             onPressed: () {
               Navigator.pop(context);
@@ -38,8 +37,7 @@ class Mobile_Screen extends GetView<DetailBukuController> {
         actions: [
           const SizedBox(width: 10),
           Padding(
-            padding:
-                const EdgeInsets.only(left: 26, top: 10, bottom: 10, right: 22),
+            padding: const EdgeInsets.only(left: 26, top: 10, bottom: 10, right: 22),
             child: ElevatedButton(
               onPressed: () {
                 Get.toNamed(Routes.KOLEKSI);
@@ -53,23 +51,24 @@ class Mobile_Screen extends GetView<DetailBukuController> {
           const SizedBox(width: 6),
         ],
       ),
-      // floatingActionButton: FloatingActionButton.extended(
-      //   onPressed: () {},
-      //   label: Container(
-      //     alignment: Alignment.center,
-      //     height: 70,
-      //     child: const Text(
-      //       'Tambah Ke Koleksi',
-      //       style: TextStyle(
-      //         fontSize: 25,
-      //         fontWeight: FontWeight.bold,
-      //         color: Colors.white,
-      //       ),
-      //     ),
-      //   ),
-      // ),
+      floatingActionButton: FloatingActionButton.extended(
+        onPressed: () {},
+        label: Container(
+          alignment: Alignment.center,
+          height: 70,
+          child: const Text(
+            'Tambah Ke Koleksi',
+            style: TextStyle(
+              fontSize: 25,
+              fontWeight: FontWeight.bold,
+              color: Colors.white,
+            ),
+          ),
+        ),
+      ),
       floatingActionButtonLocation: FloatingActionButtonLocation.centerFloat,
       body: SingleChildScrollView(
+        padding: EdgeInsets.only(bottom: 80),
         child: Column(
           crossAxisAlignment: CrossAxisAlignment.start,
           children: [
@@ -99,14 +98,13 @@ class Mobile_Screen extends GetView<DetailBukuController> {
                       bukuModel.judul!,
                       overflow: TextOverflow.clip,
                       maxLines: 3,
-                      style:
-                          TextStyle(fontWeight: FontWeight.w800, fontSize: 20),
+                      style: const TextStyle(fontWeight: FontWeight.w800, fontSize: 20),
                     ),
                   ),
                   Spacer(),
                   Text(
-                    "${bukuModel.jumlah}",
-                    style: TextStyle(
+                    '${bukuModel.jumlah}',
+                    style: const TextStyle(
                       fontWeight: FontWeight.w800,
                       fontSize: 33,
                     ),
@@ -115,22 +113,27 @@ class Mobile_Screen extends GetView<DetailBukuController> {
               ),
             ),
             Padding(
-              padding: EdgeInsets.symmetric(horizontal: 20.0),
-              child: Text(
-                bukuModel.kategoriId!,
-                style: TextStyle(
-                  fontWeight: FontWeight.bold,
-                  fontSize: 23,
-                  color: Colors.grey,
-                ),
+              padding: const EdgeInsets.symmetric(horizontal: 20.0),
+              child: Obx(
+                () {
+                  final category = controller.categories.firstWhereOrNull((cat) => cat.id == bukuModel.kategoriId);
+                  return Text(
+                    category != null ? category.namaKategori! : 'Unknown Category',
+                    style: const TextStyle(
+                      fontWeight: FontWeight.bold,
+                      fontSize: 23,
+                      color: Colors.grey,
+                    ),
+                  );
+                },
               ),
             ),
             const SizedBox(height: 20),
             Padding(
-              padding: EdgeInsets.symmetric(horizontal: 20.0),
+              padding: const EdgeInsets.symmetric(horizontal: 20.0),
               child: Text(
                 bukuModel.sinopsis!,
-                style: TextStyle(
+                style: const TextStyle(
                   fontWeight: FontWeight.w500,
                   fontSize: 22,
                   wordSpacing: 1.4,
@@ -140,21 +143,79 @@ class Mobile_Screen extends GetView<DetailBukuController> {
             const SizedBox(height: 20),
             Padding(
               padding: const EdgeInsets.all(20.0),
-              child: DataTable(
-                columns: const [
-                  DataColumn(label: Text('Username', style: TextStyle(fontSize: 20, fontWeight: FontWeight.bold),)),
-                  DataColumn(label: Text('Comments', style: TextStyle(fontSize: 20, fontWeight: FontWeight.bold),)),
-                  DataColumn(label: Text('Rating', style: TextStyle(fontSize: 20, fontWeight: FontWeight.bold),))
-                ],
-                rows: controller.allUlasan.map((comment) {
-                  return DataRow(cells: [
-                    DataCell(Text(comment.userId ?? '')),
-                    DataCell(Text(comment.ulasan ?? '')),
-                    DataCell(Text(comment.rating?.toString() ?? '')),
-                  ]);
-                }).toList(),
-              ),
+              child: controller.allUlasan.isNotEmpty
+                  ? Container(
+                      color: Colors.white,
+                      child: Obx(
+                        () => DataTable(
+                          columns: const [
+                            DataColumn(
+                              label: Text(
+                                'Username',
+                                style: TextStyle(fontSize: 20, fontWeight: FontWeight.bold),
+                              ),
+                            ),
+                            DataColumn(
+                              label: Text(
+                                'Comments',
+                                style: TextStyle(fontSize: 20, fontWeight: FontWeight.bold),
+                              ),
+                            ),
+                            DataColumn(
+                              label: Text(
+                                'Rating',
+                                style: TextStyle(fontSize: 20, fontWeight: FontWeight.bold),
+                              ),
+                            ),
+                          ],
+                          rows: controller.allUlasan.map((comment) {
+                            return DataRow(cells: [
+                              DataCell(Text(comment.userId ?? 'No Username')),
+                              DataCell(Text(comment.ulasan ?? 'No Comment')),
+                              DataCell(Text(comment.rating?.toString() ?? 'No Rating')),
+                            ]);
+                          }).toList(),
+                        ),
+                      ),
+                    )
+                  : const SizedBox(), // Placeholder
             ),
+            if (controller.allUlasan.isEmpty)
+              Padding(
+                padding: const EdgeInsets.all(20.0),
+                child: Container(
+                  color: Colors.white,
+                  child: DataTable(
+                    columns: const [
+                      DataColumn(
+                        label: Text(
+                          'Username',
+                          style: TextStyle(fontSize: 20, fontWeight: FontWeight.bold),
+                        ),
+                      ),
+                      DataColumn(
+                        label: Text(
+                          'Comments',
+                          style: TextStyle(fontSize: 20, fontWeight: FontWeight.bold),
+                        ),
+                      ),
+                      DataColumn(
+                        label: Text(
+                          'Rating',
+                          style: TextStyle(fontSize: 20, fontWeight: FontWeight.bold),
+                        ),
+                      ),
+                    ],
+                    rows: [
+                      DataRow(cells: [
+                        DataCell(const Text('No data')),
+                        DataCell(const Text('No data')),
+                        DataCell(const Text('No data')),
+                      ])
+                    ],
+                  ),
+                ),
+              ),
             const SizedBox(height: 20),
           ],
         ),
