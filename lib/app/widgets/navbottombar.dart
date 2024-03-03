@@ -10,9 +10,9 @@ class BottomNav extends StatelessWidget {
   @override
   Widget build(BuildContext context){
       return ConvexAppBar(
-        backgroundColor: lightBlue,
+        backgroundColor: Color(0xFF004D47),
         color: Colors.black,
-        activeColor:Color(0xFF3C19C0),
+        activeColor:Color(0xFF52958B),
         style: TabStyle.reactCircle,
         items: const [
           TabItem(icon: Icons.home),
@@ -21,11 +21,11 @@ class BottomNav extends StatelessWidget {
         ],
         onTap: (index){
           if (index == 0) {
-            Get.offNamed(Routes.HOME);
+            Get.toNamed(Routes.HOME);
           } else if (index == 1) {
-            Get.offNamed(Routes.KOLEKSI);
+            Get.toNamed(Routes.KOLEKSI);
           } else if (index == 2) {
-            Get.offNamed(Routes.PROFIL);
+            Get.toNamed(Routes.PROFIL);
           }
         },
         initialActiveIndex: initialindex,

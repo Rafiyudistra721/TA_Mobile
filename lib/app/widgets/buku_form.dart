@@ -95,9 +95,11 @@ class BukuForm extends GetView<ManageBukuController> {
                               },
                               icon: const Icon(
                                 Icons.upload,
+                                color: Colors.blue,
                               ),
                               label: const Text(
                                 "Unggah",
+                                style: TextStyle(color: Colors.blue),
                               )),
                         ],
                       ),
@@ -231,7 +233,6 @@ class BukuForm extends GetView<ManageBukuController> {
                   SizedBox(
                     width: 116,
                     child: FloatingActionButton.extended(
-                        backgroundColor: Colors.white,
                         onPressed: () => Get.back(),
                         label: const Text(
                           "Kembali",
@@ -255,7 +256,7 @@ class BukuForm extends GetView<ManageBukuController> {
                               )
                             : const Text(
                                 "Simpan",
-                                style: TextStyle(color: Colors.white),
+                                // style: TextStyle(color: Colors.white),
                               )),
                   ),
                 ],

@@ -73,4 +73,39 @@ class PinjamModel {
       return list;
     });
   }
+
+  Stream<List<PinjamModel>> bukuDipinjamStreamList() async* {
+    var Query = db.collectionReference;
+    yield* Query
+    .where("statusPinjam", isEqualTo: "Dipinjam")
+    .snapshots()
+    .map((query) {
+      List<PinjamModel> list = [];
+      for (var doc in query.docs) {
+        list.add(
+          PinjamModel().fromJson(
+            doc,
+          ),
+        );
+      }
+      return list;
+    });
+  }
+  Stream<List<PinjamModel>> bukuTerlambatStreamList() async* {
+    var Query = db.collectionReference;
+    yield* Query
+    .where("statusPinjam", isEqualTo: "Terlambat")
+    .snapshots()
+    .map((query) {
+      List<PinjamModel> list = [];
+      for (var doc in query.docs) {
+        list.add(
+          PinjamModel().fromJson(
+            doc,
+          ),
+        );
+      }
+      return list;
+    });
+  }
 }

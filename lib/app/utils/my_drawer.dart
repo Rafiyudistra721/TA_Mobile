@@ -14,20 +14,23 @@ class MyDrawer extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Drawer(
+
       elevation: 5,
       child: Obx(() => Column(
             children: [
               DrawerHeader(
                 child: Column(
                   children: [
-                    Image.asset(
-                      'assets/icons/logo_login.png',
+                    Image.asset( homeController.darkModeValue.value
+                      ?'assets/icons/logofinalfinalfinal.png'
+                      :'assets/icons/logofinalfinal.png',
                       height: 75,
                       width: 150,
                       fit: BoxFit.cover,
                     ),
                     Text(
                       "Halo... ${authController.user.username} 👋",
+                      overflow: TextOverflow.fade,
                       style: GoogleFonts.ubuntu(
                         fontSize: 25,
                       ),
@@ -53,8 +56,10 @@ class MyDrawer extends StatelessWidget {
                 buildListTile(Icons.supervised_user_circle_rounded,
                     'Manage User', Routes.MANAGE_USER),
               buildListTile(Icons.logout_rounded, 'Keluar', null),
-              20.height,
+              150.height,
               FloatingActionButton(
+                mini: true,
+                heroTag: 'btn-add',
                 onPressed: () {
                   homeController.toggleTheme();
                 },
@@ -62,8 +67,7 @@ class MyDrawer extends StatelessWidget {
                   (homeController.darkModeValue.value)
                       ? Icons.nightlight_round
                       : Icons.wb_sunny_rounded,
-                  size: 18,
-                  color: Colors.grey,
+                  size: 23,
                 ),
               )
             ],
@@ -85,7 +89,7 @@ class MyDrawer extends StatelessWidget {
       selected: route != null && Get.currentRoute == route,
       onTap: () {
         if (route != null) {
-          Get.offAllNamed(route);
+          Get.offNamed(route);
         } else {
           authController.logout();
         }

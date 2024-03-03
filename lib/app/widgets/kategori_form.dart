@@ -52,7 +52,7 @@ class KategoriForm extends GetView<ManageKategoriController> {
                   SizedBox(
                     width: 116,
                     child: FloatingActionButton.extended(
-                        backgroundColor: Colors.white,
+                        // backgroundColor: Colors.white,
                         onPressed: () => Get.back(),
                         label: const Text(
                           "Kembali",
@@ -75,7 +75,7 @@ class KategoriForm extends GetView<ManageKategoriController> {
                               )
                             : const Text(
                                 "Simpan",
-                                style: TextStyle(color: Colors.white),
+                                // style: TextStyle(color: Colors.white),
                               )),
                   ),
                 ],

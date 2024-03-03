@@ -16,39 +16,40 @@ class AuthController extends GetxController {
   TextEditingController passC2 = TextEditingController();
   TextEditingController adressC = TextEditingController();
 
-
-
   //fungsi login dengan google
   Future<void> signInWithGoogle() async {
     try {
-      final GoogleSignInAccount? googleUser = await GoogleSignIn().signInSilently(reAuthenticate: true);
+      final GoogleSignInAccount? googleUser =
+          await GoogleSignIn().signInSilently(reAuthenticate: true);
       if (googleUser == null) {
-        final  GoogleSignInAccount? googleUser = await GoogleSignIn().signIn();
+        final GoogleSignInAccount? googleUser = await GoogleSignIn().signIn();
         if (googleUser == null) {
           throw Exception('Tidak dapat mengambil data pengguna dari Google.');
         }
       }
 
-        final GoogleSignInAuthentication googleAuth = await googleUser!.authentication;
-        final AuthCredential credential = GoogleAuthProvider.credential(
-          accessToken: googleAuth.accessToken,
-          idToken: googleAuth.idToken,
-        );
+      final GoogleSignInAuthentication googleAuth =
+          await googleUser!.authentication;
+      final AuthCredential credential = GoogleAuthProvider.credential(
+        accessToken: googleAuth.accessToken,
+        idToken: googleAuth.idToken,
+      );
 
-        final UserCredential userCredential = await FirebaseAuth.instance.signInWithCredential(credential);
-        final User? user = userCredential.user;
+      final UserCredential userCredential =
+          await FirebaseAuth.instance.signInWithCredential(credential);
+      final User? user = userCredential.user;
 
-        if (user == null) {
-          throw Exception('Tidak dapat mengambil data pengguna dari Firebase.');
-        }
+      if (user == null) {
+        throw Exception('Tidak dapat mengambil data pengguna dari Firebase.');
+      }
 
-        await saveGoogleUserToFirestore(user);
+      await saveGoogleUserToFirestore(user);
     } catch (e) {
       print(e);
       rethrow;
     }
   }
-  
+
   //Menyimpan data user dari google ke firestore
   Future<void> saveGoogleUserToFirestore(User users) async {
     try {
@@ -66,25 +67,22 @@ class AuthController extends GetxController {
           .doc(users.uid)
           .set(userModel.toJson);
 
-      
       switch (user.level) {
         case "Admin":
-        Get.offAndToNamed(Routes.DASHBOARD);
-        break;
+          Get.offAndToNamed(Routes.DASHBOARD);
+          break;
         case "Petugas":
-        Get.offAndToNamed(Routes.DASHBOARD);
-        break;
+          Get.offAndToNamed(Routes.DASHBOARD);
+          break;
         case "Peminjam":
-        Get.offAndToNamed(Routes.HOME);
-        break;
+          Get.offAndToNamed(Routes.HOME);
+          break;
       }
     } catch (e) {
       print('Error saving Google user to Firestore: $e');
       rethrow;
     }
   }
-
-
 
   RxBool isPassHidden = true.obs;
 
@@ -117,16 +115,16 @@ class AuthController extends GetxController {
           email: emailC.text, password: passC.text);
       if (myUser.user!.emailVerified) {
         switch (user.level) {
-        case "Admin":
-        Get.offAndToNamed(Routes.DASHBOARD);
-        break;
-        case "Petugas":
-        Get.offAndToNamed(Routes.DASHBOARD);
-        break;
-        case "Peminjam":
-        Get.offAndToNamed(Routes.HOME);
-        break;
-      }
+          case "Admin":
+            Get.offAndToNamed(Routes.DASHBOARD);
+            break;
+          case "Petugas":
+            Get.offAndToNamed(Routes.DASHBOARD);
+            break;
+          case "Peminjam":
+            Get.offAndToNamed(Routes.HOME);
+            break;
+        }
       } else {
         Get.defaultDialog(
           title: 'Verifikasi',
@@ -138,7 +136,9 @@ class AuthController extends GetxController {
             await myUser.user!.sendEmailVerification();
             Get.back();
             Get.snackbar(
-                'Berhasil', 'Kode verifikasi telah dikirimkan ke email Anda');
+                duration: const Duration(seconds: 5),
+                'Berhasil',
+                'Kode verifikasi telah dikirimkan ke email Anda');
           },
           textConfirm: 'Iya',
           textCancel: 'Tidak',
@@ -183,20 +183,16 @@ class AuthController extends GetxController {
             .doc(user.id)
             .set(user.toJson)
             .then((value) {
-          Get.defaultDialog(
-              title: "Verifikasi Email",
-              middleText: "Kami telah mengirimkan verifikasi ke Email anda",
-              textConfirm: "Oke",
-              onConfirm: () {
-                nameC.clear();
-                passC.clear();
-                emailC.clear();
-                adressC.clear();
-                passC2.clear();
-                Get.toNamed(Routes.AUTH);
-                isRegis = false;
-              },
-              confirmTextColor: Colors.white,);
+          nameC.clear();
+          passC.clear();
+          emailC.clear();
+          adressC.clear();
+          passC2.clear();
+          isRegis = false;
+          Get.snackbar(
+            "Verifikasi Email",
+            "Kami telah mengirimkan verifikasi ke Email anda, ",
+          );
         });
       }
       isSaving = false;
@@ -235,21 +231,23 @@ class AuthController extends GetxController {
     if (email != '' && GetUtils.isEmail(email)) {
       await auth.sendPasswordResetEmail(email: email);
       Get.defaultDialog(
-          title: 'Reset Password',
-          middleText: 'Berhasil mengirim link reset password ke $email',
-          onConfirm: () {
-            Get.back();
-            Get.back();
-          },
-          textConfirm: 'Oke',
-          confirmTextColor: Colors.white,);
+        title: 'Reset Password',
+        middleText: 'Berhasil mengirim link reset password ke $email',
+        onConfirm: () {
+          Get.back();
+          Get.back();
+        },
+        textConfirm: 'Oke',
+        confirmTextColor: Colors.white,
+      );
     } else {
       Get.defaultDialog(
-          title: 'Error',
-          middleText: 'Email yang anda kirim tidak valid',
-          textConfirm: 'Oke',
-          onConfirm: () => Get.back(),
-          confirmTextColor: Colors.white,);
+        title: 'Error',
+        middleText: 'Email yang anda kirim tidak valid',
+        textConfirm: 'Oke',
+        onConfirm: () => Get.back(),
+        confirmTextColor: Colors.white,
+      );
     }
   }
 
@@ -277,7 +275,7 @@ class AuthController extends GetxController {
   }
 
   @override
-  void onClose() { 
+  void onClose() {
     emailC.clear();
     passC.clear();
     passC2.clear();

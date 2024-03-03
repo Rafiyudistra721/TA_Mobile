@@ -69,5 +69,7 @@ flutter:
     - assets/imgs/guyreadbook2.jpg
     - assets/imgs/guyreadbookpng.png
     - assets/test.jpg
+    - assets/icons/logofinalfinal.png
+    - assets/icons/logofinalfinalfinal.png
   uses-material-design: true
 

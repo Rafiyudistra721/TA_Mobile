@@ -79,7 +79,7 @@ class WebScreen extends GetView<LandingPageController> {
                 children: [
                   70.height,
                   Image.asset(
-                    'assets/imgs/guyreadbook1.jpg', // Replace with your image path
+                    'assets/icons/logofinalfinal.png', // Replace with your image path
                     width: 400,
                     height: 400,
                     fit: BoxFit.cover,
@@ -90,7 +90,6 @@ class WebScreen extends GetView<LandingPageController> {
                       Get.toNamed(Routes.AUTH);
                     },
                     style: ElevatedButton.styleFrom(
-                        backgroundColor: Colors.black,
                         padding: const EdgeInsets.symmetric(
                             horizontal: 30, vertical: 20)),
                     child: Text(
@@ -98,7 +97,6 @@ class WebScreen extends GetView<LandingPageController> {
                       style: GoogleFonts.urbanist(
                         fontSize: 30,
                         fontWeight: FontWeight.bold,
-                        color: Colors.blue, // Your desired color
                       ),
                     ),
                   ),

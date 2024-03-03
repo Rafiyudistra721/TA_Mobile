@@ -1,6 +1,6 @@
 // ignore_for_file: unnecessary_overrides, invalid_use_of_protected_member, avoid_print, prefer_final_fields
 
-import 'package:file_picker/_internal/file_picker_web.dart';
+// import 'package:file_picker/_internal/file_picker_web.dart';
 import 'package:file_picker/file_picker.dart';
 import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
@@ -18,7 +18,6 @@ class ManageBukuController extends GetxController {
   var categories = <KategoriModel>[].obs;
   String? selectedCategory;
   KategoriModel? selectedCategoryView;
-
 
   TextEditingController judulC = TextEditingController();
   TextEditingController penulisC = TextEditingController();
@@ -47,22 +46,24 @@ class ManageBukuController extends GetxController {
     sinopsisC.text = bukuModel.sinopsis ?? '';
   }
 
-
   Future pickFile() async {
-    final FilePickerResult? result = await FilePickerWeb.platform.pickFiles(type: FileType.image);
-    if (result != null && result.files.isNotEmpty) {
-      pickedFile = result.files.first.bytes;
-      imagePath.value = pickedFile.toString();
-      results = result;
-      // String fileName = result.files.first.name;
-      // return fileName;
-    } else {
-      toast('Kamu tidak memilih file apapun', length: Toast.LENGTH_SHORT);
+    if (kIsWeb) {
+      final FilePickerResult? result =
+          await FilePicker.platform.pickFiles(type: FileType.image);
+      if (result != null && result.files.isNotEmpty) {
+        pickedFile = result.files.first.bytes;
+        imagePath.value = pickedFile.toString();
+        results = result;
+        // String fileName = result.files.first.name;
+        // return fileName;
+      } else {
+        toast('Kamu tidak memilih file apapun', length: Toast.LENGTH_SHORT);
+      }
     }
   }
 
   Future<String> uploadFile(Uint8List? file, FilePickerResult? results) async {
-        String fileName = results!.files.first.name;
+    String fileName = results!.files.first.name;
     try {
       final storageRef = firebaseStorage.ref(fileName);
 
@@ -85,14 +86,22 @@ class ManageBukuController extends GetxController {
     bukuModel.judul = judulC.text;
     bukuModel.penulis = penulisC.text;
     bukuModel.penerbit = penerbitC.text;
-    bukuModel.jumlah = int.tryParse(jumlahC.text) ;
+    bukuModel.jumlah = int.tryParse(jumlahC.text);
     bukuModel.tahunTerbit = int.tryParse(tahunterbitC.text);
     bukuModel.sinopsis = sinopsisC.text;
-    bukuModel.kategoriId = selectedCategory;
+    if (bukuModel.kategoriId.isEmptyOrNull) {
+      bukuModel.kategoriId = selectedCategory;
+    } else {
+      bukuModel.kategoriId;
+    }
 
     try {
-      String downloadUrl = await uploadFile(pickedFile, results);
-      bukuModel.coverBuku = downloadUrl;
+      if (bukuModel.coverBuku.isEmptyOrNull) {
+        String downloadUrl = await uploadFile(pickedFile, results);
+        bukuModel.coverBuku = downloadUrl;
+      } else {
+        bukuModel.coverBuku;
+      }
       await bukuModel.save();
       toast("Daftar Buku Telah Diperbarui");
       print("Success");
@@ -135,7 +144,7 @@ class ManageBukuController extends GetxController {
     }
   }
 
-    void fetchCategories() async {
+  void fetchCategories() async {
     try {
       final kategoriModel = KategoriModel();
       kategoriModel.streamList().listen((categoriesList) {
