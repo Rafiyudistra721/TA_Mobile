@@ -4,11 +4,13 @@ import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:ta_mobile/app/data/Models/buku_model.dart';
 import 'package:ta_mobile/app/data/Models/kategori_model.dart';
+import 'package:ta_mobile/app/data/Models/ulasan_model.dart';
 
 class DetailBukuController extends GetxController {
   var categories = <KategoriModel>[].obs;
   var selectedCategory = ''.obs;
   var allBooks = <BukuModel>[].obs;
+  var allUlasan = <UlasanModel>[].obs;
   final darkModeValue = Get.isDarkMode.obs;
 
     void toggleTheme() {
@@ -39,10 +41,20 @@ class DetailBukuController extends GetxController {
     }
   }
 
+  void fetchUlasan() {
+    try {
+      final ulasanModel = UlasanModel();
+      ulasanModel.streamList().listen((books) {
+        allUlasan.assignAll(books);
+      });
+    } catch (e) {
+      print('Error fetching books: $e');
+    }
+  }
+
   void changeCategory({required String temp}) {
     selectedCategory.value = temp;
   }
-
   
   @override
   void onInit() {

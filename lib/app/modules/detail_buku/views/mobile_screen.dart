@@ -1,19 +1,25 @@
-// import 'package:cloud_firestore/cloud_firestore.dart';
+import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/material.dart';
-// import 'package:ta_mobile/app/integrations/firestore.dart';
+import 'package:nb_utils/nb_utils.dart';
+import 'package:ta_mobile/app/data/Models/buku_model.dart';
+import 'package:ta_mobile/app/integrations/firestore.dart';
 import 'package:get/get.dart';
 import 'package:ta_mobile/app/routes/app_pages.dart';
 
 import '../controllers/detail_buku_controller.dart';
 
 class Mobile_Screen extends GetView<DetailBukuController> {
-  const Mobile_Screen({Key? key}) : super(key: key);
+  Mobile_Screen({Key? key}) : super(key: key);
+
+  BukuModel bukuModel = Get.arguments ?? BukuModel();
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      backgroundColor: const Color(0xFF52958B), // Updated to blue color
+      backgroundColor: const Color(0xFF52958B),
       appBar: AppBar(
         leadingWidth: 100,
+        title: Text('DetailBuku'),
         leading: Padding(
           padding:
               const EdgeInsets.only(left: 22, top: 10, bottom: 10, right: 20),
@@ -27,15 +33,10 @@ class Mobile_Screen extends GetView<DetailBukuController> {
             ),
           ),
         ),
-        foregroundColor: Color(0xFF52958B), // Updated to blue color
-        backgroundColor: Color(0xFF52958B), // Updated to blue color
         elevation: 0,
         bottomOpacity: 0.0,
-        scrolledUnderElevation: 0,
         actions: [
-          const SizedBox(
-            width: 10,
-          ),
+          const SizedBox(width: 10),
           Padding(
             padding:
                 const EdgeInsets.only(left: 26, top: 10, bottom: 10, right: 22),
@@ -49,182 +50,114 @@ class Mobile_Screen extends GetView<DetailBukuController> {
               ),
             ),
           ),
-          const SizedBox(
-            width: 6,
-          )
+          const SizedBox(width: 6),
         ],
       ),
-      body: Column(
-        children: [
-          const Expanded(
-            flex: 2,
-            child: SizedBox(),
-          ),
-          Expanded(
-            flex: 5,
-            child: Container(
-              decoration: BoxDecoration(
-                color: Colors.white,
-                borderRadius: const BorderRadius.only(
-                  topLeft: Radius.circular(60),
-                  topRight: Radius.circular(60),
-                ),
-                boxShadow: const [
-                  BoxShadow(
-                      color: Colors.black12,
-                      offset: Offset(-2, -3),
-                      blurRadius: 12)
-                ],
-              ),
-              child: Stack(
-                children: [
-                  Column(
-                    crossAxisAlignment: CrossAxisAlignment.start,
-                    mainAxisAlignment: MainAxisAlignment.spaceEvenly,
-                    children: [
-                      const SizedBox(
-                        height: 80,
-                      ),
-                      const Spacer(
-                        flex: 8,
-                      ),
-                      const Padding(
-                        padding:
-                            EdgeInsets.symmetric(horizontal: 20.0, vertical: 5),
-                        child: Row(
-                          crossAxisAlignment: CrossAxisAlignment.end,
-                          children: [
-                            Text(
-                              'BUKU 1',
-                              style: TextStyle(
-                                  fontWeight: FontWeight.w800, fontSize: 33),
-                            ),
-                            Spacer(),
-                            Padding(
-                              padding: EdgeInsets.all(5.0),
-                              child: Text(
-                                '',
-                                style: TextStyle(
-                                  fontWeight: FontWeight.bold,
-                                  fontSize: 22,
-                                  color: Colors.red,
-                                ),
-                              ),
-                            ),
-                            SizedBox(
-                              width: 3,
-                            ),
-                            Text(
-                              'STOK : 1 ',
-                              style: TextStyle(
-                                fontWeight: FontWeight.w800,
-                                fontSize: 33,
-                              ),
-                            ),
-                          ],
-                        ),
-                      ),
-                      const Padding(
-                        padding: EdgeInsets.symmetric(horizontal: 20.0),
-                        child: Text(
-                          'Fiksi',
-                          style: TextStyle(
-                            fontWeight: FontWeight.bold,
-                            fontSize: 23,
-                            color: Colors.grey,
-                          ),
-                        ),
-                      ),
-                      const Spacer(),
-                      const Spacer(),
-                      Padding(
-                        padding: const EdgeInsets.symmetric(horizontal: 20.0),
-                        child: Divider(
-                          thickness: 1.7,
-                          color: Colors.grey.shade200,
-                        ),
-                      ),
-                      const Padding(
-                        padding: EdgeInsets.symmetric(horizontal: 20.0),
-                        child: Row(
-                          mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                          children: [
-                            Text(
-                              '',
-                              style: TextStyle(
-                                fontSize: 22,
-                                fontWeight: FontWeight.w600,
-                              ),
-                            ),
-                            SizedBox(
-                              width: 5,
-                            ),
-                          ],
-                        ),
-                      ),
-                      Padding(
-                        padding: const EdgeInsets.symmetric(
-                            horizontal: 20.0, vertical: 40),
-                        child: Text(
-                          'Deskripsi',
-                          style: TextStyle(
-                            fontWeight: FontWeight.w500,
-                            fontSize: 22,
-                            wordSpacing: 1.4,
-                            color: Colors.grey.shade700,
-                          ),
-                        ),
-                      ),
-                      Padding(
-                        padding: const EdgeInsets.all(20.0),
-                        child: ElevatedButton(
-                          onPressed: () {
-                            Get.toNamed(Routes.KOLEKSI);
-                          },
-                          style: ButtonStyle(
-                            backgroundColor: MaterialStateProperty.all(
-                              Colors.black,
-                            ),
-                          ),
-                          child: Container(
-                            alignment: Alignment.center,
-                            height: 70,
-                            width: double.infinity,
-                            child: const Text(
-                              'Tambah Ke Koleksi',
-                              style: TextStyle(
-                                fontSize: 25,
-                                fontWeight: FontWeight.bold,
-                                color: Colors.white,
-                              ),
-                            ),
-                          ),
-                        ),
-                      ),
-                      const Spacer(),
-                    ],
+      // floatingActionButton: FloatingActionButton.extended(
+      //   onPressed: () {},
+      //   label: Container(
+      //     alignment: Alignment.center,
+      //     height: 70,
+      //     child: const Text(
+      //       'Tambah Ke Koleksi',
+      //       style: TextStyle(
+      //         fontSize: 25,
+      //         fontWeight: FontWeight.bold,
+      //         color: Colors.white,
+      //       ),
+      //     ),
+      //   ),
+      // ),
+      floatingActionButtonLocation: FloatingActionButtonLocation.centerFloat,
+      body: SingleChildScrollView(
+        child: Column(
+          crossAxisAlignment: CrossAxisAlignment.start,
+          children: [
+            const SizedBox(height: 40),
+            Align(
+              alignment: Alignment.center,
+              child: Padding(
+                padding: const EdgeInsets.only(top: 20.0),
+                child: AspectRatio(
+                  aspectRatio: 1.0 / 1,
+                  child: Image.network(
+                    bukuModel.coverBuku!,
+                    height: double.infinity,
+                    width: double.infinity,
                   ),
-                  Transform.translate(
-                    offset: const Offset(0, -150),
-                    child: Transform.scale(
-                      scale: 0.6,
-                      child: Align(
-                        alignment: Alignment.topCenter,
-                        child: Hero(
-                          tag: '',
-                          child: Transform.translate(
-                            offset: const Offset(0, -250),
-                            child: Image.asset('assets/test.jpg'),
-                          ),
-                        ),
-                      ),
+                ),
+              ),
+            ),
+            const SizedBox(height: 40),
+            Padding(
+              padding: const EdgeInsets.symmetric(horizontal: 20),
+              child: Row(
+                crossAxisAlignment: CrossAxisAlignment.end,
+                children: [
+                  Flexible(
+                    child: Text(
+                      bukuModel.judul!,
+                      overflow: TextOverflow.clip,
+                      maxLines: 3,
+                      style:
+                          TextStyle(fontWeight: FontWeight.w800, fontSize: 20),
+                    ),
+                  ),
+                  Spacer(),
+                  Text(
+                    "${bukuModel.jumlah}",
+                    style: TextStyle(
+                      fontWeight: FontWeight.w800,
+                      fontSize: 33,
                     ),
                   ),
                 ],
               ),
             ),
-          ),
-        ],
+            Padding(
+              padding: EdgeInsets.symmetric(horizontal: 20.0),
+              child: Text(
+                bukuModel.kategoriId!,
+                style: TextStyle(
+                  fontWeight: FontWeight.bold,
+                  fontSize: 23,
+                  color: Colors.grey,
+                ),
+              ),
+            ),
+            const SizedBox(height: 20),
+            Padding(
+              padding: EdgeInsets.symmetric(horizontal: 20.0),
+              child: Text(
+                bukuModel.sinopsis!,
+                style: TextStyle(
+                  fontWeight: FontWeight.w500,
+                  fontSize: 22,
+                  wordSpacing: 1.4,
+                ),
+              ),
+            ),
+            const SizedBox(height: 20),
+            Padding(
+              padding: const EdgeInsets.all(20.0),
+              child: DataTable(
+                columns: const [
+                  DataColumn(label: Text('Username', style: TextStyle(fontSize: 20, fontWeight: FontWeight.bold),)),
+                  DataColumn(label: Text('Comments', style: TextStyle(fontSize: 20, fontWeight: FontWeight.bold),)),
+                  DataColumn(label: Text('Rating', style: TextStyle(fontSize: 20, fontWeight: FontWeight.bold),))
+                ],
+                rows: controller.allUlasan.map((comment) {
+                  return DataRow(cells: [
+                    DataCell(Text(comment.userId ?? '')),
+                    DataCell(Text(comment.ulasan ?? '')),
+                    DataCell(Text(comment.rating?.toString() ?? '')),
+                  ]);
+                }).toList(),
+              ),
+            ),
+            const SizedBox(height: 20),
+          ],
+        ),
       ),
     );
   }

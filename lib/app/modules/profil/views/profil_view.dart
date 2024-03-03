@@ -59,7 +59,7 @@ class ProfilView extends GetView<ProfilController> {
                           TextStyle(fontSize: 25, fontWeight: FontWeight.bold),
                     ),
                     Text(
-                      'User1',
+                      authC.user.username!,
                       style: TextStyle(fontSize: 20),
                     ),
                     SizedBox(height: 10),
@@ -69,7 +69,7 @@ class ProfilView extends GetView<ProfilController> {
                           TextStyle(fontSize: 25, fontWeight: FontWeight.bold),
                     ),
                     Text(
-                      'user1@example.com', // Add email here
+                      authC.user.email!, // Add email here
                       style: TextStyle(fontSize: 20),
                     ),
                     SizedBox(height: 10),
@@ -79,7 +79,7 @@ class ProfilView extends GetView<ProfilController> {
                           TextStyle(fontSize: 25, fontWeight: FontWeight.bold),
                     ),
                     Text(
-                      'Jl. A', // Add address here
+                      authC.user.alamat!, // Add address here
                       style: TextStyle(fontSize: 20),
                     ),
                   ],
