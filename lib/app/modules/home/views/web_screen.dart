@@ -69,7 +69,7 @@ class WebScreen extends GetView<HomeController> {
                 Padding(
                   padding: const EdgeInsets.only(top: 50),
                   child: Column(
-                    crossAxisAlignment: CrossAxisAlignment.start,
+                    crossAxisAlignment: CrossAxisAlignment.center,
                     children: [
                       Padding(
                         padding: const EdgeInsets.only(left: 20, bottom: 30),
@@ -88,54 +88,56 @@ class WebScreen extends GetView<HomeController> {
                         } else {
                           return SizedBox(
                             height: 50,
-                            child: Padding(
-                              padding: const EdgeInsets.symmetric(horizontal: 20),
-                              child: ListView.builder(
-                                scrollDirection: Axis.horizontal,
-                                itemCount: controller.categories.length,
-                                itemBuilder: (context, index) {
-                                  var category = controller.categories[index];
-                                  var isActive = category.id! ==
-                                      controller.selectedCategory.value;
-                                  var isActiveValue = isActive.obs;
-                                  return Hero(
-                                      tag: 'category_${category.id}',
-                                      child: Padding(
-                                        padding: const EdgeInsets.symmetric(
-                                            vertical: 8.0, horizontal: 8.0),
-                                        child: ElevatedButton(
-                                        onPressed: () async {
-                                          controller.changeCategory(
-                                              temp: category.id!);
-                                        },
-                                        style: ElevatedButton.styleFrom(
-                                          elevation:
-                                              isActiveValue.value ? 6 : 0,
-                                          backgroundColor: isActiveValue.value
-                                              ? Colors.red
-                                              : controller.darkModeValue.value
-                                                  ? Colors.white
-                                                  : Color.fromARGB(255, 255, 255, 255),
-                                        ),
-                                          child: Padding(
-                                            padding: const EdgeInsets.all(4),
-                                            child: Text(
-                                              category.namaKategori!,
-                                              style: TextStyle(
-                                                fontWeight: FontWeight.bold,
-                                                fontSize: 18,
-                                                color: isActiveValue.value
+                            child: Center(
+                              child: Padding(
+                                padding: const EdgeInsets.symmetric(horizontal: 650),
+                                child: ListView.builder(
+                                  scrollDirection: Axis.horizontal,
+                                  itemCount: controller.categories.length,
+                                  itemBuilder: (context, index) {
+                                    var category = controller.categories[index];
+                                    var isActive = category.id! ==
+                                        controller.selectedCategory.value;
+                                    var isActiveValue = isActive.obs;
+                                    return Hero(
+                                        tag: 'category_${category.id}',
+                                        child: Padding(
+                                          padding: const EdgeInsets.symmetric(
+                                              vertical: 8.0, horizontal: 8.0),
+                                          child: ElevatedButton(
+                                          onPressed: () async {
+                                            controller.changeCategory(
+                                                temp: category.id!);
+                                          },
+                                          style: ElevatedButton.styleFrom(
+                                            elevation:
+                                                isActiveValue.value ? 6 : 0,
+                                            backgroundColor: isActiveValue.value
+                                                ? Colors.red
+                                                : controller.darkModeValue.value
                                                     ? Colors.white
-                                                    : controller
-                                                            .darkModeValue.value
-                                                        ? Colors.white
-                                                        : Colors.black,
+                                                    : Color.fromARGB(255, 255, 255, 255),
+                                          ),
+                                            child: Padding(
+                                              padding: const EdgeInsets.all(4),
+                                              child: Text(
+                                                category.namaKategori!,
+                                                style: TextStyle(
+                                                  fontWeight: FontWeight.bold,
+                                                  fontSize: 18,
+                                                  color: isActiveValue.value
+                                                      ? Colors.white
+                                                      : controller
+                                                              .darkModeValue.value
+                                                          ? Colors.white
+                                                          : Colors.black,
+                                                ),
                                               ),
                                             ),
                                           ),
-                                        ),
-                                      ));
-                                },
+                                        ));
+                                  },
+                                ),
                               ),
                             ),
                           );
@@ -224,7 +226,7 @@ class WebScreen extends GetView<HomeController> {
                                               image: DecorationImage(
                                                 image: NetworkImage(
                                                     book.coverBuku!),
-                                                fit: BoxFit.cover,
+                                                fit: BoxFit.fitHeight,
                                               ),
                                             ),
                                           ),

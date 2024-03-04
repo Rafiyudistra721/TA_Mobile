@@ -7,7 +7,7 @@ var tilePadding = const EdgeInsets.only(left: 8.0, right: 8, top: 8);
 Color active = const Color(0xFF3C19C0);
 
   const Color darkerAppBarColor = Color(0xFF003D38); 
-  const Color lighterAppBarColor = Color(0xFFB9C4C9); 
+  const Color lighterAppBarColor = Color(0xFF003D38); 
   const Color darkerDrawerBackgroundColor = Color(0xFF003D38); 
   const Color lighterDrawerBackgroundColor = Color(0xFFEDF8F6); 
   const Color darkerScaffoldBackgroundColor = Color(0xFF181A1B); 
