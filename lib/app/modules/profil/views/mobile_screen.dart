@@ -3,6 +3,7 @@ import 'package:get/get.dart';
 
 import 'package:ta_mobile/app/modules/auth/controllers/auth_controller.dart';
 import 'package:ta_mobile/app/widgets/AppBar.dart';
+import 'package:ta_mobile/app/widgets/navbottombar.dart';
 // import 'package:ta_mobile/app/routes/app_pages.dart';
 // import 'package:ta_mobile/app/widgets/navbottombar.dart';
 // import 'package:ta_mobile/app/widgets/navbar.dart';
@@ -16,7 +17,9 @@ class MobileScreen extends GetView<ProfilController> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      appBar: appBar,
+      bottomNavigationBar: BottomNav(
+        initialindex: 2,
+      ),
       body: Container(
         decoration: BoxDecoration(
           color: Color(0xFF52958B),
@@ -50,31 +53,31 @@ class MobileScreen extends GetView<ProfilController> {
                     Text(
                       'Username:',
                       style:
-                          TextStyle(fontSize: 25, fontWeight: FontWeight.bold),
+                          TextStyle(fontSize: 25, fontWeight: FontWeight.bold, color: Colors.black),
                     ),
                     Text(
                       authC.user.username!,
-                      style: TextStyle(fontSize: 20),
+                      style: TextStyle(fontSize: 20, color: Colors.black),
                     ),
                     SizedBox(height: 10),
                     Text(
                       'Email:',
                       style:
-                          TextStyle(fontSize: 25, fontWeight: FontWeight.bold),
+                          TextStyle(fontSize: 25, fontWeight: FontWeight.bold, color: Colors.black),
                     ),
                     Text(
                       authC.user.email!, // Add email here
-                      style: TextStyle(fontSize: 20),
+                      style: TextStyle(fontSize: 20, color: Colors.black),
                     ),
                     SizedBox(height: 10),
                     Text(
                       'Alamat:',
                       style:
-                          TextStyle(fontSize: 25, fontWeight: FontWeight.bold),
+                          TextStyle(fontSize: 25, fontWeight: FontWeight.bold, color: Colors.black),
                     ),
                     Text(
                       authC.user.alamat!, // Add address here
-                      style: TextStyle(fontSize: 20),
+                      style: TextStyle(fontSize: 20, color: Colors.black),
                     ),
                   ],
                 ),

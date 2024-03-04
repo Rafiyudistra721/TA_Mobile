@@ -17,7 +17,7 @@ class MobileScreen extends GetView<LandingPageController> {
           Container(
             decoration: const BoxDecoration(
               image: DecorationImage(
-                image: AssetImage('assets/imgs/bgbgimage.jpg'),
+                image: AssetImage('assets/images/gambarsplash.jpg'),
                 fit: BoxFit.cover,
               ),
             ),
@@ -31,14 +31,14 @@ class MobileScreen extends GetView<LandingPageController> {
             top: MediaQuery.of(context).size.height /
                 3, // Adjust position as needed
             left: MediaQuery.of(context).size.width / 2 -
-                100, // Adjust position as needed
+                120, // Adjust position as needed
             child: Column(
               mainAxisAlignment: MainAxisAlignment.center,
               children: [
                 Image.asset(
-                  'assets/imgs/guyreadbookpng.png',
-                  width: 200,
-                  height: 200,
+                  'assets/icons/logofinalfinalfinal.png',
+                  width: 300,
+                  height: 300,
                 ),
                 const SizedBox(height: 20),
                 // ... other content
@@ -63,7 +63,7 @@ class MobileScreen extends GetView<LandingPageController> {
                 Text(
                   "di SmartLib", // Replace with your desired small letter
                   style: GoogleFonts.urbanist(
-                      fontSize: 40,
+                      fontSize: 50,
                       fontWeight: FontWeight.bold,
                       color: Colors.white,
                       height: (1)),
@@ -103,7 +103,7 @@ class MobileScreen extends GetView<LandingPageController> {
             left: 0,
             right: 0,
             height: MediaQuery.of(context).size.height /
-                8, // 1/4 of the screen height
+                6, // 1/4 of the screen height
             child: Container(
               decoration: BoxDecoration(
                 color: Colors.white,
@@ -121,12 +121,13 @@ class MobileScreen extends GetView<LandingPageController> {
                         backgroundColor: Colors.black,
                         padding: const EdgeInsets.symmetric(
                             horizontal: 30, vertical: 20),
+                            
                       ),
                       child: Text(
                         'Masuk',
                         style: GoogleFonts.urbanist(
                           color: Colors.white,
-                          fontSize: (25),
+                          fontSize: (30),
                         ),
                       ),
                     ),
