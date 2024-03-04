@@ -8,6 +8,7 @@ import 'package:ta_mobile/app/modules/Manage_Ulasan/controllers/manage_ulasan_co
 import 'package:ta_mobile/app/modules/auth/controllers/auth_controller.dart';
 
 import 'package:ta_mobile/app/widgets/AppBar.dart';
+import 'package:ta_mobile/app/widgets/footerweb.dart';
 import '../controllers/detail_buku_controller.dart';
 
 class Web_Screen extends GetView<DetailBukuController> {
@@ -21,6 +22,7 @@ class Web_Screen extends GetView<DetailBukuController> {
 
   @override
   Widget build(BuildContext context) {
+    controller.modelToController(bukuModel);
     return Scaffold(
       backgroundColor:
           const Color.fromARGB(255, 255, 255, 255), // Updated to blue color
@@ -32,7 +34,7 @@ class Web_Screen extends GetView<DetailBukuController> {
           Expanded(
               child: SingleChildScrollView(
             child: Container(
-              padding: EdgeInsets.symmetric(vertical: 30),
+              padding: EdgeInsets.only(top: 30),
               color: const Color.fromARGB(255, 255, 255, 255),
               child: Column(
                 children: [
@@ -62,21 +64,24 @@ class Web_Screen extends GetView<DetailBukuController> {
                                   fontWeight: FontWeight.w700,
                                   fontFamily: 'urbanist'),
                             ),
-                            Text.rich(
-                              TextSpan(
-                                children: [
-                                  TextSpan(
-                                    text:
-                                        '${bukuModel.kategoriId}', // Access and display penulis property
+                            Padding(
+                              padding: const EdgeInsets.all(8.0),
+                              child: Obx(
+                                () {
+                                  final category = controller.categories
+                                      .firstWhereOrNull((cat) =>
+                                          cat.id == bukuModel.kategoriId);
+                                  return Text(
+                                    category != null
+                                        ? category.namaKategori!
+                                        : 'Unknown Category',
                                     style: const TextStyle(
-                                      fontSize: 20,
-                                      fontWeight: FontWeight
-                                          .w600, // Adjust weight if needed
-                                      fontFamily: 'urbanist',
-                                      color: Colors.lightGreen,
+                                      fontWeight: FontWeight.bold,
+                                      fontSize: 23,
+                                      color: Colors.grey,
                                     ),
-                                  ),
-                                ],
+                                  );
+                                },
                               ),
                             ),
                             const SizedBox(height: 10),
@@ -333,7 +338,7 @@ class Web_Screen extends GetView<DetailBukuController> {
                         ),
                         30.height,
                         Padding(
-                          padding: const EdgeInsets.symmetric(vertical: 10),
+                          padding: const EdgeInsets.only(top: 10, bottom: 20),
                           child: SizedBox(
                             width: 170,
                             child: FloatingActionButton.extended(
@@ -356,16 +361,15 @@ class Web_Screen extends GetView<DetailBukuController> {
                                       )),
                           ),
                         ),
-                        150.height
                       ],
                     ),
-                  )
+                  ),FooterWeb()
                 ],
               ),
             ),
           ))
-        ],
-      ),
+        ], 
+      ), 
     );
   }
 }

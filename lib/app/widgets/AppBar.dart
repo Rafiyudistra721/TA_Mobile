@@ -9,26 +9,26 @@ AppBar appBar = AppBar(
   leadingWidth: 1000,
   leading: Row(
     children: [
-      Padding(
-        padding: const EdgeInsets.only(left: 20),
-        child: Container(
-          width: 60,
-          height: 60,
-          decoration: BoxDecoration(
-            borderRadius: BorderRadius.circular(18),
-            gradient: LinearGradient(
-                colors: [Color.fromARGB(225, 4, 68, 85), Color.fromARGB(150, 82, 149,139)],
-                begin: Alignment.bottomRight,
-                end: Alignment.topLeft),
-          ),
-          child: Center(
-            child: Text(
-              "S",
-              style: TextStyle(fontSize: 40, color: Colors.white, fontFamily: "Montserrat"),
+        Padding(
+          padding: const EdgeInsets.only(left: 20),
+          child: Container(
+            width: 60,
+            height: 60,
+            decoration: BoxDecoration(
+              borderRadius: BorderRadius.circular(18),
+              gradient: LinearGradient(
+                  colors: [Color.fromARGB(225, 4, 68, 85), Color.fromARGB(150, 82, 149,139)],
+                  begin: Alignment.bottomRight,
+                  end: Alignment.topLeft),
+            ),
+            child: Center(
+              child: Text(
+                "S",
+                style: TextStyle(fontSize: 40, color: Colors.white, fontFamily: "Montserrat"),
+              ),
             ),
           ),
         ),
-      ),
       SizedBox(width: 10),
       Text("SmartLib",
           style: TextStyle(fontSize: 29, fontWeight: FontWeight.bold, fontFamily: "Montserrat", color: Colors.white)),
