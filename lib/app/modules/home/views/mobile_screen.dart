@@ -105,48 +105,202 @@ class MobileScreen extends GetView<HomeController> {
               Flexible(
                 flex: 5,
                 child: CarouselSlider(
-                  options: CarouselOptions(
-                    enlargeCenterPage: true,
-                    pauseAutoPlayOnManualNavigate: true,
-                    autoPlay: true,
-                    viewportFraction: 1,
-                    autoPlayInterval: const Duration(seconds: 4),
-                    autoPlayAnimationDuration:
-                        const Duration(milliseconds: 1000),
-                    autoPlayCurve: Curves.fastOutSlowIn,
-                  ),
-                  items: [
-                    Image.asset('assets/stocks/1.png'),
-                    Image.asset('assets/stocks/2.png'),
-                    Image.asset('assets/stocks/3.png'),
-                  ].map((item) {
-                    return Builder(
-                      builder: (BuildContext context) {
-                        return Padding(
+                      options: CarouselOptions(
+                        enlargeCenterPage: true,
+                        pauseAutoPlayOnManualNavigate: true,
+                        autoPlay: true,
+                        viewportFraction: 0.8,
+                        autoPlayInterval: const Duration(seconds: 2),
+                        autoPlayAnimationDuration:
+                            const Duration(milliseconds: 1000),
+                        autoPlayCurve: Curves.fastOutSlowIn,
+                      ),
+                      items: [
+                        Padding(
                           padding: const EdgeInsets.symmetric(
                             horizontal: 5.0,
-                            vertical: 12,
+                            vertical: 20,
                           ),
                           child: Container(
                             decoration: BoxDecoration(
-                                boxShadow: [
-                                  BoxShadow(
-                                    color: (controller.darkModeValue.value)
-                                        ? Colors.grey.shade900
-                                        : Colors.grey.shade900,
-                                    blurRadius: 8,
-                                    offset: const Offset(2, 3),
-                                  )
-                                ],
-                                borderRadius: BorderRadius.circular(30),
-                                color: const Color(0xFF52958B)),
-                            child: item,
+                              boxShadow: [
+                                BoxShadow(
+                                  color: (Get.isDarkMode)
+                                      ? Colors.grey.shade900
+                                      : Colors.grey.shade900,
+                                  blurRadius: 14,
+                                  offset: const Offset(2, 3),
+                                )
+                              ],
+                              borderRadius: BorderRadius.circular(40),
+                              color: Color(0xFF52958B),
+                            ),
+                            child: Row(
+                              children: [
+                                Expanded(
+                                  child: Column(
+                                    mainAxisAlignment: MainAxisAlignment.center,
+                                    crossAxisAlignment:
+                                        CrossAxisAlignment.center,
+                                    children: [
+                                      Padding(
+                                        padding: const EdgeInsets.symmetric(
+                                            horizontal: 18.0),
+                                        child: Text(
+                                          'Pinjam Buku Dengan Aman.',
+                                          style: TextStyle(
+                                            fontSize: 24,
+                                            wordSpacing: 2.5,
+                                            height: 1.4,
+                                            letterSpacing: -0.7,
+                                            
+                                            fontWeight: FontWeight.w700,
+                                          ),
+                                        ),
+                                      ),
+                                      const SizedBox(
+                                        height: 10,
+                                      ),
+                                      
+                                    ],
+                                  ),
+                                ),
+                                Expanded(
+                                  child: Transform.scale(
+                                    scale: 1,
+                                    child: Image.asset(
+                                      'assets/stocks/1.png',
+                                    ),
+                                  ),
+                                ),
+                              ],
+                            ),
                           ),
-                        );
-                      },
-                    );
-                  }).toList(),
-                ),
+                        ),
+                        Padding(
+                          padding: const EdgeInsets.symmetric(
+                            horizontal: 5.0,
+                            vertical: 20,
+                          ),
+                          child: Container(
+                            decoration: BoxDecoration(
+                              boxShadow: [
+                                BoxShadow(
+                                  color: Colors.grey.shade900,
+                                  blurRadius: 14,
+                                  offset: const Offset(2, 3),
+                                )
+                              ],
+                              borderRadius: BorderRadius.circular(40),
+                              color: Color(0xFF52958B),
+                            ),
+                            child: Row(
+                              children: [
+                                Expanded(
+                                  flex: 4,
+                                  child: Column(
+                                    mainAxisAlignment: MainAxisAlignment.center,
+                                    crossAxisAlignment:
+                                        CrossAxisAlignment.center,
+                                    children: [
+                                      Padding(
+                                        padding: const EdgeInsets.symmetric(
+                                            horizontal: 18.0),
+                                        child: Text(
+                                          'Koleksi Buku Terlengkap.',
+                                          style: TextStyle(
+                                            fontSize: 25,
+                                            wordSpacing: 2.5,
+                                            height: 1.4,
+                                            letterSpacing: -0.7,
+                                            
+                                            fontWeight: FontWeight.w700,
+                                          ),
+                                        ),
+                                      ),
+                                      const SizedBox(
+                                        height: 10,
+                                      ),
+                                      
+                                    ],
+                                  ),
+                                ),
+                                Expanded(
+                                  flex: 5,
+                                  child: Transform.scale(
+                                    scale: 1.7,
+                                    child: Transform.scale(
+                                      scale: 0.7,
+                                      child: Image.asset(
+                                          'assets/imgs/carousel1.png', width: 150, height: 150,),
+                                    ),
+                                  ),
+                                ),
+                              ],
+                            ),
+                          ),
+                        ),
+                        Padding(
+                          padding: const EdgeInsets.symmetric(
+                            horizontal: 5.0,
+                            vertical: 20,
+                          ),
+                          child: Container(
+                            decoration: BoxDecoration(
+                              boxShadow: [
+                                BoxShadow(
+                                  color: Colors.grey.shade900,
+                                  blurRadius: 14,
+                                  offset: const Offset(2, 3),
+                                )
+                              ],
+                              borderRadius: BorderRadius.circular(40),
+                              color: Color(0xFF52958B),
+                            ),
+                            child: Row(
+                              children: [
+                                Expanded(
+                                  child: Column(
+                                    mainAxisAlignment: MainAxisAlignment.center,
+                                    crossAxisAlignment:
+                                        CrossAxisAlignment.center,
+                                    children: [
+                                      Padding(
+                                        padding: const EdgeInsets.symmetric(
+                                            horizontal: 18.0),
+                                        child: Text(
+                                          'Pinjam Buku Dengan Mudah.',
+                                          style: TextStyle(
+                                            fontSize: 24,
+                                            wordSpacing: 2.5,
+                                            height: 1.4,
+                                            letterSpacing: -0.7,
+                                            
+                                            fontWeight: FontWeight.w700,
+                                          ),
+                                        ),
+                                      ),
+                                      const SizedBox(
+                                        height: 10,
+                                      ),
+                                      
+                                    ],
+                                  ),
+                                ),
+                                Expanded(
+                                  child: Transform.scale(
+                                    scale: 1.3,
+                                    child: Image.asset(
+                                      'assets/imgs/carousel2.png',
+                                    ),
+                                  ),
+                                ),
+                              ],
+                            ),
+                          ),
+                        ),
+                      ],
+                    ),
               ),
               Flexible(
                 flex: 3,
