@@ -15,6 +15,6 @@ class HomeView extends GetView<HomeController> {
   Widget build(BuildContext context) {
     return ResponsiveLayout(
       mobileScreen: MobileScreen(), 
-      webScreen: WebScreen());
+      webScreen: const WebScreen());
   }
 }

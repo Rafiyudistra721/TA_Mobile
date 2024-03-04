@@ -1,4 +1,6 @@
 // import 'package:cloud_firestore/cloud_firestore.dart';
+// ignore_for_file: camel_case_types, must_be_immutable
+
 import 'package:flutter/material.dart';
 // import 'package:ta_mobile/app/integrations/firestore.dart';
 import 'package:get/get.dart';
@@ -26,11 +28,11 @@ class Web_Screen extends GetView<DetailBukuController> {
             Expanded(
                 child: SingleChildScrollView(
               child: Container(
-                padding: EdgeInsets.symmetric(vertical: 30),
+                padding: const EdgeInsets.symmetric(vertical: 30),
                 color: const Color.fromARGB(255, 255, 255, 255),
                 child: Column(
                   children: [
-                    Text(
+                    const Text(
                       'Detail Buku',
                       style: TextStyle(
                           fontWeight: FontWeight.w700,
@@ -68,9 +70,9 @@ class Web_Screen extends GetView<DetailBukuController> {
                               Text.rich(
                                 TextSpan(
                                   children: [
-                                    TextSpan(
+                                    const TextSpan(
                                       text: 'Penulis: ',
-                                      style: const TextStyle(
+                                      style: TextStyle(
                                         fontSize: 22,
                                         fontWeight: FontWeight.w500,
                                         fontFamily: 'urbanist',
@@ -94,9 +96,9 @@ class Web_Screen extends GetView<DetailBukuController> {
                               Text.rich(
                                 TextSpan(
                                   children: [
-                                    TextSpan(
+                                    const TextSpan(
                                       text: 'Penerbit: ',
-                                      style: const TextStyle(
+                                      style: TextStyle(
                                         fontSize: 22,
                                         fontWeight: FontWeight.w500,
                                         fontFamily: 'urbanist',
@@ -120,9 +122,9 @@ class Web_Screen extends GetView<DetailBukuController> {
                               Text.rich(
                                 TextSpan(
                                   children: [
-                                    TextSpan(
+                                    const TextSpan(
                                       text: 'Tahun Terbit: ',
-                                      style: const TextStyle(
+                                      style: TextStyle(
                                         fontSize: 22,
                                         fontWeight: FontWeight.w500,
                                         fontFamily: 'urbanist',
@@ -146,9 +148,9 @@ class Web_Screen extends GetView<DetailBukuController> {
                               Text.rich(
                                 TextSpan(
                                   children: [
-                                    TextSpan(
+                                    const TextSpan(
                                       text: 'kategori: ',
-                                      style: const TextStyle(
+                                      style: TextStyle(
                                         fontSize: 22,
                                         fontWeight: FontWeight.w500,
                                         fontFamily: 'urbanist',
@@ -171,9 +173,9 @@ class Web_Screen extends GetView<DetailBukuController> {
                               Text.rich(
                                 TextSpan(
                                   children: [
-                                    TextSpan(
+                                    const TextSpan(
                                       text: 'Sinopsis: ',
-                                      style: const TextStyle(
+                                      style: TextStyle(
                                         fontSize: 22,
                                         fontWeight: FontWeight.w500,
                                         fontFamily: 'urbanist',
@@ -196,9 +198,9 @@ class Web_Screen extends GetView<DetailBukuController> {
                               Text.rich(
                                 TextSpan(
                                   children: [
-                                    TextSpan(
+                                    const TextSpan(
                                       text: 'Stok: ',
-                                      style: const TextStyle(
+                                      style: TextStyle(
                                         fontSize: 22,
                                         fontWeight: FontWeight.w500,
                                         fontFamily: 'urbanist',
@@ -221,20 +223,20 @@ class Web_Screen extends GetView<DetailBukuController> {
                                 width: 10,
                                 height: 20,
                               ),
-                              Row(// Use another Row to align icon and number
+                              const Row(// Use another Row to align icon and number
                                   children: [
-                                const Icon(
+                                Icon(
                                   // Replace with your desired icon
                                   Icons.star,
                                   color: Colors.amber,
                                   size: 28,
                                 ),
-                                const SizedBox(
+                                SizedBox(
                                     width:
                                         5), // Add spacing between icon and number
                                 Text(
                                   '4.5', // Replace with your rating value
-                                  style: const TextStyle(
+                                  style: TextStyle(
                                     fontSize: 22,
                                     color: Colors.amber,
                                   ),
@@ -246,17 +248,17 @@ class Web_Screen extends GetView<DetailBukuController> {
                       ],
                     ),
                     50.height,
-                    Column(
+                    const Column(
                       mainAxisAlignment: MainAxisAlignment.start,
                       children: [
                         Row(
                           children: [
                             Expanded(
                               child: Padding(
-                                padding: const EdgeInsets.only(left: 50),
+                                padding: EdgeInsets.only(left: 50),
                                 child: Text(
                                   'Ulasan',
-                                  style: const TextStyle(
+                                  style: TextStyle(
                                       fontSize: 42,
                                       fontWeight: FontWeight.w700,
                                       fontFamily: 'urbanist'),
@@ -275,12 +277,12 @@ class Web_Screen extends GetView<DetailBukuController> {
                       child: Align(
                           alignment: Alignment.centerLeft,
                           child: DataTable(
-                            columns: [
+                            columns: const [
                               DataColumn(label: Text('Name')),
                               DataColumn(label: Text('Rating')),
                               DataColumn(label: Text('Review')),
                             ],
-                            rows: [
+                            rows: const [
                               DataRow(cells: [
                                 DataCell(Text('User 1')),
                                 DataCell(Text('4.5')),

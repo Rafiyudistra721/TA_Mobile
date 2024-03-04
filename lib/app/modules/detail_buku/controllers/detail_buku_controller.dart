@@ -1,10 +1,11 @@
-// ignore_for_file: unnecessary_overrides, avoid_print, invalid_use_of_protected_member
+// ignore_for_file: unnecessary_overrides, avoid_print, invalid_use_of_protected_member, prefer_final_fields
 
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:nb_utils/nb_utils.dart';
 import 'package:ta_mobile/app/data/Models/buku_model.dart';
 import 'package:ta_mobile/app/data/Models/kategori_model.dart';
+import 'package:ta_mobile/app/data/Models/koleksi_model.dart';
 import 'package:ta_mobile/app/data/Models/ulasan_model.dart';
 import 'package:ta_mobile/app/data/Models/user_model.dart';
 import 'package:ta_mobile/app/modules/auth/controllers/auth_controller.dart';
@@ -22,15 +23,31 @@ class DetailBukuController extends GetxController {
   modelToController(BukuModel bukuModel) {
     bukuId = bukuModel.id;
     rxUlasan.bindStream(UlasanModel(bukuId: bukuId).streamList());
-
   }
 
+  Future storeToBookmark(KoleksiModel koleksiModel, BukuModel bukuModel,
+      AuthController authController) async {
+    isSaving = true;
+    koleksiModel.bukuId = bukuModel.id;
+    koleksiModel.userId = authController.user.id;
+
+    try {
+      await koleksiModel.save();
+      toastLong("Buku telah ditambahkan ke koleksi anda");
+      print("Success");
+    } catch (e) {
+      print('Error: $e');
+    } finally {
+      isSaving = false;
+    }
+  }
 
   var _isSaving = false.obs;
   bool get isSaving => _isSaving.value;
   set isSaving(bool value) => _isSaving.value = value;
 
-  Future store(UlasanModel ulasanModel, BukuModel bukuModel, AuthController authController) async {
+  Future store(UlasanModel ulasanModel, BukuModel bukuModel,
+      AuthController authController) async {
     isSaving = true;
     ulasanModel.bukuId = bukuModel.id;
     ulasanModel.userId = authController.user.id;
@@ -39,11 +56,10 @@ class DetailBukuController extends GetxController {
 
     try {
       await ulasanModel.save();
-      toast("Daftar Buku Telah Diperbarui");
+      toastLong("Terima kasih atas ulasan anda");
       print("Success");
     } catch (e) {
       print('Error: $e');
-      // print('1. $fileName');
     } finally {
       isSaving = false;
     }
@@ -78,7 +94,6 @@ class DetailBukuController extends GetxController {
       Get.snackbar("Error", e.toString());
     }
   }
-
 
   void fetchCategories() async {
     try {
@@ -116,13 +131,12 @@ class DetailBukuController extends GetxController {
   RxList<UlasanModel> rxUlasan = RxList<UlasanModel>();
   List<UlasanModel> get listUlasan => rxUlasan.value;
   set listUlasan(List<UlasanModel> value) => rxUlasan.value = value;
-  
+
   @override
   void onInit() {
     super.onInit();
     fetchCategories();
     fetchBooks();
-
   }
 
   @override
@@ -134,5 +148,4 @@ class DetailBukuController extends GetxController {
   void onClose() {
     super.onClose();
   }
-
 }

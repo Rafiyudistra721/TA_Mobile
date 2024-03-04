@@ -210,7 +210,7 @@ class DashboardView extends GetView<DashboardController> {
               ),
               ElevatedButton(
                 onPressed: () => authC.logout(), 
-                child: Text('Logout'))
+                child: const Text('Logout'))
             ],
           ),
         ),

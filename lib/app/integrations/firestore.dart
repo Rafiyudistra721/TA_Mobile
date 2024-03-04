@@ -13,5 +13,5 @@ const usersCollection = "Collection_Users";
 const bukuCollection = "Collection_Buku";
 const pinjamCollection = "Collection_Pinjam";
 const kategoriCollection = "Collection_Kategori";
-const bookmarkCollection = "Collection_Bookmark";
+const bookmarkCollection = "Bookmark";
 const ulasanCollection = "Ulasan";

@@ -23,13 +23,13 @@ class WebScreen extends GetView<KoleksiController> {
                   child: Column(
                     children: [
                       Obx(() {
-                        if (controller.allBooks.isEmpty) {
+                        if (controller.allBook.isEmpty) {
                           return const CircularProgressIndicator();
                         } else {
                           final filteredBooks =
                               controller.selectedCategory.isEmpty
-                                  ? controller.allBooks
-                                  : controller.allBooks
+                                  ? controller.allBook
+                                  : controller.allBook
                                       .where((book) =>
                                           book.kategoriId ==
                                           controller.selectedCategory.value)

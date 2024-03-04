@@ -1,8 +1,11 @@
+// ignore_for_file: camel_case_types, must_be_immutable
+
 import 'package:flutter/material.dart';
 import 'package:flutter_rating_bar/flutter_rating_bar.dart';
 import 'package:nb_utils/nb_utils.dart';
 import 'package:ta_mobile/app/data/Models/buku_model.dart';
 import 'package:get/get.dart';
+import 'package:ta_mobile/app/data/Models/koleksi_model.dart';
 import 'package:ta_mobile/app/data/Models/ulasan_model.dart';
 import 'package:ta_mobile/app/modules/Manage_Ulasan/controllers/manage_ulasan_controller.dart';
 import 'package:ta_mobile/app/modules/auth/controllers/auth_controller.dart';
@@ -16,6 +19,7 @@ class Mobile_Screen extends GetView<DetailBukuController> {
   Mobile_Screen({Key? key}) : super(key: key);
   final GlobalKey<FormState> _ulasanKey = GlobalKey();
   UlasanModel ulasanModel = UlasanModel();
+  KoleksiModel  koleksiModel = KoleksiModel();
 
   BukuModel bukuModel = Get.arguments ?? BukuModel();
 
@@ -40,7 +44,10 @@ class Mobile_Screen extends GetView<DetailBukuController> {
         ],
       ),
       floatingActionButton: FloatingActionButton.extended(
-        onPressed: () {},
+        onPressed: () {
+          controller.storeToBookmark(koleksiModel, bukuModel, authController);
+          
+        },
         label: Container(
           alignment: Alignment.center,
           height: 70,
@@ -235,7 +242,7 @@ class Mobile_Screen extends GetView<DetailBukuController> {
                     padding: const EdgeInsets.symmetric(horizontal: 30),
                     child: AppTextField(
                       textFieldType: TextFieldType.MULTILINE,
-                      decoration: InputDecoration(
+                      decoration: const InputDecoration(
                         labelText: "Ulasan",
                         hintText: "Isilah dengan ulasanmu mengenai buku ini",
                       ),
