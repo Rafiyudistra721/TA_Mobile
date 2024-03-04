@@ -31,7 +31,7 @@ AppBar appBar = AppBar(
       ),
       SizedBox(width: 10),
       Text("SmartLib",
-          style: TextStyle(fontSize: 29, fontWeight: FontWeight.bold, fontFamily: "Montserrat")),
+          style: TextStyle(fontSize: 29, fontWeight: FontWeight.bold, fontFamily: "Montserrat", color: Colors.white)),
     ],
   ),
   actions: [
@@ -43,7 +43,9 @@ AppBar appBar = AppBar(
       style: TextStyle(
         fontSize: 24.0, 
         fontWeight: FontWeight.bold,
-        color: Colors.red,
+        fontFamily: 'urbanist',
+        color: Colors.white,
+        letterSpacing: 2,
       ),
     ),
     ),
@@ -56,7 +58,9 @@ AppBar appBar = AppBar(
       style: TextStyle(
         fontSize: 24.0, 
         fontWeight: FontWeight.bold,
-        color: Colors.black, 
+        fontFamily: 'urbanist',
+        color: Colors.white, 
+        letterSpacing: 2,
       ),
     ),
     ),
@@ -69,7 +73,9 @@ AppBar appBar = AppBar(
       style: TextStyle(
         fontSize: 24.0, 
         fontWeight: FontWeight.bold,
-        color: Colors.black, 
+        fontFamily: 'urbanist',
+        color: Colors.white, 
+        letterSpacing: 2,
       ),
     ),
     ),
