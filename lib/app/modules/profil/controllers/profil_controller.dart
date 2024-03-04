@@ -1,18 +1,19 @@
+// ignore_for_file: unnecessary_overrides, avoid_print
+
+import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:ta_mobile/app/data/Models/user_model.dart';
-import 'package:ta_mobile/app/data/Models/buku_model.dart';
-import 'package:ta_mobile/app/data/Models/kategori_model.dart';
-
 
 class ProfilController extends GetxController {
-  var profil = <UserModel>[].obs;
 
-  final count = 0.obs;
+  final darkModeValue = Get.isDarkMode.obs;
 
-  @override
-  void onInit() {
-    super.onInit();
+    void toggleTheme() {
+    darkModeValue.value = !darkModeValue.value;
+    Get.changeThemeMode(
+        darkModeValue.value ? ThemeMode.dark : ThemeMode.light);
   }
+
 
   @override
   void onReady() {
@@ -24,5 +25,4 @@ class ProfilController extends GetxController {
     super.onClose();
   }
 
-  void increment() => count.value++;
 }

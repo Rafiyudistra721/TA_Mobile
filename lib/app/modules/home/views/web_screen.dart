@@ -22,7 +22,7 @@ class WebScreen extends GetView<HomeController> {
                   flex: 8,
                   child: CarouselSlider(
                     options: CarouselOptions(
-                      aspectRatio: 42 / 8,
+                      aspectRatio: 42/8,
                       enlargeCenterPage: true,
                       pauseAutoPlayOnManualNavigate: true,
                       autoPlay: true,
@@ -33,252 +33,49 @@ class WebScreen extends GetView<HomeController> {
                       autoPlayCurve: Curves.fastOutSlowIn,
                     ),
                     items: [
-                      Padding(
-                        padding: const EdgeInsets.symmetric(
-                          horizontal: 20.0,
-                          vertical: 20,
-                        ),
-                        child: Container(
-                          decoration: BoxDecoration(
-                            boxShadow: [
-                              BoxShadow(
-                                color: (controller.darkModeValue.value)
-                                    ? Colors.grey.shade900
-                                    : Colors.grey.shade900,
-                                blurRadius: 14,
-                                offset: const Offset(2, 3),
-                              )
-                            ],
-                            borderRadius: BorderRadius.circular(40),
-                            color: Colors.amber.shade200,
-                          ),
-                          child: Row(
-                            children: [
-                              Expanded(
-                                child: Column(
-                                  mainAxisAlignment: MainAxisAlignment.center,
-                                  crossAxisAlignment: CrossAxisAlignment.center,
-                                  children: [
-                                    Padding(
-                                      padding: const EdgeInsets.symmetric(
-                                          horizontal: 18.0),
-                                      child: Text(
-                                        'Website Paling Aman Untuk Meminjam Buku',
-                                        style: TextStyle(
-                                          fontSize: 28,
-                                          wordSpacing: 3,
-                                          height: 3,
-                                          letterSpacing: -0.7,
-                                          color: Colors.grey.shade900,
-                                          fontWeight: FontWeight.w700,
-                                        ),
-                                      ),
-                                    ),
-                                    10.height,
-                                    Align(
-                                      alignment: Alignment.center,
-                                      child: Padding(
-                                        padding: const EdgeInsets.symmetric(
-                                            horizontal: 10.0),
-                                        child: ElevatedButton(
-                                          onPressed: () {},
-                                          style: ButtonStyle(
-                                            backgroundColor:
-                                                MaterialStateProperty.all(
-                                                    Colors.red),
-                                          ),
-                                          child: const Text(
-                                            'Pinjam Sekarang',
-                                            style: TextStyle(
-                                              color: Colors.white70,
-                                              fontSize: 18,
-                                            ),
-                                          ),
-                                        ),
-                                      ),
-                                    ),
-                                  ],
-                                ),
+                      Image.asset('assets/stocks/1.png'),
+                      Image.asset('assets/stocks/2.png'),
+                      Image.asset('assets/stocks/3.png'),
+                    ].map((item) {
+                      return Builder(
+                        builder: (BuildContext context) {
+                          return Padding(
+                            padding: const EdgeInsets.symmetric(
+                              horizontal: 5.0,
+                              vertical: 20,
+                            ),
+                            child: Container(
+                              decoration: BoxDecoration(
+                                boxShadow: [
+                                  BoxShadow(
+                                    color: (controller.darkModeValue.value)
+                                        ? Colors.grey.shade900
+                                        : Colors.grey.shade900,
+                                    blurRadius: 14,
+                                    offset: const Offset(2, 3),
+                                  )
+                                ],
+                                borderRadius: BorderRadius.circular(40),
+                                color: Color(0xFF52958B)
                               ),
-                              Expanded(
-                                child: Transform.scale(
-                                  scale: 1,
-                                  child: Image.asset(
-                                    'assets/stocks/1.png',
-                                  ),
-                                ),
-                              ),
-                            ],
-                          ),
-                        ),
-                      ),
-                      Padding(
-                        padding: const EdgeInsets.symmetric(
-                          horizontal: 5.0,
-                          vertical: 20,
-                        ),
-                        child: Container(
-                          decoration: BoxDecoration(
-                            boxShadow: [
-                              BoxShadow(
-                                color: Colors.grey.shade900,
-                                blurRadius: 14,
-                                offset: const Offset(2, 3),
-                              )
-                            ],
-                            borderRadius: BorderRadius.circular(40),
-                            color: Colors.green.shade100,
-                          ),
-                          child: Row(
-                            children: [
-                              Expanded(
-                                flex: 4,
-                                child: Column(
-                                  mainAxisAlignment: MainAxisAlignment.center,
-                                  crossAxisAlignment: CrossAxisAlignment.center,
-                                  children: [
-                                    Padding(
-                                      padding: const EdgeInsets.symmetric(
-                                          horizontal: 18.0),
-                                      child: Text(
-                                        'Website Dengan Akselerasi Cepat.',
-                                        style: TextStyle(
-                                          fontSize: 28,
-                                          wordSpacing: 3,
-                                          height: 3,
-                                          letterSpacing: -0.7,
-                                          color: Colors.grey.shade900,
-                                          fontWeight: FontWeight.w700,
-                                        ),
-                                      ),
-                                    ),
-                                    10.height,
-                                    Align(
-                                      alignment: Alignment.center,
-                                      child: Padding(
-                                        padding: const EdgeInsets.symmetric(
-                                            horizontal: 10.0),
-                                        child: ElevatedButton(
-                                          onPressed: () {},
-                                          style: ButtonStyle(
-                                            backgroundColor:
-                                                MaterialStateProperty.all(
-                                                    Colors.red),
-                                          ),
-                                          child: const Text(
-                                            'Pinjam Sekarang',
-                                            style: TextStyle(
-                                              color: Colors.white70,
-                                              fontSize: 18,
-                                            ),
-                                          ),
-                                        ),
-                                      ),
-                                    ),
-                                  ],
-                                ),
-                              ),
-                              Expanded(
-                                flex: 5,
-                                child: Transform.scale(
-                                  scale: 1,
-                                  child: Image.asset('assets/stocks/2.png'),
-                                ),
-                              ),
-                            ],
-                          ),
-                        ),
-                      ),
-                      Padding(
-                        padding: const EdgeInsets.symmetric(
-                          horizontal: 5.0,
-                          vertical: 20,
-                        ),
-                        child: Container(
-                          decoration: BoxDecoration(
-                            boxShadow: [
-                              BoxShadow(
-                                color: Colors.grey.shade900,
-                                blurRadius: 14,
-                                offset: const Offset(2, 3),
-                              )
-                            ],
-                            borderRadius: BorderRadius.circular(40),
-                            color: Colors.red.shade200,
-                          ),
-                          child: Row(
-                            children: [
-                              Expanded(
-                                child: Column(
-                                  mainAxisAlignment: MainAxisAlignment.center,
-                                  crossAxisAlignment: CrossAxisAlignment.center,
-                                  children: [
-                                    Padding(
-                                      padding: const EdgeInsets.symmetric(
-                                          horizontal: 18.0),
-                                      child: Text(
-                                        'Paling Terpercaya Untuk Meminjam Buku.',
-                                        style: TextStyle(
-                                          fontSize: 28,
-                                          wordSpacing: 3,
-                                          height: 3,
-                                          letterSpacing: -0.7,
-                                          color: Colors.grey.shade900,
-                                          fontWeight: FontWeight.w700,
-                                        ),
-                                      ),
-                                    ),
-                                    10.height,
-                                    Align(
-                                      alignment: Alignment.center,
-                                      child: Padding(
-                                        padding: const EdgeInsets.symmetric(
-                                            horizontal: 10.0),
-                                        child: ElevatedButton(
-                                          onPressed: () {},
-                                          style: ButtonStyle(
-                                            backgroundColor:
-                                                MaterialStateProperty.all(
-                                                    Colors.red),
-                                          ),
-                                          child: const Text(
-                                            'Pinjam Sekarang',
-                                            style: TextStyle(
-                                              color: Colors.white70,
-                                              fontSize: 18,
-                                            ),
-                                          ),
-                                        ),
-                                      ),
-                                    ),
-                                  ],
-                                ),
-                              ),
-                              Expanded(
-                                child: Transform.scale(
-                                  scale: 1,
-                                  child: Image.asset(
-                                    'assets/stocks/3.png',
-                                  ),
-                                ),
-                              ),
-                            ],
-                          ),
-                        ),
-                      ),
-                    ],
+                              child: item,
+                            ),
+                          );
+                        },
+                      );
+                    }).toList(),
                   ),
                 ),
                 Padding(
                   padding: const EdgeInsets.only(top: 50),
                   child: Column(
-                    crossAxisAlignment: CrossAxisAlignment.center,
+                    crossAxisAlignment: CrossAxisAlignment.start,
                     children: [
                       Padding(
-                        padding: const EdgeInsets.only(left: 20),
+                        padding: const EdgeInsets.only(left: 20, bottom: 30),
                         child: Text(
                           textAlign: TextAlign.start,
-                          'Genre Buku',
+                          'Kategori',
                           style: TextStyle(
                             fontSize: 40,
                             fontWeight: FontWeight.w700,
@@ -292,7 +89,7 @@ class WebScreen extends GetView<HomeController> {
                           return SizedBox(
                             height: 50,
                             child: Padding(
-                              padding: const EdgeInsets.symmetric(horizontal: 400),
+                              padding: const EdgeInsets.symmetric(horizontal: 20),
                               child: ListView.builder(
                                 scrollDirection: Axis.horizontal,
                                 itemCount: controller.categories.length,
@@ -386,7 +183,7 @@ class WebScreen extends GetView<HomeController> {
                                       .toList();
 
                           return SizedBox(
-                            height: 320,
+                            height: 340,
                             child: GridView.builder(
                               gridDelegate:
                                   const SliverGridDelegateWithFixedCrossAxisCount(
@@ -398,14 +195,13 @@ class WebScreen extends GetView<HomeController> {
                                 return GestureDetector(
                                   onTap: () {
                                     Get.toNamed(Routes.DETAIL_BUKU,
-                                        arguments: book);
+                                        arguments: controller.allBooks[index]);
                                   },
                                   child: Container(
                                     margin: const EdgeInsets.symmetric(
-                                        vertical: 10, horizontal: 20),
-                                    padding: const EdgeInsets.all(10),
+                                        vertical: 10, horizontal: 15),
                                     decoration: BoxDecoration(
-                                      borderRadius: BorderRadius.circular(20),
+                                      borderRadius: BorderRadius.circular(10),
                                       color: Colors.white,
                                       boxShadow: [
                                         BoxShadow(
@@ -418,29 +214,54 @@ class WebScreen extends GetView<HomeController> {
                                     ),
                                     child: Column(
                                       crossAxisAlignment:
-                                          CrossAxisAlignment.center,
+                                          CrossAxisAlignment.stretch,
                                       children: [
-                                        Hero(
-                                            tag: book.id!,
-                                            child: Image.network(
-                                              book.coverBuku!,
-                                              height: 200,
-                                              width: 160,
-                                              fit: BoxFit.cover,
-                                            )),
+                                        Expanded(
+                                            child: Container(
+                                            decoration: BoxDecoration(
+                                              borderRadius:
+                                                  BorderRadius.circular(5),
+                                              image: DecorationImage(
+                                                image: NetworkImage(
+                                                    book.coverBuku!),
+                                                fit: BoxFit.cover,
+                                              ),
+                                            ),
+                                          ),
+                                        ),
                                         10.height,
-                                        Text(
-                                          book.judul!,
-                                          style: const TextStyle(
-                                              fontSize: 20,
+                                         Padding(
+                                          padding: const EdgeInsets.symmetric(
+                                              horizontal: 10),
+                                          child: Text(
+                                            book.judul!,
+                                            textAlign: TextAlign.center,
+                                            maxLines: 2, // Limit to 2 lines
+                                            overflow: TextOverflow
+                                                .ellipsis, // Add ellipsis for overflow
+                                            style: const TextStyle(
+                                              fontSize:
+                                                  16, // Decreased font size
                                               color: Colors.black,
-                                              fontWeight: FontWeight.bold),
+                                              fontWeight: FontWeight.bold,
+                                            ),
+                                          ),
                                         ),
                                         5.height,
-                                        Text(
-                                          "${controller.categories.firstWhere((cat) => cat.id == book.kategoriId).namaKategori}",
-                                          style: const TextStyle(
-                                              color: Colors.grey),
+                                        Padding(
+                                          padding: const EdgeInsets.symmetric(
+                                              horizontal: 10),
+                                          child: Text(
+                                            "${controller.categories.firstWhere((cat) => cat.id == book.kategoriId).namaKategori}",
+                                            textAlign: TextAlign.center,
+                                            maxLines: 1, // Limit to 1 line
+                                            overflow: TextOverflow
+                                                .ellipsis, // Add ellipsis for overflow
+                                            style: const TextStyle(
+                                                fontSize: 14,
+                                                color: Colors
+                                                    .grey), // Decreased font size
+                                          ),
                                         ),
                                       ],
                                     ),

@@ -122,7 +122,7 @@ class AuthController extends GetxController {
             Get.offAndToNamed(Routes.DASHBOARD);
             break;
           case "Peminjam":
-            Get.offAndToNamed(Routes.HOME);
+            Get.offNamed(Routes.HOME);
             break;
         }
       } else {
