@@ -72,5 +72,8 @@ flutter:
     - assets/test.jpg
     - assets/icons/logofinalfinal.png
     - assets/icons/logofinalfinalfinal.png
+    - assets/images/gambarsplash.jpg
+    - assets/imgs/carousel1.png
+    - assets/imgs/carousel2.png
   uses-material-design: true
 

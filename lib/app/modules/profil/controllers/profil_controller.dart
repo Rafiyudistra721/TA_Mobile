@@ -2,7 +2,6 @@
 
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
-import 'package:ta_mobile/app/data/Models/user_model.dart';
 
 class ProfilController extends GetxController {
 

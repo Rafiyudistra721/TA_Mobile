@@ -17,15 +17,15 @@ class MobileScreenAuth extends GetView<AuthController> {
       resizeToAvoidBottomInset: false,
       appBar: AppBar(
           elevation: 0,
-          backgroundColor: const Color(0xffc1dbfe),),
+          backgroundColor: const Color(0xFF52958B),),
       body: Container(
-        color: const Color(0xffc1dbfe),
+        color: const Color(0xFF52958B),
         child: Column(
           children: [
             Expanded(
               flex: 2,
               child: Container(
-                color: const Color(0xffc1dbfe),
+                color: const Color(0xFF52958B),
                 child: Padding(
                   padding: const EdgeInsets.only(bottom: 20, left: 20),
                   child: Column(

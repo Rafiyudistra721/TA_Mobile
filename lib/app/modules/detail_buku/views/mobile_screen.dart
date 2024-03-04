@@ -1,8 +1,11 @@
+// ignore_for_file: camel_case_types, must_be_immutable
+
 import 'package:flutter/material.dart';
 import 'package:flutter_rating_bar/flutter_rating_bar.dart';
 import 'package:nb_utils/nb_utils.dart';
 import 'package:ta_mobile/app/data/Models/buku_model.dart';
 import 'package:get/get.dart';
+import 'package:ta_mobile/app/data/Models/koleksi_model.dart';
 import 'package:ta_mobile/app/data/Models/ulasan_model.dart';
 import 'package:ta_mobile/app/modules/Manage_Ulasan/controllers/manage_ulasan_controller.dart';
 import 'package:ta_mobile/app/modules/auth/controllers/auth_controller.dart';
@@ -16,6 +19,7 @@ class Mobile_Screen extends GetView<DetailBukuController> {
   Mobile_Screen({Key? key}) : super(key: key);
   final GlobalKey<FormState> _ulasanKey = GlobalKey();
   UlasanModel ulasanModel = UlasanModel();
+  KoleksiModel  koleksiModel = KoleksiModel();
 
   BukuModel bukuModel = Get.arguments ?? BukuModel();
 
@@ -40,7 +44,10 @@ class Mobile_Screen extends GetView<DetailBukuController> {
         ],
       ),
       floatingActionButton: FloatingActionButton.extended(
-        onPressed: () {},
+        onPressed: () {
+          controller.storeToBookmark(koleksiModel, bukuModel, authController);
+          
+        },
         label: Container(
           alignment: Alignment.center,
           height: 70,
@@ -102,13 +109,21 @@ class Mobile_Screen extends GetView<DetailBukuController> {
             ),
             Padding(
               padding: const EdgeInsets.symmetric(horizontal: 20.0),
-              child: Text(
-                bukuModel.kategoriId!,
-                style: const TextStyle(
-                  fontWeight: FontWeight.bold,
-                  fontSize: 20,
-                  color: Colors.grey,
-                ),
+              child: Obx(
+                () {
+                  final category = controller.categories.firstWhereOrNull(
+                      (cat) => cat.id == bukuModel.kategoriId);
+                  return Text(
+                    category != null
+                        ? category.namaKategori!
+                        : 'Unknown Category',
+                    style: const TextStyle(
+                      fontWeight: FontWeight.bold,
+                      fontSize: 23,
+                      color: Colors.grey,
+                    ),
+                  );
+                },
               ),
             ),
             20.height,
@@ -153,8 +168,16 @@ class Mobile_Screen extends GetView<DetailBukuController> {
             ),
             Padding(
               padding: const EdgeInsets.symmetric(horizontal: 20),
-              child: Text('Kategori          : ${bukuModel.kategoriId}',
-                  style: const TextStyle(fontSize: 15)),
+              child: Obx(
+                () {
+                  final category = controller.categories.firstWhereOrNull(
+                      (cat) => cat.id == bukuModel.kategoriId);
+                  return Text(
+                    'Kategori          : ${category != null ? category.namaKategori! : 'Unknown Category'}',
+                    style: const TextStyle(fontSize: 15),
+                  );
+                },
+              ),
             ),
             20.height,
             const Padding(
@@ -211,7 +234,10 @@ class Mobile_Screen extends GetView<DetailBukuController> {
             20.height,
             const Padding(
               padding: EdgeInsets.symmetric(horizontal: 30),
-              child: Text('Berikan Ulasanmu di sini', style: TextStyle(fontSize: 17),),
+              child: Text(
+                'Berikan Ulasanmu di sini',
+                style: TextStyle(fontSize: 17),
+              ),
             ),
             Form(
               key: _ulasanKey,
@@ -235,13 +261,14 @@ class Mobile_Screen extends GetView<DetailBukuController> {
                     padding: const EdgeInsets.symmetric(horizontal: 30),
                     child: AppTextField(
                       textFieldType: TextFieldType.MULTILINE,
-                      decoration: InputDecoration(
+                      decoration: const InputDecoration(
                         labelText: "Ulasan",
                         hintText: "Isilah dengan ulasanmu mengenai buku ini",
                       ),
                       controller: controller.ulasanC,
                       validator: (value) => value.isEmptyOrNull
-                      ? "Isilah ulasanmu terlebih dahulu" : null,
+                          ? "Isilah ulasanmu terlebih dahulu"
+                          : null,
                     ),
                   ),
                   Padding(
@@ -253,7 +280,8 @@ class Mobile_Screen extends GetView<DetailBukuController> {
                               ? null
                               : () {
                                   if (_ulasanKey.currentState!.validate()) {
-                                    controller.store(ulasanModel, bukuModel, authController);
+                                    controller.store(
+                                        ulasanModel, bukuModel, authController);
                                   }
                                 },
                           label: controller.isSaving

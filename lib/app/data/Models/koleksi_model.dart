@@ -20,20 +20,23 @@ class KoleksiModel {
     var json = doc.data() as Map<String, dynamic>?;
     return KoleksiModel(
       id: doc.id,
-      bukuId: json!['Buku'] as String?,
-      userId: json['User'] as String?,
+      bukuId: json!['bukuId'] as String?,
+      userId: json['userId'] as String?,
     );
   }
 
   Map<String, dynamic> get toJson => {
         'id': id,
-        'Buku': bukuId,
-        'User': userId,
+        'bukuId': bukuId,
+        'userId': userId,
       };
 
   Database get db => Database(
-      collectionReference: firebaseFirestore.collection(bookmarkCollection),
-      storageReference: firebaseStorage.ref());
+      collectionReference: firebaseFirestore
+      .collection(usersCollection)
+      .doc(userId)
+      .collection(bookmarkCollection),
+      storageReference: firebaseStorage.ref(usersCollection).child(bookmarkCollection));
 
   Future<KoleksiModel> save() async {
     id == null ? id = await db.add(toJson) : await db.delete(id!);
