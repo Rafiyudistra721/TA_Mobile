@@ -19,7 +19,7 @@ class Mobile_Screen extends GetView<DetailBukuController> {
   Mobile_Screen({Key? key}) : super(key: key);
   final GlobalKey<FormState> _ulasanKey = GlobalKey();
   UlasanModel ulasanModel = UlasanModel();
-  KoleksiModel  koleksiModel = KoleksiModel();
+  KoleksiModel koleksiModel = KoleksiModel();
 
   BukuModel bukuModel = Get.arguments ?? BukuModel();
 
@@ -44,9 +44,9 @@ class Mobile_Screen extends GetView<DetailBukuController> {
         ],
       ),
       floatingActionButton: FloatingActionButton.extended(
+        heroTag: 'btn_add_koleksi',
         onPressed: () {
           controller.storeToBookmark(koleksiModel, bukuModel, authController);
-          
         },
         label: Container(
           alignment: Alignment.center,
@@ -56,7 +56,6 @@ class Mobile_Screen extends GetView<DetailBukuController> {
             style: TextStyle(
               fontSize: 25,
               fontWeight: FontWeight.bold,
-              color: Colors.white,
             ),
           ),
         ),
@@ -160,12 +159,12 @@ class Mobile_Screen extends GetView<DetailBukuController> {
                   style: const TextStyle(fontSize: 15)),
             ),
             Padding(
-              padding: const EdgeInsets.symmetric(horizontal: 20),
-              child: Text(
-                'Jumlah            : ${bukuModel.jumlah}',
-                style: const TextStyle(fontSize: 15),
-              ),
-            ),
+                  padding: const EdgeInsets.symmetric(horizontal: 20),
+                  child: Text(
+                    'Jumlah            : ${bukuModel.jumlah}',
+                    style: const TextStyle(fontSize: 15),
+                  ),
+                ),
             Padding(
               padding: const EdgeInsets.symmetric(horizontal: 20),
               child: Obx(
@@ -276,6 +275,7 @@ class Mobile_Screen extends GetView<DetailBukuController> {
                     child: SizedBox(
                       width: 116,
                       child: FloatingActionButton.extended(
+                          heroTag: 'btn_submit',
                           onPressed: controller.isSaving
                               ? null
                               : () {
