@@ -102,13 +102,21 @@ class Mobile_Screen extends GetView<DetailBukuController> {
             ),
             Padding(
               padding: const EdgeInsets.symmetric(horizontal: 20.0),
-              child: Text(
-                bukuModel.kategoriId!,
-                style: const TextStyle(
-                  fontWeight: FontWeight.bold,
-                  fontSize: 20,
-                  color: Colors.grey,
-                ),
+              child: Obx(
+                () {
+                  final category = controller.categories.firstWhereOrNull(
+                      (cat) => cat.id == bukuModel.kategoriId);
+                  return Text(
+                    category != null
+                        ? category.namaKategori!
+                        : 'Unknown Category',
+                    style: const TextStyle(
+                      fontWeight: FontWeight.bold,
+                      fontSize: 23,
+                      color: Colors.grey,
+                    ),
+                  );
+                },
               ),
             ),
             20.height,
@@ -153,8 +161,16 @@ class Mobile_Screen extends GetView<DetailBukuController> {
             ),
             Padding(
               padding: const EdgeInsets.symmetric(horizontal: 20),
-              child: Text('Kategori          : ${bukuModel.kategoriId}',
-                  style: const TextStyle(fontSize: 15)),
+              child: Obx(
+                () {
+                  final category = controller.categories.firstWhereOrNull(
+                      (cat) => cat.id == bukuModel.kategoriId);
+                  return Text(
+                    'Kategori          : ${category != null ? category.namaKategori! : 'Unknown Category'}',
+                    style: const TextStyle(fontSize: 15),
+                  );
+                },
+              ),
             ),
             20.height,
             const Padding(
@@ -211,7 +227,10 @@ class Mobile_Screen extends GetView<DetailBukuController> {
             20.height,
             const Padding(
               padding: EdgeInsets.symmetric(horizontal: 30),
-              child: Text('Berikan Ulasanmu di sini', style: TextStyle(fontSize: 17),),
+              child: Text(
+                'Berikan Ulasanmu di sini',
+                style: TextStyle(fontSize: 17),
+              ),
             ),
             Form(
               key: _ulasanKey,
@@ -241,7 +260,8 @@ class Mobile_Screen extends GetView<DetailBukuController> {
                       ),
                       controller: controller.ulasanC,
                       validator: (value) => value.isEmptyOrNull
-                      ? "Isilah ulasanmu terlebih dahulu" : null,
+                          ? "Isilah ulasanmu terlebih dahulu"
+                          : null,
                     ),
                   ),
                   Padding(
@@ -253,7 +273,8 @@ class Mobile_Screen extends GetView<DetailBukuController> {
                               ? null
                               : () {
                                   if (_ulasanKey.currentState!.validate()) {
-                                    controller.store(ulasanModel, bukuModel, authController);
+                                    controller.store(
+                                        ulasanModel, bukuModel, authController);
                                   }
                                 },
                           label: controller.isSaving
