@@ -120,9 +120,9 @@ class WebScreenAuth extends GetView<AuthController> {
                   crossAxisAlignment: CrossAxisAlignment.center,
                   children: [
                     Image.asset(
-                      'assets/icons/logo_login.png',
-                      height: 200,
-                      width: 200,
+                      'assets/icons/logofinalfinal.png',
+                      height: 350,
+                      width: 350,
                     ),
                     20.height,
                     Obx(

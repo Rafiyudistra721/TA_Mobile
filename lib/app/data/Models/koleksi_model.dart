@@ -39,8 +39,7 @@ class KoleksiModel {
       storageReference: firebaseStorage.ref(usersCollection).child(bookmarkCollection));
 
   Future<KoleksiModel> save() async {
-    id == null ? id = await db.add(toJson) : await db.delete(id!);
-
+    id == null ? id = await db.add(toJson) : await db.edit(toJson);
     return this;
   }
 

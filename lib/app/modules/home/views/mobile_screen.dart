@@ -149,7 +149,7 @@ class MobileScreen extends GetView<HomeController> {
                                         child: Text(
                                           'Pinjam Buku Dengan Aman.',
                                           style: TextStyle(
-                                            fontSize: 24,
+                                            fontSize: 20,
                                             wordSpacing: 2.5,
                                             height: 1.4,
                                             letterSpacing: -0.7,
@@ -209,7 +209,7 @@ class MobileScreen extends GetView<HomeController> {
                                         child: Text(
                                           'Koleksi Buku Terlengkap.',
                                           style: TextStyle(
-                                            fontSize: 25,
+                                            fontSize: 20,
                                             wordSpacing: 2.5,
                                             height: 1.4,
                                             letterSpacing: -0.7,
@@ -271,7 +271,7 @@ class MobileScreen extends GetView<HomeController> {
                                         child: Text(
                                           'Pinjam Buku Dengan Mudah.',
                                           style: TextStyle(
-                                            fontSize: 24,
+                                            fontSize: 20,
                                             wordSpacing: 2.5,
                                             height: 1.4,
                                             letterSpacing: -0.7,
