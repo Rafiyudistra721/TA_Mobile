@@ -1,73 +1,59 @@
-import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_rating_bar/flutter_rating_bar.dart';
 import 'package:nb_utils/nb_utils.dart';
 import 'package:ta_mobile/app/data/Models/buku_model.dart';
-import 'package:ta_mobile/app/integrations/firestore.dart';
 import 'package:get/get.dart';
+import 'package:ta_mobile/app/data/Models/ulasan_model.dart';
+import 'package:ta_mobile/app/modules/Manage_Ulasan/controllers/manage_ulasan_controller.dart';
+import 'package:ta_mobile/app/modules/auth/controllers/auth_controller.dart';
 import 'package:ta_mobile/app/routes/app_pages.dart';
 
 import '../controllers/detail_buku_controller.dart';
 
 class Mobile_Screen extends GetView<DetailBukuController> {
+  final AuthController authController = Get.put(AuthController());
+  final streamUser = Get.put(ManageUlasanController());
   Mobile_Screen({Key? key}) : super(key: key);
+  final GlobalKey<FormState> _ulasanKey = GlobalKey();
+  UlasanModel ulasanModel = UlasanModel();
 
   BukuModel bukuModel = Get.arguments ?? BukuModel();
 
   @override
   Widget build(BuildContext context) {
+    controller.modelToController(bukuModel);
     return Scaffold(
-      backgroundColor: const Color(0xFF52958B),
       appBar: AppBar(
-        leadingWidth: 100,
-        title: Text('DetailBuku'),
-        leading: Padding(
-          padding:
-              const EdgeInsets.only(left: 22, top: 10, bottom: 10, right: 20),
-          child: ElevatedButton(
-            onPressed: () {
-              Navigator.pop(context);
-            },
-            child: const Icon(
-              Icons.arrow_back_ios_rounded,
-              color: Colors.grey,
-            ),
-          ),
-        ),
-        elevation: 0,
-        bottomOpacity: 0.0,
+        title: const Text('Detail Buku'),
         actions: [
           const SizedBox(width: 10),
-          Padding(
-            padding:
-                const EdgeInsets.only(left: 26, top: 10, bottom: 10, right: 22),
-            child: ElevatedButton(
-              onPressed: () {
-                Get.toNamed(Routes.KOLEKSI);
-              },
-              child: const Icon(
-                Icons.shopping_basket_outlined,
-                color: Colors.grey,
-              ),
+          ElevatedButton(
+            onPressed: () {
+              Get.toNamed(Routes.KOLEKSI);
+            },
+            child: const Icon(
+              Icons.shopping_basket_outlined,
+              color: Colors.grey,
             ),
           ),
           const SizedBox(width: 6),
         ],
       ),
-      // floatingActionButton: FloatingActionButton.extended(
-      //   onPressed: () {},
-      //   label: Container(
-      //     alignment: Alignment.center,
-      //     height: 70,
-      //     child: const Text(
-      //       'Tambah Ke Koleksi',
-      //       style: TextStyle(
-      //         fontSize: 25,
-      //         fontWeight: FontWeight.bold,
-      //         color: Colors.white,
-      //       ),
-      //     ),
-      //   ),
-      // ),
+      floatingActionButton: FloatingActionButton.extended(
+        onPressed: () {},
+        label: Container(
+          alignment: Alignment.center,
+          height: 70,
+          child: const Text(
+            'Tambah Ke Koleksi',
+            style: TextStyle(
+              fontSize: 25,
+              fontWeight: FontWeight.bold,
+              color: Colors.white,
+            ),
+          ),
+        ),
+      ),
       floatingActionButtonLocation: FloatingActionButtonLocation.centerFloat,
       body: SingleChildScrollView(
         child: Column(
@@ -93,69 +79,197 @@ class Mobile_Screen extends GetView<DetailBukuController> {
               padding: const EdgeInsets.symmetric(horizontal: 20),
               child: Row(
                 crossAxisAlignment: CrossAxisAlignment.end,
+                mainAxisAlignment: MainAxisAlignment.spaceBetween,
                 children: [
                   Flexible(
                     child: Text(
                       bukuModel.judul!,
-                      overflow: TextOverflow.clip,
+                      overflow: TextOverflow.ellipsis,
                       maxLines: 3,
-                      style:
-                          TextStyle(fontWeight: FontWeight.w800, fontSize: 20),
+                      style: const TextStyle(
+                          fontWeight: FontWeight.w900, fontSize: 25),
                     ),
                   ),
-                  Spacer(),
                   Text(
-                    "${bukuModel.jumlah}",
-                    style: TextStyle(
+                    "Stok: ${bukuModel.jumlah}",
+                    style: const TextStyle(
                       fontWeight: FontWeight.w800,
-                      fontSize: 33,
+                      fontSize: 20,
                     ),
                   ),
                 ],
               ),
             ),
             Padding(
-              padding: EdgeInsets.symmetric(horizontal: 20.0),
+              padding: const EdgeInsets.symmetric(horizontal: 20.0),
               child: Text(
                 bukuModel.kategoriId!,
-                style: TextStyle(
+                style: const TextStyle(
                   fontWeight: FontWeight.bold,
-                  fontSize: 23,
+                  fontSize: 20,
                   color: Colors.grey,
                 ),
               ),
             ),
-            const SizedBox(height: 20),
+            20.height,
             Padding(
-              padding: EdgeInsets.symmetric(horizontal: 20.0),
-              child: Text(
+              padding: const EdgeInsets.symmetric(horizontal: 20.0),
+              child: ReadMoreText(
                 bukuModel.sinopsis!,
-                style: TextStyle(
+                trimLines: 3,
+                colorClickableText: Colors.blue,
+                trimMode: TrimMode.Line,
+                trimCollapsedText: 'Selengkapnya',
+                trimExpandedText: 'Sembunyikan',
+                style: const TextStyle(
                   fontWeight: FontWeight.w500,
-                  fontSize: 22,
+                  fontSize: 15,
                   wordSpacing: 1.4,
                 ),
               ),
             ),
-            const SizedBox(height: 20),
+            40.height,
             Padding(
-              padding: const EdgeInsets.all(20.0),
-              child: DataTable(
-                columns: const [
-                  DataColumn(label: Text('Username', style: TextStyle(fontSize: 20, fontWeight: FontWeight.bold),)),
-                  DataColumn(label: Text('Comments', style: TextStyle(fontSize: 20, fontWeight: FontWeight.bold),)),
-                  DataColumn(label: Text('Rating', style: TextStyle(fontSize: 20, fontWeight: FontWeight.bold),))
-                ],
-                rows: controller.allUlasan.map((comment) {
-                  return DataRow(cells: [
-                    DataCell(Text(comment.userId ?? '')),
-                    DataCell(Text(comment.ulasan ?? '')),
-                    DataCell(Text(comment.rating?.toString() ?? '')),
-                  ]);
-                }).toList(),
+              padding: const EdgeInsets.symmetric(horizontal: 20),
+              child: Text('Penulis            : ${bukuModel.penulis}',
+                  style: const TextStyle(fontSize: 15)),
+            ),
+            Padding(
+              padding: const EdgeInsets.symmetric(horizontal: 20),
+              child: Text('Penerbit          : ${bukuModel.penerbit}',
+                  style: const TextStyle(fontSize: 15)),
+            ),
+            Padding(
+              padding: const EdgeInsets.symmetric(horizontal: 20),
+              child: Text('Tahun Terbit  : ${bukuModel.tahunTerbit}',
+                  style: const TextStyle(fontSize: 15)),
+            ),
+            Padding(
+              padding: const EdgeInsets.symmetric(horizontal: 20),
+              child: Text(
+                'Jumlah            : ${bukuModel.jumlah}',
+                style: const TextStyle(fontSize: 15),
               ),
             ),
-            const SizedBox(height: 20),
+            Padding(
+              padding: const EdgeInsets.symmetric(horizontal: 20),
+              child: Text('Kategori          : ${bukuModel.kategoriId}',
+                  style: const TextStyle(fontSize: 15)),
+            ),
+            20.height,
+            const Padding(
+              padding: EdgeInsets.symmetric(horizontal: 20),
+              child: Text(
+                'Ulasan',
+                style: TextStyle(fontSize: 25, fontWeight: FontWeight.w700),
+              ),
+            ),
+            Padding(
+              padding: const EdgeInsets.all(20.0),
+              child: Obx(() => DataTable(
+                    columns: const [
+                      DataColumn(
+                          label: Text(
+                        'Pengguna',
+                        style: TextStyle(
+                            fontSize: 17, fontWeight: FontWeight.bold),
+                      )),
+                      DataColumn(
+                          label: Text(
+                        'Ulasan',
+                        style: TextStyle(
+                            fontSize: 17, fontWeight: FontWeight.bold),
+                      )),
+                      DataColumn(
+                          label: Text(
+                        'Rating',
+                        style: TextStyle(
+                            fontSize: 17, fontWeight: FontWeight.bold),
+                      )),
+                    ],
+                    rows: controller.listUlasan.map((comment) {
+                      final user = streamUser.users
+                          .firstWhereOrNull((cat) => cat.id == comment.userId);
+                      return DataRow(cells: [
+                        DataCell(Text(
+                            user != null ? user.username! : 'Tidak Ditemukan')),
+                        DataCell(Text(comment.ulasan ?? '')),
+                        DataCell(RatingBarIndicator(
+                          rating: comment.rating!,
+                          itemBuilder: (context, index) => const Icon(
+                            Icons.star,
+                            color: Colors.amber,
+                          ),
+                          itemCount: 5,
+                          itemSize: 20,
+                          direction: Axis.horizontal,
+                        )),
+                      ]);
+                    }).toList(),
+                  )),
+            ),
+            20.height,
+            const Padding(
+              padding: EdgeInsets.symmetric(horizontal: 30),
+              child: Text('Berikan Ulasanmu di sini', style: TextStyle(fontSize: 17),),
+            ),
+            Form(
+              key: _ulasanKey,
+              child: Column(
+                children: [
+                  RatingBar.builder(
+                    initialRating: 0,
+                    allowHalfRating: true,
+                    minRating: 1,
+                    itemPadding: const EdgeInsets.symmetric(horizontal: 4.0),
+                    itemSize: 28,
+                    glowColor: Colors.yellow[700]!.withOpacity(.9),
+                    onRatingUpdate: (v) {
+                      controller.ratingValue = v;
+                    },
+                    itemBuilder: (context, _) {
+                      return const Icon(Icons.star, color: Colors.amber);
+                    },
+                  ),
+                  Padding(
+                    padding: const EdgeInsets.symmetric(horizontal: 30),
+                    child: AppTextField(
+                      textFieldType: TextFieldType.MULTILINE,
+                      decoration: InputDecoration(
+                        labelText: "Ulasan",
+                        hintText: "Isilah dengan ulasanmu mengenai buku ini",
+                      ),
+                      controller: controller.ulasanC,
+                      validator: (value) => value.isEmptyOrNull
+                      ? "Isilah ulasanmu terlebih dahulu" : null,
+                    ),
+                  ),
+                  Padding(
+                    padding: const EdgeInsets.symmetric(vertical: 10),
+                    child: SizedBox(
+                      width: 116,
+                      child: FloatingActionButton.extended(
+                          onPressed: controller.isSaving
+                              ? null
+                              : () {
+                                  if (_ulasanKey.currentState!.validate()) {
+                                    controller.store(ulasanModel, bukuModel, authController);
+                                  }
+                                },
+                          label: controller.isSaving
+                              ? const CircularProgressIndicator(
+                                  color: Colors.white,
+                                )
+                              : const Text(
+                                  "Simpan",
+                                  // style: TextStyle(color: Colors.white),
+                                )),
+                    ),
+                  ),
+                  150.height
+                ],
+              ),
+            )
           ],
         ),
       ),
