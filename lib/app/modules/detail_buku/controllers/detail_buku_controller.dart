@@ -20,7 +20,7 @@ class DetailBukuController extends GetxController {
 
   TextEditingController ulasanC = TextEditingController();
 
-  modelToController(BukuModel bukuModel) {
+  Future modelToController(BukuModel bukuModel) async {
     bukuId = bukuModel.id;
     rxUlasan.bindStream(UlasanModel(bukuId: bukuId).streamList());
   }
@@ -95,7 +95,7 @@ class DetailBukuController extends GetxController {
     }
   }
 
-  void fetchCategories() async {
+  Future fetchCategories() async {
     try {
       final kategoriModel = KategoriModel();
       kategoriModel.streamList().listen((categoriesList) {
@@ -106,7 +106,7 @@ class DetailBukuController extends GetxController {
     }
   }
 
-  void fetchBooks() {
+  Future fetchBooks() async {
     try {
       final bukuModel = BukuModel();
       bukuModel.streamList().listen((books) {
@@ -117,7 +117,7 @@ class DetailBukuController extends GetxController {
     }
   }
 
-  void fetchUsers() {
+  Future fetchUsers() async {
     try {
       final userModel = UserModel();
       userModel.allStreamList().listen((books) {

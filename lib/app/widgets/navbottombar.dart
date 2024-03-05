@@ -22,11 +22,11 @@ class BottomNav extends StatelessWidget {
         ],
         onTap: (index){
           if (index == 0) {
-            Get.toNamed(Routes.HOME);
+            Get.offNamed(Routes.HOME);
           } else if (index == 1) {
-            Get.toNamed(Routes.KOLEKSI);
+            Get.offNamed(Routes.KOLEKSI);
           } else if (index == 2) {
-            Get.toNamed(Routes.PROFIL);
+            Get.offNamed(Routes.PROFIL);
           }
         },
         initialActiveIndex: initialindex,

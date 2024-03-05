@@ -400,22 +400,6 @@ class MobileScreen extends GetView<HomeController> {
                                   ),
                                 ),
                           )),
-                          const Spacer(),
-                          GestureDetector(
-                            onTap: () {
-                              Navigator.of(context).pushNamed('viewScreen');
-                            },
-                            child: const Padding(
-                              padding: EdgeInsets.symmetric(vertical: 20),
-                              child: Text(
-                                'Lihat Semua ',
-                                style: TextStyle(
-                                  fontSize: 20,
-                                  fontWeight: FontWeight.bold,
-                                ),
-                              ),
-                            ),
-                          ),
                         ],
                       ),
                     ),

@@ -121,7 +121,7 @@ class MyData extends DataTableSource {
         DataCell(Text("${listUlasan[index].ulasan}",
             style: GoogleFonts.urbanist(fontSize: 15, fontWeight: FontWeight.w500))),
         DataCell(RatingBarIndicator(
-          rating: listUlasan[index].rating!,
+          rating: listUlasan[index].rating!.toDouble(),
           itemBuilder: (context, index) => const Icon(
             Icons.star,
             color: Colors.amber,

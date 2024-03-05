@@ -129,7 +129,7 @@ class Mobile_Screen extends GetView<DetailBukuController> {
             Padding(
               padding: const EdgeInsets.symmetric(horizontal: 20.0),
               child: ReadMoreText(
-                bukuModel.sinopsis!,
+                "${bukuModel.sinopsis}",
                 trimLines: 3,
                 colorClickableText: Colors.blue,
                 trimMode: TrimMode.Line,
@@ -186,51 +186,48 @@ class Mobile_Screen extends GetView<DetailBukuController> {
                 style: TextStyle(fontSize: 25, fontWeight: FontWeight.w700),
               ),
             ),
-            Padding(
-              padding: const EdgeInsets.all(20.0),
-              child: Obx(() => DataTable(
-                    columns: const [
-                      DataColumn(
-                          label: Text(
-                        'Pengguna',
-                        style: TextStyle(
-                            fontSize: 17, fontWeight: FontWeight.bold),
+            Obx(() => DataTable(
+                  columns: const [
+                    DataColumn(
+                        label: Text(
+                      'Pengguna',
+                      style: TextStyle(
+                          fontSize: 15, fontWeight: FontWeight.bold),
+                    )),
+                    DataColumn(
+                        label: Text(
+                      'Ulasan',
+                      style: TextStyle(
+                          fontSize: 15, fontWeight: FontWeight.bold),
+                    )),
+                    DataColumn(
+                        label: Text(
+                      'Rating',
+                      style: TextStyle(
+                          fontSize: 15, fontWeight: FontWeight.bold),
+                    )),
+                  ],
+                  rows: controller.listUlasan.map((comment) {
+                    final user = streamUser.users
+                        .firstWhereOrNull((cat) => cat.id == comment.userId);
+                    return DataRow(cells: [
+                      DataCell(Text(
+                          user != null ? user.username! : 'Tidak Ditemukan')),
+                      DataCell(Text(comment.ulasan ?? '')),
+                      DataCell(RatingBarIndicator(
+                        rating: comment.rating!.toDouble(),
+                        itemBuilder: (context, index) => const Icon(
+                          Icons.star,
+                          color: Colors.amber,
+                        ),
+                        itemCount: 5,
+                        itemSize: 20,
+                        direction: Axis.horizontal,
                       )),
-                      DataColumn(
-                          label: Text(
-                        'Ulasan',
-                        style: TextStyle(
-                            fontSize: 17, fontWeight: FontWeight.bold),
-                      )),
-                      DataColumn(
-                          label: Text(
-                        'Rating',
-                        style: TextStyle(
-                            fontSize: 17, fontWeight: FontWeight.bold),
-                      )),
-                    ],
-                    rows: controller.listUlasan.map((comment) {
-                      final user = streamUser.users
-                          .firstWhereOrNull((cat) => cat.id == comment.userId);
-                      return DataRow(cells: [
-                        DataCell(Text(
-                            user != null ? user.username! : 'Tidak Ditemukan')),
-                        DataCell(Text(comment.ulasan ?? '')),
-                        DataCell(RatingBarIndicator(
-                          rating: comment.rating!,
-                          itemBuilder: (context, index) => const Icon(
-                            Icons.star,
-                            color: Colors.amber,
-                          ),
-                          itemCount: 5,
-                          itemSize: 20,
-                          direction: Axis.horizontal,
-                        )),
-                      ]);
-                    }).toList(),
-                  )),
-            ),
-            20.height,
+                    ]);
+                  }).toList(),
+                )),
+            60.height,
             const Padding(
               padding: EdgeInsets.symmetric(horizontal: 30),
               child: Text(
@@ -282,6 +279,7 @@ class Mobile_Screen extends GetView<DetailBukuController> {
                                   if (_ulasanKey.currentState!.validate()) {
                                     controller.store(
                                         ulasanModel, bukuModel, authController);
+                                    
                                   }
                                 },
                           label: controller.isSaving
