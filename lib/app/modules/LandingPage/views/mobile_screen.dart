@@ -115,7 +115,7 @@ class MobileScreen extends GetView<LandingPageController> {
                   children: [
                     ElevatedButton(
                       onPressed: () {
-                        Get.toNamed(Routes.AUTH);
+                        Get.offNamed(Routes.AUTH);
                       },
                       style: ElevatedButton.styleFrom(
                         backgroundColor: Colors.black,

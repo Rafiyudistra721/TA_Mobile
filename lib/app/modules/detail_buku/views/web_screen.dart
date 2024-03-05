@@ -293,7 +293,7 @@ class Web_Screen extends GetView<DetailBukuController> {
                                   : 'Tidak Ditemukan')),
                               DataCell(Text(comment.ulasan ?? '')),
                               DataCell(RatingBarIndicator(
-                                rating: comment.rating!,
+                                rating: comment.rating!.toDouble(),
                                 itemBuilder: (context, index) => const Icon(
                                   Icons.star,
                                   color: Colors.amber,

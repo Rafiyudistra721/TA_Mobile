@@ -10,7 +10,7 @@ class UlasanModel {
   String? userId;
   String? bukuId;
   String? ulasan;
-  double? rating;
+  num? rating;
 
   UlasanModel({
     this.id,

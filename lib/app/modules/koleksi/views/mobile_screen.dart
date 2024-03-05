@@ -150,7 +150,7 @@ class MobileScreen extends GetView<KoleksiController> {
                                             onConfirm: () async {
                                               await controller.store(pinjamModel, controller.listKoleksi[index], userStream.user);
                                             },
-                                            onCancel: () => Get.back(),
+                                            onCancel: () {},
                                           );
                                         },
                                         child: const Text(
