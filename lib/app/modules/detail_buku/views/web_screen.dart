@@ -10,6 +10,7 @@ import 'package:ta_mobile/app/modules/auth/controllers/auth_controller.dart';
 import 'package:ta_mobile/app/widgets/AppBar.dart';
 import 'package:ta_mobile/app/widgets/footerweb.dart';
 import '../controllers/detail_buku_controller.dart';
+import 'package:ta_mobile/app/data/Models/koleksi_model.dart';
 
 class Web_Screen extends GetView<DetailBukuController> {
   final AuthController authController = Get.put(AuthController());
@@ -17,6 +18,7 @@ class Web_Screen extends GetView<DetailBukuController> {
   Web_Screen({Key? key}) : super(key: key);
   final GlobalKey<FormState> _ulasanKey = GlobalKey();
   UlasanModel ulasanModel = UlasanModel();
+    KoleksiModel koleksiModel = KoleksiModel();
 
   BukuModel bukuModel = Get.arguments ?? BukuModel();
 
@@ -27,6 +29,23 @@ class Web_Screen extends GetView<DetailBukuController> {
       backgroundColor:
           const Color.fromARGB(255, 255, 255, 255), // Updated to blue color
       appBar: appBar,
+      floatingActionButton: FloatingActionButton.extended(
+        heroTag: 'btn_add_koleksi',
+        onPressed: () {
+          controller.storeToBookmark(koleksiModel, bukuModel, authController);
+        },
+        label: Container(
+          alignment: Alignment.center,
+          height: 70,
+          child: const Text(
+            'Tambah Ke Koleksi',
+            style: TextStyle(
+              fontSize: 25,
+              fontWeight: FontWeight.bold,
+            ),
+          ),
+        ),
+      ),
       body: Column(
         mainAxisAlignment: MainAxisAlignment.start,
         crossAxisAlignment: CrossAxisAlignment.center,

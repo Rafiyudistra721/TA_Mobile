@@ -12,6 +12,6 @@ class KoleksiView extends GetView<KoleksiController> {
   Widget build(BuildContext context) {
     return ResponsiveLayout(
       mobileScreen: MobileScreen(), 
-      webScreen: const WebScreen());
+      webScreen:  WebScreen());
       }
     }
